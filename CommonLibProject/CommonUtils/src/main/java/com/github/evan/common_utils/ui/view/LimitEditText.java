@@ -4,18 +4,15 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Paint;
-import android.graphics.drawable.Drawable;
 import android.support.v7.widget.AppCompatEditText;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.AttributeSet;
 import android.widget.Toast;
-
 import com.github.evan.common_utils.R;
 import com.github.evan.common_utils.utils.DensityUtil;
 import com.github.evan.common_utils.utils.ResourceUtil;
 import com.github.evan.common_utils.utils.StringUtil;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,10 +23,6 @@ public class LimitEditText extends AppCompatEditText implements TextWatcher {
     private List<TextWatcher> mOuterWatchers;
     private boolean mIsLimitInputCount = false;
     private int mLimitInputCount = 48;
-    private boolean mIsShowClearButton = false;
-    private boolean mIsShowExtraButton = false;
-    private Drawable mClearInputButtonDrawable;
-    private Drawable mExtraButtonDrawable;
     private boolean mIsShowInputTotalCount = false;
     private boolean mIsToastIfOverRangingLimitCount = false;
     private String mToastText;
@@ -56,10 +49,6 @@ public class LimitEditText extends AppCompatEditText implements TextWatcher {
             TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.LimitEditText);
             mIsLimitInputCount = typedArray.getBoolean(R.styleable.LimitEditText_isLimitInputCount, mIsLimitInputCount);
             mLimitInputCount = typedArray.getInt(R.styleable.LimitEditText_limitCount, mLimitInputCount);
-            mIsShowClearButton = typedArray.getBoolean(R.styleable.LimitEditText_isShowClearInputButton, mIsShowClearButton);
-            mIsShowExtraButton = typedArray.getBoolean(R.styleable.LimitEditText_isShowExtraButton, mIsShowExtraButton);
-            mClearInputButtonDrawable = typedArray.getDrawable(R.styleable.LimitEditText_clearInputButtonDrawable);
-            mExtraButtonDrawable = typedArray.getDrawable(R.styleable.LimitEditText_extraButtonDrawable);
             mIsShowInputTotalCount = typedArray.getBoolean(R.styleable.LimitEditText_isShowTotalInputCount, mIsShowInputTotalCount);
             mIsToastIfOverRangingLimitCount = typedArray.getBoolean(R.styleable.LimitEditText_isToastIfOverRangingLimitCount, mIsToastIfOverRangingLimitCount);
             mToastText = typedArray.getString(R.styleable.LimitEditText_toastText);
@@ -118,7 +107,7 @@ public class LimitEditText extends AppCompatEditText implements TextWatcher {
     }
 
     @Override
-    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+    public final void beforeTextChanged(CharSequence s, int start, int count, int after) {
         if(mIsLimitInputCount){
             if(after >= mLimitInputCount){
                 s = s.subSequence(0, mLimitInputCount + 1);
@@ -138,7 +127,7 @@ public class LimitEditText extends AppCompatEditText implements TextWatcher {
     }
 
     @Override
-    public void onTextChanged(CharSequence s, int start, int before, int count) {
+    public final void onTextChanged(CharSequence s, int start, int before, int count) {
         int size = mOuterWatchers.size();
         for (int i = 0; i < size; i++) {
             TextWatcher textWatcher = mOuterWatchers.get(i);
@@ -147,11 +136,75 @@ public class LimitEditText extends AppCompatEditText implements TextWatcher {
     }
 
     @Override
-    public void afterTextChanged(Editable s) {
+    public final void afterTextChanged(Editable s) {
         int size = mOuterWatchers.size();
         for (int i = 0; i < size; i++) {
             TextWatcher textWatcher = mOuterWatchers.get(i);
             textWatcher.afterTextChanged(s);
         }
+    }
+
+    public boolean isIsLimitInputCount() {
+        return mIsLimitInputCount;
+    }
+
+    public void setIsLimitInputCount(boolean isLimitInputCount) {
+        this.mIsLimitInputCount = isLimitInputCount;
+    }
+
+    public int getLimitInputCount() {
+        return mLimitInputCount;
+    }
+
+    public void setLimitInputCount(int limitInputCount) {
+        this.mLimitInputCount = limitInputCount;
+    }
+
+    public boolean isShowInputTotalCount() {
+        return mIsShowInputTotalCount;
+    }
+
+    public void setIsShowInputTotalCount(boolean isShowInputTotalCount) {
+        this.mIsShowInputTotalCount = isShowInputTotalCount;
+    }
+
+    public boolean isToastIfOverRangingLimitCount() {
+        return mIsToastIfOverRangingLimitCount;
+    }
+
+    public void setmIsToastIfOverRangingLimitCount(boolean isToastIfOverRangingLimitCount) {
+        this.mIsToastIfOverRangingLimitCount = isToastIfOverRangingLimitCount;
+    }
+
+    public String getToastText() {
+        return mToastText;
+    }
+
+    public void setToastText(String toastText) {
+        this.mToastText = toastText;
+    }
+
+    public int getTotalInputCountTextColor() {
+        return mTotalInputCountTextColor;
+    }
+
+    public void setTotalInputCountTextColor(int totalInputCountTextColor) {
+        this.mTotalInputCountTextColor = totalInputCountTextColor;
+    }
+
+    public float getTotalInputCountTextSize() {
+        return mTotalInputCountTextSize;
+    }
+
+    public void setTotalInputCountTextSize(float totalInputCountTextSize) {
+        this.mTotalInputCountTextSize = totalInputCountTextSize;
+    }
+
+    public Paint getShowInputtedCountPaint() {
+        return mShowInputtedCountPaint;
+    }
+
+    public void setShowInputtedCountPaint(Paint showInputtedCountPaint) {
+        this.mShowInputtedCountPaint = showInputtedCountPaint;
     }
 }
