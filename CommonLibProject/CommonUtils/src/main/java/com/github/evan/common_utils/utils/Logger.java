@@ -13,7 +13,7 @@ public class Logger {
     private static final int VERBOSE = 1;
     private static final int DEBUG = 2;
     private static final int INFO = 3;
-    private static final int WARNNING = 4;
+    private static final int WARNING = 4;
     private static final int ERROR = 5;
 
     private static boolean mIsLogEnable = true;
@@ -43,7 +43,7 @@ public class Logger {
     }
 
     public static void w(String log) {
-        if (mIsLogEnable && mCurrentLevel >= WARNNING) {
+        if (mIsLogEnable && mCurrentLevel >= WARNING) {
             Log.w(TAG, log);
             write2File(log);
         }
