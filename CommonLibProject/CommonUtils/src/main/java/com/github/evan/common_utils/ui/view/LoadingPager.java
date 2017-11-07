@@ -167,6 +167,22 @@ public class LoadingPager extends FrameLayout {
         }
     }
 
+    public int getStatusTextColor() {
+        return mStatusTextColor;
+    }
+
+    public void setStatusTextColor(int statusTextColor) {
+        this.mStatusTextColor = statusTextColor;
+    }
+
+    public int getStatusTextSize() {
+        return mStatusTextSize;
+    }
+
+    public void setStatusTextSize(int statusTextSize) {
+        this.mStatusTextSize = statusTextSize;
+    }
+
     public Drawable getLoadingDrawable() {
         return mLoadingDrawable;
     }

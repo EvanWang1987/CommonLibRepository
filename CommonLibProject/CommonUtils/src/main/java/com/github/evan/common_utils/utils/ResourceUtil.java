@@ -10,7 +10,9 @@ import android.support.annotation.DimenRes;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.IntegerRes;
 import android.support.annotation.StringRes;
-import com.Evan.CommonUtil.BaseApplication;
+
+import com.github.evan.common_utils.BaseApplication;
+
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -55,6 +57,16 @@ public class ResourceUtil {
      */
     public static String getString(@StringRes int resId){
         return getResource().getString(resId);
+    }
+
+    /**
+     * 获取&替换字符串
+     * @param resId
+     * @param replaceValue
+     * @return
+     */
+    public static String getString(@StringRes int resId, Object... replaceValue){
+        return getResource().getString(resId, replaceValue);
     }
 
     /**
