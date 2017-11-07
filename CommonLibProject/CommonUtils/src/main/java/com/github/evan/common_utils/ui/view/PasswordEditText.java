@@ -7,7 +7,9 @@ import android.support.annotation.StringRes;
 import android.text.InputType;
 import android.util.AttributeSet;
 import android.view.Gravity;
+import android.view.View;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -18,7 +20,7 @@ import com.github.evan.common_utils.utils.ResourceUtil;
 /**
  * Created by Evan on 2017/11/7.
  */
-public class PasswordEditText extends LinearLayout {
+public class PasswordEditText extends LinearLayout implements View.OnClickListener, CompoundButton.OnCheckedChangeListener {
     private LimitEditText mLimitEditText;
     private ImageButton mBtnClear;
     private ImageView mImgLeftIcon;
@@ -27,6 +29,10 @@ public class PasswordEditText extends LinearLayout {
     private boolean mIsShowDisplayPwdButton = true;
     private boolean mIsShowLeftIcon = true;
     private Drawable mClearButtonDrawable, mDisplayPwdDrawable, mLeftIcon;
+    private CompoundButton.OnCheckedChangeListener mCheckedListener;
+    private OnClickListener mClickListener;
+
+
 
     public PasswordEditText(Context context) {
         this(context, null, 0);
@@ -54,6 +60,8 @@ public class PasswordEditText extends LinearLayout {
         mBtnDisplayPwd.setBackgroundColor(ResourceUtil.getColor(R.color.alpha));
         mBtnDisplayPwd.setText("");
         mImgLeftIcon = new ImageView(context);
+        mBtnClear.setOnClickListener(this);
+        mBtnDisplayPwd.setOnCheckedChangeListener(this);
         if(null != attrs){
             TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.PasswordEditText);
             mIsShowClearButton = typedArray.getBoolean(R.styleable.PasswordEditText_isShowClearButton, mIsShowClearButton);
@@ -83,12 +91,29 @@ public class PasswordEditText extends LinearLayout {
         mBtnDisplayPwd.setVisibility(mIsShowDisplayPwdButton ? VISIBLE : GONE);
     }
 
+    public CompoundButton.OnCheckedChangeListener getCheckedListener() {
+        return mCheckedListener;
+    }
+
+    public void setCheckedListener(CompoundButton.OnCheckedChangeListener checkedListener) {
+        this.mCheckedListener = checkedListener;
+    }
+
+    public OnClickListener getClickListener() {
+        return mClickListener;
+    }
+
+    public void setClickListener(OnClickListener clickListener) {
+        this.mClickListener = clickListener;
+    }
+
     public boolean isShowClearButton() {
         return mIsShowClearButton;
     }
 
     public void setIsShowClearButton(boolean isShowClearButton) {
         this.mIsShowClearButton = isShowClearButton;
+        mBtnClear.setVisibility(isShowClearButton ? VISIBLE : GONE);
     }
 
     public boolean isShowDisplayPwdButton() {
@@ -97,6 +122,7 @@ public class PasswordEditText extends LinearLayout {
 
     public void setIsShowDisplayPwdButton(boolean isShowDisplayPwdButton) {
         this.mIsShowDisplayPwdButton = isShowDisplayPwdButton;
+        mBtnDisplayPwd.setVisibility(isShowDisplayPwdButton ? VISIBLE : GONE);
     }
 
     public boolean isShowLeftIcon() {
@@ -105,6 +131,7 @@ public class PasswordEditText extends LinearLayout {
 
     public void setIsShowLeftIcon(boolean isShowLeftIcon) {
         this.mIsShowLeftIcon = isShowLeftIcon;
+        mImgLeftIcon.setVisibility(isShowLeftIcon ? VISIBLE : GONE);
     }
 
     public Drawable getClearButtonDrawable() {
@@ -113,6 +140,7 @@ public class PasswordEditText extends LinearLayout {
 
     public void setClearButtonDrawable(Drawable clearButtonDrawable) {
         this.mClearButtonDrawable = clearButtonDrawable;
+        mBtnClear.setImageDrawable(clearButtonDrawable);
     }
 
     public Drawable getDisplayPwdDrawable() {
@@ -121,6 +149,7 @@ public class PasswordEditText extends LinearLayout {
 
     public void setDisplayPwdDrawable(Drawable displayPwdDrawable) {
         this.mDisplayPwdDrawable = displayPwdDrawable;
+        mBtnDisplayPwd.setButtonDrawable(displayPwdDrawable);
     }
 
     public Drawable getLeftIcon() {
@@ -129,6 +158,15 @@ public class PasswordEditText extends LinearLayout {
 
     public void setLeftIcon(Drawable leftIcon) {
         this.mLeftIcon = leftIcon;
+        mImgLeftIcon.setImageDrawable(leftIcon);
+    }
+
+    public void setText(CharSequence text){
+        mLimitEditText.setText(text);
+    }
+
+    public void setText(@StringRes int  resId){
+        mLimitEditText.setText(resId);
     }
 
     public CharSequence getText(){
@@ -143,7 +181,33 @@ public class PasswordEditText extends LinearLayout {
         mLimitEditText.setHint(resId);
     }
 
+    public void setLines(int line){
+        mLimitEditText.setLines(line);
+    }
 
+    public void setMaxLine(int maxLine){
+        mLimitEditText.setMaxLines(maxLine);
+    }
 
+    public boolean isDisplayPassword(){
+        return mBtnDisplayPwd.isChecked();
+    }
 
+    public void setDisplayPassword(boolean isChecked){
+        mBtnDisplayPwd.setChecked(isChecked);
+    }
+
+    @Override
+    public void onClick(View v) {
+        if(null != mClickListener){
+            mClickListener.onClick(v);
+        }
+    }
+
+    @Override
+    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+        if(null != mCheckedListener){
+            mCheckedListener.onCheckedChanged(buttonView, isChecked);
+        }
+    }
 }
