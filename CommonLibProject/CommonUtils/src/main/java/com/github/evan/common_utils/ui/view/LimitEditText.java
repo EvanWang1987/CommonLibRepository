@@ -4,15 +4,20 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Paint;
+import android.support.annotation.ColorInt;
+import android.support.annotation.ColorRes;
 import android.support.v7.widget.AppCompatEditText;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.AttributeSet;
 import android.widget.Toast;
+
 import com.github.evan.common_utils.R;
 import com.github.evan.common_utils.utils.DensityUtil;
+import com.github.evan.common_utils.utils.Logger;
 import com.github.evan.common_utils.utils.ResourceUtil;
 import com.github.evan.common_utils.utils.StringUtil;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,16 +31,17 @@ public class LimitEditText extends AppCompatEditText implements TextWatcher {
     private boolean mIsShowInputTotalCount = false;
     private boolean mIsToastIfOverRangingLimitCount = false;
     private String mToastText;
-    private int mTotalInputCountTextColor = 0;
-    private float mTotalInputCountTextSize = 15;
+    private @ColorInt int mTotalInputCountTextColor = 0;
     private Paint mShowInputtedCountPaint;
 
     public LimitEditText(Context context) {
-        this(context, null, 0);
+        super(context);
+        setup(context, null, 0);
     }
 
     public LimitEditText(Context context, AttributeSet attrs) {
-        this(context, attrs, 0);
+        super(context, attrs);
+        setup(context, attrs, 0);
     }
 
     public LimitEditText(Context context, AttributeSet attrs, int defStyleAttr) {
@@ -43,9 +49,8 @@ public class LimitEditText extends AppCompatEditText implements TextWatcher {
         setup(context, attrs, defStyleAttr);
     }
 
-    private void setup(Context context, AttributeSet attrs, int defStyleAttr){
-
-        if(null != attrs){
+    private void setup(Context context, AttributeSet attrs, int defStyleAttr) {
+        if (null != attrs) {
             TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.LimitEditText);
             mIsLimitInputCount = typedArray.getBoolean(R.styleable.LimitEditText_isLimitInputCount, mIsLimitInputCount);
             mLimitInputCount = typedArray.getInt(R.styleable.LimitEditText_limitCount, mLimitInputCount);
@@ -54,7 +59,6 @@ public class LimitEditText extends AppCompatEditText implements TextWatcher {
             mToastText = typedArray.getString(R.styleable.LimitEditText_toastText);
             mToastText = StringUtil.isEmptyString(mToastText, true) ? ResourceUtil.getString(R.string.limit_text_notify_text_when_over_rang_limit_count, mLimitInputCount) : mToastText;
             mTotalInputCountTextColor = typedArray.getColor(R.styleable.LimitEditText_totalInputCountTextColor, ResourceUtil.getColor(R.color.DarkGray));
-            mTotalInputCountTextSize = typedArray.getDimension(R.styleable.LimitEditText_totalInputCountTextSize, 16);
             typedArray.recycle();
         }
         mShowInputtedCountPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
@@ -64,18 +68,18 @@ public class LimitEditText extends AppCompatEditText implements TextWatcher {
 
     @Override
     public final void addTextChangedListener(TextWatcher watcher) {
-        if(null == mOuterWatchers){
+        if (null == mOuterWatchers) {
             mOuterWatchers = new ArrayList<>();
         }
 
-        if(!mOuterWatchers.contains(watcher)){
+        if (!mOuterWatchers.contains(watcher)) {
             mOuterWatchers.add(watcher);
         }
     }
 
     @Override
     public final void removeTextChangedListener(TextWatcher watcher) {
-        if(null != mOuterWatchers && mOuterWatchers.contains(watcher)){
+        if (null != mOuterWatchers && mOuterWatchers.contains(watcher)) {
             mOuterWatchers.remove(watcher);
         }
     }
@@ -83,24 +87,21 @@ public class LimitEditText extends AppCompatEditText implements TextWatcher {
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        if(mIsLimitInputCount){
-            if(mIsShowInputTotalCount){
+        if (mIsLimitInputCount) {
+            if (mIsShowInputTotalCount) {
                 final int measuredWidth = getMeasuredWidth();
                 final int measuredHeight = getMeasuredHeight();
-                final int paddingTop = getPaddingTop();
-                final int paddingBottom = getPaddingBottom();
                 final int paddingLeft = getPaddingLeft();
                 final int paddingRight = getPaddingRight();
-                final int contentWidth = measuredWidth - paddingLeft - paddingRight;
-                final int contentHeight = measuredHeight - paddingTop - paddingBottom;
+                final int paddingTop = getPaddingTop();
                 final int inputTextLength = getText().toString().length();
                 final int totalInputLength = mLimitInputCount;
                 final String displayString = inputTextLength + " / " + totalInputLength;
+                mShowInputtedCountPaint.setColor(mTotalInputCountTextColor);
+                mShowInputtedCountPaint.setTextSize(this.getTextSize());
                 final float textWidth = mShowInputtedCountPaint.measureText(displayString);
-                final int fiveDp = DensityUtil.dp2px(5);
-                mShowInputtedCountPaint.setTextSize(mTotalInputCountTextSize);
-                final float x = contentWidth - textWidth - fiveDp;
-                final float y = contentHeight - mTotalInputCountTextSize - fiveDp;
+                final float x = measuredWidth - textWidth - paddingLeft - paddingRight;
+                final float y = measuredHeight - this.getTextSize() + paddingTop / 2;
                 canvas.drawText(displayString, x, y, mShowInputtedCountPaint);
             }
         }
@@ -108,48 +109,58 @@ public class LimitEditText extends AppCompatEditText implements TextWatcher {
 
     @Override
     public final void beforeTextChanged(CharSequence s, int start, int count, int after) {
-        if(mIsLimitInputCount){
-            if(after >= mLimitInputCount){
-                s = s.subSequence(0, mLimitInputCount + 1);
-                this.setText(s);
-                if(mIsToastIfOverRangingLimitCount){
+        Logger.d("beforeTextChanged");
+        if (mIsLimitInputCount) {
+            if (start + after > mLimitInputCount) {
+                if (mIsToastIfOverRangingLimitCount) {
                     Toast.makeText(getContext(), mToastText, Toast.LENGTH_SHORT).show();
                 }
+                this.setText(s);
+                this.setSelection(s.length());
+                invalidate();
                 return;
             }
         }
-
-        int size = mOuterWatchers.size();
-        for (int i = 0; i < size; i++) {
-            TextWatcher textWatcher = mOuterWatchers.get(i);
-            textWatcher.beforeTextChanged(s, start, count, after);
+        if (null != mOuterWatchers) {
+            int size = mOuterWatchers.size();
+            for (int i = 0; i < size; i++) {
+                TextWatcher textWatcher = mOuterWatchers.get(i);
+                textWatcher.beforeTextChanged(s, start, count, after);
+            }
         }
     }
 
     @Override
     public final void onTextChanged(CharSequence s, int start, int before, int count) {
-        int size = mOuterWatchers.size();
-        for (int i = 0; i < size; i++) {
-            TextWatcher textWatcher = mOuterWatchers.get(i);
-            textWatcher.onTextChanged(s, start, before, count);
+        Logger.d("onTextChanged");
+        if (null != mOuterWatchers) {
+            int size = mOuterWatchers.size();
+            for (int i = 0; i < size; i++) {
+                TextWatcher textWatcher = mOuterWatchers.get(i);
+                textWatcher.onTextChanged(s, start, before, count);
+            }
         }
     }
 
     @Override
     public final void afterTextChanged(Editable s) {
-        int size = mOuterWatchers.size();
-        for (int i = 0; i < size; i++) {
-            TextWatcher textWatcher = mOuterWatchers.get(i);
-            textWatcher.afterTextChanged(s);
+        Logger.d("afterTextChanged");
+        if (null != mOuterWatchers) {
+            int size = mOuterWatchers.size();
+            for (int i = 0; i < size; i++) {
+                TextWatcher textWatcher = mOuterWatchers.get(i);
+                textWatcher.afterTextChanged(s);
+            }
         }
     }
 
-    public boolean isIsLimitInputCount() {
+    public boolean isLimitInputCount() {
         return mIsLimitInputCount;
     }
 
-    public void setIsLimitInputCount(boolean isLimitInputCount) {
+    public void setLimitInputCount(boolean isLimitInputCount) {
         this.mIsLimitInputCount = isLimitInputCount;
+        postInvalidate();
     }
 
     public int getLimitInputCount() {
@@ -158,21 +169,23 @@ public class LimitEditText extends AppCompatEditText implements TextWatcher {
 
     public void setLimitInputCount(int limitInputCount) {
         this.mLimitInputCount = limitInputCount;
+        postInvalidate();
     }
 
     public boolean isShowInputTotalCount() {
         return mIsShowInputTotalCount;
     }
 
-    public void setIsShowInputTotalCount(boolean isShowInputTotalCount) {
+    public void setShowInputTotalCount(boolean isShowInputTotalCount) {
         this.mIsShowInputTotalCount = isShowInputTotalCount;
+        postInvalidate();
     }
 
     public boolean isToastIfOverRangingLimitCount() {
         return mIsToastIfOverRangingLimitCount;
     }
 
-    public void setmIsToastIfOverRangingLimitCount(boolean isToastIfOverRangingLimitCount) {
+    public void setToastIfOverRangingLimitCount(boolean isToastIfOverRangingLimitCount) {
         this.mIsToastIfOverRangingLimitCount = isToastIfOverRangingLimitCount;
     }
 
@@ -188,16 +201,9 @@ public class LimitEditText extends AppCompatEditText implements TextWatcher {
         return mTotalInputCountTextColor;
     }
 
-    public void setTotalInputCountTextColor(int totalInputCountTextColor) {
-        this.mTotalInputCountTextColor = totalInputCountTextColor;
-    }
-
-    public float getTotalInputCountTextSize() {
-        return mTotalInputCountTextSize;
-    }
-
-    public void setTotalInputCountTextSize(float totalInputCountTextSize) {
-        this.mTotalInputCountTextSize = totalInputCountTextSize;
+    public void setTotalInputCountTextColor(@ColorRes int totalInputCountTextColor) {
+        this.mTotalInputCountTextColor = ResourceUtil.getColor(totalInputCountTextColor);
+        postInvalidate();
     }
 
     public Paint getShowInputtedCountPaint() {

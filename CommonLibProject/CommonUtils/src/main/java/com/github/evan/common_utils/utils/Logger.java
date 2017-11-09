@@ -60,6 +60,8 @@ public class Logger {
         StringBuilder sBuilder = new StringBuilder();
         sBuilder.append(e.getMessage());
         sBuilder.append("\r\n");
+        sBuilder.append(e.getCause().getMessage());
+        sBuilder.append("\r\n");
         StackTraceElement[] stackTrace = e.getCause().getStackTrace();
         for (int i = 0; i < stackTrace.length; i++) {
             StackTraceElement stackTraceElement = stackTrace[i];

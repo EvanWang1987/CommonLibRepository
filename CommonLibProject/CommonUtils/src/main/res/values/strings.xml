@@ -5,5 +5,5 @@
     <string name="loading_pager_net_timeout">网络链接超时...</string>
     <string name="loading_pager_empty_data">没有数据...</string>
     <string name="loading_pager_unknown_error">未知错误...</string>
-    <string name="limit_text_notify_text_when_over_rang_limit_count">您输入的字符已经超出%$d的限制</string>
+    <string name="limit_text_notify_text_when_over_rang_limit_count">您输入的字符已经超出%1$d的限制</string>
 </resources>

@@ -3,43 +3,37 @@ package com.github.evan.common_utils.ui.view;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
-import android.support.annotation.StringRes;
+import android.text.Editable;
 import android.text.InputType;
+import android.text.TextWatcher;
 import android.util.AttributeSet;
-import android.view.Gravity;
 import android.view.View;
-import android.widget.CheckBox;
-import android.widget.CompoundButton;
-import android.widget.ImageButton;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
+import android.view.inputmethod.EditorInfo;
 
 import com.github.evan.common_utils.R;
+import com.github.evan.common_utils.utils.Logger;
 import com.github.evan.common_utils.utils.ResourceUtil;
 
 /**
- * Created by Evan on 2017/11/7.
+ * Created by Evan on 2017/11/8.
  */
-public class PasswordEditText extends LinearLayout implements View.OnClickListener, CompoundButton.OnCheckedChangeListener {
-    private LimitEditText mLimitEditText;
-    private ImageButton mBtnClear;
-    private ImageView mImgLeftIcon;
-    private CheckBox mBtnDisplayPwd;
-    private boolean mIsShowClearButton = true;
-    private boolean mIsShowDisplayPwdButton = true;
-    private boolean mIsShowLeftIcon = true;
-    private Drawable mClearButtonDrawable, mDisplayPwdDrawable, mLeftIcon;
-    private CompoundButton.OnCheckedChangeListener mCheckedListener;
-    private OnClickListener mClickListener;
+public class PasswordEditText extends ExtraButtonEditText implements ExtraButtonEditText.OnExtraButtonClickListener {
+    public interface OnPasswordVisibilityCheckedChangeListener {
+        void onPasswordVisibilityCheckedChange(PasswordEditText v, boolean isChecked);
+    }
 
-
+    private boolean mIsPwdVisibilityChecked = false;
+    private Drawable mPwdVisibilityDrawable;
+    private OnPasswordVisibilityCheckedChangeListener mCheckedChangeListener;
 
     public PasswordEditText(Context context) {
-        this(context, null, 0);
+        super(context);
+        setup(context, null, 0);
     }
 
     public PasswordEditText(Context context, AttributeSet attrs) {
-        this(context, attrs, 0);
+        super(context, attrs);
+        setup(context, attrs, 0);
     }
 
     public PasswordEditText(Context context, AttributeSet attrs, int defStyleAttr) {
@@ -47,167 +41,65 @@ public class PasswordEditText extends LinearLayout implements View.OnClickListen
         setup(context, attrs, defStyleAttr);
     }
 
-    private void setup(Context context, AttributeSet attrs, int defStyleAttr){
-        this.setOrientation(LinearLayout.HORIZONTAL);
-        this.setWeightSum(3);
-        this.setGravity(Gravity.CENTER_VERTICAL);
-        mLimitEditText = new LimitEditText(context);
-        mLimitEditText.setMaxLines(1);
-        mLimitEditText.setInputType(InputType.TYPE_TEXT_VARIATION_PASSWORD);
-        mLimitEditText.setIsLimitInputCount(false);
-        mBtnClear = new ImageButton(context);
-        mBtnDisplayPwd = new CheckBox(context);
-        mBtnDisplayPwd.setBackgroundColor(ResourceUtil.getColor(R.color.alpha));
-        mBtnDisplayPwd.setText("");
-        mImgLeftIcon = new ImageView(context);
-        mBtnClear.setOnClickListener(this);
-        mBtnDisplayPwd.setOnCheckedChangeListener(this);
-        if(null != attrs){
+
+    public boolean isPwdVisibilityChecked() {
+        return mIsPwdVisibilityChecked;
+    }
+
+    public void setPwdVisibilityChecked(boolean isPwdVisibilityChecked) {
+        this.mIsPwdVisibilityChecked = isPwdVisibilityChecked;
+    }
+
+    public Drawable getPwdVisibilityDrawable() {
+        return mPwdVisibilityDrawable;
+    }
+
+    public void setPwdVisibilityDrawable(Drawable pwdVisibilityDrawable) {
+        this.mPwdVisibilityDrawable = pwdVisibilityDrawable;
+    }
+
+    public OnPasswordVisibilityCheckedChangeListener getCheckedChangeListener() {
+        return mCheckedChangeListener;
+    }
+
+    public void setPasswordVisibilityCheckedChangeListener(OnPasswordVisibilityCheckedChangeListener l) {
+        this.mCheckedChangeListener = l;
+    }
+
+    @Override
+    public void onExtraButtonClick(View v, int whichButton) {
+        if (whichButton == EXTRA_BUTTON_RIGHT) {
+            mIsPwdVisibilityChecked = !mIsPwdVisibilityChecked;
+            mPwdVisibilityDrawable.setState(new int[]{mIsPwdVisibilityChecked ? android.R.attr.state_checked : android.R.attr.state_checkable});
+            setInputType(convertInputType(mIsPwdVisibilityChecked));
+            setSelection(getText().toString().length());
+            if (null != mCheckedChangeListener) {
+                mCheckedChangeListener.onPasswordVisibilityCheckedChange((PasswordEditText) v, mIsPwdVisibilityChecked);
+            }
+        }
+    }
+
+    private void setup(Context context, AttributeSet attrs, int defStyleAttr) {
+        if (null != attrs) {
             TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.PasswordEditText);
-            mIsShowClearButton = typedArray.getBoolean(R.styleable.PasswordEditText_isShowClearButton, mIsShowClearButton);
-            mIsShowDisplayPwdButton = typedArray.getBoolean(R.styleable.PasswordEditText_isShowDisplayPwdButton, mIsShowDisplayPwdButton);
-            mIsShowLeftIcon = typedArray.getBoolean(R.styleable.PasswordEditText_leftIcon, mIsShowLeftIcon);
-            mClearButtonDrawable = typedArray.getDrawable(R.styleable.PasswordEditText_clearButtonDrawable);
-            mDisplayPwdDrawable = typedArray.getDrawable(R.styleable.PasswordEditText_displayPwdButtonDrawable);
-            mLeftIcon = typedArray.getDrawable(R.styleable.PasswordEditText_leftIcon);
+            mIsPwdVisibilityChecked = typedArray.getBoolean(R.styleable.PasswordEditText_passwordVisibilityChecked, mIsPwdVisibilityChecked);
+            mPwdVisibilityDrawable = typedArray.getDrawable(R.styleable.PasswordEditText_passwordVisibilityDrawable);
             typedArray.recycle();
         }
-        mClearButtonDrawable = null == mClearButtonDrawable ? ResourceUtil.getDrawable(R.drawable.selector_button_clear) : mClearButtonDrawable;
-        mDisplayPwdDrawable = null == mDisplayPwdDrawable ? ResourceUtil.getDrawable(R.drawable.selector_password_visibility) : mDisplayPwdDrawable;
-        mLeftIcon = null == mLeftIcon ? ResourceUtil.getDrawable(R.mipmap.ic_account_dark) : mDisplayPwdDrawable;
-        mBtnClear.setImageDrawable(mClearButtonDrawable);
-        mBtnDisplayPwd.setButtonDrawable(mDisplayPwdDrawable);
 
-        LinearLayout.LayoutParams leftIconParams = new LinearLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
-        LinearLayout.LayoutParams editTextParams = new LinearLayout.LayoutParams(0, LayoutParams.WRAP_CONTENT, 1);
-        LinearLayout.LayoutParams clearButtonParams = new LinearLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
-        LinearLayout.LayoutParams displayPwdParams = new LinearLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
-        this.addView(mImgLeftIcon, leftIconParams);
-        this.addView(mLimitEditText, editTextParams);
-        this.addView(mBtnClear, clearButtonParams);
-        this.addView(mBtnDisplayPwd, displayPwdParams);
-        mImgLeftIcon.setVisibility(mIsShowLeftIcon ? VISIBLE : GONE);
-        mBtnClear.setVisibility(mIsShowClearButton ? VISIBLE : GONE);
-        mBtnDisplayPwd.setVisibility(mIsShowDisplayPwdButton ? VISIBLE : GONE);
+        mPwdVisibilityDrawable = null == mPwdVisibilityDrawable ? ResourceUtil.getDrawable(R.drawable.selector_password_visibility) : mPwdVisibilityDrawable;
+        setMaxLines(1);
+        setShowLeftButton(false);
+        setShowRightButton(true);
+        setAutoClearTextWhenClickLeftButton(false);
+        setAutoClearTextWhenClickRightButton(false);
+        setRightButtonDrawable(mPwdVisibilityDrawable);
+        setExtraButtonClickListener(this);
+        setInputType(convertInputType(mIsPwdVisibilityChecked));
     }
 
-    public CompoundButton.OnCheckedChangeListener getCheckedListener() {
-        return mCheckedListener;
+    private int convertInputType(boolean isPlain){
+        return isPlain ? InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD : InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD;
     }
 
-    public void setCheckedListener(CompoundButton.OnCheckedChangeListener checkedListener) {
-        this.mCheckedListener = checkedListener;
-    }
-
-    public OnClickListener getClickListener() {
-        return mClickListener;
-    }
-
-    public void setClickListener(OnClickListener clickListener) {
-        this.mClickListener = clickListener;
-    }
-
-    public boolean isShowClearButton() {
-        return mIsShowClearButton;
-    }
-
-    public void setIsShowClearButton(boolean isShowClearButton) {
-        this.mIsShowClearButton = isShowClearButton;
-        mBtnClear.setVisibility(isShowClearButton ? VISIBLE : GONE);
-    }
-
-    public boolean isShowDisplayPwdButton() {
-        return mIsShowDisplayPwdButton;
-    }
-
-    public void setIsShowDisplayPwdButton(boolean isShowDisplayPwdButton) {
-        this.mIsShowDisplayPwdButton = isShowDisplayPwdButton;
-        mBtnDisplayPwd.setVisibility(isShowDisplayPwdButton ? VISIBLE : GONE);
-    }
-
-    public boolean isShowLeftIcon() {
-        return mIsShowLeftIcon;
-    }
-
-    public void setIsShowLeftIcon(boolean isShowLeftIcon) {
-        this.mIsShowLeftIcon = isShowLeftIcon;
-        mImgLeftIcon.setVisibility(isShowLeftIcon ? VISIBLE : GONE);
-    }
-
-    public Drawable getClearButtonDrawable() {
-        return mClearButtonDrawable;
-    }
-
-    public void setClearButtonDrawable(Drawable clearButtonDrawable) {
-        this.mClearButtonDrawable = clearButtonDrawable;
-        mBtnClear.setImageDrawable(clearButtonDrawable);
-    }
-
-    public Drawable getDisplayPwdDrawable() {
-        return mDisplayPwdDrawable;
-    }
-
-    public void setDisplayPwdDrawable(Drawable displayPwdDrawable) {
-        this.mDisplayPwdDrawable = displayPwdDrawable;
-        mBtnDisplayPwd.setButtonDrawable(displayPwdDrawable);
-    }
-
-    public Drawable getLeftIcon() {
-        return mLeftIcon;
-    }
-
-    public void setLeftIcon(Drawable leftIcon) {
-        this.mLeftIcon = leftIcon;
-        mImgLeftIcon.setImageDrawable(leftIcon);
-    }
-
-    public void setText(CharSequence text){
-        mLimitEditText.setText(text);
-    }
-
-    public void setText(@StringRes int  resId){
-        mLimitEditText.setText(resId);
-    }
-
-    public CharSequence getText(){
-        return mLimitEditText.getText();
-    }
-
-    public void setHint(CharSequence hint){
-        mLimitEditText.setHint(hint);
-    }
-
-    public void setHint(@StringRes int resId){
-        mLimitEditText.setHint(resId);
-    }
-
-    public void setLines(int line){
-        mLimitEditText.setLines(line);
-    }
-
-    public void setMaxLine(int maxLine){
-        mLimitEditText.setMaxLines(maxLine);
-    }
-
-    public boolean isDisplayPassword(){
-        return mBtnDisplayPwd.isChecked();
-    }
-
-    public void setDisplayPassword(boolean isChecked){
-        mBtnDisplayPwd.setChecked(isChecked);
-    }
-
-    @Override
-    public void onClick(View v) {
-        if(null != mClickListener){
-            mClickListener.onClick(v);
-        }
-    }
-
-    @Override
-    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-        if(null != mCheckedListener){
-            mCheckedListener.onCheckedChanged(buttonView, isChecked);
-        }
-    }
 }

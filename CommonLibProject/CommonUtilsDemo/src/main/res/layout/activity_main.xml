@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.github.evan.common_utils_demo.MainActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Android EditText"
+            android:textColor="@color/Coral"
+            android:textSize="18sp" />
+
+        <android.support.v7.widget.AppCompatEditText
+            android:id="@+id/androidEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:lines="5" />
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="LimitEditText"
+            android:textColor="@color/Coral"
+            android:textSize="18sp" />
+
+        <com.github.evan.common_utils.ui.view.LimitEditText
+            android:id="@+id/limitEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="top|left"
+            android:lines="5"
+            app:isLimitInputCount="true"
+            app:isShowTotalInputCount="true"
+            app:isToastIfOverRangingLimitCount="true"
+            app:limitCount="48"
+            app:totalInputCountTextColor="@color/DarkGray" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ExtraButtonEditText"
+            android:textColor="@color/Coral"
+            android:textSize="18sp" />
+
+        <com.github.evan.common_utils.ui.view.ExtraButtonEditText
+            android:id="@+id/extraButtonEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="top|left"
+            android:lines="5"
+            app:isAutoClearTextWhenClickLeftButton="false"
+            app:isAutoClearTextWhenClickRightButton="false"
+            app:isShowLeftButton="true"
+            app:isShowRightButton="true"
+            app:leftButtonDrawableRes="@drawable/selector_password_visibility"
+            app:rightButtonDrawableRes="@drawable/selector_button_clear" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="PasswordEditText"
+            android:textColor="@color/Coral"
+            android:textSize="18sp" />
+
+        <com.github.evan.common_utils.ui.view.PasswordEditText
+            android:id="@+id/passwordEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="top|left"
+            android:inputType="text"
+            android:lines="5" />
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="LoginEditText"
+            android:textColor="@color/Coral"
+            android:textSize="18sp" />
+
+        <com.github.evan.common_utils.ui.view.LoginEditText
+            android:id="@+id/accountPwdEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:isShowClearButton="true"
+            app:isShowDisplayPwdButton="true"
+            app:isShowLeftIcon="true"
+            app:leftIcon="@mipmap/ic_account_dark" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="LoginEditText"
+            android:textColor="@color/Coral"
+            android:textSize="18sp" />
+
+        <com.github.evan.common_utils.ui.view.LoginEditText
+            android:id="@+id/pwdEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:isShowClearButton="true"
+            app:isShowDisplayPwdButton="false"
+            app:isShowLeftIcon="true"
+            app:leftIcon="@mipmap/ic_lock_dark" />
+
+    </LinearLayout>
+
+</ScrollView>

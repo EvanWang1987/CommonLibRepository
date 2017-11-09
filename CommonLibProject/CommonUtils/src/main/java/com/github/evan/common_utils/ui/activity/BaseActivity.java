@@ -7,8 +7,10 @@ import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
-import com.Evan.CommonUtil.handler.SoftHandler;
-import com.Evan.CommonUtil.handler.SoftHandlerReceiver;
+
+import com.github.evan.common_utils.handler.SoftHandler;
+import com.github.evan.common_utils.handler.SoftHandlerReceiver;
+
 import java.util.LinkedList;
 
 /**

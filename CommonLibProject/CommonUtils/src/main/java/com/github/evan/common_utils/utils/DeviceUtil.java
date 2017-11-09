@@ -3,7 +3,8 @@ package com.github.evan.common_utils.utils;
 import android.content.Context;
 import android.os.Build;
 import android.telephony.TelephonyManager;
-import com.Evan.CommonUtil.BaseApplication;
+
+import com.github.evan.common_utils.BaseApplication;
 
 /**
  * Created by Evan on 2017/10/4.

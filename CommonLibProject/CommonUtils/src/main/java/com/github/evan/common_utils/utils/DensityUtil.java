@@ -7,9 +7,8 @@ import android.os.Build;
 import android.util.DisplayMetrics;
 import android.view.Display;
 import android.view.WindowManager;
-import com.Evan.CommonUtil.BaseApplication;
+import com.github.evan.common_utils.BaseApplication;
 import java.lang.reflect.InvocationTargetException;
-import java.util.ArrayList;
 
 /**
  * Created by Evan on 2017/10/1.

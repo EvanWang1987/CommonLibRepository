@@ -5,7 +5,9 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
-import com.Evan.CommonUtil.BaseApplication;
+
+import com.github.evan.common_utils.BaseApplication;
+
 import java.util.ArrayList;
 import java.util.List;
 
