@@ -1,4 +1,4 @@
-package com.github.evan.common_utils.ui.view;
+package com.github.evan.common_utils.ui.view.editText;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -11,6 +11,7 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+
 import com.github.evan.common_utils.R;
 import com.github.evan.common_utils.utils.ResourceUtil;
 
@@ -55,7 +56,7 @@ public class LoginEditText extends LinearLayout implements CompoundButton.OnChec
         mEditText.setAutoClearTextWhenClickRightButton(true);
         mEditText.setRightButtonDrawable(ResourceUtil.getDrawable(R.drawable.selector_button_clear));
         mBtnDisplayPwd = new CheckBox(context);
-        mBtnDisplayPwd.setBackgroundColor(ResourceUtil.getColor(R.color.alpha));
+        mBtnDisplayPwd.setBackgroundColor(ResourceUtil.getColor(R.color.Alpha));
         mBtnDisplayPwd.setText("");
         mImgLeftIcon = new ImageView(context);
         mBtnDisplayPwd.setOnCheckedChangeListener(this);
@@ -73,12 +74,12 @@ public class LoginEditText extends LinearLayout implements CompoundButton.OnChec
         mDisplayPwdDrawable = null == mDisplayPwdDrawable ? ResourceUtil.getDrawable(R.drawable.selector_password_visibility) : mDisplayPwdDrawable;
         mLeftIcon = null == mLeftIcon ? ResourceUtil.getDrawable(R.mipmap.ic_account_dark) : mLeftIcon;
         mBtnDisplayPwd.setButtonDrawable(mDisplayPwdDrawable);
-        mBtnDisplayPwd.setBackgroundColor(ResourceUtil.getColor(R.color.alpha));
+        mBtnDisplayPwd.setBackgroundColor(ResourceUtil.getColor(R.color.Alpha));
         mImgLeftIcon.setImageDrawable(mLeftIcon);
 
-        LinearLayout.LayoutParams leftIconParams = new LinearLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
-        LinearLayout.LayoutParams editTextParams = new LinearLayout.LayoutParams(0, LayoutParams.WRAP_CONTENT, 1);
-        LinearLayout.LayoutParams displayPwdParams = new LinearLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
+        LayoutParams leftIconParams = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
+        LayoutParams editTextParams = new LayoutParams(0, LayoutParams.WRAP_CONTENT, 1);
+        LayoutParams displayPwdParams = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
         this.addView(mImgLeftIcon, leftIconParams);
         this.addView(mEditText, editTextParams);
         this.addView(mBtnDisplayPwd, displayPwdParams);

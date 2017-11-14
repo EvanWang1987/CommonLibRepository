@@ -19,6 +19,6 @@ public class BaseApplication extends Application{
     public void onCreate() {
         super.onCreate();
         mApplication = this;
-        Thread.setDefaultUncaughtExceptionHandler(new CrashHandler());
+//        Thread.setDefaultUncaughtExceptionHandler(new CrashHandler());
     }
 }

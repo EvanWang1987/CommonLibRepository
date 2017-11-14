@@ -1,6 +1,7 @@
 package com.github.evan.common_utils.utils;
 
 import android.content.res.AssetManager;
+import android.content.res.ColorStateList;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.AnimRes;
@@ -39,6 +40,15 @@ public class ResourceUtil {
      */
     public static Drawable getDrawable(@DrawableRes int resId){
         return getResource().getDrawable(resId);
+    }
+
+    /**
+     * 获取颜色选择器
+     * @param resId
+     * @return
+     */
+    public static ColorStateList getSelector(int resId){
+        return getResource().getColorStateList(resId);
     }
 
     /**

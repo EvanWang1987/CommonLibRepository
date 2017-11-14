@@ -18,5 +18,11 @@ public class StringUtil {
         return isFilteringNullString ? isEmpty(value) || isNullString(value) : isEmpty(value);
     }
 
+    public static boolean equals(String arg1, String arg2, boolean isIgnoreCase){
+        if(isEmpty(arg1) && isEmpty(arg2)){
+            return true;
+        }
+        return isIgnoreCase ? arg1.equalsIgnoreCase(arg2) : arg1.equals(arg2);
+    }
 
 }

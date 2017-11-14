@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="function_title_array">
+        <item>Custom EditText</item>
+    </array>
+</resources>

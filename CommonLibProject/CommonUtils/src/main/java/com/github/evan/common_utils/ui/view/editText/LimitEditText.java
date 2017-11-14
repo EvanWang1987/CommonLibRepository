@@ -1,4 +1,4 @@
-package com.github.evan.common_utils.ui.view;
+package com.github.evan.common_utils.ui.view.editText;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -13,7 +13,6 @@ import android.util.AttributeSet;
 import android.widget.Toast;
 
 import com.github.evan.common_utils.R;
-import com.github.evan.common_utils.utils.DensityUtil;
 import com.github.evan.common_utils.utils.Logger;
 import com.github.evan.common_utils.utils.ResourceUtil;
 import com.github.evan.common_utils.utils.StringUtil;

@@ -1,3 +1,54 @@
 <resources>
     <string name="app_name">CommonUtilsDemo</string>
+    <string name="about">关于</string>
+
+    <string name="demo_version_name">CommonUtilsDemo version: %1$s</string>
+    <string name="os_version">Android version: %1$s</string>
+    <string name="lib_version_name">CommonUtils Lib version: %1$s</string>
+    <string name="lib_min_support_os">CommonUtils Lib min support OS version: %1$s</string>
+
+    <string name="drawer_open_desc">更多</string>
+    <string name="drawer_close_desc">回到首页</string>
+
+    <string name="home">首页</string>
+    <string name="edit_text">自定义EditText</string>
+    <string name="flag_view">自定义标记View</string>
+    <string name="tint">着色</string>
+
+
+    <string name="time_flag_text_view">带时间标记的TextView</string>
+    <string name="left_top_corner">左上角</string>
+    <string name="left_bottom_corner">左下角</string>
+    <string name="right_top_corner">右上角</string>
+    <string name="right_bottom_corner">右下角</string>
+    <string name="clickToShowFlag">显示标记</string>
+    <string name="clickToDismissFlag">隐藏标记</string>
+    <string name="clickToUpdateFlag2CurrentTime">更新标记时间</string>
+    <string name="clickToGetLastUpdateTime">上次标记时间</string>
+    <string name="lastUpdateTime">上次标记更新时间: %1$s</string>
+    <string name="currentUpdateTime">本次标记更新时间: %1$s</string>
+
+    <string name="ImageViewWithTint">ImageView with tint</string>
+    <string name="Image_without_tint">原图</string>
+    <string name="Tint_Mode_Src_in">TintMode: src_in</string>
+    <string name="Tint_Mode_Src">TintMode: src</string>
+    <string name="Tint_Mode_Add">TintMode: src_add</string>
+    <string name="Tint_Mode_Src_Atop">TintMode: src_atop</string>
+    <string name="Tint_Mode_Src_Over">TintMode: src_over</string>
+    <string name="Tint_Mode_SRC_Out">TintMode: src_out</string>
+    <string name="Tint_Mode_Dst_Out">TintMode: dst_out</string>
+    <string name="Tint_Mode_Multiply">TintMode: multiply</string>
+    <string name="Tint_Mode_Screen">TintMode: screen</string>
+    <string name="Tint_Mode_Clear">TintMode: clear</string>
+    <string name="Tint_Mode_DST">TintMode: dst</string>
+    <string name="Tint_Mode_DST_Over">TintMode: dst over</string>
+    <string name="Tint_Mode_DST_Atop">TintMode: dst atop</string>
+    <string name="Tint_Mode_DST_In">TintMode: dst in</string>
+    <string name="Tint_Mode_Xor">TintMode: xor</string>
+    <string name="Tint_Mode_Darken">TintMode: darken</string>
+    <string name="Tint_Mode_Lighten">TintMode: lighten</string>
+    <string name="Tint_Mode_Overly">TintMode: overly</string>
+
+
+    <string name="home_page_link">https://github.com/EvanWang1987</string>
 </resources>

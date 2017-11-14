@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="ThemeAppCompatLightDarkActionBar" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="android:textAllCaps">false</item>
+        <item name="colorControlNormal">@color/White</item>
+    </style>
+
+    <style name="ThemeAppCompatLightDarkActionBarPopMenuNotOverToolBar" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="android:textAllCaps">false</item>
+        <item name="colorControlNormal">@color/White</item>
+        <item name="actionBarPopupTheme">@style/ActionBarPopupMenuNotOverActionBar</item>
+    </style>
+
+    <style name="ThemeAppCompatLightNoActionBar" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:textAllCaps">false</item>
+        <item name="colorControlNormal">@color/White</item>
+    </style>
+
+    <style name="ActionBarPopupMenuNotOverActionBar" parent="ThemeOverlay.AppCompat.Light">
+        <item name="overlapAnchor">false</item>                         <!-- 是否弹出在ToolBar上 -->
+    </style>
+
+    <style name="ActionBarPopupMenuOverActionBar" parent="ThemeOverlay.AppCompat.Light">
+        <item name="overlapAnchor">true</item>                         <!-- 是否弹出在ToolBar上 -->
+    </style>
+
+    <style name="ThemeDarkActionBar" parent="ThemeOverlay.AppCompat.Light">
+        <item name="colorControlNormal">@color/White</item>
+        <item name="android:textColorPrimary">@color/text_color_white</item>
+        <item name="android:textColorSecondary">@color/text_color_white</item>
+        <item name="android:windowBackground">?attr/colorPrimary</item>
+    </style>
+
+    <style name="ThemeLightActionBar">
+        <item name="colorControlNormal">@color/Black</item>
+        <item name="android:textColorPrimary">@color/text_color_black</item>
+        <item name="android:textColorSecondary">@color/text_color_black</item>
+        <item name="android:windowBackground">?attr/colorPrimary</item>
+    </style>
+
+</resources>

@@ -1,17 +1,305 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="alpha">#00000000</color>                   <!-- 透明 -->
-    <color name="black">#000000</color>                     <!-- 纯黑 -->
-    <color name="white">#FFFFFF</color>                     <!-- 纯白 -->
-    <color name="red">#FF0000</color>                       <!-- 纯红 -->
+    <!-- 基础色 -->
+    <color name="Alpha">#00000000</color>                   <!-- 透明 -->
+    <color name="Black">#000000</color>                     <!-- 纯黑 -->
+    <color name="White">#FFFFFF</color>                     <!-- 纯白 -->
+    <color name="Red">#FF0000</color>                       <!-- 纯红 -->
     <color name="Purple">#800080</color>                    <!-- 紫色 -->
-    <color name="green">#008000</color>                     <!-- 纯绿 -->
-    <color name="blue">#0000FF</color>                      <!-- 纯蓝 -->
+    <color name="Green">#008000</color>                     <!-- 纯绿 -->
+    <color name="Blue">#0000FF</color>                      <!-- 纯蓝 -->
     <color name="Yellow">#FFFF00</color>                    <!-- 纯黄 -->
     <color name="Brown">#A52A2A</color>                     <!-- 棕色 -->
     <color name="Gray">#808080</color>                      <!-- 灰色 -->
     <color name="Orange">#FFA500</color>                    <!-- 橙色 -->
     <color name="Gold">#FFD700</color>                      <!-- 金色 -->
+
+    <!-- 常用字体颜色 -->
+    <color name="text_color_black">#212121</color>
+    <color name="text_color_gray">#757575</color>
+    <color name="text_color_white">#FFFFFF</color>
+
+    <!-- 常用分割线颜色 -->
+    <color name="divider_color_gray">#BDBDBD</color>
+
+    <!-- ↓Material Design↓ 颜色 -->
+    <!-- 红 -->
+    <color name="Red_Material_Design_50_saturation">#fde0dc</color>
+    <color name="Red_Material_Design_100_saturation">#f9bdbb</color>
+    <color name="Red_Material_Design_200_saturation">#f69988</color>
+    <color name="Red_Material_Design_300_saturation">#f36c60</color>
+    <color name="Red_Material_Design_400_saturation">#e84e40</color>
+    <color name="Red_Material_Design_500_saturation">#e51c23</color>
+    <color name="Red_Material_Design_600_saturation">#dd191d</color>
+    <color name="Red_Material_Design_700_saturation">#d01716</color>
+    <color name="Red_Material_Design_800_saturation">#c41411</color>
+    <color name="Red_Material_Design_900_saturation">#b0120a</color>
+    <color name="Red_Material_Design_A100_saturation">#ff7997</color>
+    <color name="Red_Material_Design_A200_saturation">#ff5177</color>
+    <color name="Red_Material_Design_A400_saturation">#ff2d6f</color>
+    <color name="Red_Material_Design_A700_saturation">#e00032</color>
+    <!-- 粉 -->
+    <color name="Pink_Material_Design_50_saturation">#fce4ec</color>
+    <color name="Pink_Material_Design_100_saturation">#f8bbd0</color>
+    <color name="Pink_Material_Design_200_saturation">#f48fb1</color>
+    <color name="Pink_Material_Design_300_saturation">#f06292</color>
+    <color name="Pink_Material_Design_400_saturation">#ec407a</color>
+    <color name="Pink_Material_Design_500_saturation">#e91e63</color>
+    <color name="Pink_Material_Design_600_saturation">#d81b60</color>
+    <color name="Pink_Material_Design_700_saturation">#c2185b</color>
+    <color name="Pink_Material_Design_800_saturation">#ad1457</color>
+    <color name="Pink_Material_Design_900_saturation">#880e4f</color>
+    <color name="Pink_Material_Design_A100_saturation">#ff80ab</color>
+    <color name="Pink_Material_Design_A200_saturation">#ff4081</color>
+    <color name="Pink_Material_Design_A400_saturation">#f50057</color>
+    <color name="Pink_Material_Design_A700_saturation">#c51162</color>
+    <!-- 紫 -->
+    <color name="Purple_Material_Design_50_saturation">#f3e5f5</color>
+    <color name="Purple_Material_Design_100_saturation">#e1bee7</color>
+    <color name="Purple_Material_Design_200_saturation">#ce93d8</color>
+    <color name="Purple_Material_Design_300_saturation">#ba68c8</color>
+    <color name="Purple_Material_Design_400_saturation">#ab47bc</color>
+    <color name="Purple_Material_Design_500_saturation">#9c27b0</color>
+    <color name="Purple_Material_Design_600_saturation">#8e24aa</color>
+    <color name="Purple_Material_Design_700_saturation">#7b1fa2</color>
+    <color name="Purple_Material_Design_800_saturation">#6a1b9a</color>
+    <color name="Purple_Material_Design_900_saturation">#4a148c</color>
+    <color name="Purple_Material_Design_A100_saturation">#ea80fc</color>
+    <color name="Purple_Material_Design_A200_saturation">#e040fb</color>
+    <color name="Purple_Material_Design_A400_saturation">#d500f9</color>
+    <color name="Purple_Material_Design_A700_saturation">#aa00ff</color>
+    <!-- 深紫 -->
+    <color name="Deep_Purple_Material_Design_50_saturation">#ede7f6</color>
+    <color name="Deep_Purple_Material_Design_100_saturation">#d1c4e9</color>
+    <color name="Deep_Purple_Material_Design_200_saturation">#b39ddb</color>
+    <color name="Deep_Purple_Material_Design_300_saturation">#9575cd</color>
+    <color name="Deep_Purple_Material_Design_400_saturation">#7e57c2</color>
+    <color name="Deep_Purple_Material_Design_500_saturation">#673ab7</color>
+    <color name="Deep_Purple_Material_Design_600_saturation">#5e35b1</color>
+    <color name="Deep_Purple_Material_Design_700_saturation">#512da8</color>
+    <color name="Deep_Purple_Material_Design_800_saturation">#4527a0</color>
+    <color name="Deep_Purple_Material_Design_900_saturation">#311b92</color>
+    <color name="Deep_Purple_Material_Design_A100_saturation">#b388ff</color>
+    <color name="Deep_Purple_Material_Design_A200_saturation">#7c4dff</color>
+    <color name="Deep_Purple_Material_Design_A400_saturation">#651fff</color>
+    <color name="Deep_Purple_Material_Design_A700_saturation">#6200ea</color>
+    <!-- 靛蓝 -->
+    <color name="Indigo_Material_Design_50_saturation">#e8eaf6</color>
+    <color name="Indigo_Material_Design_100_saturation">#c5cae9</color>
+    <color name="Indigo_Material_Design_200_saturation">#9fa8da</color>
+    <color name="Indigo_Material_Design_300_saturation">#7986cb</color>
+    <color name="Indigo_Material_Design_400_saturation">#5c6bc0</color>
+    <color name="Indigo_Material_Design_500_saturation">#3f51b5</color>
+    <color name="Indigo_Material_Design_600_saturation">#3949ab</color>
+    <color name="Indigo_Material_Design_700_saturation">#303f9f</color>
+    <color name="Indigo_Material_Design_800_saturation">#283593</color>
+    <color name="Indigo_Material_Design_900_saturation">#1a237e</color>
+    <color name="Indigo_Material_Design_A100_saturation">#8c9eff</color>
+    <color name="Indigo_Material_Design_A200_saturation">#536dfe</color>
+    <color name="Indigo_Material_Design_A400_saturation">#3d5afe</color>
+    <color name="Indigo_Material_Design_A700_saturation">#304ffe</color>
+    <!-- 蓝 -->
+    <color name="Blue_Material_Design_50_saturation">#e7e9fd</color>
+    <color name="Blue_Material_Design_100_saturation">#d0d9ff</color>
+    <color name="Blue_Material_Design_200_saturation">#afbfff</color>
+    <color name="Blue_Material_Design_300_saturation">#91a7ff</color>
+    <color name="Blue_Material_Design_400_saturation">#738ffe</color>
+    <color name="Blue_Material_Design_500_saturation">#5677fc</color>
+    <color name="Blue_Material_Design_600_saturation">#4e6cef</color>
+    <color name="Blue_Material_Design_700_saturation">#455ede</color>
+    <color name="Blue_Material_Design_800_saturation">#3b50ce</color>
+    <color name="Blue_Material_Design_900_saturation">#2a36b1</color>
+    <color name="Blue_Material_Design_A100_saturation">#a6baff</color>
+    <color name="Blue_Material_Design_A200_saturation">#6889ff</color>
+    <color name="Blue_Material_Design_A400_saturation">#4d73ff</color>
+    <color name="Blue_Material_Design_A700_saturation">#4d69ff</color>
+    <!-- 浅蓝 -->
+    <color name="Light_Blue_Material_Design_50_saturation">#e1f5fe</color>
+    <color name="Light_Blue_Material_Design_100_saturation">#b3e5fc</color>
+    <color name="Light_Blue_Material_Design_200_saturation">#81d4fa</color>
+    <color name="Light_Blue_Material_Design_300_saturation">#4fc3f7</color>
+    <color name="Light_Blue_Material_Design_400_saturation">#29b6f6</color>
+    <color name="Light_Blue_Material_Design_500_saturation">#03a9f4</color>
+    <color name="Light_Blue_Material_Design_600_saturation">#039be5</color>
+    <color name="Light_Blue_Material_Design_700_saturation">#0288d1</color>
+    <color name="Light_Blue_Material_Design_800_saturation">#0277bd</color>
+    <color name="Light_Blue_Material_Design_900_saturation">#01579b</color>
+    <color name="Light_Blue_Material_Design_A100_saturation">#80d8ff</color>
+    <color name="Light_Blue_Material_Design_A200_saturation">#40c4ff</color>
+    <color name="Light_Blue_Material_Design_A400_saturation">#00b0ff</color>
+    <color name="Light_Blue_Material_Design_A700_saturation">#0091ea</color>
+    <!-- 青(蓝绿) -->
+    <color name="Cyan_Material_Design_50_saturation">#e0f7fa</color>
+    <color name="Cyan_Material_Design_100_saturation">#b2ebf2</color>
+    <color name="Cyan_Material_Design_200_saturation">#80deea</color>
+    <color name="Cyan_Material_Design_300_saturation">#4dd0e1</color>
+    <color name="Cyan_Material_Design_400_saturation">#26c6da</color>
+    <color name="Cyan_Material_Design_500_saturation">#00bcd4</color>
+    <color name="Cyan_Material_Design_600_saturation">#00acc1</color>
+    <color name="Cyan_Material_Design_700_saturation">#0097a7</color>
+    <color name="Cyan_Material_Design_800_saturation">#00838f</color>
+    <color name="Cyan_Material_Design_900_saturation">#006064</color>
+    <color name="Cyan_Material_Design_A100_saturation">#84ffff</color>
+    <color name="Cyan_Material_Design_A200_saturation">#18ffff</color>
+    <color name="Cyan_Material_Design_A400_saturation">#00e5ff</color>
+    <color name="Cyan_Material_Design_A700_saturation">#00b8d4</color>
+    <!-- 青(蓝绿) -->
+    <color name="Teal_Material_Design_50_saturation">#e0f2f1</color>
+    <color name="Teal_Material_Design_100_saturation">#b2dfdb</color>
+    <color name="Teal_Material_Design_200_saturation">#80cbc4</color>
+    <color name="Teal_Material_Design_300_saturation">#4db6ac</color>
+    <color name="Teal_Material_Design_400_saturation">#26a69a</color>
+    <color name="Teal_Material_Design_500_saturation">#009688</color>
+    <color name="Teal_Material_Design_600_saturation">#00897b</color>
+    <color name="Teal_Material_Design_700_saturation">#00796b</color>
+    <color name="Teal_Material_Design_800_saturation">#00695c</color>
+    <color name="Teal_Material_Design_900_saturation">#004d40</color>
+    <color name="Teal_Material_Design_A100_saturation">#a7ffeb</color>
+    <color name="Teal_Material_Design_A200_saturation">#64ffda</color>
+    <color name="Teal_Material_Design_A400_saturation">#1de9b6</color>
+    <color name="Teal_Material_Design_A700_saturation">#00bfa5</color>
+    <!-- 绿 -->
+    <color name="Green_Material_Design_50_saturation">#d0f8ce</color>
+    <color name="Green_Material_Design_100_saturation">#a3e9a4</color>
+    <color name="Green_Material_Design_200_saturation">#72d572</color>
+    <color name="Green_Material_Design_300_saturation">#42bd41</color>
+    <color name="Green_Material_Design_400_saturation">#2baf2b</color>
+    <color name="Green_Material_Design_500_saturation">#259b24</color>
+    <color name="Green_Material_Design_600_saturation">#0a8f08</color>
+    <color name="Green_Material_Design_700_saturation">#0a7e07</color>
+    <color name="Green_Material_Design_800_saturation">#056f00</color>
+    <color name="Green_Material_Design_900_saturation">#0d5302</color>
+    <color name="Green_Material_Design_A100_saturation">#a2f78d</color>
+    <color name="Green_Material_Design_A200_saturation">#5af158</color>
+    <color name="Green_Material_Design_A400_saturation">#14e715</color>
+    <color name="Green_Material_Design_A700_saturation">#12c700</color>
+    <!-- 浅绿 -->
+    <color name="Light_Green_Material_Design_50_saturation">#f1f8e9</color>
+    <color name="Light_Green_Material_Design_100_saturation">#dcedc8</color>
+    <color name="Light_Green_Material_Design_200_saturation">#c5e1a5</color>
+    <color name="Light_Green_Material_Design_300_saturation">#aed581</color>
+    <color name="Light_Green_Material_Design_400_saturation">#9ccc65</color>
+    <color name="Light_Green_Material_Design_500_saturation">#8bc34a</color>
+    <color name="Light_Green_Material_Design_600_saturation">#7cb342</color>
+    <color name="Light_Green_Material_Design_700_saturation">#689f38</color>
+    <color name="Light_Green_Material_Design_800_saturation">#558b2f</color>
+    <color name="Light_Green_Material_Design_900_saturation">#33691e</color>
+    <color name="Light_Light__Material_Design_A100_saturation">#ccff90</color>
+    <color name="Light_Green_Material_Design_A200_saturation">#b2ff59</color>
+    <color name="Light_Green_Material_Design_A400_saturation">#76ff03</color>
+    <color name="Light_Green_Material_Design_A700_saturation">#64dd17</color>
+    <!-- 柠檬(青黄色) -->
+    <color name="Lime_Material_Design_50_saturation">#f9fbe7</color>
+    <color name="Lime_Material_Design_100_saturation">#f0f4c3</color>
+    <color name="Lime_Material_Design_200_saturation">#e6ee9c</color>
+    <color name="Lime_Material_Design_300_saturation">#dce775</color>
+    <color name="Lime_Material_Design_400_saturation">#d4e157</color>
+    <color name="Lime_Material_Design_500_saturation">#cddc39</color>
+    <color name="Lime_Material_Design_600_saturation">#c0ca33</color>
+    <color name="Lime_Material_Design_700_saturation">#afb42b</color>
+    <color name="Lime_Material_Design_800_saturation">#9e9d24</color>
+    <color name="Lime_Material_Design_900_saturation">#827717</color>
+    <color name="Lime__Material_Design_A100_saturation">#f4ff81</color>
+    <color name="Lime_Material_Design_A200_saturation">#eeff41</color>
+    <color name="Lime_Material_Design_A400_saturation">#c6ff00</color>
+    <color name="Lime_Material_Design_A700_saturation">#aeea00</color>
+    <!-- 黄 -->
+    <color name="Yellow_Material_Design_50_saturation">#fffde7</color>
+    <color name="Yellow_Material_Design_100_saturation">#fff9c4</color>
+    <color name="Yellow_Material_Design_200_saturation">#fff59d</color>
+    <color name="Yellow_Material_Design_300_saturation">#fff176</color>
+    <color name="Yellow_Material_Design_400_saturation">#ffee58</color>
+    <color name="Yellow_Material_Design_500_saturation">#ffeb3b</color>
+    <color name="Yellow_Material_Design_600_saturation">#fdd835</color>
+    <color name="Yellow_Material_Design_700_saturation">#fbc02d</color>
+    <color name="Yellow_Material_Design_800_saturation">#f9a825</color>
+    <color name="Yellow_Material_Design_900_saturation">#f57f17</color>
+    <color name="Yellow__Material_Design_A100_saturation">#ffff8d</color>
+    <color name="Yellow_Material_Design_A200_saturation">#ffff00</color>
+    <color name="Yellow_Material_Design_A400_saturation">#ffea00</color>
+    <color name="Yellow_Material_Design_A700_saturation">#ffd600</color>
+    <!-- 琥珀色(褐色) -->
+    <color name="Amber_Material_Design_50_saturation">#fff8e1</color>
+    <color name="Amber_Material_Design_100_saturation">#ffecb3</color>
+    <color name="Amber_Material_Design_200_saturation">#ffe082</color>
+    <color name="Amber_Material_Design_300_saturation">#ffd54f</color>
+    <color name="Amber_Material_Design_400_saturation">#ffca28</color>
+    <color name="Amber_Material_Design_500_saturation">#ffc107</color>
+    <color name="Amber_Material_Design_600_saturation">#ffb300</color>
+    <color name="Amber_Material_Design_700_saturation">#ffa000</color>
+    <color name="Amber_Material_Design_800_saturation">#ff8f00</color>
+    <color name="Amber_Material_Design_900_saturation">#ff6f00</color>
+    <color name="Amber__Material_Design_A100_saturation">#ffe57f</color>
+    <color name="Amber_Material_Design_A200_saturation">#ffd740</color>
+    <color name="Amber_Material_Design_A400_saturation">#ffc400</color>
+    <color name="Amber_Material_Design_A700_saturation">#ffab00</color>
+    <!-- 橙色 -->
+    <color name="Orange_Material_Design_50_saturation">#fff3e0</color>
+    <color name="Orange_Material_Design_100_saturation">#ffe0b2</color>
+    <color name="Orange_Material_Design_200_saturation">#ffcc80</color>
+    <color name="Orange_Material_Design_300_saturation">#ffb74d</color>
+    <color name="Orange_Material_Design_400_saturation">#ffa726</color>
+    <color name="Orange_Material_Design_500_saturation">#ff9800</color>
+    <color name="Orange_Material_Design_600_saturation">#fb8c00</color>
+    <color name="Orange_Material_Design_700_saturation">#f57c00</color>
+    <color name="Orange_Material_Design_800_saturation">#ef6c00</color>
+    <color name="Orange_Material_Design_900_saturation">#e65100</color>
+    <color name="Orange_Material_Design_A100_saturation">#ffd180</color>
+    <color name="Orange_Material_Design_A200_saturation">#ffab40</color>
+    <color name="Orange_Material_Design_A400_saturation">#ff9100</color>
+    <color name="Orange_Material_Design_A700_saturation">#ff6d00</color>
+    <!-- 深橙色 -->
+    <color name="Deep_Orange_Material_Design_50_saturation">#fbe9e7</color>
+    <color name="Deep_Orange_Material_Design_100_saturation">#ffccbc</color>
+    <color name="Deep_Orange_Material_Design_200_saturation">#ffab91</color>
+    <color name="Deep_Orange_Material_Design_300_saturation">#ff8a65</color>
+    <color name="Deep_Orange_Material_Design_400_saturation">#ff7043</color>
+    <color name="Deep_Orange_Material_Design_500_saturation">#ff5722</color>
+    <color name="Deep_Orange_Material_Design_600_saturation">#f4511e</color>
+    <color name="Deep_Orange_Material_Design_700_saturation">#e64a19</color>
+    <color name="Deep_Orange_Material_Design_800_saturation">#d84315</color>
+    <color name="Deep_Orange_Material_Design_900_saturation">#bf360c</color>
+    <color name="Deep_Orange_Material_Design_A100_saturation">#ff9e80</color>
+    <color name="Deep_Orange_Material_Design_A200_saturation">#ff6e40</color>
+    <color name="Deep_Orange_Material_Design_A400_saturation">#ff3d00</color>
+    <color name="Deep_Orange_Material_Design_A700_saturation">#dd2c00</color>
+    <!-- 棕色 -->
+    <color name="Brown_Material_Design_50_saturation">#efebe9</color>
+    <color name="Brown_Material_Design_100_saturation">#d7ccc8</color>
+    <color name="Brown_Material_Design_200_saturation">#bcaaa4</color>
+    <color name="Brown_Material_Design_300_saturation">#a1887f</color>
+    <color name="Brown_Material_Design_400_saturation">#8d6e63</color>
+    <color name="Brown_Material_Design_500_saturation">#795548</color>
+    <color name="Brown_Material_Design_600_saturation">#6d4c41</color>
+    <color name="Brown_Material_Design_700_saturation">#5d4037</color>
+    <color name="Brown_Material_Design_800_saturation">#4e342e</color>
+    <color name="Brown_Material_Design_900_saturation">#3e2723</color>
+    <!-- 灰色 -->
+    <color name="Grey_Material_Design_50_saturation">#fafafa</color>
+    <color name="Grey_Material_Design_100_saturation">#f5f5f5</color>
+    <color name="Grey_Material_Design_200_saturation">#eeeeee</color>
+    <color name="Grey_Material_Design_300_saturation">#e0e0e0</color>
+    <color name="Grey_Material_Design_400_saturation">#bdbdbd</color>
+    <color name="Grey_Material_Design_500_saturation">#9e9e9e</color>
+    <color name="Grey_Material_Design_600_saturation">#757575</color>
+    <color name="Grey_Material_Design_700_saturation">#616161</color>
+    <color name="Grey_Material_Design_800_saturation">#424242</color>
+    <color name="Grey_Material_Design_900_saturation">#212121</color>
+    <color name="Grey_Material_Design_1000_saturation">#000000</color>
+    <color name="Grey_Material_Design_1100_saturation">#ffffff</color>  <!-- 疑问 -->
+    <!-- 蓝灰色 -->
+    <color name="Blue_Grey_Material_Design_50_saturation">#eceff1</color>
+    <color name="Blue_Grey_Material_Design_100_saturation">#cfd8dc</color>
+    <color name="Blue_Grey_Material_Design_200_saturation">#b0bec5</color>
+    <color name="Blue_Grey_Material_Design_300_saturation">#90a4ae</color>
+    <color name="Blue_Grey_Material_Design_400_saturation">#78909c</color>
+    <color name="Blue_Grey_Material_Design_500_saturation">#607d8b</color>
+    <color name="Blue_Grey_Material_Design_600_saturation">#546e7a</color>
+    <color name="Blue_Grey_Material_Design_700_saturation">#455a64</color>
+    <color name="Blue_Grey_Material_Design_800_saturation">#37474f</color>
+    <color name="Blue_Grey_Material_Design_900_saturation">#263238</color>
+    <!-- ↑Material Design↑ 颜色 -->
+
 
     <color name="DimGray">#696969</color>                   <!-- 暗灰 -->
     <color name="DarkGray">#A9A9A9</color>                  <!-- 深灰 -->
@@ -138,10 +426,4 @@
     <color name="LightCoral">#F08080</color>                <!-- 淡珊瑚色 -->
     <color name="RosyBrown">#BC8F8F</color>                 <!-- 玫瑰棕色 -->
     <color name="IndianRed">#CD5C5C</color>                 <!-- 印度红 -->
-
-
-
-
-
-
 </resources>

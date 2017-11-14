@@ -33,4 +33,12 @@ public class BaseFragment extends android.support.v4.app.Fragment implements Sof
     public void onHandleMessage(Message message) {
 
     }
+
+    protected SoftHandler getHandler(){
+        return mHandler;
+    }
+
+    protected boolean postDelay(Runnable runnable, long delayTime){
+        return mHandler.postDelayed(runnable, delayTime);
+    }
 }

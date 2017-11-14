@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="10dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/time_flag_text_view"
+            android:textColor="@color/Orange"
+            android:textSize="18sp" />
+
+        <android.support.v7.widget.GridLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:columnCount="2"
+            app:orientation="horizontal"
+            app:rowCount="2">
+
+            <Button
+                android:id="@+id/btnClickShowTimeFlag"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/clickToShowFlag"
+                app:layout_columnWeight="1"
+                app:layout_rowWeight="1" />
+
+            <Button
+                android:id="@+id/btnClickDismissTimeFlag"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/clickToDismissFlag"
+                app:layout_columnWeight="1"
+                app:layout_rowWeight="1" />
+
+            <Button
+                android:id="@+id/btnClickUpdateFlag2CurrentTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/clickToUpdateFlag2CurrentTime"
+                app:layout_columnWeight="1"
+                app:layout_rowWeight="1" />
+
+            <Button
+                android:id="@+id/btnClickLastUpdateTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/clickToGetLastUpdateTime"
+                app:layout_columnWeight="1"
+                app:layout_rowWeight="1" />
+        </android.support.v7.widget.GridLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <com.github.evan.common_utils.ui.view.flagView.TimeFlagTextView
+                android:id="@+id/txtWithLeftTopTimeFlag"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="@string/left_top_corner"
+                android:textSize="14sp"
+                app:flagDrawable="@drawable/shape_red_point"
+                app:flagLocation="left_top_corner"
+                app:flagName="TimeFlagTextView / FragmentFlagView / LeftTopFlag" />
+
+            <com.github.evan.common_utils.ui.view.flagView.TimeFlagTextView
+                android:id="@+id/txtWithLeftBottomTimeFlag"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="@string/left_bottom_corner"
+                android:textSize="14sp"
+                app:flagDrawable="@drawable/shape_red_point"
+                app:flagLocation="left_bottom_corner"
+                app:flagName="TimeFlagTextView / FragmentFlagView / LeftBottomCorner" />
+
+            <com.github.evan.common_utils.ui.view.flagView.TimeFlagTextView
+                android:id="@+id/txtWithRightTopTimeFlag"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="@string/right_top_corner"
+                android:textSize="14sp"
+                app:flagDrawable="@drawable/shape_red_point"
+                app:flagLocation="right_top"
+                app:flagName="TimeFlagTextView / FragmentFlagView / RightTopCorner" />
+
+
+            <com.github.evan.common_utils.ui.view.flagView.TimeFlagTextView
+                android:id="@+id/txtWithRightBottomTimeFlag"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="@string/right_bottom_corner"
+                android:textSize="14sp"
+                app:flagDrawable="@drawable/shape_red_point"
+                app:flagLocation="right_bottom"
+                app:flagName="TimeFlagTextView / FragmentFlagView / RightBottomCorner" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/txtUpdateTime"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:gravity="center"
+            android:text="@string/lastUpdateTime"
+            android:textColor="@color/Red"
+            android:textSize="12sp" />
+
+    </LinearLayout>
+
+
+</LinearLayout>

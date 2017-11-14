@@ -59,6 +59,21 @@ public class PackageUtil {
     }
 
     /**
+     * 获取版本号
+     * @return
+     */
+    public static int getVersionCode(String packageName){
+        try {
+            Context application = BaseApplication.getApplication();
+            PackageInfo packageInfo = application.getPackageManager().getPackageInfo(packageName, 0);
+            return packageInfo.versionCode;
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+            return -1;
+        }
+    }
+
+    /**
      * 获取版本名
      * @return
      */
@@ -73,5 +88,18 @@ public class PackageUtil {
         }
     }
 
-
+    /**
+     * 获取版本名
+     * @return
+     */
+    public static String getVersionName(String packageName){
+        try {
+            Context application = BaseApplication.getApplication();
+            PackageInfo packageInfo = application.getPackageManager().getPackageInfo(packageName, 0);
+            return packageInfo.versionName;
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 }

@@ -1,21 +1,16 @@
-package com.github.evan.common_utils.ui.view;
+package com.github.evan.common_utils.ui.view.editText;
 
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
-import android.support.v4.view.GestureDetectorCompat;
 import android.util.AttributeSet;
-import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.ScaleGestureDetector;
 import android.view.View;
-import android.view.ViewGroup;
-import android.view.ViewParent;
 
 import com.github.evan.common_utils.R;
 import com.github.evan.common_utils.gesture.CommonGestures;
 import com.github.evan.common_utils.utils.DensityUtil;
-import com.github.evan.common_utils.utils.Logger;
 import com.github.evan.common_utils.utils.ResourceUtil;
 
 /**

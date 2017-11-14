@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <group android:id="@+id/functionGroup" android:checkableBehavior="single">
+        <item android:id="@+id/functionHome" android:title="@string/home" android:icon="@drawable/selector_action_button_home_dark" />
+        <item android:id="@+id/functionCustomEditText" android:title="@string/edit_text" android:icon="@drawable/selector_action_button_edit_dark" />
+        <item android:id="@+id/functionFlagView" android:title="@string/flag_view" android:icon="@drawable/selector_action_button_flag_dark" />
+        <item android:id="@+id/functionTint" android:title="@string/tint" android:icon="@mipmap/ic_tint" />
+    </group>
+</menu>

@@ -1,0 +1,478 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="10dp"
+    android:scrollbarStyle="insideOverlay">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:text="@string/ImageViewWithTint"
+            android:textSize="18sp" />
+
+
+        <android.support.v7.widget.AppCompatImageView
+            android:id="@+id/imgUnTint"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:src="@mipmap/ic_launcher_round" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="@string/Image_without_tint"
+            android:textSize="16sp" />
+
+
+        <android.support.v7.widget.GridLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:columnCount="2"
+            app:rowCount="9">
+
+            <LinearLayout
+                android:gravity="center_horizontal"
+                android:orientation="vertical"
+                app:layout_column="0"
+                app:layout_columnWeight="1"
+                app:layout_row="0"
+                app:layout_rowWeight="1">
+
+                <android.support.v7.widget.AppCompatImageView
+                    android:id="@+id/imgTint_src"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:srcCompat="@mipmap/ic_launcher_round" />
+
+                <Button
+                    android:id="@+id/btnTint_src"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="@string/Tint_Mode_Src" />
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:gravity="center_horizontal"
+                android:orientation="vertical"
+                app:layout_column="1"
+                app:layout_columnWeight="1"
+                app:layout_row="0"
+                app:layout_rowWeight="1">
+
+                <android.support.v7.widget.AppCompatImageView
+                    android:id="@+id/imgTintDST"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:srcCompat="@mipmap/ic_launcher_round" />
+
+                <Button
+                    android:id="@+id/btnTint_DST"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="@string/Tint_Mode_DST" />
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:gravity="center_horizontal"
+                android:orientation="vertical"
+                app:layout_column="0"
+                app:layout_columnWeight="1"
+                app:layout_row="1"
+                app:layout_rowWeight="1">
+
+                <android.support.v7.widget.AppCompatImageView
+                    android:id="@+id/imgTint_srcIn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:srcCompat="@mipmap/ic_launcher_round" />
+
+                <Button
+                    android:id="@+id/btnTint_srcIn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="@string/Tint_Mode_Src_in" />
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:gravity="center_horizontal"
+                android:orientation="vertical"
+                app:layout_column="1"
+                app:layout_columnWeight="1"
+                app:layout_row="1"
+                app:layout_rowWeight="1">
+
+                <android.support.v7.widget.AppCompatImageView
+                    android:id="@+id/imgTint_dstIn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:srcCompat="@mipmap/ic_launcher_round" />
+
+                <Button
+                    android:id="@+id/btnTint_dstIn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="@string/Tint_Mode_DST_In" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:gravity="center_horizontal"
+                android:orientation="vertical"
+                app:layout_column="0"
+                app:layout_columnWeight="1"
+                app:layout_row="2"
+                app:layout_rowWeight="1">
+
+                <android.support.v7.widget.AppCompatImageView
+                    android:id="@+id/imgTint_srcOut"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:srcCompat="@mipmap/ic_launcher_round" />
+
+                <Button
+                    android:id="@+id/btnTint_srcOut"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="@string/Tint_Mode_SRC_Out" />
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:gravity="center_horizontal"
+                android:orientation="vertical"
+                app:layout_column="1"
+                app:layout_columnWeight="1"
+                app:layout_row="2"
+                app:layout_rowWeight="1">
+
+                <android.support.v7.widget.AppCompatImageView
+                    android:id="@+id/imgTint_dstOut"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:srcCompat="@mipmap/ic_launcher_round" />
+
+                <Button
+                    android:id="@+id/btnTint_dstOut"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="@string/Tint_Mode_Dst_Out" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:gravity="center_horizontal"
+                android:orientation="vertical"
+                app:layout_column="0"
+                app:layout_columnWeight="1"
+                app:layout_row="3"
+                app:layout_rowWeight="1">
+
+                <android.support.v7.widget.AppCompatImageView
+                    android:id="@+id/imgTint_srcOver"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:srcCompat="@mipmap/ic_launcher_round" />
+
+                <Button
+                    android:id="@+id/btnTint_srcOver"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="@string/Tint_Mode_Src_Over" />
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:gravity="center_horizontal"
+                android:orientation="vertical"
+                app:layout_column="1"
+                app:layout_columnWeight="1"
+                app:layout_row="3"
+                app:layout_rowWeight="1">
+
+                <android.support.v7.widget.AppCompatImageView
+                    android:id="@+id/imgTint_dstOver"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:srcCompat="@mipmap/ic_launcher_round" />
+
+                <Button
+                    android:id="@+id/btnTint_dstOver"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="@string/Tint_Mode_DST_Over" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:gravity="center_horizontal"
+                android:orientation="vertical"
+                app:layout_column="0"
+                app:layout_columnWeight="1"
+                app:layout_row="4"
+                app:layout_rowWeight="1">
+
+                <android.support.v7.widget.AppCompatImageView
+                    android:id="@+id/imgTint_srcAtop"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:srcCompat="@mipmap/ic_launcher_round" />
+
+                <Button
+                    android:id="@+id/btnTint_srcAtop"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="@string/Tint_Mode_Src_Atop" />
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:gravity="center_horizontal"
+                android:orientation="vertical"
+                app:layout_column="1"
+                app:layout_columnWeight="1"
+                app:layout_row="4"
+                app:layout_rowWeight="1">
+
+                <android.support.v7.widget.AppCompatImageView
+                    android:id="@+id/imgTint_dstAtop"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:srcCompat="@mipmap/ic_launcher_round" />
+
+                <Button
+                    android:id="@+id/btnTint_dstAtop"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="@string/Tint_Mode_DST_Atop" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:gravity="center_horizontal"
+                android:orientation="vertical"
+                app:layout_column="0"
+                app:layout_columnWeight="1"
+                app:layout_row="5"
+                app:layout_rowWeight="1">
+
+                <android.support.v7.widget.AppCompatImageView
+                    android:id="@+id/imgTint_darken"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:srcCompat="@mipmap/ic_launcher_round" />
+
+                <Button
+                    android:id="@+id/btnTint_darken"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="@string/Tint_Mode_Darken" />
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:gravity="center_horizontal"
+                android:orientation="vertical"
+                app:layout_column="1"
+                app:layout_columnWeight="1"
+                app:layout_row="5"
+                app:layout_rowWeight="1">
+
+                <android.support.v7.widget.AppCompatImageView
+                    android:id="@+id/imgTint_lighten"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:srcCompat="@mipmap/ic_launcher_round" />
+
+                <Button
+                    android:id="@+id/btnTint_lighten"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="@string/Tint_Mode_Lighten" />
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:gravity="center_horizontal"
+                android:orientation="vertical"
+                app:layout_column="0"
+                app:layout_columnWeight="1"
+                app:layout_row="6"
+                app:layout_rowWeight="1">
+
+                <android.support.v7.widget.AppCompatImageView
+                    android:id="@+id/imgTint_xor"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:srcCompat="@mipmap/ic_launcher_round" />
+
+                <Button
+                    android:id="@+id/btnTint_xor"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="@string/Tint_Mode_Xor" />
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:gravity="center_horizontal"
+                android:orientation="vertical"
+                app:layout_column="1"
+                app:layout_columnWeight="1"
+                app:layout_row="6"
+                app:layout_rowWeight="1">
+
+                <android.support.v7.widget.AppCompatImageView
+                    android:id="@+id/imgTint_screen"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:srcCompat="@mipmap/ic_launcher_round" />
+
+                <Button
+                    android:id="@+id/btnTint_screen"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="@string/Tint_Mode_Screen" />
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:gravity="center_horizontal"
+                android:orientation="vertical"
+                app:layout_column="0"
+                app:layout_columnWeight="1"
+                app:layout_row="7"
+                app:layout_rowWeight="1">
+
+                <android.support.v7.widget.AppCompatImageView
+                    android:id="@+id/imgTint_multiply"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:srcCompat="@mipmap/ic_launcher_round" />
+
+                <Button
+                    android:id="@+id/btnTint_multiply"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="@string/Tint_Mode_Multiply" />
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:gravity="center_horizontal"
+                android:orientation="vertical"
+                app:layout_column="1"
+                app:layout_columnWeight="1"
+                app:layout_row="7"
+                app:layout_rowWeight="1">
+
+                <android.support.v7.widget.AppCompatImageView
+                    android:id="@+id/imgTintAdd"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:srcCompat="@mipmap/ic_launcher_round" />
+
+                <Button
+                    android:id="@+id/btnTint_add"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="@string/Tint_Mode_Add" />
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:gravity="center_horizontal"
+                android:orientation="vertical"
+                app:layout_column="0"
+                app:layout_columnWeight="1"
+                app:layout_row="8"
+                app:layout_rowWeight="1">
+
+                <android.support.v7.widget.AppCompatImageView
+                    android:id="@+id/imgTintClear"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:srcCompat="@mipmap/ic_launcher_round" />
+
+                <Button
+                    android:id="@+id/btnTint_clear"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="@string/Tint_Mode_Clear" />
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:gravity="center_horizontal"
+                android:orientation="vertical"
+                app:layout_column="1"
+                app:layout_columnWeight="1"
+                app:layout_row="8"
+                app:layout_rowWeight="1">
+
+                <android.support.v7.widget.AppCompatImageView
+                    android:id="@+id/imgTint_overly"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:srcCompat="@mipmap/ic_launcher_round" />
+
+                <Button
+                    android:id="@+id/btnTint_overly"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="@string/Tint_Mode_Overly" />
+
+            </LinearLayout>
+
+        </android.support.v7.widget.GridLayout>
+
+
+    </LinearLayout>
+
+
+</ScrollView>

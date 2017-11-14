@@ -1,5 +1,6 @@
 package com.github.evan.common_utils.utils;
 
+import android.graphics.Paint;
 import android.os.Environment;
 
 import com.github.evan.common_utils.BaseApplication;
@@ -19,11 +20,32 @@ import java.util.List;
  * Created by Evan on 2017/10/2.
  */
 public class FileUtil {
+    /** 默认SharedPreferences文件名 */
+    public static final String DEFAULT_SHARED_PREFERENCE_FILE_NAME = "default_shared_preferences";
+
+    public static final String SUFFIX_NAME_XML = ".xml";
+    public static final String SUFFIX_NAME_JAVA = ".java";
+    public static final String SUFFIX_NAME_TXT = ".txt";
+    public static final String SUFFIX_NAME_DB = ".db";
+    public static final String SUFFIX_NAME_PNG = ".png";
+    public static final String SUFFIX_NAME_JPG = ".JPG";
+    public static final String SUFFIX_NAME_MP3 = ".mp3";
+
 
     public enum FileStatus {
         UNKNOWN, NOT_EXISTS, FILE_EXISTS, CREATE_SUCCESS, CREATE_FAIL, CREATE_PARENT_DIR_FAIL,
         NOT_DELETE, DELETE_SUCCESS, SOURCE_FILE_DELETE_FAIL, DELETE_FAIL, WRITE_SUCCESS,
         WRITE_FAIL, IS_FILE, IS_DIRECTORY, COPY_SUCCESS, COPY_FAIL, CUT_FILE_SUCCESS, CUT_FILE_FAIL
+    }
+
+    /**
+     * 判断是否是指定文件后缀名
+     * @param fileName
+     * @param suffixName
+     * @return
+     */
+    public static boolean isFileOfTargetSuffixName(String fileName, String suffixName){
+        return fileName.endsWith(suffixName);
     }
 
 
@@ -38,6 +60,84 @@ public class FileUtil {
         if (isExternalCardEnable) {
             returnValue = Environment.getExternalStorageDirectory().getAbsolutePath() + "/" + BaseApplication.getApplication().getPackageName();
         }
+        return returnValue;
+    }
+
+    /**
+     * 获取SharedPreference目录
+     *
+     * @return
+     */
+    public static File getSharedPreferenceDir(){
+        return new File(BaseApplication.getApplication().getFilesDir().getParentFile(), "shared_prefs");
+    }
+
+    /**
+     * 列出App SharedPreference目录下所有.xml结尾的文件名
+     * @return
+     */
+    public static List<String> listSharedPreferenceFiles(){
+        List<String> returnValue = new ArrayList<>();
+        File sharedPreferenceDir = getSharedPreferenceDir();
+        String[] fileNames = sharedPreferenceDir.list();
+        if(null != fileNames){
+            int N = fileNames.length;
+            for (int i = 0; i < N; i++) {
+                String fileName = fileNames[i];
+                boolean isXmlFile = isFileOfTargetSuffixName(fileNames[i], SUFFIX_NAME_XML);
+                if(isXmlFile){
+                    returnValue.add(fileName);
+                }
+            }
+        }
+
+        return returnValue;
+    }
+
+    /**
+     * 获取SharedPreference文件
+     * @param isDefaultSpFile
+     * @param fileName
+     * @return
+     */
+    public static File getSharedPreferenceFile(boolean isDefaultSpFile, String fileName){
+        String targetFileName = isDefaultSpFile ? DEFAULT_SHARED_PREFERENCE_FILE_NAME : fileName;
+        String dir = getSharedPreferenceDir().getAbsolutePath();
+        return new File(dir, targetFileName + SUFFIX_NAME_XML);
+    }
+
+    /**
+     * 删除SharedPreference文件
+     * @param isDefaultSpName
+     * @param spName
+     * @return
+     */
+    public static FileStatus removeSharedPreferenceFile(boolean isDefaultSpName, String spName){
+        File sharedPreferenceFile = getSharedPreferenceFile(isDefaultSpName, spName);
+        return deleteFile(sharedPreferenceFile.getAbsolutePath());
+    }
+
+    /**
+     *
+     * 判断SharedPreference文件是否存在
+     *
+     * @param isDefaultSp
+     * @param spName
+     * @return
+     */
+    public static boolean isSharedPreferenceFileExistsOnDisk(boolean isDefaultSp, String spName){
+        boolean returnValue = false;
+        String targetSpName = isDefaultSp ? FileUtil.DEFAULT_SHARED_PREFERENCE_FILE_NAME : spName;
+
+        List<String> sharedPreferenceFiles = listSharedPreferenceFiles();
+        for (int i = 0; i < sharedPreferenceFiles.size(); i++) {
+            String fileName = sharedPreferenceFiles.get(i);
+            if(StringUtil.equals(targetSpName + SUFFIX_NAME_XML, fileName, false)){
+                returnValue = true;
+                break;
+            }
+        }
+
         return returnValue;
     }
 

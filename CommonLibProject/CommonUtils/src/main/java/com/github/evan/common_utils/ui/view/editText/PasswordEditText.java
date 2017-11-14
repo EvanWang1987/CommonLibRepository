@@ -1,17 +1,13 @@
-package com.github.evan.common_utils.ui.view;
+package com.github.evan.common_utils.ui.view.editText;
 
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
-import android.text.Editable;
 import android.text.InputType;
-import android.text.TextWatcher;
 import android.util.AttributeSet;
 import android.view.View;
-import android.view.inputmethod.EditorInfo;
 
 import com.github.evan.common_utils.R;
-import com.github.evan.common_utils.utils.Logger;
 import com.github.evan.common_utils.utils.ResourceUtil;
 
 /**
