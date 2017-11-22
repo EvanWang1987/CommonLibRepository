@@ -29,6 +29,8 @@ import com.github.evan.common_utils_demo.ui.fragment.ListGridViewFragment;
 import com.github.evan.common_utils_demo.ui.fragment.RecyclerViewFragment;
 import com.github.evan.common_utils_demo.ui.fragment.ScreenInformationFragment;
 import com.github.evan.common_utils_demo.ui.fragment.TintFragment;
+import com.github.evan.common_utils_demo.ui.fragment.ViewPagerFragment;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -37,7 +39,7 @@ import butterknife.OnClick;
  * Created by Evan on 2017/11/9.
  */
 public class MainActivity extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener {
-    private static final String[] fragmentNames = {HomeFragment.class.getName(), ScreenInformationFragment.class.getName(), ListGridViewFragment.class.getName(), RecyclerViewFragment.class.getName(), CustomEditTextFragment.class.getName(), FlagViewFragment.class.getName(), TintFragment.class.getName()};
+    private static final String[] fragmentNames = {HomeFragment.class.getName(), ScreenInformationFragment.class.getName(), ListGridViewFragment.class.getName(), RecyclerViewFragment.class.getName(), ViewPagerFragment.class.getName(), CustomEditTextFragment.class.getName(), FlagViewFragment.class.getName(), TintFragment.class.getName()};
 
     @BindView(R.id.mainActivity_appBar)
     public AppBarLayout mAppbarLayout;
@@ -118,84 +120,103 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     private boolean switchFragment(int selectedMenuItemId){
         FragmentManager fragmentManager = getSupportFragmentManager();
         Fragment visibleFragment = null;
-        Fragment[] inVisibleFragment = new Fragment[6];
+        Fragment[] inVisibleFragment = new Fragment[7];
         boolean isExpand = false;
 
         switch (selectedMenuItemId){
             case R.id.functionHome:
                 visibleFragment = fragmentManager.findFragmentByTag(HomeFragment.class.getName());
-                inVisibleFragment[0] = fragmentManager.findFragmentByTag(CustomEditTextFragment.class.getName());
-                inVisibleFragment[1] = fragmentManager.findFragmentByTag(FlagViewFragment.class.getName());
-                inVisibleFragment[2] = fragmentManager.findFragmentByTag(TintFragment.class.getName());
-                inVisibleFragment[3] = fragmentManager.findFragmentByTag(ScreenInformationFragment.class.getName());
-                inVisibleFragment[4] = fragmentManager.findFragmentByTag(ListGridViewFragment.class.getName());
-                inVisibleFragment[5] = fragmentManager.findFragmentByTag(RecyclerViewFragment.class.getName());
+                inVisibleFragment[0] = fragmentManager.findFragmentByTag(ScreenInformationFragment.class.getName());
+                inVisibleFragment[1] = fragmentManager.findFragmentByTag(ListGridViewFragment.class.getName());
+                inVisibleFragment[2] = fragmentManager.findFragmentByTag(RecyclerViewFragment.class.getName());
+                inVisibleFragment[3] = fragmentManager.findFragmentByTag(ViewPagerFragment.class.getName());
+                inVisibleFragment[4] = fragmentManager.findFragmentByTag(CustomEditTextFragment.class.getName());
+                inVisibleFragment[5] = fragmentManager.findFragmentByTag(FlagViewFragment.class.getName());
+                inVisibleFragment[6] = fragmentManager.findFragmentByTag(TintFragment.class.getName());
                 isExpand = true;
                 break;
 
             case R.id.functionScreenAdaptation:
                 visibleFragment = fragmentManager.findFragmentByTag(ScreenInformationFragment.class.getName());
-                inVisibleFragment[0] = fragmentManager.findFragmentByTag(CustomEditTextFragment.class.getName());
-                inVisibleFragment[1] = fragmentManager.findFragmentByTag(FlagViewFragment.class.getName());
-                inVisibleFragment[2] = fragmentManager.findFragmentByTag(TintFragment.class.getName());
-                inVisibleFragment[3] = fragmentManager.findFragmentByTag(HomeFragment.class.getName());
-                inVisibleFragment[4] = fragmentManager.findFragmentByTag(ListGridViewFragment.class.getName());
-                inVisibleFragment[5] = fragmentManager.findFragmentByTag(RecyclerViewFragment.class.getName());
+                inVisibleFragment[0] = fragmentManager.findFragmentByTag(HomeFragment.class.getName());
+                inVisibleFragment[1] = fragmentManager.findFragmentByTag(ListGridViewFragment.class.getName());
+                inVisibleFragment[2] = fragmentManager.findFragmentByTag(RecyclerViewFragment.class.getName());
+                inVisibleFragment[3] = fragmentManager.findFragmentByTag(ViewPagerFragment.class.getName());
+                inVisibleFragment[4] = fragmentManager.findFragmentByTag(CustomEditTextFragment.class.getName());
+                inVisibleFragment[5] = fragmentManager.findFragmentByTag(FlagViewFragment.class.getName());
+                inVisibleFragment[6] = fragmentManager.findFragmentByTag(TintFragment.class.getName());
                 isExpand = true;
                 break;
 
             case R.id.functionListView:
                 visibleFragment = fragmentManager.findFragmentByTag(ListGridViewFragment.class.getName());
-                inVisibleFragment[0] = fragmentManager.findFragmentByTag(CustomEditTextFragment.class.getName());
-                inVisibleFragment[1] = fragmentManager.findFragmentByTag(FlagViewFragment.class.getName());
-                inVisibleFragment[2] = fragmentManager.findFragmentByTag(TintFragment.class.getName());
-                inVisibleFragment[3] = fragmentManager.findFragmentByTag(ScreenInformationFragment.class.getName());
-                inVisibleFragment[4] = fragmentManager.findFragmentByTag(HomeFragment.class.getName());
-                inVisibleFragment[5] = fragmentManager.findFragmentByTag(RecyclerViewFragment.class.getName());
+                inVisibleFragment[0] = fragmentManager.findFragmentByTag(HomeFragment.class.getName());
+                inVisibleFragment[1] = fragmentManager.findFragmentByTag(ScreenInformationFragment.class.getName());
+                inVisibleFragment[2] = fragmentManager.findFragmentByTag(RecyclerViewFragment.class.getName());
+                inVisibleFragment[3] = fragmentManager.findFragmentByTag(ViewPagerFragment.class.getName());
+                inVisibleFragment[4] = fragmentManager.findFragmentByTag(CustomEditTextFragment.class.getName());
+                inVisibleFragment[5] = fragmentManager.findFragmentByTag(FlagViewFragment.class.getName());
+                inVisibleFragment[6] = fragmentManager.findFragmentByTag(TintFragment.class.getName());
                 isExpand = false;
                 break;
 
             case R.id.functionRecyclerView:
                 visibleFragment = fragmentManager.findFragmentByTag(RecyclerViewFragment.class.getName());
-                inVisibleFragment[0] = fragmentManager.findFragmentByTag(CustomEditTextFragment.class.getName());
-                inVisibleFragment[1] = fragmentManager.findFragmentByTag(FlagViewFragment.class.getName());
-                inVisibleFragment[2] = fragmentManager.findFragmentByTag(TintFragment.class.getName());
-                inVisibleFragment[3] = fragmentManager.findFragmentByTag(ScreenInformationFragment.class.getName());
-                inVisibleFragment[4] = fragmentManager.findFragmentByTag(HomeFragment.class.getName());
-                inVisibleFragment[5] = fragmentManager.findFragmentByTag(ListGridViewFragment.class.getName());
+                inVisibleFragment[0] = fragmentManager.findFragmentByTag(HomeFragment.class.getName());
+                inVisibleFragment[1] = fragmentManager.findFragmentByTag(ScreenInformationFragment.class.getName());
+                inVisibleFragment[2] = fragmentManager.findFragmentByTag(ListGridViewFragment.class.getName());
+                inVisibleFragment[3] = fragmentManager.findFragmentByTag(ViewPagerFragment.class.getName());
+                inVisibleFragment[4] = fragmentManager.findFragmentByTag(CustomEditTextFragment.class.getName());
+                inVisibleFragment[5] = fragmentManager.findFragmentByTag(FlagViewFragment.class.getName());
+                inVisibleFragment[6] = fragmentManager.findFragmentByTag(TintFragment.class.getName());
                 isExpand = true;
+                break;
+
+            case R.id.functionViewPager:
+                visibleFragment = fragmentManager.findFragmentByTag(ViewPagerFragment.class.getName());
+                inVisibleFragment[0] = fragmentManager.findFragmentByTag(HomeFragment.class.getName());
+                inVisibleFragment[1] = fragmentManager.findFragmentByTag(ScreenInformationFragment.class.getName());
+                inVisibleFragment[2] = fragmentManager.findFragmentByTag(ListGridViewFragment.class.getName());
+                inVisibleFragment[3] = fragmentManager.findFragmentByTag(RecyclerViewFragment.class.getName());
+                inVisibleFragment[4] = fragmentManager.findFragmentByTag(CustomEditTextFragment.class.getName());
+                inVisibleFragment[5] = fragmentManager.findFragmentByTag(FlagViewFragment.class.getName());
+                inVisibleFragment[6] = fragmentManager.findFragmentByTag(TintFragment.class.getName());
+                isExpand = false;
                 break;
 
             case R.id.functionCustomEditText:
                 visibleFragment = fragmentManager.findFragmentByTag(CustomEditTextFragment.class.getName());
                 inVisibleFragment[0] = fragmentManager.findFragmentByTag(HomeFragment.class.getName());
-                inVisibleFragment[1] = fragmentManager.findFragmentByTag(FlagViewFragment.class.getName());
-                inVisibleFragment[2] = fragmentManager.findFragmentByTag(TintFragment.class.getName());
-                inVisibleFragment[3] = fragmentManager.findFragmentByTag(ScreenInformationFragment.class.getName());
-                inVisibleFragment[4] = fragmentManager.findFragmentByTag(ListGridViewFragment.class.getName());
-                inVisibleFragment[5] = fragmentManager.findFragmentByTag(RecyclerViewFragment.class.getName());
+                inVisibleFragment[1] = fragmentManager.findFragmentByTag(ScreenInformationFragment.class.getName());
+                inVisibleFragment[2] = fragmentManager.findFragmentByTag(ListGridViewFragment.class.getName());
+                inVisibleFragment[3] = fragmentManager.findFragmentByTag(RecyclerViewFragment.class.getName());
+                inVisibleFragment[4] = fragmentManager.findFragmentByTag(ViewPagerFragment.class.getName());
+                inVisibleFragment[5] = fragmentManager.findFragmentByTag(FlagViewFragment.class.getName());
+                inVisibleFragment[6] = fragmentManager.findFragmentByTag(TintFragment.class.getName());
                 isExpand = true;
                 break;
 
             case R.id.functionFlagView:
                 visibleFragment = fragmentManager.findFragmentByTag(FlagViewFragment.class.getName());
                 inVisibleFragment[0] = fragmentManager.findFragmentByTag(HomeFragment.class.getName());
-                inVisibleFragment[1] = fragmentManager.findFragmentByTag(CustomEditTextFragment.class.getName());
-                inVisibleFragment[2] = fragmentManager.findFragmentByTag(TintFragment.class.getName());
-                inVisibleFragment[3] = fragmentManager.findFragmentByTag(ScreenInformationFragment.class.getName());
-                inVisibleFragment[4] = fragmentManager.findFragmentByTag(ListGridViewFragment.class.getName());
-                inVisibleFragment[5] = fragmentManager.findFragmentByTag(RecyclerViewFragment.class.getName());
+                inVisibleFragment[1] = fragmentManager.findFragmentByTag(ScreenInformationFragment.class.getName());
+                inVisibleFragment[2] = fragmentManager.findFragmentByTag(ListGridViewFragment.class.getName());
+                inVisibleFragment[3] = fragmentManager.findFragmentByTag(RecyclerViewFragment.class.getName());
+                inVisibleFragment[4] = fragmentManager.findFragmentByTag(ViewPagerFragment.class.getName());
+                inVisibleFragment[5] = fragmentManager.findFragmentByTag(CustomEditTextFragment.class.getName());
+                inVisibleFragment[6] = fragmentManager.findFragmentByTag(TintFragment.class.getName());
                 isExpand = true;
                 break;
 
             case R.id.functionTint:
                 visibleFragment = fragmentManager.findFragmentByTag(TintFragment.class.getName());
                 inVisibleFragment[0] = fragmentManager.findFragmentByTag(HomeFragment.class.getName());
-                inVisibleFragment[1] = fragmentManager.findFragmentByTag(CustomEditTextFragment.class.getName());
-                inVisibleFragment[2] = fragmentManager.findFragmentByTag(FlagViewFragment.class.getName());
-                inVisibleFragment[3] = fragmentManager.findFragmentByTag(ScreenInformationFragment.class.getName());
-                inVisibleFragment[4] = fragmentManager.findFragmentByTag(ListGridViewFragment.class.getName());
-                inVisibleFragment[5] = fragmentManager.findFragmentByTag(RecyclerViewFragment.class.getName());
+                inVisibleFragment[1] = fragmentManager.findFragmentByTag(ScreenInformationFragment.class.getName());
+                inVisibleFragment[2] = fragmentManager.findFragmentByTag(ListGridViewFragment.class.getName());
+                inVisibleFragment[3] = fragmentManager.findFragmentByTag(RecyclerViewFragment.class.getName());
+                inVisibleFragment[4] = fragmentManager.findFragmentByTag(ViewPagerFragment.class.getName());
+                inVisibleFragment[5] = fragmentManager.findFragmentByTag(CustomEditTextFragment.class.getName());
+                inVisibleFragment[6] = fragmentManager.findFragmentByTag(FlagViewFragment.class.getName());
                 isExpand = true;
                 break;
 

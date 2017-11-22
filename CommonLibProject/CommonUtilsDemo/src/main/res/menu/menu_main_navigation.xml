@@ -5,6 +5,7 @@
         <item android:id="@+id/functionScreenAdaptation" android:title="@string/screen_information" android:icon="@drawable/selector_screen_adaptation_black" />
         <item android:id="@+id/functionListView" android:title="@string/list_view_and_grid_view" android:icon="@drawable/selector_list_view_black" />
         <item android:id="@+id/functionRecyclerView" android:title="@string/recycler_view" android:icon="@drawable/selector_recycler_view_black" />
+        <item android:id="@+id/functionViewPager" android:title="@string/view_pager" android:icon="@drawable/selector_button_view_pager_black_72dp" />
         <item android:id="@+id/functionCustomEditText" android:title="@string/edit_text" android:icon="@drawable/selector_action_button_edit_dark" />
         <item android:id="@+id/functionFlagView" android:title="@string/flag_view" android:icon="@drawable/selector_action_button_flag_dark" />
         <item android:id="@+id/functionTint" android:title="@string/tint" android:icon="@mipmap/ic_tint" />

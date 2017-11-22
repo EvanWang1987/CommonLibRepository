@@ -13,8 +13,8 @@ import java.lang.ref.SoftReference;
  */
 
 public abstract class BasePagerHolder<Data> {
-    public abstract View onCreateView(Context context, LayoutInflater inflater);
-    public abstract Object instantiateItem(ViewGroup container, int position);
+    public abstract View onCreateView(Context context, LayoutInflater inflater, ViewGroup parent);
+    public abstract void instantiateItem(ViewGroup container, int position);
     public abstract void destroyItem(ViewGroup container, int position, Object object);
 
 
@@ -23,12 +23,12 @@ public abstract class BasePagerHolder<Data> {
     private int mPosition;
     private Data mData;
 
-    public BasePagerHolder(Context context) {
+    public BasePagerHolder(Context context, ViewGroup parent) {
         if(null == context){
             throw new IllegalArgumentException("Context can not be null！");
         }
         this.mContext = new SoftReference<>(context);
-        mRootView = onCreateView(context, LayoutInflater.from(context));
+        mRootView = onCreateView(context, LayoutInflater.from(context), parent);
     }
 
     @Nullable

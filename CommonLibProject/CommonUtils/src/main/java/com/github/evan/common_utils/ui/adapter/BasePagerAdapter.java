@@ -15,7 +15,7 @@ import java.util.concurrent.ConcurrentHashMap;
  * Created by Evan on 2017/11/22.
  */
 public abstract class BasePagerAdapter<Data> extends PagerAdapter {
-    public abstract BasePagerHolder<Data> onCreateHolder(Context context);
+    public abstract BasePagerHolder<Data> onCreateHolder(Context context, ViewGroup parent);
 
     private Context mContext;
     private List<Data> mData = new ArrayList<>();
@@ -78,12 +78,12 @@ public abstract class BasePagerAdapter<Data> extends PagerAdapter {
                 holder = (BasePagerHolder<Data>) tag;
             }
             else{
-                holder = onCreateHolder(mContext);
+                holder = onCreateHolder(mContext, container);
                 convertView = holder.getRootView();
                 convertView.setTag(holder);
             }
         }else{
-            holder = onCreateHolder(mContext);
+            holder = onCreateHolder(mContext, container);
             convertView = holder.getRootView();
             convertView.setTag(holder);
         }
