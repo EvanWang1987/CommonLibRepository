@@ -49,6 +49,48 @@
     <string name="Tint_Mode_Lighten">TintMode: lighten</string>
     <string name="Tint_Mode_Overly">TintMode: overly</string>
 
+    <!-- 屏幕适配相关 -->
+    <string name="screen_information">屏幕相关</string>
+    <string name="convert">转换</string>
+    <string name="px_convert_to_dp">px转dp</string>
+    <string name="px_convert_to_sp">px转sp</string>
+    <string name="dp_convert_to_px">dp转px</string>
+    <string name="sp_convert_to_px">sp转px</string>
+    <string name="input_converting_value">输入要转换的值</string>
+    <string name="current_device_screen_real_width">当前设备屏幕宽: %1$d</string>
+    <string name="current_device_screen_real_height">当前设备屏幕高: %1$d</string>
+    <string name="current_device_screen_resolution">当前设备屏幕分辨率: %1$s</string>
+    <string name="current_device_screen_aspect_ratio">当前设备屏幕宽高比: %1$s</string>
+    <string name="current_device_system_status_bar_height">当前系统状态栏高: %1$s</string>
+    <string name="current_device_screen_xdpi">当前设备x轴DPI: %1$s</string>
+    <string name="current_device_screen_ydpi">当前设备y轴DPI: %1$s</string>
+    <string name="current_device_screen_dpi">当前设备DPI: %1$d</string>
+    <string name="current_device_screen_density">当前设备Density: %1$s</string>
+    <string name="current_device_screen_scale_density">当前设备字体Density: %1$s</string>
+    <string name="current_device_screen_size">当前设备尺寸: %1$s</string>
+    <!-- 屏幕适配相关 -->
+
+    <!-- ListGridViewFragment相关 -->
+    <string name="list_view_and_grid_view">List View &amp; Grid View</string>
+    <string name="list_item_title">This is a title.</string>
+    <string name="list_item_desc">This is description. </string>
+    <string name="list_item_thumb_up">12 thumb up</string>
+    <string name="default_list_item">单Item</string>
+    <string name="two_style_list_item">双Item</string>
+    <string name="three_style_list_item">多Item</string>
+    <string name="grid_view">GridView</string>
+    <!-- ListViewFragment相关 -->
+
+    <!-- RecyclerViewFragment相关 -->
+    <string name="recycler_view">Recycler View</string>
+    <string name="vertical_recycler_item">竖向列表</string>
+    <string name="horizontal_recycler_item">横向列表</string>
+    <string name="grid_recycler_item">网格样式</string>
+    <string name="waterfall_recycler_item">瀑布流</string>
+    <string name="thumb_up">赞</string>
+    <string name="share">分享</string>
+    <string name="search">搜索</string>
+    <!-- RecyclerViewFragment相关 -->
 
     <string name="home_page_link">https://github.com/EvanWang1987</string>
 </resources>

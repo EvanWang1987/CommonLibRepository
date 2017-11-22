@@ -11,20 +11,40 @@
         android:layout_height="match_parent">
 
         <android.support.design.widget.AppBarLayout
+            android:id="@+id/mainActivity_appBar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <android.support.v7.widget.Toolbar
-                android:id="@+id/toolBar"
+            <android.support.design.widget.CollapsingToolbarLayout
+                android:id="@+id/collapsingLayout"
                 android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                app:popupTheme="@style/ActionBarPopupMenuNotOverActionBar"
-                app:theme="@style/ThemeDarkActionBar"
-                app:title="@string/app_name" />
+                android:layout_height="wrap_content"
+                app:collapsedTitleGravity="start"
+                app:collapsedTitleTextAppearance="@style/WhiteTitleAppearance"
+                app:contentScrim="?attr/colorPrimary"
+                app:expandedTitleGravity="start|bottom"
+                app:expandedTitleTextAppearance="@style/WhiteTitleAppearance"
+                app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:scaleType="centerCrop"
+                    android:src="@mipmap/logo_android"
+                    app:layout_collapseMode="parallax" />
+
+                <android.support.v7.widget.Toolbar
+                    android:id="@+id/toolBar"
+                    android:layout_width="match_parent"
+                    android:layout_height="?attr/actionBarSize"
+                    app:layout_collapseMode="pin"
+                    app:popupTheme="@style/ActionBarPopupMenuNotOverActionBar"
+                    app:theme="@style/ThemeDarkActionBar"
+                    app:title="@string/app_name" />
+
+            </android.support.design.widget.CollapsingToolbarLayout>
 
         </android.support.design.widget.AppBarLayout>
-
 
         <FrameLayout
             android:id="@+id/fragmentContainer"
@@ -32,6 +52,15 @@
             android:layout_height="match_parent"
             app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/btn_share"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:src="@drawable/selector_share_white"
+            app:elevation="5dp"
+            app:layout_anchor="@id/mainActivity_appBar"
+            app:layout_anchorGravity="bottom|end" />
 
     </android.support.design.widget.CoordinatorLayout>
 
@@ -41,10 +70,6 @@
         android:layout_height="match_parent"
         android:layout_gravity="left"
         app:headerLayout="@layout/view_navigation_view_header"
-        app:menu="@menu/view_main_navigation">
-
-
-    </android.support.design.widget.NavigationView>
-
+        app:menu="@menu/menu_main_navigation" />
 
 </android.support.v4.widget.DrawerLayout>

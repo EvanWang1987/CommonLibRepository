@@ -1,13 +1,12 @@
 <resources>
     <!-- Base application theme. -->
     <style name="AppTheme" parent="ThemeAppCompatLightNoActionBar">
-        <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/Lime_Material_Design_500_saturation</item>                 <!-- 主色调 Google推荐500饱和度-->
-        <item name="colorPrimaryDark">@color/Lime_Material_Design_700_saturation</item>             <!-- 主暗色调 Google推荐700饱和度-->
-        <item name="colorAccent">@color/Pink_Material_Design_A400_saturation</item>                 <!-- 强调色 -->
+        <item name="colorPrimary">@color/colorPrimary</item>                        <!-- 主色调 Google推荐500饱和度-->
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>                <!-- 主暗色调 Google推荐700饱和度-->
+        <item name="colorAccent">@color/colorAccent</item>                          <!-- 强调色 -->
         <item name="android:textColor">@color/text_color_black</item>                               <!-- 字体颜色 -->
         <item name="android:textColorPrimary">@color/text_color_black</item>                        <!-- 主题字体主色调 -->
         <item name="android:textColorSecondary">@color/text_color_gray</item>                       <!-- 主题字体副色调 -->
-        <item name="android:windowBackground">@color/Grey_Material_Design_100_saturation</item>     <!-- Activity背景色 -->
+        <item name="android:windowBackground">@color/Grey_Material_Design_100_saturation</item>     <!-- Window背景色 -->
     </style>
 </resources>

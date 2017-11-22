@@ -2,6 +2,7 @@ package com.github.evan.common_utils_demo.ui.fragment;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.view.ViewCompat;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,7 +15,7 @@ import com.github.evan.common_utils_demo.R;
 /**
  * Created by Evan on 2017/11/9.
  */
-public class HomeFragment extends BaseFragment implements View.OnClickListener {
+public class HomeFragment extends BaseFragment {
 
     @Nullable
     @Override
@@ -24,6 +25,7 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
     }
 
     @Override
-    public void onClick(View v){
+    protected void loadData() {
+
     }
 }

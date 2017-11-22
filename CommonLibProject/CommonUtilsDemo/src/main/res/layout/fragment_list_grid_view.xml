@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RadioGroup
+        android:id="@+id/radio_group"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/radio_btn_single_style_adapter"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/default_list_item"
+            android:textSize="14sp" />
+
+        <RadioButton
+            android:id="@+id/radio_btn_two_style_adapter"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/two_style_list_item"
+            android:textSize="14sp" />
+
+        <RadioButton
+            android:id="@+id/radio_btn_three_style_adapter"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/three_style_list_item"
+            android:textSize="14sp" />
+
+        <RadioButton
+            android:id="@+id/radio_btn_grid_view"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/grid_view"
+            android:textSize="14sp" />
+
+    </RadioGroup>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="10dp">
+
+        <ListView
+            android:id="@+id/list_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:divider="@color/Alpha"
+            android:dividerHeight="10dp"
+            android:listSelector="@null"
+            android:padding="5dp"
+            android:scrollbarStyle="outsideOverlay" />
+
+        <GridView
+            android:padding="5dp"
+            android:id="@+id/grid_view"
+            android:horizontalSpacing="10dp"
+            android:verticalSpacing="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:numColumns="2" />
+
+
+    </FrameLayout>
+
+
+</LinearLayout>

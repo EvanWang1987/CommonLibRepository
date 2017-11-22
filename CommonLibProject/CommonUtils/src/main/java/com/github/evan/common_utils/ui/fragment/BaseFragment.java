@@ -2,6 +2,7 @@ package com.github.evan.common_utils.ui.fragment;
 
 
 import android.content.Context;
+import android.os.Bundle;
 import android.os.Looper;
 import android.os.Message;
 import android.view.LayoutInflater;
@@ -12,9 +13,20 @@ import com.github.evan.common_utils.handler.SoftHandlerReceiver;
 /**
  * Created by Evan on 2017/11/4.
  */
-public class BaseFragment extends android.support.v4.app.Fragment implements SoftHandlerReceiver {
+public abstract class BaseFragment extends android.support.v4.app.Fragment implements SoftHandlerReceiver {
+    protected abstract void loadData();
+
+    protected static final int IDLE = 0;
+    protected static final int UNKNOW_ERROR = -1;
+    protected static final int LOAD_COMPLETE = 1;
+    protected static final int NET_UNAVAILABLE = 2;
+    protected static final int NET_TIME_OUT = 3;
+    protected static final int LOAD_EMPTY = 4;
+    protected static final int LOAD_ERROR = 5;
+
     private SoftHandler<BaseFragment> mHandler = new SoftHandler<>(Looper.getMainLooper());
     private LayoutInflater mLayoutInflater;
+    private boolean mIsLoadedDataAtFirstHiddenChange = false;
 
     @Override
     public void onAttach(Context context) {
@@ -34,11 +46,44 @@ public class BaseFragment extends android.support.v4.app.Fragment implements Sof
 
     }
 
+    @Override
+    public void onHiddenChanged(boolean hidden) {
+        if(!hidden){
+            if(!mIsLoadedDataAtFirstHiddenChange){
+                loadData();
+                mIsLoadedDataAtFirstHiddenChange = true;
+            }
+        }
+    }
+
     protected SoftHandler getHandler(){
         return mHandler;
     }
 
     protected boolean postDelay(Runnable runnable, long delayTime){
         return mHandler.postDelayed(runnable, delayTime);
+    }
+
+    protected void sendEmptyMessage(int what){
+        sendMessage(what, -1, -1, null);
+    }
+
+    protected void sendMessage(int what, int arg1, int arg2, Bundle bundle){
+        Message message = Message.obtain();
+        message.what = what;
+        message.arg1 = arg1;
+        message.arg2 = arg2;
+        message.setData(bundle);
+        boolean receiverExists = mHandler.isReceiverExists();
+        if(receiverExists){
+            BaseFragment receiver = mHandler.getReceiver();
+            if(receiver.hashCode() != this.hashCode()){
+                mHandler.setReceiver(this);
+            }
+        }else{
+            mHandler.setReceiver(this);
+        }
+
+        mHandler.sendMessage(message);
     }
 }

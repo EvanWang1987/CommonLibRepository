@@ -108,7 +108,6 @@ public class LimitEditText extends AppCompatEditText implements TextWatcher {
 
     @Override
     public final void beforeTextChanged(CharSequence s, int start, int count, int after) {
-        Logger.d("beforeTextChanged");
         if (mIsLimitInputCount) {
             if (start + after > mLimitInputCount) {
                 if (mIsToastIfOverRangingLimitCount) {
@@ -131,7 +130,6 @@ public class LimitEditText extends AppCompatEditText implements TextWatcher {
 
     @Override
     public final void onTextChanged(CharSequence s, int start, int before, int count) {
-        Logger.d("onTextChanged");
         if (null != mOuterWatchers) {
             int size = mOuterWatchers.size();
             for (int i = 0; i < size; i++) {
@@ -143,7 +141,6 @@ public class LimitEditText extends AppCompatEditText implements TextWatcher {
 
     @Override
     public final void afterTextChanged(Editable s) {
-        Logger.d("afterTextChanged");
         if (null != mOuterWatchers) {
             int size = mOuterWatchers.size();
             for (int i = 0; i < size; i++) {

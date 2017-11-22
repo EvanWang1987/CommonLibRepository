@@ -8,7 +8,10 @@ import android.util.DisplayMetrics;
 import android.view.Display;
 import android.view.WindowManager;
 import com.github.evan.common_utils.BaseApplication;
+
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
+import java.math.BigDecimal;
 
 /**
  * Created by Evan on 2017/10/1.
@@ -70,6 +73,56 @@ public class DensityUtil {
     }
 
     /**
+     * 获取屏幕宽高比
+     * @return
+     */
+    private static String getScreenAspectRatioString(){
+        //TODO:
+
+        return "";
+    }
+
+    /**
+     * 获取屏幕尺寸(对角线)
+     * @return
+     */
+    public static float getScreenSize(){
+        float xDpi = getXDpi();
+        float yDpi = getYDpi();
+        int realScreenWidthOfPx = getRealScreenWidthOfPx();
+        int realScreenHeightOfPx = getRealScreenHeightOfPx();
+
+        float widthInch = realScreenWidthOfPx / xDpi;
+        float heightInch = realScreenHeightOfPx / yDpi;
+
+        double screenSize = Math.sqrt(widthInch * widthInch + heightInch * heightInch);
+
+        BigDecimal bigDecimal = new BigDecimal(screenSize);
+        return bigDecimal.setScale(1, BigDecimal.ROUND_HALF_UP).floatValue();
+    }
+
+    /**
+     * 获取系统状态栏高度
+     * @return
+     */
+    public static float getStatusBarHeight() {
+        Class<?> c = null;
+        Object obj = null;
+        Field field = null;
+        int x = 0;
+        try {
+            c = Class.forName("com.android.internal.R$dimen");
+            obj = c.newInstance();
+            field = c.getField("status_bar_height");
+            x = Integer.parseInt(field.get(obj).toString());
+            return ResourceUtil.getDimenOfPixel(x);
+        } catch (Exception e) {
+            Logger.printStackTrace(e);
+            return 75;
+        }
+    }
+
+    /**
      * 获取App宽 单位像素
      *
      * @return
@@ -103,6 +156,19 @@ public class DensityUtil {
      */
     public static float getYDpi() {
         return ResourceUtil.getResource().getDisplayMetrics().ydpi;
+    }
+
+    /**
+     * 获取屏幕DPI
+     * @return
+     */
+    public static int getScreenDpi(){
+        int realScreenWidthOfPx = getRealScreenWidthOfPx();
+        int realScreenHeightOfPx = getRealScreenHeightOfPx();
+        float screenSize = getScreenSize();
+
+        int pxInDiagonal = (int) (Math.sqrt(realScreenWidthOfPx * realScreenWidthOfPx + realScreenHeightOfPx * realScreenHeightOfPx) + 0.5f);
+        return (int) (pxInDiagonal / screenSize);
     }
 
     /**
@@ -172,7 +238,7 @@ public class DensityUtil {
      *
      * @return
      */
-    public static String getResolutionString() {
-        return getRealScreenWidthOfPx() + " * " + getRealScreenHeightOfPx();
+    public static int[] getResolution() {
+        return new int[]{getRealScreenWidthOfPx(), getRealScreenHeightOfPx()};
     }
 }

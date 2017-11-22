@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/layout_root_grid_holder"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    app:cardCornerRadius="5dp"
+    app:cardElevation="5dp"
+    app:cardPreventCornerOverlap="false"
+    app:cardUseCompatPadding="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/shape_white_bkg_with_round_corner"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <com.github.evan.common_utils.ui.view.imageView.RoundedImageView
+                android:id="@+id/img_preview_grid_item"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:scaleType="centerCrop"
+                android:src="@mipmap/img_video_preview"
+                app:riv_corner_radius_top_left="5dp"
+                app:riv_corner_radius_top_right="5dp" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@id/img_preview_grid_item"
+                android:layout_alignLeft="@id/img_preview_grid_item"
+                android:layout_alignRight="@id/img_preview_grid_item"
+                android:layout_gravity="bottom"
+                android:alpha="50"
+                android:background="@color/Black"
+                android:orientation="horizontal"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp">
+
+                <TextView
+                    android:id="@+id/txt_views_grid_item"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:drawableLeft="@mipmap/ic_info_views"
+                    android:drawablePadding="5dp"
+                    android:gravity="center_vertical"
+                    android:text="12万"
+                    android:textColor="@color/text_color_white"
+                    android:textSize="10sp" />
+
+
+                <TextView
+                    android:id="@+id/txt_danmarkus_grid_item"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:drawableLeft="@mipmap/ic_info_danmakus"
+                    android:drawablePadding="5dp"
+                    android:gravity="center_vertical"
+                    android:text="2万"
+                    android:textColor="@color/text_color_white"
+                    android:textSize="10sp" />
+
+                <TextView
+                    android:id="@+id/txt_video_duration_grid_item"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical|end"
+                    android:text="4:02"
+                    android:textColor="@color/text_color_white"
+                    android:textSize="10sp" />
+
+            </LinearLayout>
+
+
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/txt_title_grid_item"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:padding="5dp"
+            android:text="@string/list_item_title"
+            android:textColor="@color/text_color_black"
+            android:textSize="12sp" />
+
+        <ImageView
+            android:id="@+id/img_action_more_grid_item"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:padding="5dp"
+            android:src="@mipmap/ic_action_more"
+            android:tint="@color/Gray" />
+
+
+    </LinearLayout>
+
+
+</android.support.v7.widget.CardView>

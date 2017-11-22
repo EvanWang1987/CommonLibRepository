@@ -34,6 +34,10 @@ public class SoftHandler<Receiver extends SoftHandlerReceiver> extends Handler {
         mReceiver = new SoftReference<>(receiver);
     }
 
+    public Receiver getReceiver(){
+        return mReceiver.get();
+    }
+
     public boolean isReceiverExists(){
         return null != mReceiver && null != mReceiver.get();
     }

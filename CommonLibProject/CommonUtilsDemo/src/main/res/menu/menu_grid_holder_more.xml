@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/menu_grid_holder_thumb_up" android:title="@string/thumb_up" android:icon="@drawable/selector_button_thumb_up_black_36dp"/>
+    <item android:id="@+id/menu_grid_holder_search" android:title="@string/search" android:icon="@drawable/selector_button_search_black_36dp"/>
+    <item android:id="@+id/menu_grid_holder_share" android:title="@string/share" android:icon="@drawable/selector_button_share_black_36dp"/>
+</menu>

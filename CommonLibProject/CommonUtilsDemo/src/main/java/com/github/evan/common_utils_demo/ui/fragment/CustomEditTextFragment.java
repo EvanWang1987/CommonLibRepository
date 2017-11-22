@@ -20,4 +20,9 @@ public class CustomEditTextFragment extends BaseFragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_edit_text, null);
     }
+
+    @Override
+    protected void loadData() {
+
+    }
 }

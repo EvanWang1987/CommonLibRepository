@@ -103,4 +103,9 @@ public class FlagViewFragment extends BaseFragment {
         String timeString = DateUtil.time2String(lastFlagValue, DateUtil.yyyy_MM_dd_HH_mm_ss, Locale.getDefault());
         mTxtUpdateTime.setText(ResourceUtil.getString(R.string.lastUpdateTime, timeString));
     }
+
+    @Override
+    protected void loadData() {
+
+    }
 }

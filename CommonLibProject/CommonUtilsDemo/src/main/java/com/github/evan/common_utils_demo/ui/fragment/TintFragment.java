@@ -202,4 +202,9 @@ public class TintFragment extends BaseFragment {
                 break;
         }
     }
+
+    @Override
+    protected void loadData() {
+
+    }
 }

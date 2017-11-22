@@ -22,6 +22,9 @@
     <!-- 常用分割线颜色 -->
     <color name="divider_color_gray">#BDBDBD</color>
 
+    <!-- 常用分割线颜色 -->
+    <color name="background_black">#000000</color>
+
     <!-- ↓Material Design↓ 颜色 -->
     <!-- 红 -->
     <color name="Red_Material_Design_50_saturation">#fde0dc</color>
