@@ -14,8 +14,8 @@ import android.widget.RadioGroup;
 
 import com.github.evan.common_utils.ui.fragment.BaseFragment;
 import com.github.evan.common_utils_demo.R;
-import com.github.evan.common_utils_demo.ui.adapter.absListViewAdapter.GridViewAdapter;
-import com.github.evan.common_utils_demo.ui.adapter.absListViewAdapter.SingleStyleItemAdapter;
+import com.github.evan.common_utils_demo.ui.adapter.absListViewAdapter.GridAdapter;
+import com.github.evan.common_utils_demo.ui.adapter.absListViewAdapter.DefaultAdapter;
 import com.github.evan.common_utils_demo.ui.adapter.absListViewAdapter.ThreeStyleItemAdapter;
 import com.github.evan.common_utils_demo.ui.adapter.absListViewAdapter.TwoStyleItemAdapter;
 
@@ -43,10 +43,10 @@ public class ListGridViewFragment extends BaseFragment {
     ListView mListView;
     @BindView(R.id.grid_view)
     GridView mGridView;
-    private SingleStyleItemAdapter mSingleStyleItemAdapter;
+    private DefaultAdapter mDefaultAdapter;
     private TwoStyleItemAdapter mTwoStyleItemAdapter;
     private ThreeStyleItemAdapter mThreeStyleItemAdapter;
-    private GridViewAdapter mGridAdapter;
+    private GridAdapter mGridAdapter;
 
     @Nullable
     @Override
@@ -58,10 +58,10 @@ public class ListGridViewFragment extends BaseFragment {
 
     @Override
     public void onDestroy() {
-        mSingleStyleItemAdapter.recycle();
-        mTwoStyleItemAdapter.recycle();
-        mThreeStyleItemAdapter.recycle();
-        mGridAdapter.recycle();
+        if(null != mDefaultAdapter) mDefaultAdapter.recycle();
+        if(null != mTwoStyleItemAdapter) mTwoStyleItemAdapter.recycle();
+        if(null != mThreeStyleItemAdapter) mThreeStyleItemAdapter.recycle();
+        if(null != mGridAdapter) mGridAdapter.recycle();
         super.onDestroy();
     }
 
@@ -77,7 +77,7 @@ public class ListGridViewFragment extends BaseFragment {
         if(button.isChecked()){{
             switch (button.getId()){
                 case R.id.radio_btn_single_style_adapter:
-                    mListView.setAdapter(mSingleStyleItemAdapter);
+                    mListView.setAdapter(mDefaultAdapter);
                     mListView.setVisibility(View.VISIBLE);
                     mGridView.setVisibility(View.INVISIBLE);
                     break;
@@ -113,13 +113,13 @@ public class ListGridViewFragment extends BaseFragment {
                 for (int i = 0; i < N; i++) {
                     data.add(i + 1);
                 }
-                mSingleStyleItemAdapter = new SingleStyleItemAdapter(getContext());
-                mSingleStyleItemAdapter.replace(data);
+                mDefaultAdapter = new DefaultAdapter(getContext());
+                mDefaultAdapter.replace(data);
                 mTwoStyleItemAdapter = new TwoStyleItemAdapter(getContext());
                 mTwoStyleItemAdapter.replace(data);
                 mThreeStyleItemAdapter = new ThreeStyleItemAdapter(getContext());
                 mThreeStyleItemAdapter.replace(data);
-                mGridAdapter = new GridViewAdapter(getContext());
+                mGridAdapter = new GridAdapter(getContext());
                 mGridAdapter.replace(data);
                 sendEmptyMessage(LOAD_COMPLETE);
             }

@@ -4,19 +4,19 @@ import android.content.Context;
 
 import com.github.evan.common_utils.ui.adapter.BaseAbsListViewAdapter;
 import com.github.evan.common_utils.ui.holder.BaseAbsListViewHolder;
-import com.github.evan.common_utils_demo.ui.holder.absListViewHolder.GridItemHolder;
+import com.github.evan.common_utils_demo.ui.holder.absListViewHolder.DefaultHolder;
 
 /**
- * Created by Evan on 2017/11/21.
+ * Created by Evan on 2017/11/20.
  */
-public class GridViewAdapter extends BaseAbsListViewAdapter<Integer> {
+public class DefaultAdapter extends BaseAbsListViewAdapter<Integer> {
 
-    public GridViewAdapter(Context context) {
+    public DefaultAdapter(Context context) {
         super(context);
     }
 
     @Override
     public BaseAbsListViewHolder<Integer> onCreateHolder(Context context, int itemViewType) {
-        return new GridItemHolder(context);
+        return new DefaultHolder(context);
     }
 }
