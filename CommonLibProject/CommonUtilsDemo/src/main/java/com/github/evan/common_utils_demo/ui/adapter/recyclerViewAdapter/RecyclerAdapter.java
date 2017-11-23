@@ -12,6 +12,7 @@ import com.github.evan.common_utils_demo.ui.holder.recyclerViewHolder.BigPreview
 import com.github.evan.common_utils_demo.ui.holder.recyclerViewHolder.DefaultHolder;
 import com.github.evan.common_utils_demo.ui.holder.recyclerViewHolder.GridHolder;
 import com.github.evan.common_utils_demo.ui.holder.recyclerViewHolder.MultiPreviewHolder;
+import com.github.evan.common_utils_demo.ui.holder.recyclerViewHolder.StaggeredHolder;
 
 /**
  * Created by Evan on 2017/11/21.
@@ -41,6 +42,9 @@ public class RecyclerAdapter extends SwitchRecyclerAdapter<Integer> {
                     break;
             }
         }
+        else if(switchMode == STAGGERED_GRID_MODE){
+            root = inflater.inflate(R.layout.item_staggered_grid, parent, false);
+        }
         else {
             root = inflater.inflate(R.layout.item_grid, parent, false);
         }
@@ -65,6 +69,9 @@ public class RecyclerAdapter extends SwitchRecyclerAdapter<Integer> {
                     holder = new MultiPreviewHolder(parent.getContext(), itemView);
                     break;
             }
+        }
+        else if(switchMode == STAGGERED_GRID_MODE){
+            holder = new StaggeredHolder(parent.getContext(), itemView);
         }
         else {
             holder = new GridHolder(parent.getContext(), itemView);

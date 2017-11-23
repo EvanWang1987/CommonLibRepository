@@ -14,6 +14,7 @@ public abstract class SwitchRecyclerAdapter<Data> extends BaseRecyclerViewAdapte
     public static final int LIST_MODE_VERTICAL = 1;
     public static final int LIST_MODE_HORIZONTAL = 2;
     public static final int GRID_MODE = 3;
+    public static final int STAGGERED_GRID_MODE = 4;
 
     public abstract View onCreateViewWithSwitchMode(LayoutInflater inflater, ViewGroup parent, int viewType, int switchMode);
     public abstract BaseRecyclerViewHolder<Data> onCreateHolderWithSwitchMode(View itemView, ViewGroup parent, int viewType, int switchMode);

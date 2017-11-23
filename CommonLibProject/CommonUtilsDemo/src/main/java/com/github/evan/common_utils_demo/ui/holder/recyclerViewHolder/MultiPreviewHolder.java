@@ -42,7 +42,7 @@ public class MultiPreviewHolder extends BaseRecyclerViewHolder<Integer> {
 
     @Override
     public void onRefreshHolder(Integer integer) {
-        mTxtPosition.setText(integer + "");
+        mTxtPosition.setText(getAdapterPosition() + "");
     }
 
     @Override
