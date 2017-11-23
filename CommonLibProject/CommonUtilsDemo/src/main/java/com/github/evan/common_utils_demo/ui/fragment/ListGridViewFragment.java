@@ -3,14 +3,13 @@ package com.github.evan.common_utils_demo.ui.fragment;
 import android.os.Bundle;
 import android.os.Message;
 import android.support.annotation.Nullable;
+import android.support.design.widget.TabLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CompoundButton;
 import android.widget.GridView;
 import android.widget.ListView;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
 
 import com.github.evan.common_utils.ui.fragment.BaseFragment;
 import com.github.evan.common_utils_demo.R;
@@ -28,17 +27,9 @@ import butterknife.OnCheckedChanged;
 /**
  * Created by Evan on 2017/11/20.
  */
-public class ListGridViewFragment extends BaseFragment {
-    @BindView(R.id.radio_group)
-    RadioGroup mRadioGroup;
-    @BindView(R.id.radio_btn_single_style_adapter)
-    RadioButton mBtnSingleAdapter;
-    @BindView(R.id.radio_btn_two_style_adapter)
-    RadioButton mBtnTwoStyleAdapter;
-    @BindView(R.id.radio_btn_three_style_adapter)
-    RadioButton mBtnThreeStyleAdapter;
-    @BindView(R.id.radio_btn_grid_view)
-    RadioButton mBtnGridView;
+public class ListGridViewFragment extends BaseFragment implements TabLayout.OnTabSelectedListener {
+    @BindView(R.id.tab_layout_list_grid_view_fragment)
+    TabLayout mTabLayout;
     @BindView(R.id.list_view)
     ListView mListView;
     @BindView(R.id.grid_view)
@@ -53,6 +44,7 @@ public class ListGridViewFragment extends BaseFragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_list_grid_view, null);
         ButterKnife.bind(this, root);
+        mTabLayout.addOnTabSelectedListener(this);
         return root;
     }
 
@@ -68,39 +60,10 @@ public class ListGridViewFragment extends BaseFragment {
     @Override
     public void onHandleMessage(Message message) {
         if(message.what == LOAD_COMPLETE){
-            mBtnSingleAdapter.setChecked(true);
+            TabLayout.Tab tab = mTabLayout.getTabAt(0);
+            tab.select();
+            onTabSelected(tab);
         }
-    }
-
-    @OnCheckedChanged({R.id.radio_btn_single_style_adapter, R.id.radio_btn_two_style_adapter, R.id.radio_btn_three_style_adapter, R.id.radio_btn_grid_view})
-    void onCheckedChanged(CompoundButton button){
-        if(button.isChecked()){{
-            switch (button.getId()){
-                case R.id.radio_btn_single_style_adapter:
-                    mListView.setAdapter(mDefaultAdapter);
-                    mListView.setVisibility(View.VISIBLE);
-                    mGridView.setVisibility(View.INVISIBLE);
-                    break;
-
-                case R.id.radio_btn_two_style_adapter:
-                    mListView.setAdapter(mTwoStyleItemAdapter);
-                    mListView.setVisibility(View.VISIBLE);
-                    mGridView.setVisibility(View.INVISIBLE);
-                    break;
-
-                case R.id.radio_btn_three_style_adapter:
-                    mListView.setAdapter(mThreeStyleItemAdapter);
-                    mListView.setVisibility(View.VISIBLE);
-                    mGridView.setVisibility(View.INVISIBLE);
-                    break;
-
-                case R.id.radio_btn_grid_view:
-                    mGridView.setAdapter(mGridAdapter);
-                    mGridView.setVisibility(View.VISIBLE);
-                    mListView.setVisibility(View.INVISIBLE);
-                    break;
-            }
-        }}
     }
 
     @Override
@@ -124,5 +87,44 @@ public class ListGridViewFragment extends BaseFragment {
                 sendEmptyMessage(LOAD_COMPLETE);
             }
         }.start();
+    }
+
+    @Override
+    public void onTabSelected(TabLayout.Tab tab) {
+        switch (tab.getPosition()){
+            case 0:
+                mListView.setAdapter(mDefaultAdapter);
+                mListView.setVisibility(View.VISIBLE);
+                mGridView.setVisibility(View.INVISIBLE);
+                break;
+
+            case 1:
+                mListView.setAdapter(mTwoStyleItemAdapter);
+                mListView.setVisibility(View.VISIBLE);
+                mGridView.setVisibility(View.INVISIBLE);
+                break;
+
+            case 2:
+                mListView.setAdapter(mThreeStyleItemAdapter);
+                mListView.setVisibility(View.VISIBLE);
+                mGridView.setVisibility(View.INVISIBLE);
+                break;
+
+            case 3:
+                mGridView.setAdapter(mGridAdapter);
+                mGridView.setVisibility(View.VISIBLE);
+                mListView.setVisibility(View.INVISIBLE);
+                break;
+        }
+    }
+
+    @Override
+    public void onTabUnselected(TabLayout.Tab tab) {
+
+    }
+
+    @Override
+    public void onTabReselected(TabLayout.Tab tab) {
+
     }
 }

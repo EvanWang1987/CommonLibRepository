@@ -1,48 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <RadioGroup
-        android:id="@+id/radio_group"
+    <android.support.design.widget.TabLayout
+        android:id="@+id/tab_layout_list_grid_view_fragment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:background="@color/colorPrimary"
+        app:tabTextAppearance="@style/TabLayoutTextAppearance_White"
+        app:tabGravity="fill"
+        app:tabMode="fixed">
 
-        <RadioButton
-            android:id="@+id/radio_btn_single_style_adapter"
-            android:layout_weight="1"
-            android:layout_width="0dp"
+        <android.support.design.widget.TabItem
+            android:id="@+id/radio_btn_list_mode"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/default_list_item"
-            android:textSize="14sp" />
+            android:text="@string/default_list_item" />
 
-        <RadioButton
-            android:id="@+id/radio_btn_two_style_adapter"
-            android:layout_weight="1"
-            android:layout_width="0dp"
+        <android.support.design.widget.TabItem
+            android:id="@+id/radio_btn_horizontal_list_mode"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/two_style_list_item"
-            android:textSize="14sp" />
+            android:text="@string/two_style_list_item" />
 
-        <RadioButton
-            android:id="@+id/radio_btn_three_style_adapter"
-            android:layout_weight="1"
-            android:layout_width="0dp"
+        <android.support.design.widget.TabItem
+            android:id="@+id/radio_btn_grid_mode"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/three_style_list_item"
-            android:textSize="14sp" />
+            android:text="@string/three_style_list_item" />
 
-        <RadioButton
-            android:id="@+id/radio_btn_grid_view"
-            android:layout_weight="1"
-            android:layout_width="0dp"
+
+        <android.support.design.widget.TabItem
+            android:id="@+id/radio_btn_waterfall"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/grid_view"
-            android:textSize="14sp" />
+            android:text="@string/grid_view" />
 
-    </RadioGroup>
+
+    </android.support.design.widget.TabLayout>
 
     <FrameLayout
         android:layout_width="match_parent"
