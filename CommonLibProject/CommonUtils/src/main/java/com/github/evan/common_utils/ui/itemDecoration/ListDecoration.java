@@ -18,47 +18,15 @@ import com.github.evan.common_utils.utils.ResourceUtil;
 /**
  * Created by Evan on 2017/11/22.
  */
-public class ListDecoration extends RecyclerView.ItemDecoration {
-    private Drawable mDecorationDrawable;
-    private int mDecorationSpace;
-    private RectF mRect = new RectF();
-    private Paint mPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+public class ListDecoration extends BaseItemDecoration {
 
-    public ListDecoration(@ColorRes int decorationColor, int decorationSpace){
-        this(new ColorDrawable(ResourceUtil.getColor(decorationColor)), decorationSpace);
+
+    public ListDecoration(@ColorRes int decorationColor, int decorationSpace) {
+        super(decorationColor, decorationSpace);
     }
 
     public ListDecoration(Drawable decorationDrawable, int decorationSpace) {
-        this.mDecorationDrawable = decorationDrawable;
-        this.mDecorationSpace = decorationSpace;
-        if(mDecorationSpace < 0){
-            int intrinsicHeight = mDecorationDrawable.getIntrinsicHeight();
-            mDecorationSpace = intrinsicHeight;
-            if(intrinsicHeight < 0){
-                mDecorationSpace = DensityUtil.dp2px(5);
-            }
-        }
-    }
-
-    public Drawable getDecorationDrawable() {
-        return mDecorationDrawable;
-    }
-
-    public void setDecorationDrawable(Drawable decorationDrawable) {
-        this.mDecorationDrawable = decorationDrawable;
-    }
-
-    public int getDecorationSpace() {
-        return mDecorationSpace;
-    }
-
-    public void setDecorationSpace(int decorationSpace) {
-        this.mDecorationSpace = decorationSpace;
-    }
-
-    @Override
-    public void onDraw(Canvas c, RecyclerView parent, RecyclerView.State state) {
-        super.onDraw(c, parent, state);
+        super(decorationDrawable, decorationSpace);
     }
 
     @Override
@@ -77,13 +45,13 @@ public class ListDecoration extends RecyclerView.ItemDecoration {
             int left = 0;
             int right = 0;
             int bottom = 0;
-            if(isVerticalLinearLayoutManager(parent)){
+            if(isVerticalLayoutManager(parent)){
                 top = itemBottomAtParent;
                 left = itemLeftAtParent;
                 right = itemRightAtParent;
                 bottom = isLastItemView ? 0 : itemBottomAtParent + mDecorationSpace;
             }
-            else if(isHorizontalLinearLayoutManager(parent)){
+            else if(isHorizontalLayoutManager(parent)){
                 top = itemTopAtParent;
                 left = itemRightAtParent;
                 right = isLastItemView ? 0 : itemRightAtParent + mDecorationSpace;
@@ -105,34 +73,11 @@ public class ListDecoration extends RecyclerView.ItemDecoration {
         if(null != layoutManager && layoutManager instanceof LinearLayoutManager){
             LinearLayoutManager linearLayoutManager = (LinearLayoutManager) layoutManager;
             if(linearLayoutManager.getOrientation() == LinearLayoutManager.VERTICAL){
-//                outRect.bottom = mDecorationSpace;
                 outRect.set(0, 0, 0, mDecorationSpace);
             }
             else if(linearLayoutManager.getOrientation() == LinearLayoutManager.HORIZONTAL){
-//                outRect.right = mDecorationSpace;
                 outRect.set(0, 0, mDecorationSpace, 0);
             }
         }
-    }
-
-    private boolean isLinearLayoutManager(RecyclerView recyclerView){
-        return null != recyclerView && null != recyclerView.getLayoutManager() && recyclerView.getLayoutManager() instanceof LinearLayoutManager;
-    }
-
-    private boolean isVerticalLinearLayoutManager(RecyclerView recyclerView){
-        if(isLinearLayoutManager(recyclerView)){
-            LinearLayoutManager linearLayoutManager = (LinearLayoutManager) recyclerView.getLayoutManager();
-            return linearLayoutManager.getOrientation() == LinearLayoutManager.VERTICAL;
-        }
-        return false;
-    }
-
-    public boolean isHorizontalLinearLayoutManager(RecyclerView recyclerView){
-        if(isLinearLayoutManager(recyclerView)){
-            LinearLayoutManager linearLayoutManager = (LinearLayoutManager) recyclerView.getLayoutManager();
-            return linearLayoutManager.getOrientation() == LinearLayoutManager.HORIZONTAL;
-        }
-
-        return false;
     }
 }

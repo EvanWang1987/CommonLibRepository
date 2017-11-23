@@ -20,9 +20,22 @@ public abstract class BasePagerAdapter<Data> extends PagerAdapter {
     private Context mContext;
     private List<Data> mData = new ArrayList<>();
     private ConcurrentHashMap<Integer, View> mConvertViews = new ConcurrentHashMap<>();
+    private boolean mIsCacheAllItemView = false;
 
     public BasePagerAdapter(Context context) {
+        this(context, false);
+    }
+    public BasePagerAdapter(Context context, boolean isCacheAllItemView) {
         this.mContext = context.getApplicationContext();
+        mIsCacheAllItemView = isCacheAllItemView;
+    }
+
+    public boolean isCacheAllItemView() {
+        return mIsCacheAllItemView;
+    }
+
+    public void setCacheAllItemView(boolean isCacheAllItemView) {
+        this.mIsCacheAllItemView = isCacheAllItemView;
     }
 
     public void add(Data data){
@@ -105,7 +118,9 @@ public abstract class BasePagerAdapter<Data> extends PagerAdapter {
         container.removeView(convertView);
         BasePagerHolder<Data> holder = (BasePagerHolder<Data>) convertView.getTag();
         holder.destroyItem(container, position, object);
-        mConvertViews.remove(position);
+        if(!mIsCacheAllItemView){
+            mConvertViews.remove(position);
+        }
     }
 
     @Override

@@ -13,6 +13,7 @@ import android.widget.CompoundButton;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import com.github.evan.common_utils.ui.fragment.BaseFragment;
+import com.github.evan.common_utils.ui.itemDecoration.GridDecoration;
 import com.github.evan.common_utils.ui.itemDecoration.ListDecoration;
 import com.github.evan.common_utils.utils.DensityUtil;
 import com.github.evan.common_utils_demo.R;
@@ -72,7 +73,7 @@ public class RecyclerViewFragment extends BaseFragment {
                     break;
 
                 case R.id.radio_btn_grid_mode:
-                    GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 2);
+                    GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 3);
                     mRecyclerView.setLayoutManager(gridLayoutManager);
                     mRecyclerAdapter.setCurrentMode(RecyclerAdapter.GRID_MODE);
                     mRecyclerView.setAdapter(mRecyclerAdapter);
@@ -97,7 +98,7 @@ public class RecyclerViewFragment extends BaseFragment {
         new Thread(){
             @Override
             public void run() {
-                int N = 30;
+                int N = 32;
                 List<Integer> data = new ArrayList<>(N);
                 for (int i = 0; i < N; i++) {
                     data.add(i + 1);
