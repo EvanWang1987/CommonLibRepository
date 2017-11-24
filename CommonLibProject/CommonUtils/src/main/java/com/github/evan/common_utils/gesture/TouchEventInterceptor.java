@@ -93,6 +93,8 @@ public class TouchEventInterceptor {
                     destination.getParent().requestDisallowInterceptTouchEvent(true);
                     return true;
                 } else {
+                    mDownX = -1;
+                    mDownY = -1;
                     return false;
                 }
             } else {
@@ -101,6 +103,8 @@ public class TouchEventInterceptor {
                     destination.getParent().requestDisallowInterceptTouchEvent(true);
                     return true;
                 } else {
+                    mDownX = -1;
+                    mDownY = -1;
                     return false;
                 }
             }
