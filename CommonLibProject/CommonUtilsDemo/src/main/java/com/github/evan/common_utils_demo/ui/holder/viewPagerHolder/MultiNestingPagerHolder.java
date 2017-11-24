@@ -41,7 +41,6 @@ public class MultiNestingPagerHolder extends BasePagerHolder<Integer> {
     public View onCreateView(Context context, LayoutInflater inflater, ViewGroup parent) {
         View root = inflater.inflate(R.layout.pager_multi_nesting, null);
         ButterKnife.bind(this, root);
-        mViewPager.setInterceptMode(TouchEventInterceptor.InterceptMode.ALL_BY_ITSELF);
         mImagePagerAdapter = new ImagePagerAdapter(getContext());
         return root;
     }
