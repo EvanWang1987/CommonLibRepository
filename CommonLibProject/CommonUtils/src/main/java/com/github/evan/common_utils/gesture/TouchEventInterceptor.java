@@ -77,6 +77,7 @@ public class TouchEventInterceptor {
         if ((action == MotionEvent.ACTION_DOWN)) {
             mDownX = event.getX();
             mDownY = event.getY();
+            destination.getParent().requestDisallowInterceptTouchEvent(true);
             return false;
         } else if (action == MotionEvent.ACTION_MOVE) {
             float currentX = event.getX();
@@ -95,6 +96,7 @@ public class TouchEventInterceptor {
                 } else {
                     mDownX = -1;
                     mDownY = -1;
+                    destination.getParent().requestDisallowInterceptTouchEvent(false);
                     return false;
                 }
             } else {
@@ -105,6 +107,7 @@ public class TouchEventInterceptor {
                 } else {
                     mDownX = -1;
                     mDownY = -1;
+                    destination.getParent().requestDisallowInterceptTouchEvent(false);
                     return false;
                 }
             }
@@ -112,8 +115,10 @@ public class TouchEventInterceptor {
         } else if (action == MotionEvent.ACTION_UP || action == MotionEvent.ACTION_CANCEL) {
             mDownX = -1;
             mDownY = -1;
+            destination.getParent().requestDisallowInterceptTouchEvent(false);
             return false;
         } else {
+            destination.getParent().requestDisallowInterceptTouchEvent(false);
             return false;
         }
     }
