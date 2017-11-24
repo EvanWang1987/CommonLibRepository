@@ -9,6 +9,7 @@
         <item android:id="@+id/functionNestingViewPager" android:title="@string/nesting_touch" android:icon="@drawable/selector_nesting_touch_black" />
         <item android:id="@+id/functionCustomEditText" android:title="@string/edit_text" android:icon="@drawable/selector_action_button_edit_dark" />
         <item android:id="@+id/functionFlagView" android:title="@string/flag_view" android:icon="@drawable/selector_action_button_flag_dark" />
-        <item android:id="@+id/functionTint" android:title="@string/tint" android:icon="@mipmap/ic_tint" />
+        <item android:id="@+id/functionTint" android:title="@string/tint" android:icon="@drawable/selector_tint_black" />
+        <item android:id="@+id/functionTest" android:title="@string/debug" android:icon="@drawable/selector_debug_black" />
     </group>
 </menu>

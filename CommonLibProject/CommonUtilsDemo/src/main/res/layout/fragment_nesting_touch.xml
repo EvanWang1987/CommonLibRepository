@@ -42,7 +42,7 @@
 
     </android.support.design.widget.TabLayout>
 
-    <com.github.evan.common_utils.ui.view.viewPager.InterceptTouchViewPager
+    <com.github.evan.common_utils.ui.view.nestingTouchView.NestingViewPager
         android:id="@+id/dispatch_view_pager"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />

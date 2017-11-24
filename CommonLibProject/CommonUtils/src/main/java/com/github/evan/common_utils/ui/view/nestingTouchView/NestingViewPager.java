@@ -1,4 +1,4 @@
-package com.github.evan.common_utils.ui.view.viewPager;
+package com.github.evan.common_utils.ui.view.nestingTouchView;
 
 import android.content.Context;
 import android.support.v4.view.ViewPager;
@@ -8,25 +8,26 @@ import android.view.MotionEvent;
 import com.github.evan.common_utils.gesture.TouchEventInterceptor;
 
 /**
- * Created by Evan on 2017/11/23.
+ * Created by Evan on 2017/11/24.
  */
-public class InterceptTouchViewPager extends ViewPager implements TouchInterceptable {
-    private TouchEventInterceptor.InterceptMode mInterceptMode = TouchEventInterceptor.InterceptMode.HORIZONTAL_BY_ITSELF;
+public class NestingViewPager extends ViewPager implements TouchEventInterceptor.TouchInterceptable {
     private TouchEventInterceptor mInterceptor;
+    private TouchEventInterceptor.InterceptMode mInterceptMode = TouchEventInterceptor.InterceptMode.HORIZONTAL_BY_ITSELF;
 
-    public InterceptTouchViewPager(Context context) {
+
+    public NestingViewPager(Context context) {
         super(context);
         mInterceptor = new TouchEventInterceptor(context);
     }
 
-    public InterceptTouchViewPager(Context context, AttributeSet attrs) {
+    public NestingViewPager(Context context, AttributeSet attrs) {
         super(context, attrs);
         mInterceptor = new TouchEventInterceptor(context);
     }
 
     @Override
-    public boolean onInterceptTouchEvent(MotionEvent event) {
-        return mInterceptor.onInterceptTouchEvent(event, mInterceptMode, this) || super.onInterceptTouchEvent(event);
+    public boolean onInterceptTouchEvent(MotionEvent ev) {
+        return mInterceptor.onInterceptTouchEvent(ev, mInterceptMode, this) || super.onInterceptTouchEvent(ev);
     }
 
     @Override

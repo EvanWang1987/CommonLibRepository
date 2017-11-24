@@ -47,6 +47,14 @@ public class TouchEventInterceptor {
         }
     }
 
+    public interface TouchInterceptable {
+
+        void setInterceptMode(TouchEventInterceptor.InterceptMode interceptMode);
+
+        TouchEventInterceptor.InterceptMode getInterceptMode();
+
+    }
+
 
     private float mDownX = -1, mDownY = -1;
     private float mTouchSlop;

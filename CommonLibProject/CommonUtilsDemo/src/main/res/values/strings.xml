@@ -97,8 +97,12 @@
     <!-- ViewPagerFragment相关 -->
 
     <!-- ViewPagerFragment相关 -->
-    <string name="nesting_touch">Nesting Touch</string>
+    <string name="nesting_touch">手势兼容</string>
     <!-- ViewPagerFragment相关 -->
+
+    <!-- DebugFragment相关 -->
+    <string name="debug">Debug</string>
+    <!-- DebugFragment相关 -->
 
     <string name="home_page_link">https://github.com/EvanWang1987</string>
 </resources>

@@ -4,14 +4,12 @@ import android.os.Bundle;
 import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
-import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
 import com.github.evan.common_utils.bean.PagerTitleUsableInteger;
 import com.github.evan.common_utils.ui.fragment.BaseFragment;
-import com.github.evan.common_utils.ui.view.viewPager.InterceptTouchViewPager;
+import com.github.evan.common_utils.ui.view.nestingTouchView.NestingViewPager;
 import com.github.evan.common_utils_demo.R;
 import com.github.evan.common_utils_demo.ui.adapter.viewPagerAdapter.NestingPagerAdapter;
 
@@ -28,7 +26,7 @@ public class NestingTouchFragment extends BaseFragment {
     @BindView(R.id.tab_layout_nesting_view_pager)
     TabLayout mTabLayout;
     @BindView(R.id.dispatch_view_pager)
-    InterceptTouchViewPager mInterceptTouchViewPager;
+    NestingViewPager mInterceptTouchViewPager;
     NestingPagerAdapter mAdapter;
 
 

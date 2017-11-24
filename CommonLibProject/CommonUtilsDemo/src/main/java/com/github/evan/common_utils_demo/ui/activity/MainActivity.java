@@ -29,6 +29,7 @@ import com.github.evan.common_utils_demo.ui.fragment.ListGridViewFragment;
 import com.github.evan.common_utils_demo.ui.fragment.NestingTouchFragment;
 import com.github.evan.common_utils_demo.ui.fragment.RecyclerViewFragment;
 import com.github.evan.common_utils_demo.ui.fragment.ScreenInformationFragment;
+import com.github.evan.common_utils_demo.ui.fragment.DebugFragment;
 import com.github.evan.common_utils_demo.ui.fragment.TintFragment;
 import com.github.evan.common_utils_demo.ui.fragment.ViewPagerFragment;
 
@@ -40,7 +41,7 @@ import butterknife.OnClick;
  * Created by Evan on 2017/11/9.
  */
 public class MainActivity extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener {
-    private static final String[] fragmentNames = {HomeFragment.class.getName(), ScreenInformationFragment.class.getName(), ListGridViewFragment.class.getName(), RecyclerViewFragment.class.getName(), ViewPagerFragment.class.getName(), NestingTouchFragment.class.getName(), CustomEditTextFragment.class.getName(), FlagViewFragment.class.getName(), TintFragment.class.getName()};
+    private static final String[] fragmentNames = {HomeFragment.class.getName(), ScreenInformationFragment.class.getName(), ListGridViewFragment.class.getName(), RecyclerViewFragment.class.getName(), ViewPagerFragment.class.getName(), NestingTouchFragment.class.getName(), CustomEditTextFragment.class.getName(), FlagViewFragment.class.getName(), TintFragment.class.getName(), DebugFragment.class.getName()};
 
     @BindView(R.id.mainActivity_appBar)
     public AppBarLayout mAppbarLayout;
@@ -121,7 +122,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     private boolean switchFragment(int selectedMenuItemId){
         FragmentManager fragmentManager = getSupportFragmentManager();
         Fragment visibleFragment = null;
-        Fragment[] inVisibleFragment = new Fragment[8];
+        Fragment[] inVisibleFragment = new Fragment[9];
         boolean isExpand = false;
 
         switch (selectedMenuItemId){
@@ -135,6 +136,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                 inVisibleFragment[5] = fragmentManager.findFragmentByTag(CustomEditTextFragment.class.getName());
                 inVisibleFragment[6] = fragmentManager.findFragmentByTag(FlagViewFragment.class.getName());
                 inVisibleFragment[7] = fragmentManager.findFragmentByTag(TintFragment.class.getName());
+                inVisibleFragment[8] = fragmentManager.findFragmentByTag(DebugFragment.class.getName());
                 isExpand = true;
                 break;
 
@@ -148,6 +150,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                 inVisibleFragment[5] = fragmentManager.findFragmentByTag(CustomEditTextFragment.class.getName());
                 inVisibleFragment[6] = fragmentManager.findFragmentByTag(FlagViewFragment.class.getName());
                 inVisibleFragment[7] = fragmentManager.findFragmentByTag(TintFragment.class.getName());
+                inVisibleFragment[8] = fragmentManager.findFragmentByTag(DebugFragment.class.getName());
                 isExpand = true;
                 break;
 
@@ -161,6 +164,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                 inVisibleFragment[5] = fragmentManager.findFragmentByTag(CustomEditTextFragment.class.getName());
                 inVisibleFragment[6] = fragmentManager.findFragmentByTag(FlagViewFragment.class.getName());
                 inVisibleFragment[7] = fragmentManager.findFragmentByTag(TintFragment.class.getName());
+                inVisibleFragment[8] = fragmentManager.findFragmentByTag(DebugFragment.class.getName());
                 isExpand = false;
                 break;
 
@@ -174,6 +178,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                 inVisibleFragment[5] = fragmentManager.findFragmentByTag(CustomEditTextFragment.class.getName());
                 inVisibleFragment[6] = fragmentManager.findFragmentByTag(FlagViewFragment.class.getName());
                 inVisibleFragment[7] = fragmentManager.findFragmentByTag(TintFragment.class.getName());
+                inVisibleFragment[8] = fragmentManager.findFragmentByTag(DebugFragment.class.getName());
                 isExpand = true;
                 break;
 
@@ -187,6 +192,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                 inVisibleFragment[5] = fragmentManager.findFragmentByTag(CustomEditTextFragment.class.getName());
                 inVisibleFragment[6] = fragmentManager.findFragmentByTag(FlagViewFragment.class.getName());
                 inVisibleFragment[7] = fragmentManager.findFragmentByTag(TintFragment.class.getName());
+                inVisibleFragment[8] = fragmentManager.findFragmentByTag(DebugFragment.class.getName());
                 isExpand = false;
                 break;
 
@@ -200,6 +206,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                 inVisibleFragment[5] = fragmentManager.findFragmentByTag(CustomEditTextFragment.class.getName());
                 inVisibleFragment[6] = fragmentManager.findFragmentByTag(FlagViewFragment.class.getName());
                 inVisibleFragment[7] = fragmentManager.findFragmentByTag(TintFragment.class.getName());
+                inVisibleFragment[8] = fragmentManager.findFragmentByTag(DebugFragment.class.getName());
                 isExpand = true;
                 break;
 
@@ -213,6 +220,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                 inVisibleFragment[5] = fragmentManager.findFragmentByTag(ViewPagerFragment.class.getName());
                 inVisibleFragment[6] = fragmentManager.findFragmentByTag(FlagViewFragment.class.getName());
                 inVisibleFragment[7] = fragmentManager.findFragmentByTag(TintFragment.class.getName());
+                inVisibleFragment[8] = fragmentManager.findFragmentByTag(DebugFragment.class.getName());
                 isExpand = true;
                 break;
 
@@ -239,7 +247,22 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                 inVisibleFragment[5] = fragmentManager.findFragmentByTag(ViewPagerFragment.class.getName());
                 inVisibleFragment[6] = fragmentManager.findFragmentByTag(CustomEditTextFragment.class.getName());
                 inVisibleFragment[7] = fragmentManager.findFragmentByTag(FlagViewFragment.class.getName());
+                inVisibleFragment[8] = fragmentManager.findFragmentByTag(DebugFragment.class.getName());
                 isExpand = true;
+                break;
+
+            case R.id.functionTest:
+                visibleFragment = fragmentManager.findFragmentByTag(DebugFragment.class.getName());
+                inVisibleFragment[0] = fragmentManager.findFragmentByTag(HomeFragment.class.getName());
+                inVisibleFragment[1] = fragmentManager.findFragmentByTag(ScreenInformationFragment.class.getName());
+                inVisibleFragment[2] = fragmentManager.findFragmentByTag(ListGridViewFragment.class.getName());
+                inVisibleFragment[3] = fragmentManager.findFragmentByTag(RecyclerViewFragment.class.getName());
+                inVisibleFragment[4] = fragmentManager.findFragmentByTag(NestingTouchFragment.class.getName());
+                inVisibleFragment[5] = fragmentManager.findFragmentByTag(ViewPagerFragment.class.getName());
+                inVisibleFragment[6] = fragmentManager.findFragmentByTag(CustomEditTextFragment.class.getName());
+                inVisibleFragment[7] = fragmentManager.findFragmentByTag(FlagViewFragment.class.getName());
+                inVisibleFragment[8] = fragmentManager.findFragmentByTag(TintFragment.class.getName());
+                isExpand = false;
                 break;
 
             default:
