@@ -95,6 +95,10 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        if(item.getItemId() == R.id.actionBtn_about){
+            loadActivity(TestActivity.class);
+            return true;
+        }
         return super.onOptionsItemSelected(item);
     }
 

@@ -1,5 +1,7 @@
 package com.github.evan.common_utils.ui.activity;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Looper;
 import android.os.Message;
@@ -10,6 +12,7 @@ import android.view.LayoutInflater;
 
 import com.github.evan.common_utils.handler.SoftHandler;
 import com.github.evan.common_utils.handler.SoftHandlerReceiver;
+import com.github.evan.common_utils.ui.fragment.BaseFragment;
 
 import java.util.LinkedList;
 
@@ -58,8 +61,62 @@ public abstract class BaseActivity extends AppCompatActivity implements SoftHand
         return mLayoutInflater;
     }
 
-    public boolean post(Runnable runnable, long delay){
+    public void loadActivity(Class<? extends Activity> activity){
+        loadActivity(activity, null, false, -1);
+    }
+
+    public void loadActivity(Class<? extends Activity> destination, Bundle extras, boolean isForResult, int requestCode){
+        Intent intent = new Intent(this, destination);
+        if(null != extras){
+            intent.putExtras(extras);
+        }
+
+        if(isForResult){
+            startActivityForResult(intent, requestCode);
+        }else{
+            startActivity(intent);
+        }
+    }
+
+    public void loadActivity(String action, Bundle extras, boolean isForResult, int requestCode){
+        Intent intent = new Intent(action);
+        if(null != extras){
+            intent.putExtras(extras);
+        }
+
+        if(isForResult){
+            startActivityForResult(intent, requestCode);
+        }else{
+            startActivity(intent);
+        }
+    }
+
+    public boolean postDelay(Runnable runnable, long delay){
         return mHandler.postDelayed(runnable, delay < 0 ? 0 : delay);
+    }
+
+    protected void sendEmptyMessage(int what){
+        sendMessage(what, -1, -1, null);
+    }
+
+    protected void sendMessage(int what, int arg1, int arg2, Bundle bundle){
+        Message message = Message.obtain();
+        message.what = what;
+        message.arg1 = arg1;
+        message.arg2 = arg2;
+        message.setData(bundle);
+        boolean receiverExists = mHandler.isReceiverExists();
+        if(receiverExists){
+            BaseActivity receiver = mHandler.getReceiver();
+            if(receiver.hashCode() != this.hashCode()){
+                mHandler.clearReceiver();
+                mHandler.setReceiver(this);
+            }
+        }else{
+            mHandler.setReceiver(this);
+        }
+
+        mHandler.sendMessage(message);
     }
 
     public boolean isForegroundActivity(){

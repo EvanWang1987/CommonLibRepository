@@ -1,7 +1,9 @@
 package com.github.evan.common_utils.ui.fragment;
 
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Looper;
 import android.os.Message;
@@ -64,6 +66,32 @@ public abstract class BaseFragment extends android.support.v4.app.Fragment imple
         return mHandler.postDelayed(runnable, delayTime);
     }
 
+    public void loadActivity(Class<? extends Activity> destination, Bundle extras, boolean isForResult, int requestCode){
+        Intent intent = new Intent(getContext(), destination);
+        if(null != extras){
+            intent.putExtras(extras);
+        }
+
+        if(isForResult){
+            startActivityForResult(intent, requestCode);
+        }else{
+            startActivity(intent);
+        }
+    }
+
+    public void loadActivity(String action, Bundle extras, boolean isForResult, int requestCode){
+        Intent intent = new Intent(action);
+        if(null != extras){
+            intent.putExtras(extras);
+        }
+
+        if(isForResult){
+            startActivityForResult(intent, requestCode);
+        }else{
+            startActivity(intent);
+        }
+    }
+
     protected void sendEmptyMessage(int what){
         sendMessage(what, -1, -1, null);
     }
@@ -78,6 +106,7 @@ public abstract class BaseFragment extends android.support.v4.app.Fragment imple
         if(receiverExists){
             BaseFragment receiver = mHandler.getReceiver();
             if(receiver.hashCode() != this.hashCode()){
+                mHandler.clearReceiver();
                 mHandler.setReceiver(this);
             }
         }else{
