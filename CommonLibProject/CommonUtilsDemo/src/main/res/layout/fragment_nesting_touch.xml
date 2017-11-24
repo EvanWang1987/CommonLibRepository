@@ -6,48 +6,45 @@
     android:orientation="vertical">
 
     <android.support.design.widget.TabLayout
-        android:id="@+id/tab_layout_recycler_view_fragment"
+        android:id="@+id/tab_layout_nesting_view_pager"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/colorPrimary"
-        app:tabTextAppearance="@style/TabItemTextAppearance_White"
+        android:background="?attr/colorPrimary"
         app:tabGravity="fill"
-        app:tabMode="fixed">
+        app:tabMode="scrollable"
+        app:tabTextAppearance="@style/TabItemTextAppearance_White">
 
         <android.support.design.widget.TabItem
-            android:id="@+id/radio_btn_list_mode"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/vertical_recycler_item" />
+            android:text="Pager 1" />
 
         <android.support.design.widget.TabItem
-            android:id="@+id/radio_btn_horizontal_list_mode"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/horizontal_recycler_item" />
+            android:text="Pager 2" />
 
         <android.support.design.widget.TabItem
-            android:id="@+id/radio_btn_grid_mode"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/grid_recycler_item" />
-
+            android:text="Pager 3" />
 
         <android.support.design.widget.TabItem
-            android:id="@+id/radio_btn_waterfall"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/waterfall_recycler_item" />
+            android:text="Pager 4" />
+
+        <android.support.design.widget.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Pager 5" />
 
 
     </android.support.design.widget.TabLayout>
 
-
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recycler_view"
+    <com.github.evan.common_utils.ui.view.viewPager.InterceptTouchViewPager
+        android:id="@+id/dispatch_view_pager"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginBottom="10dp"
-        android:layout_marginTop="10dp" />
+        android:layout_height="match_parent" />
 
 </LinearLayout>

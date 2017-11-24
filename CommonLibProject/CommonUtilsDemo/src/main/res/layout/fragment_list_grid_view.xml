@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/colorPrimary"
-        app:tabTextAppearance="@style/TabLayoutTextAppearance_White"
+        app:tabTextAppearance="@style/TabItemTextAppearance_White"
         app:tabGravity="fill"
         app:tabMode="fixed">
 

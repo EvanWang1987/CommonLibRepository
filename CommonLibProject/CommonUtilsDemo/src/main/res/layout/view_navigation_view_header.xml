@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:background="@mipmap/bkg_user_information">
 
-    <com.github.evan.common_utils.ui.view.CircleImageView
+    <com.github.evan.common_utils.ui.view.imageView.CircleImageView
         android:id="@+id/portrait"
         android:layout_width="65dp"
         android:layout_height="65dp"

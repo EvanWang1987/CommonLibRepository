@@ -18,7 +18,7 @@ public class ImagePagerAdapter extends BasePagerAdapter<Integer> {
     }
 
     @Override
-    public BasePagerHolder<Integer> onCreateHolder(Context context, ViewGroup parent) {
+    public BasePagerHolder<Integer> onCreateHolder(Context context, ViewGroup parent, int position) {
         return new ImagePagerHolder(context, parent);
     }
 }

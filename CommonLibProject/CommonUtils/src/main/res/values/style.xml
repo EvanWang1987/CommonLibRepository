@@ -58,12 +58,12 @@
         <item name="android:textColor">@color/Gray</item>
     </style>
 
-    <style name="TabLayoutTextAppearance_White">
+    <style name="TabItemTextAppearance_White">
         <item name="android:textSize">12sp</item>
         <item name="android:textColor">@drawable/selector_text_color_light</item>
     </style>
 
-    <style name="TabLayoutTextAppearance_Black">
+    <style name="TabItemTextAppearance_Black">
         <item name="android:textSize">12sp</item>
         <item name="android:textColor">@drawable/selector_text_color_dark</item>
     </style>

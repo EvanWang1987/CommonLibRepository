@@ -92,9 +92,13 @@
     <string name="search">搜索</string>
     <!-- RecyclerViewFragment相关 -->
 
-    <!-- RecyclerViewFragment相关 -->
+    <!-- ViewPagerFragment相关 -->
     <string name="view_pager">View Pager</string>
-    <!-- RecyclerViewFragment相关 -->
+    <!-- ViewPagerFragment相关 -->
+
+    <!-- ViewPagerFragment相关 -->
+    <string name="nesting_touch">Nesting Touch</string>
+    <!-- ViewPagerFragment相关 -->
 
     <string name="home_page_link">https://github.com/EvanWang1987</string>
 </resources>
