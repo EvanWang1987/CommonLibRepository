@@ -88,22 +88,40 @@ public class TouchEventInterceptor {
             boolean isAchieveScrollOffset = isHorizontalScroll ? offsetX >= mTouchSlop : offsetY >= mTouchSlop;
 
             if (interceptMode == InterceptMode.HORIZONTAL_BY_ITSELF) {
-                //横向
-                if (isHorizontalScroll && isAchieveScrollOffset) {
-                    destination.getParent().requestDisallowInterceptTouchEvent(true);
-                    return true;
-                } else {
+                //外部设置拦截横向
+                if(isHorizontalScroll){
+                    //本次也是横向滑动
+                    if(isAchieveScrollOffset){
+                        //到达最短滑动距离
+                        destination.getParent().requestDisallowInterceptTouchEvent(true);
+                        return true;
+                    }else{
+                        mDownX = -1;
+                        mDownY = -1;
+                        destination.getParent().requestDisallowInterceptTouchEvent(false);
+                        return false;
+                    }
+                }else{
                     mDownX = -1;
                     mDownY = -1;
                     destination.getParent().requestDisallowInterceptTouchEvent(false);
                     return false;
                 }
             } else {
-                //竖向
-                if (!isHorizontalScroll && isAchieveScrollOffset) {
-                    destination.getParent().requestDisallowInterceptTouchEvent(true);
-                    return true;
-                } else {
+                //外部设置拦截竖向
+                if(!isHorizontalScroll){
+                    //本次也是竖向滑动
+                    if(isAchieveScrollOffset){
+                        //到达了最短滑动距离
+                        destination.getParent().requestDisallowInterceptTouchEvent(true);
+                        return true;
+                    }else{
+                        mDownX = -1;
+                        mDownY = -1;
+                        destination.getParent().requestDisallowInterceptTouchEvent(false);
+                        return false;
+                    }
+                }else{
                     mDownX = -1;
                     mDownY = -1;
                     destination.getParent().requestDisallowInterceptTouchEvent(false);
