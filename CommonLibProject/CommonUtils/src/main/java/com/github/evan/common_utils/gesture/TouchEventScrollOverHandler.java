@@ -3,6 +3,8 @@ package com.github.evan.common_utils.gesture;
 import android.view.MotionEvent;
 import android.view.ViewGroup;
 
+import com.github.evan.common_utils.utils.Logger;
+
 /**
  * Created by Evan on 2017/11/25.
  * <p>
@@ -44,6 +46,7 @@ public class TouchEventScrollOverHandler {
             ScrollDirection xDirection = currentX >= mDownX ? ScrollDirection.LEFT_2_RIGHT : ScrollDirection.RIGHT_2_LEFT;
             ScrollDirection yDirection = currentY >= mDownY ? ScrollDirection.TOP_2_BOTTOM : ScrollDirection.BOTTOM_2_TOP;
             boolean isAtScrollOverThreshold = listener.isAtScrollOverThreshold(xDirection, yDirection);
+            Logger.d("isAtScrollOverThreshold: " + isAtScrollOverThreshold);
             if (isAtScrollOverThreshold) {
                 if(mIsHandleScrollOverEvent){
                     destination.getParent().requestDisallowInterceptTouchEvent(true);

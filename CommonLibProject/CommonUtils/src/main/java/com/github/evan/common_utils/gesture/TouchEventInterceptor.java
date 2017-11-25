@@ -9,27 +9,26 @@ import android.view.ViewGroup;
 
 /**
  * Created by Evan on 2017/11/24.
- *
+ * <p>
  * 手势拦截器，用于ViewGroup进行横竖向手势判定，并决定是否进行拦截。
- *
+ * <p>
  * 使用拦截器的ViewGroup需在onInterceptTouchEvent(MotionEvent event)方法中进行如下使用
- *
+ * <p>
  * public boolean onInterceptTouchEvent(MotionEvent event){
- *     return mInterceptor.onInterceptTouchEvent(motionEvent, interceptMode, %Destination ViewGroup%)
+ * return mInterceptor.onInterceptTouchEvent(motionEvent, interceptMode, %Destination ViewGroup%)
  * }
- *
  */
 public class TouchEventInterceptor {
 
     /**
      * 拦截模式
-     *
+     * <p>
      * unknown & use_view_default 都使用destination View的默认处理方式
-     *
+     * <p>
      * all_by_itself 所有手势都拦截
-     *
+     * <p>
      * horizontal_by_itself 只拦截横向手势
-     *
+     * <p>
      * vertical_by_itself 只拦截竖向手势
      */
     public enum InterceptMode {
@@ -80,11 +79,6 @@ public class TouchEventInterceptor {
             return false;
         }
 
-        if (interceptMode == InterceptMode.ALL_BY_ITSELF) {
-            destination.getParent().requestDisallowInterceptTouchEvent(true);
-            return true;
-        }
-
         final int action = event.getAction() & MotionEvent.ACTION_MASK;
         if ((action == MotionEvent.ACTION_DOWN)) {
             mDownX = event.getX();
@@ -99,43 +93,53 @@ public class TouchEventInterceptor {
             boolean isHorizontalScroll = offsetX > offsetY;
             boolean isAchieveScrollOffset = isHorizontalScroll ? offsetX >= mTouchSlop : offsetY >= mTouchSlop;
 
+
             if (interceptMode == InterceptMode.HORIZONTAL_BY_ITSELF) {
                 //外部设置拦截横向
-                if(isHorizontalScroll){
+                if (isHorizontalScroll) {
                     //本次也是横向滑动
-                    if(isAchieveScrollOffset){
+                    if (isAchieveScrollOffset) {
                         //到达最短滑动距离
                         destination.getParent().requestDisallowInterceptTouchEvent(true);
                         return true;
-                    }else{
+                    } else {
                         mDownX = -1;
                         mDownY = -1;
                         destination.getParent().requestDisallowInterceptTouchEvent(false);
                         return false;
                     }
-                }else{
+                } else {
+                    mDownX = -1;
+                    mDownY = -1;
+                    destination.getParent().requestDisallowInterceptTouchEvent(false);
+                    return false;
+                }
+            } else if (interceptMode == InterceptMode.VERTICAL_BY_ITSELF) {
+                //外部设置拦截竖向
+                if (!isHorizontalScroll) {
+                    //本次也是竖向滑动
+                    if (isAchieveScrollOffset) {
+                        //到达了最短滑动距离
+                        destination.getParent().requestDisallowInterceptTouchEvent(true);
+                        return true;
+                    } else {
+                        mDownX = -1;
+                        mDownY = -1;
+                        destination.getParent().requestDisallowInterceptTouchEvent(false);
+                        return false;
+                    }
+                } else {
                     mDownX = -1;
                     mDownY = -1;
                     destination.getParent().requestDisallowInterceptTouchEvent(false);
                     return false;
                 }
             } else {
-                //外部设置拦截竖向
-                if(!isHorizontalScroll){
-                    //本次也是竖向滑动
-                    if(isAchieveScrollOffset){
-                        //到达了最短滑动距离
-                        destination.getParent().requestDisallowInterceptTouchEvent(true);
-                        return true;
-                    }else{
-                        mDownX = -1;
-                        mDownY = -1;
-                        destination.getParent().requestDisallowInterceptTouchEvent(false);
-                        return false;
-                    }
-                }else{
-                    mDownX = -1;
-                    mDownY = -1;
+                //all by itself
+                if (isAchieveScrollOffset) {
+                    destination.getParent().requestDisallowInterceptTouchEvent(true);
+                    return true;
+                } else {
                     destination.getParent().requestDisallowInterceptTouchEvent(false);
                     return false;
                 }

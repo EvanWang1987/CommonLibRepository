@@ -5,17 +5,19 @@ import android.content.res.TypedArray;
 import android.os.Build;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
+import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.widget.ScrollView;
 import com.github.evan.common_utils.R;
 import com.github.evan.common_utils.gesture.TouchEventInterceptor;
 import com.github.evan.common_utils.gesture.TouchEventScrollOverHandler;
+import com.github.evan.common_utils.utils.Logger;
 
 /**
  * Created by Evan on 2017/11/24.
  */
-public class NestingScrollView extends ScrollView implements TouchEventInterceptor.TouchInterceptable, TouchEventScrollOverHandler.IsAtScrollOverThresholdListener, ViewTreeObserver.OnGlobalLayoutListener {
+public class NestingScrollView extends ScrollView implements TouchEventInterceptor.TouchInterceptable, TouchEventScrollOverHandler.IsAtScrollOverThresholdListener {
     private TouchEventInterceptor.InterceptMode mInterceptMode = TouchEventInterceptor.InterceptMode.VERTICAL_BY_ITSELF;
     private TouchEventInterceptor mTouchInterceptor;
     private TouchEventScrollOverHandler mScrollOverHandler = new TouchEventScrollOverHandler(false);
@@ -41,21 +43,18 @@ public class NestingScrollView extends ScrollView implements TouchEventIntercept
         if (null != attrs) {
             mInterceptMode = convertInterceptModeFromAttrs(attrs);
         }
-        getViewTreeObserver().addOnGlobalLayoutListener(this);
-    }
-
-    @Override
-    public void onGlobalLayout() {
-        mViewHeight = getHeight();
-        ViewGroup parent = (ViewGroup) getParent();
-        mParentHeight = parent.getHeight();
-
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-            getViewTreeObserver().removeOnGlobalLayoutListener(this);
-        } else {
-            getViewTreeObserver().removeGlobalOnLayoutListener(this);
-        }
+        getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+            @Override
+            public void onGlobalLayout() {
+                View firstChild = getChildAt(0);
+                mViewHeight = firstChild.getHeight();
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+                    getViewTreeObserver().removeOnGlobalLayoutListener(this);
+                } else {
+                    getViewTreeObserver().removeGlobalOnLayoutListener(this);
+                }
+            }
+        });
     }
 
     @Override
@@ -89,9 +88,14 @@ public class NestingScrollView extends ScrollView implements TouchEventIntercept
 
     @Override
     public boolean isAtScrollOverThreshold(TouchEventScrollOverHandler.ScrollDirection xDirection, TouchEventScrollOverHandler.ScrollDirection yDirection) {
-        if (mInterceptMode == TouchEventInterceptor.InterceptMode.ALL_BY_ITSELF || mInterceptMode == TouchEventInterceptor.InterceptMode.VERTICAL_BY_ITSELF) {
+        if (mInterceptMode == TouchEventInterceptor.InterceptMode.VERTICAL_BY_ITSELF) {
+            ViewGroup parent = (ViewGroup) getParent();
+            View child = getChildAt(0);
             int scrollY = getScrollY();
-            int largestScrollY = mParentHeight - mViewHeight;
+            int parentHeight = parent.getHeight();
+            int childHeight = child.getHeight();
+            boolean isChildLargeThanParent = childHeight > parentHeight;
+            int largestScrollY = isChildLargeThanParent ? Math.abs(parentHeight - childHeight) : 0;
             boolean isAtScrollOverThreshold = yDirection == TouchEventScrollOverHandler.ScrollDirection.TOP_2_BOTTOM ? scrollY <= 0 : scrollY >= largestScrollY;
             return isAtScrollOverThreshold;
         }

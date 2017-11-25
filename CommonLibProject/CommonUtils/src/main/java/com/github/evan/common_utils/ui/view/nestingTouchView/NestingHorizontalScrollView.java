@@ -5,6 +5,7 @@ import android.content.res.TypedArray;
 import android.os.Build;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
+import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.widget.HorizontalScrollView;
@@ -84,9 +85,15 @@ public class NestingHorizontalScrollView extends HorizontalScrollView implements
 
     @Override
     public boolean isAtScrollOverThreshold(TouchEventScrollOverHandler.ScrollDirection xDirection, TouchEventScrollOverHandler.ScrollDirection yDirection) {
-        if(mInterceptMode == TouchEventInterceptor.InterceptMode.ALL_BY_ITSELF || mInterceptMode == TouchEventInterceptor.InterceptMode.HORIZONTAL_BY_ITSELF){
+        if(mInterceptMode == TouchEventInterceptor.InterceptMode.HORIZONTAL_BY_ITSELF){
             int scrollX = getScrollX();
-            boolean isAtScrollOverThreshold = xDirection == TouchEventScrollOverHandler.ScrollDirection.LEFT_2_RIGHT ? scrollX <= 0 : scrollX >= mParentWidth - mViewWidth;
+            ViewGroup parent = (ViewGroup) getParent();
+            View child = getChildAt(0);
+            int parentWidth = parent.getWidth();
+            int childWidth = child.getWidth();
+            boolean isChildLargeThanParent = childWidth > parentWidth;
+            int maxScrollX = isChildLargeThanParent ? Math.abs(childWidth - parentWidth) : 0;
+            boolean isAtScrollOverThreshold = xDirection == TouchEventScrollOverHandler.ScrollDirection.LEFT_2_RIGHT ? scrollX <= 0 : scrollX >= maxScrollX;
             return isAtScrollOverThreshold;
         }
         return false;
