@@ -77,7 +77,6 @@ public class TouchEventInterceptor {
         if ((action == MotionEvent.ACTION_DOWN)) {
             mDownX = event.getX();
             mDownY = event.getY();
-            destination.getParent().requestDisallowInterceptTouchEvent(true);
             return false;
         } else if (action == MotionEvent.ACTION_MOVE) {
             float currentX = event.getX();
