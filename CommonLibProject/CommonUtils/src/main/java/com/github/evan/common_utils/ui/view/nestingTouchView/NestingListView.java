@@ -4,18 +4,21 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
+import android.widget.ListAdapter;
 import android.widget.ListView;
 
 import com.github.evan.common_utils.R;
 import com.github.evan.common_utils.gesture.TouchEventInterceptor;
+import com.github.evan.common_utils.gesture.TouchEventScrollOverHandler;
 
 /**
  * Created by Evan on 2017/11/24.
  */
 
-public class NestingListView extends ListView implements TouchEventInterceptor.TouchInterceptable {
+public class NestingListView extends ListView implements TouchEventInterceptor.TouchInterceptable, TouchEventScrollOverHandler.IsAtScrollOverThresholdListener {
     private TouchEventInterceptor mInterceptor;
     private TouchEventInterceptor.InterceptMode mInterceptMode = TouchEventInterceptor.InterceptMode.VERTICAL_BY_ITSELF;
+    private TouchEventScrollOverHandler mScrollOverHandler = new TouchEventScrollOverHandler(false);
 
     public NestingListView(Context context) {
         super(context);
@@ -46,6 +49,11 @@ public class NestingListView extends ListView implements TouchEventInterceptor.T
     }
 
     @Override
+    public final boolean onTouchEvent(MotionEvent ev) {
+        return mScrollOverHandler.onTouchEvent(ev, this, this) || super.onTouchEvent(ev);
+    }
+
+    @Override
     public void setInterceptMode(TouchEventInterceptor.InterceptMode interceptMode) {
         mInterceptMode = interceptMode;
     }
@@ -53,5 +61,20 @@ public class NestingListView extends ListView implements TouchEventInterceptor.T
     @Override
     public TouchEventInterceptor.InterceptMode getInterceptMode() {
         return mInterceptMode;
+    }
+
+    @Override
+    public boolean isAtScrollOverThreshold(TouchEventScrollOverHandler.ScrollDirection xDirection, TouchEventScrollOverHandler.ScrollDirection yDirection) {
+        ListAdapter adapter = getAdapter();
+        int firstVisiblePosition = getFirstVisiblePosition();
+        int lastVisiblePosition = getLastVisiblePosition();
+        if(mInterceptMode == TouchEventInterceptor.InterceptMode.ALL_BY_ITSELF || mInterceptMode == TouchEventInterceptor.InterceptMode.VERTICAL_BY_ITSELF){
+            if(null == adapter){
+                return true;
+            }else{
+                return yDirection == TouchEventScrollOverHandler.ScrollDirection.TOP_2_BOTTOM ? firstVisiblePosition == 0 : lastVisiblePosition == adapter.getCount() - 1;
+            }
+        }
+        return false;
     }
 }

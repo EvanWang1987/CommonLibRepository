@@ -9,6 +9,15 @@ import android.view.ViewGroup;
 
 /**
  * Created by Evan on 2017/11/24.
+ *
+ * 手势拦截器，用于ViewGroup进行横竖向手势判定，并决定是否进行拦截。
+ *
+ * 使用拦截器的ViewGroup需在onInterceptTouchEvent(MotionEvent event)方法中进行如下使用
+ *
+ * public boolean onInterceptTouchEvent(MotionEvent event){
+ *     return mInterceptor.onInterceptTouchEvent(motionEvent, interceptMode, %Destination ViewGroup%)
+ * }
+ *
  */
 public class TouchEventInterceptor {
 

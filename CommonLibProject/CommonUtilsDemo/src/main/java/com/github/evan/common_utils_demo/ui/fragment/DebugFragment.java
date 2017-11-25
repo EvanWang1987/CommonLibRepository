@@ -17,7 +17,7 @@ public class DebugFragment extends BaseFragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_test, null);
+        return inflater.inflate(R.layout.fragment_debug, null);
     }
 
     @Override
