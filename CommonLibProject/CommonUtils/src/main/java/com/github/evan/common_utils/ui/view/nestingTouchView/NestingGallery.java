@@ -38,8 +38,8 @@ public class NestingGallery extends Gallery implements TouchEventInterceptor.Tou
 
     @Override
     public TouchEventInterceptor.InterceptMode convertInterceptModeFromAttrs(AttributeSet attrs) {
-        TypedArray typedArray = getContext().obtainStyledAttributes(attrs, R.styleable.intercept_mode);
-        int anInt = typedArray.getInt(R.styleable.intercept_mode_interceptMode, TouchEventInterceptor.InterceptMode.UNKNOWN.value);
+        TypedArray typedArray = getContext().obtainStyledAttributes(attrs, R.styleable.NestingGallery);
+        int anInt = typedArray.getInt(R.styleable.NestingGallery_gallery_intercept_mode, TouchEventInterceptor.InterceptMode.UNKNOWN.value);
         TouchEventInterceptor.InterceptMode interceptMode = TouchEventInterceptor.InterceptMode.valueOf(anInt);
         typedArray.recycle();
         return interceptMode;

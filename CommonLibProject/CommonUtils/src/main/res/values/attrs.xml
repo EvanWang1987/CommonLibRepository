@@ -1,8 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <declare-styleable name="intercept_mode">
-        <attr name="interceptMode" format="enum">
+    <declare-styleable name="NestingGallery">
+        <attr name="gallery_intercept_mode" format="enum">
+            <enum name="use_view_default" value="0"/>
+            <enum name="all_by_itself" value="1"/>
+            <enum name="horizontal_by_itself" value="2"/>
+            <enum name="vertical_by_itself" value="3"/>
+        </attr>
+    </declare-styleable>
+
+    <declare-styleable name="NestingScrollView">
+        <attr name="scroll_view_intercept_mode" format="enum">
+            <enum name="use_view_default" value="0"/>
+            <enum name="all_by_itself" value="1"/>
+            <enum name="horizontal_by_itself" value="2"/>
+            <enum name="vertical_by_itself" value="3"/>
+        </attr>
+    </declare-styleable>
+
+    <declare-styleable name="NestingHorizontalScrollView">
+        <attr name="horizontal_scroll_view_intercept_mode" format="enum">
+            <enum name="use_view_default" value="0"/>
+            <enum name="all_by_itself" value="1"/>
+            <enum name="horizontal_by_itself" value="2"/>
+            <enum name="vertical_by_itself" value="3"/>
+        </attr>
+    </declare-styleable>
+
+    <declare-styleable name="NestingListView">
+        <attr name="list__view_intercept_mode" format="enum">
+            <enum name="use_view_default" value="0"/>
+            <enum name="all_by_itself" value="1"/>
+            <enum name="horizontal_by_itself" value="2"/>
+            <enum name="vertical_by_itself" value="3"/>
+        </attr>
+    </declare-styleable>
+
+    <declare-styleable name="NestingGridView">
+        <attr name="grid_view_intercept_mode" format="enum">
+            <enum name="use_view_default" value="0"/>
+            <enum name="all_by_itself" value="1"/>
+            <enum name="horizontal_by_itself" value="2"/>
+            <enum name="vertical_by_itself" value="3"/>
+        </attr>
+    </declare-styleable>
+
+    <declare-styleable name="NestingViewPager">
+        <attr name="view_pager_intercept_mode" format="enum">
             <enum name="use_view_default" value="0"/>
             <enum name="all_by_itself" value="1"/>
             <enum name="horizontal_by_itself" value="2"/>

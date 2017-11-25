@@ -36,8 +36,8 @@ public class NestingHorizontalScrollView extends HorizontalScrollView implements
 
     @Override
     public TouchEventInterceptor.InterceptMode convertInterceptModeFromAttrs(AttributeSet attrs) {
-        TypedArray typedArray = getContext().obtainStyledAttributes(attrs, R.styleable.intercept_mode);
-        int anInt = typedArray.getInt(R.styleable.intercept_mode_interceptMode, TouchEventInterceptor.InterceptMode.UNKNOWN.value);
+        TypedArray typedArray = getContext().obtainStyledAttributes(attrs, R.styleable.NestingHorizontalScrollView);
+        int anInt = typedArray.getInt(R.styleable.NestingHorizontalScrollView_horizontal_scroll_view_intercept_mode, TouchEventInterceptor.InterceptMode.UNKNOWN.value);
         TouchEventInterceptor.InterceptMode interceptMode = TouchEventInterceptor.InterceptMode.valueOf(anInt);
         typedArray.recycle();
         return interceptMode;
