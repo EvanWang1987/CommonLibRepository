@@ -1,6 +1,7 @@
 package com.github.evan.common_utils.gesture;
 
 import android.content.Context;
+import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.ViewConfiguration;
 import android.view.ViewGroup;
@@ -48,6 +49,8 @@ public class TouchEventInterceptor {
     }
 
     public interface TouchInterceptable {
+
+        InterceptMode convertInterceptModeFromAttrs(AttributeSet attrs);
 
         void setInterceptMode(TouchEventInterceptor.InterceptMode interceptMode);
 

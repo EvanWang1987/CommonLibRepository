@@ -1,10 +1,12 @@
 package com.github.evan.common_utils.ui.view.nestingTouchView;
 
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 
+import com.github.evan.common_utils.R;
 import com.github.evan.common_utils.gesture.TouchEventInterceptor;
 
 /**
@@ -23,11 +25,21 @@ public class NestingViewPager extends ViewPager implements TouchEventInterceptor
     public NestingViewPager(Context context, AttributeSet attrs) {
         super(context, attrs);
         mInterceptor = new TouchEventInterceptor(context);
+        mInterceptMode = convertInterceptModeFromAttrs(attrs);
     }
 
     @Override
-    public boolean onInterceptTouchEvent(MotionEvent ev) {
+    public final boolean onInterceptTouchEvent(MotionEvent ev) {
         return mInterceptor.onInterceptTouchEvent(ev, mInterceptMode, this) || super.onInterceptTouchEvent(ev);
+    }
+
+    @Override
+    public TouchEventInterceptor.InterceptMode convertInterceptModeFromAttrs(AttributeSet attrs) {
+        TypedArray typedArray = getContext().obtainStyledAttributes(attrs, R.styleable.intercept_mode);
+        int anInt = typedArray.getInt(R.styleable.intercept_mode_interceptMode, TouchEventInterceptor.InterceptMode.UNKNOWN.value);
+        TouchEventInterceptor.InterceptMode interceptMode = TouchEventInterceptor.InterceptMode.valueOf(anInt);
+        typedArray.recycle();
+        return interceptMode;
     }
 
     @Override

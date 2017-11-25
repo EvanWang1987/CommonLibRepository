@@ -1,10 +1,12 @@
 package com.github.evan.common_utils.ui.view.nestingTouchView;
 
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.widget.ListView;
 
+import com.github.evan.common_utils.R;
 import com.github.evan.common_utils.gesture.TouchEventInterceptor;
 
 /**
@@ -21,14 +23,25 @@ public class NestingListView extends ListView implements TouchEventInterceptor.T
 
     public NestingListView(Context context, AttributeSet attrs) {
         super(context, attrs);
+        mInterceptMode = convertInterceptModeFromAttrs(attrs);
     }
 
     public NestingListView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
+        mInterceptMode = convertInterceptModeFromAttrs(attrs);
     }
 
     @Override
-    public boolean onInterceptTouchEvent(MotionEvent ev) {
+    public TouchEventInterceptor.InterceptMode convertInterceptModeFromAttrs(AttributeSet attrs) {
+        TypedArray typedArray = getContext().obtainStyledAttributes(attrs, R.styleable.intercept_mode);
+        int anInt = typedArray.getInt(R.styleable.intercept_mode_interceptMode, TouchEventInterceptor.InterceptMode.UNKNOWN.value);
+        TouchEventInterceptor.InterceptMode interceptMode = TouchEventInterceptor.InterceptMode.valueOf(anInt);
+        typedArray.recycle();
+        return interceptMode;
+    }
+
+    @Override
+    public final boolean onInterceptTouchEvent(MotionEvent ev) {
         return mInterceptor.onInterceptTouchEvent(ev, mInterceptMode, this) || super.onInterceptTouchEvent(ev);
     }
 
