@@ -13,6 +13,7 @@ import android.widget.HorizontalScrollView;
 import com.github.evan.common_utils.R;
 import com.github.evan.common_utils.gesture.TouchEventInterceptor;
 import com.github.evan.common_utils.gesture.TouchEventScrollOverHandler;
+import com.github.evan.common_utils.utils.Logger;
 
 /**
  * Created by Evan on 2017/11/24.
@@ -57,7 +58,7 @@ public class NestingHorizontalScrollView extends HorizontalScrollView implements
     @Override
     public TouchEventInterceptor.InterceptMode convertInterceptModeFromAttrs(AttributeSet attrs) {
         TypedArray typedArray = getContext().obtainStyledAttributes(attrs, R.styleable.NestingHorizontalScrollView);
-        int anInt = typedArray.getInt(R.styleable.NestingHorizontalScrollView_horizontal_scroll_view_intercept_mode, TouchEventInterceptor.InterceptMode.UNKNOWN.value);
+        int anInt = typedArray.getInt(R.styleable.NestingHorizontalScrollView_horizontal_scroll_view_intercept_mode, TouchEventInterceptor.InterceptMode.HORIZONTAL_BY_ITSELF.value);
         TouchEventInterceptor.InterceptMode interceptMode = TouchEventInterceptor.InterceptMode.valueOf(anInt);
         typedArray.recycle();
         return interceptMode;
@@ -84,7 +85,7 @@ public class NestingHorizontalScrollView extends HorizontalScrollView implements
     }
 
     @Override
-    public boolean isAtScrollOverThreshold(TouchEventScrollOverHandler.ScrollDirection xDirection, TouchEventScrollOverHandler.ScrollDirection yDirection) {
+    public boolean isAtScrollOverThreshold(TouchEventScrollOverHandler.ScrollDirection xDirection, TouchEventScrollOverHandler.ScrollDirection yDirection, boolean isHorizontalScroll) {
         if(mInterceptMode == TouchEventInterceptor.InterceptMode.HORIZONTAL_BY_ITSELF){
             int scrollX = getScrollX();
             ViewGroup parent = (ViewGroup) getParent();
@@ -94,7 +95,10 @@ public class NestingHorizontalScrollView extends HorizontalScrollView implements
             boolean isChildLargeThanParent = childWidth > parentWidth;
             int maxScrollX = isChildLargeThanParent ? Math.abs(childWidth - parentWidth) : 0;
             boolean isAtScrollOverThreshold = xDirection == TouchEventScrollOverHandler.ScrollDirection.LEFT_2_RIGHT ? scrollX <= 0 : scrollX >= maxScrollX;
-            return isAtScrollOverThreshold;
+            Logger.d("NestingHorizontalScrollView");
+            Logger.d("isHorizontalScroll: " + isHorizontalScroll);
+            Logger.d("isAtScrollOverThreshold: " + isAtScrollOverThreshold);
+            return isHorizontalScroll && isAtScrollOverThreshold;
         }
         return false;
     }

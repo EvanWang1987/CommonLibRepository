@@ -63,7 +63,7 @@ public class NestingGridView extends GridView implements TouchEventInterceptor.T
     }
 
     @Override
-    public boolean isAtScrollOverThreshold(TouchEventScrollOverHandler.ScrollDirection xDirection, TouchEventScrollOverHandler.ScrollDirection yDirection) {
+    public boolean isAtScrollOverThreshold(TouchEventScrollOverHandler.ScrollDirection xDirection, TouchEventScrollOverHandler.ScrollDirection yDirection, boolean isHorizontalScroll) {
         if(mInterceptMode == TouchEventInterceptor.InterceptMode.ALL_BY_ITSELF || mInterceptMode == TouchEventInterceptor.InterceptMode.VERTICAL_BY_ITSELF){
             ListAdapter adapter = getAdapter();
             int firstVisiblePosition = getFirstVisiblePosition();

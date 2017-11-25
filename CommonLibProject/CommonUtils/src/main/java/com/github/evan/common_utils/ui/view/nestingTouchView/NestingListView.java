@@ -64,7 +64,7 @@ public class NestingListView extends ListView implements TouchEventInterceptor.T
     }
 
     @Override
-    public boolean isAtScrollOverThreshold(TouchEventScrollOverHandler.ScrollDirection xDirection, TouchEventScrollOverHandler.ScrollDirection yDirection) {
+    public boolean isAtScrollOverThreshold(TouchEventScrollOverHandler.ScrollDirection xDirection, TouchEventScrollOverHandler.ScrollDirection yDirection, boolean isHorizontalScroll) {
         ListAdapter adapter = getAdapter();
         int firstVisiblePosition = getFirstVisiblePosition();
         int lastVisiblePosition = getLastVisiblePosition();

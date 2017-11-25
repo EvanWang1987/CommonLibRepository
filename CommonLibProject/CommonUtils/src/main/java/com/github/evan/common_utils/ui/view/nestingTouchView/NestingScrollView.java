@@ -21,7 +21,6 @@ public class NestingScrollView extends ScrollView implements TouchEventIntercept
     private TouchEventInterceptor.InterceptMode mInterceptMode = TouchEventInterceptor.InterceptMode.VERTICAL_BY_ITSELF;
     private TouchEventInterceptor mTouchInterceptor;
     private TouchEventScrollOverHandler mScrollOverHandler = new TouchEventScrollOverHandler(false);
-    private int mViewHeight, mParentHeight;
 
     public NestingScrollView(Context context) {
         super(context);
@@ -43,18 +42,6 @@ public class NestingScrollView extends ScrollView implements TouchEventIntercept
         if (null != attrs) {
             mInterceptMode = convertInterceptModeFromAttrs(attrs);
         }
-        getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
-            @Override
-            public void onGlobalLayout() {
-                View firstChild = getChildAt(0);
-                mViewHeight = firstChild.getHeight();
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-                    getViewTreeObserver().removeOnGlobalLayoutListener(this);
-                } else {
-                    getViewTreeObserver().removeGlobalOnLayoutListener(this);
-                }
-            }
-        });
     }
 
     @Override
@@ -87,7 +74,7 @@ public class NestingScrollView extends ScrollView implements TouchEventIntercept
     }
 
     @Override
-    public boolean isAtScrollOverThreshold(TouchEventScrollOverHandler.ScrollDirection xDirection, TouchEventScrollOverHandler.ScrollDirection yDirection) {
+    public boolean isAtScrollOverThreshold(TouchEventScrollOverHandler.ScrollDirection xDirection, TouchEventScrollOverHandler.ScrollDirection yDirection, boolean isHorizontalScroll) {
         if (mInterceptMode == TouchEventInterceptor.InterceptMode.VERTICAL_BY_ITSELF) {
             ViewGroup parent = (ViewGroup) getParent();
             View child = getChildAt(0);
@@ -97,6 +84,9 @@ public class NestingScrollView extends ScrollView implements TouchEventIntercept
             boolean isChildLargeThanParent = childHeight > parentHeight;
             int largestScrollY = isChildLargeThanParent ? Math.abs(parentHeight - childHeight) : 0;
             boolean isAtScrollOverThreshold = yDirection == TouchEventScrollOverHandler.ScrollDirection.TOP_2_BOTTOM ? scrollY <= 0 : scrollY >= largestScrollY;
+            Logger.d("NestingScrollView");
+            Logger.d("isHorizontalScroll: " + isHorizontalScroll);
+            Logger.d("isAtScrollOverThreshold: " + isAtScrollOverThreshold);
             return isAtScrollOverThreshold;
         }
         return false;

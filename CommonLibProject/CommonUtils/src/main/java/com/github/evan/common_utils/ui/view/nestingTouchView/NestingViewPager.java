@@ -62,7 +62,7 @@ public class NestingViewPager extends ViewPager implements TouchEventInterceptor
 
 
     @Override
-    public boolean isAtScrollOverThreshold(TouchEventScrollOverHandler.ScrollDirection xDirection, TouchEventScrollOverHandler.ScrollDirection yDirection) {
+    public boolean isAtScrollOverThreshold(TouchEventScrollOverHandler.ScrollDirection xDirection, TouchEventScrollOverHandler.ScrollDirection yDirection, boolean isHorizontalScroll) {
         PagerAdapter adapter = getAdapter();
         int currentItem = getCurrentItem();
         if (mInterceptMode == TouchEventInterceptor.InterceptMode.ALL_BY_ITSELF || mInterceptMode == TouchEventInterceptor.InterceptMode.HORIZONTAL_BY_ITSELF) {

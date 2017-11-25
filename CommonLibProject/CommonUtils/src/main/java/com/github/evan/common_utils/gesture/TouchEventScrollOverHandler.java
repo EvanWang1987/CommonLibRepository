@@ -13,12 +13,12 @@ import com.github.evan.common_utils.utils.Logger;
 public class TouchEventScrollOverHandler {
 
     public enum ScrollDirection {
-        UN_KNOWN, LEFT_2_RIGHT, RIGHT_2_LEFT, TOP_2_BOTTOM, BOTTOM_2_TOP;
+        UN_KNOWN, LEFT_2_RIGHT, RIGHT_2_LEFT, TOP_2_BOTTOM, BOTTOM_2_TOP
     }
 
     public interface IsAtScrollOverThresholdListener {
 
-        boolean isAtScrollOverThreshold(ScrollDirection xDirection, ScrollDirection yDirection);
+        boolean isAtScrollOverThreshold(ScrollDirection xDirection, ScrollDirection yDirection, boolean isHorizontalScroll);
     }
 
     /**
@@ -27,11 +27,11 @@ public class TouchEventScrollOverHandler {
      * true --> 当前ViewGroup继续处理
      * false --> 交给父ViewGroup处理
      */
-    private boolean mIsHandleScrollOverEvent = false;
+    private boolean mIsHandleScrollOverEventByMyself = false;
     private float mDownX, mDownY;
 
-    public TouchEventScrollOverHandler(boolean isHandleScrollOverEvent) {
-        this.mIsHandleScrollOverEvent = isHandleScrollOverEvent;
+    public TouchEventScrollOverHandler(boolean isHandleScrollOverEventByMySelf) {
+        this.mIsHandleScrollOverEventByMyself = isHandleScrollOverEventByMySelf;
     }
 
     public boolean onTouchEvent(MotionEvent event, ViewGroup destination, IsAtScrollOverThresholdListener listener) {
@@ -43,12 +43,16 @@ public class TouchEventScrollOverHandler {
         } else if (action == MotionEvent.ACTION_MOVE) {
             float currentX = event.getX();
             float currentY = event.getY();
+            float offsetX = Math.abs(currentX - mDownX);
+            float offsetY = Math.abs(currentY - mDownY);
+            boolean isHorizontalScroll = offsetX >= offsetY;
+
+
             ScrollDirection xDirection = currentX >= mDownX ? ScrollDirection.LEFT_2_RIGHT : ScrollDirection.RIGHT_2_LEFT;
             ScrollDirection yDirection = currentY >= mDownY ? ScrollDirection.TOP_2_BOTTOM : ScrollDirection.BOTTOM_2_TOP;
-            boolean isAtScrollOverThreshold = listener.isAtScrollOverThreshold(xDirection, yDirection);
-            Logger.d("isAtScrollOverThreshold: " + isAtScrollOverThreshold);
+            boolean isAtScrollOverThreshold = listener.isAtScrollOverThreshold(xDirection, yDirection, isHorizontalScroll);
             if (isAtScrollOverThreshold) {
-                if(mIsHandleScrollOverEvent){
+                if(mIsHandleScrollOverEventByMyself){
                     destination.getParent().requestDisallowInterceptTouchEvent(true);
                 }else{
                     destination.getParent().requestDisallowInterceptTouchEvent(false);

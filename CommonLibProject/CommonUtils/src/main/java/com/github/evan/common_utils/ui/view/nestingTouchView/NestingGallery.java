@@ -65,7 +65,7 @@ public class NestingGallery extends Gallery implements TouchEventInterceptor.Tou
     }
 
     @Override
-    public boolean isAtScrollOverThreshold(TouchEventScrollOverHandler.ScrollDirection xDirection, TouchEventScrollOverHandler.ScrollDirection yDirection) {
+    public boolean isAtScrollOverThreshold(TouchEventScrollOverHandler.ScrollDirection xDirection, TouchEventScrollOverHandler.ScrollDirection yDirection, boolean isHorizontalScroll) {
         SpinnerAdapter adapter = this.getAdapter();
         int currentItem = getSelectedItemPosition();
         if (mInterceptMode == TouchEventInterceptor.InterceptMode.ALL_BY_ITSELF || mInterceptMode == TouchEventInterceptor.InterceptMode.HORIZONTAL_BY_ITSELF) {
