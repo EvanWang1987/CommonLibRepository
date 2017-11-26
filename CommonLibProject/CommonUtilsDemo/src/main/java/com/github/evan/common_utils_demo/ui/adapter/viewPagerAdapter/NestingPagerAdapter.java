@@ -15,6 +15,11 @@ import com.github.evan.common_utils_demo.ui.holder.viewPagerHolder.NestingPagerH
 
 public class NestingPagerAdapter extends BaseTitlePagerAdapter<PagerTitleUsableInteger> {
 
+    @Override
+    public BasePagerHolder<PagerTitleUsableInteger> onCreateTitleUsableHolder(Context context, ViewGroup parent, int position) {
+        return new NestingPagerHolder(context, parent);
+    }
+
     public NestingPagerAdapter(Context context) {
         super(context);
     }
@@ -23,8 +28,4 @@ public class NestingPagerAdapter extends BaseTitlePagerAdapter<PagerTitleUsableI
         super(context, isCacheAllItemView);
     }
 
-    @Override
-    public BasePagerHolder<PagerTitleUsableInteger> onCreateHolder(Context context, ViewGroup parent, int position) {
-        return new NestingPagerHolder(context, parent);
-    }
 }
