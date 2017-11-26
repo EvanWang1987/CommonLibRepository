@@ -72,7 +72,7 @@ public class NestingHorizontalScrollView extends HorizontalScrollView implements
     @Override
     public InterceptMode pickupInterceptMode(AttributeSet attr, int[] declareStyleable, int style) {
         TypedArray typedArray = getContext().obtainStyledAttributes(attr, declareStyleable);
-        int anInt = typedArray.getInt(R.styleable.NestingHorizontalScrollView_nesting_horizontal_scroll_view_touch_intercept_mode, InterceptMode.HORIZONTAL_BUT_THRESHOLD.value);
+        int anInt = typedArray.getInt(R.styleable.NestingHorizontalScrollView_nesting_horizontal_scroll_view_touch_intercept_mode, InterceptMode.HORIZONTAL.value);
         InterceptMode interceptMode = InterceptMode.valueOf(anInt);
         typedArray.recycle();
         return interceptMode;
