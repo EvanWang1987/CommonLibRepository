@@ -2,94 +2,92 @@ package com.github.evan.common_utils.ui.view.nestingTouchView;
 
 import android.content.Context;
 import android.content.res.TypedArray;
-import android.os.Build;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
-import android.view.View;
-import android.view.ViewGroup;
-import android.view.ViewTreeObserver;
 import android.widget.ScrollView;
+
 import com.github.evan.common_utils.R;
-import com.github.evan.common_utils.gesture.TouchEventInterceptor;
-import com.github.evan.common_utils.gesture.TouchEventScrollOverHandler;
-import com.github.evan.common_utils.utils.Logger;
+import com.github.evan.common_utils.gesture.interceptor.InterceptMode;
+import com.github.evan.common_utils.gesture.interceptor.ThresholdSwitchable;
+import com.github.evan.common_utils.gesture.interceptor.TouchEventDirection;
+import com.github.evan.common_utils.gesture.interceptor.TouchEventInterceptor;
 
 /**
- * Created by Evan on 2017/11/24.
+ * Created by Evan on 2017/11/26.
  */
-public class NestingScrollView extends ScrollView implements TouchEventInterceptor.TouchInterceptable, TouchEventScrollOverHandler.IsAtScrollOverThresholdListener {
-    private TouchEventInterceptor.InterceptMode mInterceptMode = TouchEventInterceptor.InterceptMode.VERTICAL_BY_ITSELF;
-    private TouchEventInterceptor mTouchInterceptor;
-    private TouchEventScrollOverHandler mScrollOverHandler = new TouchEventScrollOverHandler(false);
+public class NestingScrollView extends ScrollView implements Nestable, ThresholdSwitchable {
+    private InterceptMode mInterceptMode = InterceptMode.VERTICAL;
+    private TouchEventInterceptor mInterceptor;
+
 
     public NestingScrollView(Context context) {
         super(context);
-        init(context, null, 0);
+        init(context, null, R.styleable.NestingScrollView, 0);
     }
 
     public NestingScrollView(Context context, AttributeSet attrs) {
         super(context, attrs);
-        init(context, attrs, 0);
+        init(context, null, R.styleable.NestingScrollView, 0);
     }
 
     public NestingScrollView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        init(context, attrs, 0);
+        init(context, attrs, R.styleable.NestingViewPager, defStyleAttr);
     }
 
-    private void init(Context context, AttributeSet attrs, int defStyleAttr) {
-        mTouchInterceptor = new TouchEventInterceptor(context);
-        if (null != attrs) {
-            mInterceptMode = convertInterceptModeFromAttrs(attrs);
+    private void init(Context context, AttributeSet attrs, int[] declareStyleable, int style){
+        mInterceptor = new TouchEventInterceptor(context);
+        if(null != attrs){
+            mInterceptMode = pickupInterceptMode(attrs, declareStyleable, style);
         }
     }
 
     @Override
-    public final boolean onInterceptTouchEvent(MotionEvent ev) {
-        return mTouchInterceptor.onInterceptTouchEvent(ev, mInterceptMode, this) || super.onInterceptTouchEvent(ev);
+    public boolean onInterceptTouchEvent(MotionEvent event) {
+        int actionMasked = event.getActionMasked();
+        if(actionMasked == MotionEvent.ACTION_DOWN){
+            super.onInterceptTouchEvent(event);
+        }else if(actionMasked == MotionEvent.ACTION_UP || actionMasked == MotionEvent.ACTION_CANCEL){
+            super.onInterceptTouchEvent(event);
+        }
+        return mInterceptor.interceptTouchEvent(event, mInterceptMode, this, this);
     }
 
     @Override
-    public final boolean onTouchEvent(MotionEvent ev) {
-        return mScrollOverHandler.onTouchEvent(ev, this, this) || super.onTouchEvent(ev);
+    public boolean isArriveTouchEventThreshold(InterceptMode interceptMode, TouchEventDirection xDirection, TouchEventDirection yDirection) {
+        if(interceptMode == InterceptMode.ALL_BY_MYSELF_BUT_THRESHOLD || interceptMode == InterceptMode.HORIZONTAL_BUT_THRESHOLD || interceptMode == InterceptMode.VERTICAL_BUT_THRESHOLD){
+            int scrollY = getScrollY();
+            int thisHeight = getHeight();
+            int childHeight = getChildAt(0).getHeight();
+            boolean isChildLargeThanThis = childHeight >= thisHeight;
+            int maxScrollY = childHeight - thisHeight;
+
+            boolean isArrivedTopThreshold = scrollY <= 0;
+            boolean isArrivedBottomThreshold = isChildLargeThanThis ? scrollY >= maxScrollY : isArrivedTopThreshold;
+            return yDirection == TouchEventDirection.TOP_TO_BOTTOM ? isArrivedTopThreshold : isArrivedBottomThreshold;
+        }
+        return false;
     }
 
     @Override
-    public TouchEventInterceptor.InterceptMode convertInterceptModeFromAttrs(AttributeSet attrs) {
-        TypedArray typedArray = getContext().obtainStyledAttributes(attrs, R.styleable.NestingScrollView);
-        int anInt = typedArray.getInt(R.styleable.NestingScrollView_scroll_view_intercept_mode, TouchEventInterceptor.InterceptMode.VERTICAL_BY_ITSELF.value);
-        TouchEventInterceptor.InterceptMode interceptMode = TouchEventInterceptor.InterceptMode.valueOf(anInt);
+    public InterceptMode pickupInterceptMode(AttributeSet attr, int[] declareStyleable, int style) {
+        TypedArray typedArray = getContext().obtainStyledAttributes(attr, declareStyleable);
+        int anInt = typedArray.getInt(R.styleable.NestingScrollView_nesting_scroll_view_touch_intercept_mode, InterceptMode.VERTICAL.value);
+        InterceptMode interceptMode = InterceptMode.valueOf(anInt);
         typedArray.recycle();
         return interceptMode;
     }
 
     @Override
-    public void setInterceptMode(TouchEventInterceptor.InterceptMode interceptMode) {
-        mInterceptMode = interceptMode;
+    public void setInterceptMode(InterceptMode mode) {
+        if(null == mode)
+            return;
+
+        mInterceptMode = mode;
     }
 
     @Override
-    public TouchEventInterceptor.InterceptMode getInterceptMode() {
+    public InterceptMode getInterceptMode() {
         return mInterceptMode;
     }
-
-    @Override
-    public boolean isAtScrollOverThreshold(TouchEventScrollOverHandler.ScrollDirection xDirection, TouchEventScrollOverHandler.ScrollDirection yDirection, boolean isHorizontalScroll) {
-        if (mInterceptMode == TouchEventInterceptor.InterceptMode.VERTICAL_BY_ITSELF) {
-            ViewGroup parent = (ViewGroup) getParent();
-            View child = getChildAt(0);
-            int scrollY = getScrollY();
-            int parentHeight = parent.getHeight();
-            int childHeight = child.getHeight();
-            boolean isChildLargeThanParent = childHeight > parentHeight;
-            int largestScrollY = isChildLargeThanParent ? Math.abs(parentHeight - childHeight) : 0;
-            boolean isAtScrollOverThreshold = yDirection == TouchEventScrollOverHandler.ScrollDirection.TOP_2_BOTTOM ? scrollY <= 0 : scrollY >= largestScrollY;
-            Logger.d("NestingScrollView");
-            Logger.d("isHorizontalScroll: " + isHorizontalScroll);
-            Logger.d("isAtScrollOverThreshold: " + isAtScrollOverThreshold);
-            return isAtScrollOverThreshold;
-        }
-        return false;
-    }
-
 }

@@ -6,7 +6,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.github.evan.common_utils.gesture.TouchEventInterceptor;
 import com.github.evan.common_utils.ui.holder.BasePagerHolder;
 import com.github.evan.common_utils.ui.view.nestingTouchView.NestingScrollView;
 import com.github.evan.common_utils.ui.view.nestingTouchView.NestingViewPager;

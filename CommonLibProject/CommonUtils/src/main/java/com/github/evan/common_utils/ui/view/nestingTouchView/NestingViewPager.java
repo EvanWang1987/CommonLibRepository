@@ -8,69 +8,64 @@ import android.util.AttributeSet;
 import android.view.MotionEvent;
 
 import com.github.evan.common_utils.R;
-import com.github.evan.common_utils.gesture.TouchEventInterceptor;
-import com.github.evan.common_utils.gesture.TouchEventScrollOverHandler;
-import com.github.evan.common_utils.utils.Logger;
+import com.github.evan.common_utils.gesture.interceptor.InterceptMode;
+import com.github.evan.common_utils.gesture.interceptor.ThresholdSwitchable;
+import com.github.evan.common_utils.gesture.interceptor.TouchEventDirection;
+import com.github.evan.common_utils.gesture.interceptor.TouchEventInterceptor;
+
 
 /**
- * Created by Evan on 2017/11/24.
+ * Created by Evan on 2017/11/26.
  */
-public class NestingViewPager extends ViewPager implements TouchEventInterceptor.TouchInterceptable, TouchEventScrollOverHandler.IsAtScrollOverThresholdListener {
+public class NestingViewPager extends ViewPager implements Nestable, ThresholdSwitchable {
+    private InterceptMode mInterceptMode = InterceptMode.HORIZONTAL;
     private TouchEventInterceptor mInterceptor;
-    private TouchEventInterceptor.InterceptMode mInterceptMode = TouchEventInterceptor.InterceptMode.HORIZONTAL_BY_ITSELF;
-    private TouchEventScrollOverHandler mScrollOverHandler = new TouchEventScrollOverHandler(false);
 
     public NestingViewPager(Context context) {
         super(context);
-        mInterceptor = new TouchEventInterceptor(context);
     }
 
     public NestingViewPager(Context context, AttributeSet attrs) {
         super(context, attrs);
-        mInterceptor = new TouchEventInterceptor(context);
-        mInterceptMode = convertInterceptModeFromAttrs(attrs);
+        mInterceptMode = pickupInterceptMode(attrs, R.styleable.NestingViewPager, 0);
     }
 
     @Override
-    public final boolean onInterceptTouchEvent(MotionEvent ev) {
-        return mInterceptor.onInterceptTouchEvent(ev, mInterceptMode, this) || super.onInterceptTouchEvent(ev);
+    public boolean onInterceptTouchEvent(MotionEvent ev) {
+        return mInterceptor.interceptTouchEvent(ev, mInterceptMode, this, this) && super.onInterceptTouchEvent(ev);
     }
 
     @Override
-    public final boolean onTouchEvent(MotionEvent ev) {
-        return mScrollOverHandler.onTouchEvent(ev, this, this) || super.onTouchEvent(ev);
-    }
-
-    @Override
-    public TouchEventInterceptor.InterceptMode convertInterceptModeFromAttrs(AttributeSet attrs) {
-        TypedArray typedArray = getContext().obtainStyledAttributes(attrs, R.styleable.NestingViewPager);
-        int anInt = typedArray.getInt(R.styleable.NestingViewPager_view_pager_intercept_mode, TouchEventInterceptor.InterceptMode.HORIZONTAL_BY_ITSELF.value);
-        TouchEventInterceptor.InterceptMode interceptMode = TouchEventInterceptor.InterceptMode.valueOf(anInt);
+    public InterceptMode pickupInterceptMode(AttributeSet attr, int[] declareStyleable, int style) {
+        TypedArray typedArray = getContext().obtainStyledAttributes(attr, declareStyleable);
+        int anInt = typedArray.getInt(R.styleable.NestingViewPager_nesting_view_pager_touch_intercept_mode, InterceptMode.HORIZONTAL_BUT_THRESHOLD.value);
+        InterceptMode interceptMode = InterceptMode.valueOf(anInt);
         typedArray.recycle();
         return interceptMode;
     }
 
     @Override
-    public void setInterceptMode(TouchEventInterceptor.InterceptMode interceptMode) {
-        mInterceptMode = interceptMode;
+    public void setInterceptMode(InterceptMode mode) {
+        if(null == mode){
+            return;
+        }
+        mInterceptMode = mode;
     }
 
     @Override
-    public TouchEventInterceptor.InterceptMode getInterceptMode() {
+    public InterceptMode getInterceptMode() {
         return mInterceptMode;
     }
 
-
     @Override
-    public boolean isAtScrollOverThreshold(TouchEventScrollOverHandler.ScrollDirection xDirection, TouchEventScrollOverHandler.ScrollDirection yDirection, boolean isHorizontalScroll) {
-        PagerAdapter adapter = getAdapter();
-        int currentItem = getCurrentItem();
-        if (mInterceptMode == TouchEventInterceptor.InterceptMode.ALL_BY_ITSELF || mInterceptMode == TouchEventInterceptor.InterceptMode.HORIZONTAL_BY_ITSELF) {
-            if (xDirection == TouchEventScrollOverHandler.ScrollDirection.LEFT_2_RIGHT) {
-                return currentItem == 0;
-            } else {
-                return adapter != null ? currentItem == (adapter.getCount() - 1) : currentItem == 0;
-            }
+    public boolean isArriveTouchEventThreshold(InterceptMode interceptMode, TouchEventDirection xDirection, TouchEventDirection yDirection) {
+        if(interceptMode == InterceptMode.ALL_BY_MYSELF_BUT_THRESHOLD || interceptMode == InterceptMode.HORIZONTAL_BUT_THRESHOLD || interceptMode == InterceptMode.VERTICAL_BUT_THRESHOLD){
+            PagerAdapter adapter = getAdapter();
+            int currentItem = getCurrentItem();
+
+            boolean isArriveLeftThreshold = currentItem == 0;
+            boolean isArriveRightThreshold = null == adapter ? isArriveLeftThreshold : currentItem == adapter.getCount() - 1;
+            return xDirection == TouchEventDirection.LEFT_TO_RIGHT ? isArriveLeftThreshold : isArriveRightThreshold;
         }
         return false;
     }

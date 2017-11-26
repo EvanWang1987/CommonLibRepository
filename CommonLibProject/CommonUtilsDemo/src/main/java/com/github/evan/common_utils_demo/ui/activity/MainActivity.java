@@ -18,6 +18,7 @@ import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+
 import com.github.evan.common_utils.ui.activity.BaseActivity;
 import com.github.evan.common_utils.utils.FragmentUtil;
 import com.github.evan.common_utils.utils.UiUtil;
@@ -25,8 +26,9 @@ import com.github.evan.common_utils_demo.R;
 import com.github.evan.common_utils_demo.ui.fragment.CustomEditTextFragment;
 import com.github.evan.common_utils_demo.ui.fragment.FlagViewFragment;
 import com.github.evan.common_utils_demo.ui.fragment.HomeFragment;
+import com.github.evan.common_utils_demo.ui.fragment.HorNestVerScrollViewFragment;
 import com.github.evan.common_utils_demo.ui.fragment.ListGridViewFragment;
-import com.github.evan.common_utils_demo.ui.fragment.NestingTouchFragment;
+import com.github.evan.common_utils_demo.ui.fragment.VerNestHorScrollViewFragment;
 import com.github.evan.common_utils_demo.ui.fragment.RecyclerViewFragment;
 import com.github.evan.common_utils_demo.ui.fragment.ScreenInformationFragment;
 import com.github.evan.common_utils_demo.ui.fragment.DebugFragment;
@@ -41,7 +43,7 @@ import butterknife.OnClick;
  * Created by Evan on 2017/11/9.
  */
 public class MainActivity extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener {
-    private static final String[] fragmentNames = {HomeFragment.class.getName(), ScreenInformationFragment.class.getName(), ListGridViewFragment.class.getName(), RecyclerViewFragment.class.getName(), ViewPagerFragment.class.getName(), NestingTouchFragment.class.getName(), CustomEditTextFragment.class.getName(), FlagViewFragment.class.getName(), TintFragment.class.getName(), DebugFragment.class.getName()};
+    private static final String[] fragmentNames = {HomeFragment.class.getName(), ScreenInformationFragment.class.getName(), ListGridViewFragment.class.getName(), RecyclerViewFragment.class.getName(), ViewPagerFragment.class.getName(), VerNestHorScrollViewFragment.class.getName(), HorNestVerScrollViewFragment.class.getName(), CustomEditTextFragment.class.getName(), FlagViewFragment.class.getName(), TintFragment.class.getName(), DebugFragment.class.getName()};
 
     @BindView(R.id.mainActivity_appBar)
     public AppBarLayout mAppbarLayout;
@@ -79,8 +81,8 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     }
 
     @OnClick(R.id.btn_share)
-    void onClick(View view){
-        switch (view.getId()){
+    void onClick(View view) {
+        switch (view.getId()) {
             case R.id.btn_share:
                 break;
         }
@@ -95,7 +97,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if(item.getItemId() == R.id.actionBtn_about){
+        if (item.getItemId() == R.id.actionBtn_about) {
             loadActivity(TestActivity.class);
             return true;
         }
@@ -114,33 +116,34 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         return isHandled;
     }
 
-    private void toggleDrawer(int gravity){
+    private void toggleDrawer(int gravity) {
         boolean drawerOpen = mDrawerLayout.isDrawerOpen(gravity);
-        if(drawerOpen){
+        if (drawerOpen) {
             mDrawerLayout.closeDrawer(Gravity.LEFT, true);
-        }else{
+        } else {
             mDrawerLayout.openDrawer(Gravity.LEFT, true);
         }
     }
 
-    private boolean switchFragment(int selectedMenuItemId){
+    private boolean switchFragment(int selectedMenuItemId) {
         FragmentManager fragmentManager = getSupportFragmentManager();
         Fragment visibleFragment = null;
-        Fragment[] inVisibleFragment = new Fragment[9];
+        Fragment[] inVisibleFragment = new Fragment[10];
         boolean isExpand = false;
 
-        switch (selectedMenuItemId){
+        switch (selectedMenuItemId) {
             case R.id.functionHome:
                 visibleFragment = fragmentManager.findFragmentByTag(HomeFragment.class.getName());
                 inVisibleFragment[0] = fragmentManager.findFragmentByTag(ScreenInformationFragment.class.getName());
                 inVisibleFragment[1] = fragmentManager.findFragmentByTag(ListGridViewFragment.class.getName());
                 inVisibleFragment[2] = fragmentManager.findFragmentByTag(RecyclerViewFragment.class.getName());
                 inVisibleFragment[3] = fragmentManager.findFragmentByTag(ViewPagerFragment.class.getName());
-                inVisibleFragment[4] = fragmentManager.findFragmentByTag(NestingTouchFragment.class.getName());
+                inVisibleFragment[4] = fragmentManager.findFragmentByTag(VerNestHorScrollViewFragment.class.getName());
                 inVisibleFragment[5] = fragmentManager.findFragmentByTag(CustomEditTextFragment.class.getName());
                 inVisibleFragment[6] = fragmentManager.findFragmentByTag(FlagViewFragment.class.getName());
                 inVisibleFragment[7] = fragmentManager.findFragmentByTag(TintFragment.class.getName());
                 inVisibleFragment[8] = fragmentManager.findFragmentByTag(DebugFragment.class.getName());
+                inVisibleFragment[9] = fragmentManager.findFragmentByTag(HorNestVerScrollViewFragment.class.getName());
                 isExpand = true;
                 break;
 
@@ -150,11 +153,12 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                 inVisibleFragment[1] = fragmentManager.findFragmentByTag(ListGridViewFragment.class.getName());
                 inVisibleFragment[2] = fragmentManager.findFragmentByTag(RecyclerViewFragment.class.getName());
                 inVisibleFragment[3] = fragmentManager.findFragmentByTag(ViewPagerFragment.class.getName());
-                inVisibleFragment[4] = fragmentManager.findFragmentByTag(NestingTouchFragment.class.getName());
+                inVisibleFragment[4] = fragmentManager.findFragmentByTag(VerNestHorScrollViewFragment.class.getName());
                 inVisibleFragment[5] = fragmentManager.findFragmentByTag(CustomEditTextFragment.class.getName());
                 inVisibleFragment[6] = fragmentManager.findFragmentByTag(FlagViewFragment.class.getName());
                 inVisibleFragment[7] = fragmentManager.findFragmentByTag(TintFragment.class.getName());
                 inVisibleFragment[8] = fragmentManager.findFragmentByTag(DebugFragment.class.getName());
+                inVisibleFragment[9] = fragmentManager.findFragmentByTag(HorNestVerScrollViewFragment.class.getName());
                 isExpand = true;
                 break;
 
@@ -164,11 +168,12 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                 inVisibleFragment[1] = fragmentManager.findFragmentByTag(ScreenInformationFragment.class.getName());
                 inVisibleFragment[2] = fragmentManager.findFragmentByTag(RecyclerViewFragment.class.getName());
                 inVisibleFragment[3] = fragmentManager.findFragmentByTag(ViewPagerFragment.class.getName());
-                inVisibleFragment[4] = fragmentManager.findFragmentByTag(NestingTouchFragment.class.getName());
+                inVisibleFragment[4] = fragmentManager.findFragmentByTag(VerNestHorScrollViewFragment.class.getName());
                 inVisibleFragment[5] = fragmentManager.findFragmentByTag(CustomEditTextFragment.class.getName());
                 inVisibleFragment[6] = fragmentManager.findFragmentByTag(FlagViewFragment.class.getName());
                 inVisibleFragment[7] = fragmentManager.findFragmentByTag(TintFragment.class.getName());
                 inVisibleFragment[8] = fragmentManager.findFragmentByTag(DebugFragment.class.getName());
+                inVisibleFragment[9] = fragmentManager.findFragmentByTag(HorNestVerScrollViewFragment.class.getName());
                 isExpand = false;
                 break;
 
@@ -178,11 +183,12 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                 inVisibleFragment[1] = fragmentManager.findFragmentByTag(ScreenInformationFragment.class.getName());
                 inVisibleFragment[2] = fragmentManager.findFragmentByTag(ListGridViewFragment.class.getName());
                 inVisibleFragment[3] = fragmentManager.findFragmentByTag(ViewPagerFragment.class.getName());
-                inVisibleFragment[4] = fragmentManager.findFragmentByTag(NestingTouchFragment.class.getName());
+                inVisibleFragment[4] = fragmentManager.findFragmentByTag(VerNestHorScrollViewFragment.class.getName());
                 inVisibleFragment[5] = fragmentManager.findFragmentByTag(CustomEditTextFragment.class.getName());
                 inVisibleFragment[6] = fragmentManager.findFragmentByTag(FlagViewFragment.class.getName());
                 inVisibleFragment[7] = fragmentManager.findFragmentByTag(TintFragment.class.getName());
                 inVisibleFragment[8] = fragmentManager.findFragmentByTag(DebugFragment.class.getName());
+                inVisibleFragment[9] = fragmentManager.findFragmentByTag(HorNestVerScrollViewFragment.class.getName());
                 isExpand = true;
                 break;
 
@@ -192,16 +198,17 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                 inVisibleFragment[1] = fragmentManager.findFragmentByTag(ScreenInformationFragment.class.getName());
                 inVisibleFragment[2] = fragmentManager.findFragmentByTag(ListGridViewFragment.class.getName());
                 inVisibleFragment[3] = fragmentManager.findFragmentByTag(RecyclerViewFragment.class.getName());
-                inVisibleFragment[4] = fragmentManager.findFragmentByTag(NestingTouchFragment.class.getName());
+                inVisibleFragment[4] = fragmentManager.findFragmentByTag(VerNestHorScrollViewFragment.class.getName());
                 inVisibleFragment[5] = fragmentManager.findFragmentByTag(CustomEditTextFragment.class.getName());
                 inVisibleFragment[6] = fragmentManager.findFragmentByTag(FlagViewFragment.class.getName());
                 inVisibleFragment[7] = fragmentManager.findFragmentByTag(TintFragment.class.getName());
                 inVisibleFragment[8] = fragmentManager.findFragmentByTag(DebugFragment.class.getName());
+                inVisibleFragment[9] = fragmentManager.findFragmentByTag(HorNestVerScrollViewFragment.class.getName());
                 isExpand = false;
                 break;
 
-            case R.id.functionNestingViewPager:
-                visibleFragment = fragmentManager.findFragmentByTag(NestingTouchFragment.class.getName());
+            case R.id.functionVerNestHorScrollView:
+                visibleFragment = fragmentManager.findFragmentByTag(VerNestHorScrollViewFragment.class.getName());
                 inVisibleFragment[0] = fragmentManager.findFragmentByTag(HomeFragment.class.getName());
                 inVisibleFragment[1] = fragmentManager.findFragmentByTag(ScreenInformationFragment.class.getName());
                 inVisibleFragment[2] = fragmentManager.findFragmentByTag(ListGridViewFragment.class.getName());
@@ -211,7 +218,23 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                 inVisibleFragment[6] = fragmentManager.findFragmentByTag(FlagViewFragment.class.getName());
                 inVisibleFragment[7] = fragmentManager.findFragmentByTag(TintFragment.class.getName());
                 inVisibleFragment[8] = fragmentManager.findFragmentByTag(DebugFragment.class.getName());
-                isExpand = true;
+                inVisibleFragment[9] = fragmentManager.findFragmentByTag(HorNestVerScrollViewFragment.class.getName());
+                isExpand = false;
+                break;
+
+            case R.id.functionHorNestVerScrollView:
+                visibleFragment = fragmentManager.findFragmentByTag(HorNestVerScrollViewFragment.class.getName());
+                inVisibleFragment[0] = fragmentManager.findFragmentByTag(HomeFragment.class.getName());
+                inVisibleFragment[1] = fragmentManager.findFragmentByTag(ScreenInformationFragment.class.getName());
+                inVisibleFragment[2] = fragmentManager.findFragmentByTag(ListGridViewFragment.class.getName());
+                inVisibleFragment[3] = fragmentManager.findFragmentByTag(RecyclerViewFragment.class.getName());
+                inVisibleFragment[4] = fragmentManager.findFragmentByTag(ViewPagerFragment.class.getName());
+                inVisibleFragment[5] = fragmentManager.findFragmentByTag(VerNestHorScrollViewFragment.class.getName());
+                inVisibleFragment[6] = fragmentManager.findFragmentByTag(CustomEditTextFragment.class.getName());
+                inVisibleFragment[7] = fragmentManager.findFragmentByTag(FlagViewFragment.class.getName());
+                inVisibleFragment[8] = fragmentManager.findFragmentByTag(TintFragment.class.getName());
+                inVisibleFragment[9] = fragmentManager.findFragmentByTag(DebugFragment.class.getName());
+                isExpand = false;
                 break;
 
             case R.id.functionCustomEditText:
@@ -220,11 +243,12 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                 inVisibleFragment[1] = fragmentManager.findFragmentByTag(ScreenInformationFragment.class.getName());
                 inVisibleFragment[2] = fragmentManager.findFragmentByTag(ListGridViewFragment.class.getName());
                 inVisibleFragment[3] = fragmentManager.findFragmentByTag(RecyclerViewFragment.class.getName());
-                inVisibleFragment[4] = fragmentManager.findFragmentByTag(NestingTouchFragment.class.getName());
+                inVisibleFragment[4] = fragmentManager.findFragmentByTag(VerNestHorScrollViewFragment.class.getName());
                 inVisibleFragment[5] = fragmentManager.findFragmentByTag(ViewPagerFragment.class.getName());
                 inVisibleFragment[6] = fragmentManager.findFragmentByTag(FlagViewFragment.class.getName());
                 inVisibleFragment[7] = fragmentManager.findFragmentByTag(TintFragment.class.getName());
                 inVisibleFragment[8] = fragmentManager.findFragmentByTag(DebugFragment.class.getName());
+                inVisibleFragment[9] = fragmentManager.findFragmentByTag(HorNestVerScrollViewFragment.class.getName());
                 isExpand = true;
                 break;
 
@@ -234,10 +258,12 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                 inVisibleFragment[1] = fragmentManager.findFragmentByTag(ScreenInformationFragment.class.getName());
                 inVisibleFragment[2] = fragmentManager.findFragmentByTag(ListGridViewFragment.class.getName());
                 inVisibleFragment[3] = fragmentManager.findFragmentByTag(RecyclerViewFragment.class.getName());
-                inVisibleFragment[4] = fragmentManager.findFragmentByTag(NestingTouchFragment.class.getName());
+                inVisibleFragment[4] = fragmentManager.findFragmentByTag(VerNestHorScrollViewFragment.class.getName());
                 inVisibleFragment[5] = fragmentManager.findFragmentByTag(ViewPagerFragment.class.getName());
                 inVisibleFragment[6] = fragmentManager.findFragmentByTag(CustomEditTextFragment.class.getName());
                 inVisibleFragment[7] = fragmentManager.findFragmentByTag(TintFragment.class.getName());
+                inVisibleFragment[8] = fragmentManager.findFragmentByTag(DebugFragment.class.getName());
+                inVisibleFragment[9] = fragmentManager.findFragmentByTag(HorNestVerScrollViewFragment.class.getName());
                 isExpand = true;
                 break;
 
@@ -247,11 +273,12 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                 inVisibleFragment[1] = fragmentManager.findFragmentByTag(ScreenInformationFragment.class.getName());
                 inVisibleFragment[2] = fragmentManager.findFragmentByTag(ListGridViewFragment.class.getName());
                 inVisibleFragment[3] = fragmentManager.findFragmentByTag(RecyclerViewFragment.class.getName());
-                inVisibleFragment[4] = fragmentManager.findFragmentByTag(NestingTouchFragment.class.getName());
+                inVisibleFragment[4] = fragmentManager.findFragmentByTag(VerNestHorScrollViewFragment.class.getName());
                 inVisibleFragment[5] = fragmentManager.findFragmentByTag(ViewPagerFragment.class.getName());
                 inVisibleFragment[6] = fragmentManager.findFragmentByTag(CustomEditTextFragment.class.getName());
                 inVisibleFragment[7] = fragmentManager.findFragmentByTag(FlagViewFragment.class.getName());
                 inVisibleFragment[8] = fragmentManager.findFragmentByTag(DebugFragment.class.getName());
+                inVisibleFragment[9] = fragmentManager.findFragmentByTag(HorNestVerScrollViewFragment.class.getName());
                 isExpand = true;
                 break;
 
@@ -261,11 +288,12 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                 inVisibleFragment[1] = fragmentManager.findFragmentByTag(ScreenInformationFragment.class.getName());
                 inVisibleFragment[2] = fragmentManager.findFragmentByTag(ListGridViewFragment.class.getName());
                 inVisibleFragment[3] = fragmentManager.findFragmentByTag(RecyclerViewFragment.class.getName());
-                inVisibleFragment[4] = fragmentManager.findFragmentByTag(NestingTouchFragment.class.getName());
+                inVisibleFragment[4] = fragmentManager.findFragmentByTag(VerNestHorScrollViewFragment.class.getName());
                 inVisibleFragment[5] = fragmentManager.findFragmentByTag(ViewPagerFragment.class.getName());
                 inVisibleFragment[6] = fragmentManager.findFragmentByTag(CustomEditTextFragment.class.getName());
                 inVisibleFragment[7] = fragmentManager.findFragmentByTag(FlagViewFragment.class.getName());
                 inVisibleFragment[8] = fragmentManager.findFragmentByTag(TintFragment.class.getName());
+                inVisibleFragment[9] = fragmentManager.findFragmentByTag(HorNestVerScrollViewFragment.class.getName());
                 isExpand = false;
                 break;
 

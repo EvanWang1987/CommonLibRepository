@@ -17,7 +17,8 @@
     <com.github.evan.common_utils.ui.view.nestingTouchView.NestingViewPager
         android:id="@+id/nesting_view_pager_test_activity"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        app:nesting_view_pager_touch_intercept_mode="horizontal" />
 
 
 </LinearLayout>

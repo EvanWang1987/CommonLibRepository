@@ -7,7 +7,6 @@
 
     <com.github.evan.common_utils.ui.view.nestingTouchView.NestingViewPager
         android:id="@+id/nesting_view_pager_multi_nesting_holder"
-        app:view_pager_intercept_mode="all_by_itself"
         android:layout_width="match_parent"
         android:layout_height="200dp"/>
 

@@ -1,57 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <declare-styleable name="NestingGallery">
-        <attr name="gallery_intercept_mode" format="enum">
-            <enum name="use_view_default" value="0"/>
-            <enum name="all_by_itself" value="1"/>
-            <enum name="horizontal_by_itself" value="2"/>
-            <enum name="vertical_by_itself" value="3"/>
+    <declare-styleable name="NestingViewPager">
+        <attr name="nesting_view_pager_touch_intercept_mode" format="enum">
+            <enum name="use_supper_default" value="-1"/>
+            <enum name="all_by_myself" value="0"/>
+            <enum name="all_by_myself_but_threshold" value="1"/>
+            <enum name="horizontal" value="2"/>
+            <enum name="horizontal_but_threshold" value="3"/>
+            <enum name="vertical" value="4"/>
+            <enum name="vertical__but_threshold" value="5"/>
         </attr>
     </declare-styleable>
 
     <declare-styleable name="NestingScrollView">
-        <attr name="scroll_view_intercept_mode" format="enum">
-            <enum name="use_view_default" value="0"/>
-            <enum name="all_by_itself" value="1"/>
-            <enum name="horizontal_by_itself" value="2"/>
-            <enum name="vertical_by_itself" value="3"/>
+        <attr name="nesting_scroll_view_touch_intercept_mode" format="enum">
+            <enum name="use_supper_default" value="-1"/>
+            <enum name="all_by_myself" value="0"/>
+            <enum name="all_by_myself_but_threshold" value="1"/>
+            <enum name="horizontal" value="2"/>
+            <enum name="horizontal_but_threshold" value="3"/>
+            <enum name="vertical" value="4"/>
+            <enum name="vertical__but_threshold" value="5"/>
         </attr>
     </declare-styleable>
 
     <declare-styleable name="NestingHorizontalScrollView">
-        <attr name="horizontal_scroll_view_intercept_mode" format="enum">
-            <enum name="use_view_default" value="0"/>
-            <enum name="all_by_itself" value="1"/>
-            <enum name="horizontal_by_itself" value="2"/>
-            <enum name="vertical_by_itself" value="3"/>
-        </attr>
-    </declare-styleable>
-
-    <declare-styleable name="NestingListView">
-        <attr name="list__view_intercept_mode" format="enum">
-            <enum name="use_view_default" value="0"/>
-            <enum name="all_by_itself" value="1"/>
-            <enum name="horizontal_by_itself" value="2"/>
-            <enum name="vertical_by_itself" value="3"/>
-        </attr>
-    </declare-styleable>
-
-    <declare-styleable name="NestingGridView">
-        <attr name="grid_view_intercept_mode" format="enum">
-            <enum name="use_view_default" value="0"/>
-            <enum name="all_by_itself" value="1"/>
-            <enum name="horizontal_by_itself" value="2"/>
-            <enum name="vertical_by_itself" value="3"/>
-        </attr>
-    </declare-styleable>
-
-    <declare-styleable name="NestingViewPager">
-        <attr name="view_pager_intercept_mode" format="enum">
-            <enum name="use_view_default" value="0"/>
-            <enum name="all_by_itself" value="1"/>
-            <enum name="horizontal_by_itself" value="2"/>
-            <enum name="vertical_by_itself" value="3"/>
+        <attr name="nesting_horizontal_scroll_view_touch_intercept_mode" format="enum">
+            <enum name="use_supper_default" value="-1"/>
+            <enum name="all_by_myself" value="0"/>
+            <enum name="all_by_myself_but_threshold" value="1"/>
+            <enum name="horizontal" value="2"/>
+            <enum name="horizontal_but_threshold" value="3"/>
+            <enum name="vertical" value="4"/>
+            <enum name="vertical__but_threshold" value="5"/>
         </attr>
     </declare-styleable>
 

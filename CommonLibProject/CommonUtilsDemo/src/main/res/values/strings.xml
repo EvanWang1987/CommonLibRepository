@@ -96,9 +96,10 @@
     <string name="view_pager">View Pager</string>
     <!-- ViewPagerFragment相关 -->
 
-    <!-- ViewPagerFragment相关 -->
-    <string name="nesting_touch">手势兼容</string>
-    <!-- ViewPagerFragment相关 -->
+    <!-- 嵌套布局相关 -->
+    <string name="ver_nest_hor_scroll_view">竖向嵌套横向滑动布局</string>
+    <string name="hor_nest_ver_scroll_view">横向嵌套竖向滑动布局</string>
+    <!-- 嵌套布局相关 -->
 
     <!-- DebugFragment相关 -->
     <string name="debug">Debug</string>
