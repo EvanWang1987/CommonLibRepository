@@ -19,7 +19,7 @@ public class TouchEventInterceptor {
 
     public boolean interceptTouchEvent(MotionEvent event, InterceptMode interceptMode, ViewGroup destination, ThresholdSwitchable thresholdSwitchable) {
         if (interceptMode == InterceptMode.USE_SUPER_DEFAULT) {
-            return true;
+            return destination.onInterceptTouchEvent(event);
         }
 
         int actionMasked = event.getActionMasked();
