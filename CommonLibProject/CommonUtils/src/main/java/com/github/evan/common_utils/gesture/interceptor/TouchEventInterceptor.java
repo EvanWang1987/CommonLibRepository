@@ -26,6 +26,10 @@ public class TouchEventInterceptor {
         if (actionMasked == MotionEvent.ACTION_DOWN) {
             mDownX = event.getX();
             mDownY = event.getY();
+            if(interceptMode == InterceptMode.ALL_BY_MYSELF || interceptMode == InterceptMode.ALL_BY_MYSELF_BUT_THRESHOLD){
+                destination.getParent().requestDisallowInterceptTouchEvent(true);
+                return true;
+            }
         } else if (actionMasked == MotionEvent.ACTION_MOVE) {
             float currentX = event.getX();
             float currentY = event.getY();
