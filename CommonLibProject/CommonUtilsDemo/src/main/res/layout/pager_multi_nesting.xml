@@ -8,10 +8,12 @@
     <com.github.evan.common_utils.ui.view.nestingTouchView.NestingViewPager
         android:id="@+id/nesting_view_pager_multi_nesting_holder"
         android:layout_width="match_parent"
+        app:nesting_view_pager_touch_intercept_mode="all_by_myself_but_threshold"
         android:layout_height="200dp"/>
 
     <com.github.evan.common_utils.ui.view.nestingTouchView.NestingScrollView
         android:id="@+id/nesting_scroll_view_multi_nesting_holder"
+        app:nesting_scroll_view_touch_intercept_mode="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
