@@ -8,6 +8,7 @@ import android.support.v4.view.ViewPager;
 import com.github.evan.common_utils.ui.activity.BaseActivity;
 import com.github.evan.common_utils.ui.view.nestingTouchView.NestingViewPager;
 import com.github.evan.common_utils_demo.R;
+import com.github.evan.common_utils_demo.bean.TitleInteger;
 import com.github.evan.common_utils_demo.ui.adapter.viewPagerAdapter.MultiNestingPagerAdapter;
 
 import java.util.ArrayList;
@@ -41,9 +42,9 @@ public class TestActivity extends BaseActivity implements TabLayout.OnTabSelecte
 
         mNestingAdapter = new MultiNestingPagerAdapter(this, true);
         int N = 10;
-        List<Integer> data = new ArrayList<>(N);
+        List<TitleInteger> data = new ArrayList<>(N);
         for (int i = 0; i < N; i++) {
-            data.add(i + 1);
+            data.add(new TitleInteger(i + 1));
             TabLayout.Tab tab = mTabLayout.newTab();
             tab.setText("Page " + (i + 1));
             mTabLayout.addTab(tab, i == 0);

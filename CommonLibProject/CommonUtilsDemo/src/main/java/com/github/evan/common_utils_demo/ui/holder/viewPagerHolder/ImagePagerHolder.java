@@ -40,8 +40,8 @@ public class ImagePagerHolder extends BasePagerHolder<Integer> {
 
     @Override
     public void instantiateItem(ViewGroup container, int position) {
-        mImgPhoto.setImageResource(ViewPagerFragment.IMAGES[position]);
-        mTxtPosition.setText(getData() + " / " + ViewPagerFragment.IMAGES.length);
+        mImgPhoto.setImageResource(ImagePagerAdapter.IMAGES[position]);
+        mTxtPosition.setText(getData() + " / " + ImagePagerAdapter.IMAGES.length);
     }
 
     @Override

@@ -10,6 +10,7 @@ import com.github.evan.common_utils.ui.holder.BasePagerHolder;
 import com.github.evan.common_utils.ui.view.nestingTouchView.NestingScrollView;
 import com.github.evan.common_utils.ui.view.nestingTouchView.NestingViewPager;
 import com.github.evan.common_utils_demo.R;
+import com.github.evan.common_utils_demo.bean.TitleInteger;
 import com.github.evan.common_utils_demo.ui.adapter.viewPagerAdapter.ImagePagerAdapter;
 import com.github.evan.common_utils_demo.ui.fragment.ViewPagerFragment;
 
@@ -22,7 +23,7 @@ import butterknife.ButterKnife;
 /**
  * Created by Evan on 2017/11/24.
  */
-public class MultiNestingPagerHolder extends BasePagerHolder<Integer> {
+public class MultiNestingPagerHolder extends BasePagerHolder<TitleInteger> {
 
     @BindView(R.id.nesting_view_pager_multi_nesting_holder)
     NestingViewPager mViewPager;
@@ -46,7 +47,7 @@ public class MultiNestingPagerHolder extends BasePagerHolder<Integer> {
 
     @Override
     public void instantiateItem(ViewGroup container, int position) {
-        int N = ViewPagerFragment.IMAGES.length;
+        int N = ImagePagerAdapter.IMAGES.length;
         List<Integer> data = new ArrayList<>(N);
         for (int i = 0; i < N; i++) {
             data.add(i + 1);

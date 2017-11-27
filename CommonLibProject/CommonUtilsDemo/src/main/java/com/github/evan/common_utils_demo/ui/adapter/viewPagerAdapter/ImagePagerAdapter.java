@@ -5,6 +5,7 @@ import android.view.ViewGroup;
 
 import com.github.evan.common_utils.ui.adapter.BasePagerAdapter;
 import com.github.evan.common_utils.ui.holder.BasePagerHolder;
+import com.github.evan.common_utils_demo.R;
 import com.github.evan.common_utils_demo.ui.holder.viewPagerHolder.ImagePagerHolder;
 
 /**
@@ -12,6 +13,7 @@ import com.github.evan.common_utils_demo.ui.holder.viewPagerHolder.ImagePagerHol
  */
 
 public class ImagePagerAdapter extends BasePagerAdapter<Integer> {
+    public static final int[] IMAGES = {R.mipmap.img_view_pager_one, R.mipmap.img_view_pager_two, R.mipmap.img_view_pager_three, R.mipmap.img_view_pager_four, R.mipmap.img_view_pager_five};
 
     public ImagePagerAdapter(Context context) {
         super(context);

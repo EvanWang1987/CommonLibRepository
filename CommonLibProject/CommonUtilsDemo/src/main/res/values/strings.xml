@@ -93,7 +93,7 @@
     <!-- RecyclerViewFragment相关 -->
 
     <!-- ViewPagerFragment相关 -->
-    <string name="view_pager">View Pager</string>
+    <string name="view_pager">View Pager嵌套</string>
     <!-- ViewPagerFragment相关 -->
 
     <!-- 嵌套布局相关 -->
