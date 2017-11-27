@@ -23,16 +23,22 @@ public class NestingViewPager extends ViewPager implements Nestable, ThresholdSw
 
     public NestingViewPager(Context context) {
         super(context);
+        mInterceptor = new TouchEventInterceptor(context);
     }
 
     public NestingViewPager(Context context, AttributeSet attrs) {
         super(context, attrs);
+        mInterceptor = new TouchEventInterceptor(context);
         mInterceptMode = pickupInterceptMode(attrs, R.styleable.NestingViewPager, 0);
     }
 
     @Override
-    public boolean onInterceptTouchEvent(MotionEvent ev) {
-        return mInterceptor.interceptTouchEvent(ev, mInterceptMode, this, this) && super.onInterceptTouchEvent(ev);
+    public boolean onInterceptTouchEvent(MotionEvent event) {
+        int actionMasked = event.getActionMasked();
+        if (actionMasked == MotionEvent.ACTION_DOWN || actionMasked == MotionEvent.ACTION_UP || actionMasked == MotionEvent.ACTION_CANCEL) {
+            super.onInterceptTouchEvent(event);
+        }
+        return mInterceptor.interceptTouchEvent(event, mInterceptMode, this, this);
     }
 
     @Override
@@ -46,7 +52,7 @@ public class NestingViewPager extends ViewPager implements Nestable, ThresholdSw
 
     @Override
     public void setInterceptMode(InterceptMode mode) {
-        if(null == mode){
+        if (null == mode) {
             return;
         }
         mInterceptMode = mode;
@@ -59,7 +65,7 @@ public class NestingViewPager extends ViewPager implements Nestable, ThresholdSw
 
     @Override
     public boolean isArriveTouchEventThreshold(InterceptMode interceptMode, TouchEventDirection xDirection, TouchEventDirection yDirection) {
-        if(interceptMode == InterceptMode.ALL_BY_MYSELF_BUT_THRESHOLD || interceptMode == InterceptMode.HORIZONTAL_BUT_THRESHOLD || interceptMode == InterceptMode.VERTICAL_BUT_THRESHOLD){
+        if (interceptMode == InterceptMode.ALL_BY_MYSELF_BUT_THRESHOLD || interceptMode == InterceptMode.HORIZONTAL_BUT_THRESHOLD || interceptMode == InterceptMode.VERTICAL_BUT_THRESHOLD) {
             PagerAdapter adapter = getAdapter();
             int currentItem = getCurrentItem();
 
