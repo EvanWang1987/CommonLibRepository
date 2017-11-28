@@ -4,12 +4,14 @@ import android.os.Bundle;
 import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
+import android.support.v4.view.ViewCompat;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import com.github.evan.common_utils.ui.fragment.BaseFragment;
 import com.github.evan.common_utils.ui.view.nestingTouchView.NestingViewPager;
+import com.github.evan.common_utils.utils.DensityUtil;
 import com.github.evan.common_utils_demo.R;
 import com.github.evan.common_utils_demo.bean.TitleInteger;
 import com.github.evan.common_utils_demo.ui.adapter.viewPagerAdapter.ImagePagerAdapter;
@@ -37,6 +39,8 @@ public class ViewPagerFragment extends BaseFragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_view_pager, null);
         ButterKnife.bind(this, root);
+        ViewCompat.setElevation(mTabLayout, DensityUtil.dp2px(5));
+        ViewCompat.setTranslationZ(mTabLayout, DensityUtil.dp2px(5));
         mNestingAdapter = new MultiNestingPagerAdapter(getContext(), true);
         int N = 10;
         List<TitleInteger> data = new ArrayList<>(N);
@@ -49,13 +53,6 @@ public class ViewPagerFragment extends BaseFragment {
         mViewPager.setAdapter(mNestingAdapter);
         mTabLayout.setupWithViewPager(mViewPager);
         return root;
-    }
-
-    @Override
-    public void onHandleMessage(Message message) {
-        if(message.what == LOAD_COMPLETE){
-
-        }
     }
 
     @Override

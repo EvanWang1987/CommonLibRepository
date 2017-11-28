@@ -39,7 +39,7 @@ public class DefaultHolder extends BaseRecyclerViewHolder<Integer> {
 
     @Override
     public void onRefreshHolder(Integer integer) {
-        mTxtPosition.setText(getAdapterPosition() + "");
+        mTxtPosition.setText((getAdapterPosition() + 1) + "");
     }
 
     @Override

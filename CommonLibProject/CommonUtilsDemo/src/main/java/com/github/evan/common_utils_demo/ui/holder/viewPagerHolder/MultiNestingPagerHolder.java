@@ -1,16 +1,20 @@
 package com.github.evan.common_utils_demo.ui.holder.viewPagerHolder;
 
 import android.content.Context;
+import android.support.v7.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.github.evan.common_utils.ui.holder.BasePagerHolder;
+import com.github.evan.common_utils.ui.view.nestingTouchView.NestingRecyclerView;
 import com.github.evan.common_utils.ui.view.nestingTouchView.NestingScrollView;
 import com.github.evan.common_utils.ui.view.nestingTouchView.NestingViewPager;
 import com.github.evan.common_utils_demo.R;
 import com.github.evan.common_utils_demo.bean.TitleInteger;
+import com.github.evan.common_utils_demo.ui.adapter.recyclerViewAdapter.DefaultRecyclerAdapter;
+import com.github.evan.common_utils_demo.ui.adapter.recyclerViewAdapter.RecyclerAdapter;
 import com.github.evan.common_utils_demo.ui.adapter.viewPagerAdapter.ImagePagerAdapter;
 import com.github.evan.common_utils_demo.ui.fragment.ViewPagerFragment;
 
@@ -27,11 +31,10 @@ public class MultiNestingPagerHolder extends BasePagerHolder<TitleInteger> {
 
     @BindView(R.id.nesting_view_pager_multi_nesting_holder)
     NestingViewPager mViewPager;
-    @BindView(R.id.nesting_scroll_view_multi_nesting_holder)
-    NestingScrollView mScrollView;
-    @BindView(R.id.txt_test_multi_nesting_holder)
-    TextView mTxtTest;
+    @BindView(R.id.nesting_recycler_view_pager_multi_nesting)
+    NestingRecyclerView mRecyclerView;
     private ImagePagerAdapter mImagePagerAdapter;
+    private DefaultRecyclerAdapter mRecyclerAdapter;
 
     public MultiNestingPagerHolder(Context context, ViewGroup parent) {
         super(context, parent);
@@ -41,7 +44,9 @@ public class MultiNestingPagerHolder extends BasePagerHolder<TitleInteger> {
     public View onCreateView(Context context, LayoutInflater inflater, ViewGroup parent) {
         View root = inflater.inflate(R.layout.pager_multi_nesting, null);
         ButterKnife.bind(this, root);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         mImagePagerAdapter = new ImagePagerAdapter(getContext());
+        mRecyclerAdapter = new DefaultRecyclerAdapter(getContext());
         return root;
     }
 
@@ -54,6 +59,14 @@ public class MultiNestingPagerHolder extends BasePagerHolder<TitleInteger> {
         }
         mImagePagerAdapter.replace(data);
         mViewPager.setAdapter(mImagePagerAdapter);
+
+        int Z = 15;
+        List<Integer> listData = new ArrayList<>(Z);
+        for (int i = 0; i < Z; i++) {
+            listData.add(i + i);
+        }
+        mRecyclerAdapter.replace(listData);
+        mRecyclerView.setAdapter(mRecyclerAdapter);
     }
 
     @Override

@@ -204,7 +204,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                 inVisibleFragment[7] = fragmentManager.findFragmentByTag(TintFragment.class.getName());
                 inVisibleFragment[8] = fragmentManager.findFragmentByTag(DebugFragment.class.getName());
                 inVisibleFragment[9] = fragmentManager.findFragmentByTag(HorNestVerScrollViewFragment.class.getName());
-                isExpand = false;
+                isExpand = true;
                 break;
 
             case R.id.functionVerNestHorScrollView:

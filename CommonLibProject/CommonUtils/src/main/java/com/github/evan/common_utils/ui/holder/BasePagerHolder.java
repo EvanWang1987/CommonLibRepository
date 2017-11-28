@@ -69,4 +69,5 @@ public abstract class BasePagerHolder<Data> {
     public void setData(Data data) {
         this.mData = data;
     }
+
 }
