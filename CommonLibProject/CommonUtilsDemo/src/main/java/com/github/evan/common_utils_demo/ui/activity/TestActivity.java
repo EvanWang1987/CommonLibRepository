@@ -7,6 +7,11 @@ import android.support.v4.view.ViewPager;
 
 import com.github.evan.common_utils.ui.activity.BaseActivity;
 import com.github.evan.common_utils.ui.view.nestingTouchView.NestingViewPager;
+import com.github.evan.common_utils.ui.view.ptr.OnRefreshListener;
+import com.github.evan.common_utils.ui.view.ptr.PtrFrameLayout;
+import com.github.evan.common_utils.ui.view.ptr.PullToRefreshSwitcher;
+import com.github.evan.common_utils.ui.view.ptr.indicator.PtrClassicIndicator;
+import com.github.evan.common_utils.utils.ToastUtil;
 import com.github.evan.common_utils_demo.R;
 import com.github.evan.common_utils_demo.bean.TitleInteger;
 import com.github.evan.common_utils_demo.ui.adapter.viewPagerAdapter.MultiNestingPagerAdapter;
@@ -20,15 +25,11 @@ import butterknife.ButterKnife;
 /**
  * Created by Evan on 2017/11/24.
  */
-
-public class TestActivity extends BaseActivity implements TabLayout.OnTabSelectedListener, ViewPager.OnPageChangeListener {
-    @BindView(R.id.tab_layout_test_activity)
-    TabLayout mTabLayout;
-    @BindView(R.id.nesting_view_pager_test_activity)
-    NestingViewPager mViewPager;
-    private MultiNestingPagerAdapter mNestingAdapter;
-
-
+public class TestActivity extends BaseActivity implements PullToRefreshSwitcher, OnRefreshListener {
+    @BindView(R.id.ptr_frame_layout)
+    PtrFrameLayout mPtrLayout;
+    @BindView(R.id.ptr_indicator)
+    PtrClassicIndicator mIndicator;
 
     @Override
     public int getLayoutResId() {
@@ -39,49 +40,28 @@ public class TestActivity extends BaseActivity implements TabLayout.OnTabSelecte
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ButterKnife.bind(this);
-
-        mNestingAdapter = new MultiNestingPagerAdapter(this, true);
-        int N = 10;
-        List<TitleInteger> data = new ArrayList<>(N);
-        for (int i = 0; i < N; i++) {
-            data.add(new TitleInteger(i + 1));
-            TabLayout.Tab tab = mTabLayout.newTab();
-            tab.setText("Page " + (i + 1));
-            mTabLayout.addTab(tab, i == 0);
-        }
-        mNestingAdapter.replace(data);
-        mViewPager.setAdapter(mNestingAdapter);
-        mTabLayout.addOnTabSelectedListener(this);
-        mViewPager.addOnPageChangeListener(this);
+        mPtrLayout.setRefreshableSwitcher(this);
+        mPtrLayout.setRefreshListener(this);
     }
 
     @Override
-    public void onTabSelected(TabLayout.Tab tab) {
-        mViewPager.setCurrentItem(tab.getPosition(), true);
+    public boolean checkCanPullToRefresh() {
+        return true;
     }
 
     @Override
-    public void onTabUnselected(TabLayout.Tab tab) {
-
+    public void onStartPulling() {
+        ToastUtil.showToastWithShortDuration("开始下拉刷新");
     }
 
     @Override
-    public void onTabReselected(TabLayout.Tab tab) {
-
-    }
-
-    @Override
-    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
-    }
-
-    @Override
-    public void onPageSelected(int position) {
-        mTabLayout.getTabAt(position).select();
-    }
-
-    @Override
-    public void onPageScrollStateChanged(int state) {
-
+    public void onRefresh() {
+        postDelay(new Runnable() {
+            @Override
+            public void run() {
+               mPtrLayout.refreshComplete(true);
+                ToastUtil.showToastWithShortDuration("刷新完毕");
+            }
+        }, 3000);
     }
 }

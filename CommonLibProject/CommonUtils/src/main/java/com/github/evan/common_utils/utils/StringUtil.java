@@ -25,4 +25,9 @@ public class StringUtil {
         return isIgnoreCase ? arg1.equalsIgnoreCase(arg2) : arg1.equals(arg2);
     }
 
+    public static String toStringWithoutHashCode(Object obj){
+        String s = obj.toString();
+        return s.substring(0, s.lastIndexOf("@"));
+    }
+
 }

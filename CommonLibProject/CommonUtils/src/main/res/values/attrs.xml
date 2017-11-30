@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <declare-styleable name="PtrClassicIndicator">
+        <attr name="update_time_flag" format="string"/>
+        <attr name="progress_drawable" format="reference"/>
+    </declare-styleable>
+
     <declare-styleable name="NestingRecyclerView">
         <attr name="nesting_recycler_view_touch_intercept_mode" format="enum">
             <enum name="use_supper_default" value="-1"/>
