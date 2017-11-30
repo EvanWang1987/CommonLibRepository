@@ -1,9 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <declare-styleable name="PtrFrameLayout">
+        <attr name="slide_damping" format="float"/>
+    </declare-styleable>
+
     <declare-styleable name="PtrClassicIndicator">
         <attr name="update_time_flag" format="string"/>
         <attr name="progress_drawable" format="reference"/>
+        <attr name="is_progress_rotation_when_drag" format="boolean"/>
+        <attr name="progress_rotation_direction" format="enum">
+            <enum name="clockwise" value="0"/>
+            <enum name="anti_clockwise" value="1"/>
+        </attr>
     </declare-styleable>
 
     <declare-styleable name="NestingRecyclerView">

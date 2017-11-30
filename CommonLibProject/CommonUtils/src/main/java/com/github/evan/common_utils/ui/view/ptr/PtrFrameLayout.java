@@ -152,6 +152,7 @@ public class PtrFrameLayout extends ViewGroup {
             }
         } else if (actionMasked == MotionEvent.ACTION_MOVE) {
             int currentY = (int) event.getY();
+            int offsetYSinceDown = currentY - mDownY;
             int offsetYSinceLastMoved = currentY - mLastMovedY;
             mLastMovedY = currentY;
             int scrollY = getScrollY();
@@ -194,6 +195,7 @@ public class PtrFrameLayout extends ViewGroup {
             }
 
             mIndicator.setStatus(mPtrStatus);
+            mIndicator.setOffsetY(offsetYSinceDown, offsetYSinceLastMoved);
             scrollBy(0, -offsetYSinceLastMoved);
         } else if (actionMasked == MotionEvent.ACTION_UP || actionMasked == MotionEvent.ACTION_CANCEL) {
             getParent().requestDisallowInterceptTouchEvent(false);

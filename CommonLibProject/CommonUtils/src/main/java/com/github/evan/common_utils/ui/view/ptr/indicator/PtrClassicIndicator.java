@@ -8,10 +8,10 @@ import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.animation.LinearInterpolator;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
 import com.github.evan.common_utils.R;
 import com.github.evan.common_utils.ui.view.flagView.flagUpdater.TimeFlagUpdater;
 import com.github.evan.common_utils.ui.view.ptr.PtrStatus;
@@ -19,7 +19,6 @@ import com.github.evan.common_utils.utils.DateUtil;
 import com.github.evan.common_utils.utils.Logger;
 import com.github.evan.common_utils.utils.ResourceUtil;
 import com.github.evan.common_utils.utils.StringUtil;
-
 import java.util.Locale;
 
 /**
@@ -33,7 +32,8 @@ public class PtrClassicIndicator extends LinearLayout implements IIndicator {
     private PtrStatus mPtrStatus;
     private Drawable mProgressDrawable;
     private String mFlagName;
-    private int mLastOffset;
+    private ProgressRotationDirection mRotationDirection;
+    private boolean mIsRotationProgressWhenDragging;
 
     public PtrClassicIndicator(Context context) {
         super(context);
@@ -59,6 +59,8 @@ public class PtrClassicIndicator extends LinearLayout implements IIndicator {
         mRotationAnim.setRepeatCount(ObjectAnimator.INFINITE);
         mRotationAnim.setRepeatMode(ObjectAnimator.RESTART);
         mRotationAnim.setDuration(800);
+        LinearInterpolator linearInterpolator = new LinearInterpolator();
+        mRotationAnim.setInterpolator(linearInterpolator);
         if(null != attrs){
             initAttributes(context, attrs, R.styleable.PtrClassicIndicator);
         }
@@ -85,10 +87,9 @@ public class PtrClassicIndicator extends LinearLayout implements IIndicator {
 
     @Override
     public void setOffsetY(int offsetFromDownPoint, int offsetFromLastMoved) {
-        ObjectAnimator objectAnimator = ObjectAnimator.ofFloat(mIcProgress, "rotation", mLastOffset, offsetFromLastMoved);
-        objectAnimator.setDuration(100);
-        objectAnimator.start();
-        mLastOffset = offsetFromLastMoved;
+        if(mIsRotationProgressWhenDragging){
+            mIcProgress.setRotation(mRotationDirection == ProgressRotationDirection.CLOCKWISE ? offsetFromDownPoint : -offsetFromDownPoint);
+        }
     }
 
     @Override
@@ -99,6 +100,9 @@ public class PtrClassicIndicator extends LinearLayout implements IIndicator {
     @Override
     public void initAttributes(Context context, AttributeSet attrs, int[] styleable) {
         TypedArray typedArray = context.obtainStyledAttributes(attrs, styleable);
+        mIsRotationProgressWhenDragging = typedArray.getBoolean(R.styleable.PtrClassicIndicator_is_progress_rotation_when_drag, true);
+        int anInt = typedArray.getInt(R.styleable.PtrClassicIndicator_progress_rotation_direction, ProgressRotationDirection.CLOCKWISE.value);
+        mRotationDirection = ProgressRotationDirection.valueOf(anInt);
         mProgressDrawable = typedArray.getDrawable(R.styleable.PtrClassicIndicator_progress_drawable);
         mFlagName = typedArray.getString(R.styleable.PtrClassicIndicator_update_time_flag);
         if(null == mProgressDrawable){
@@ -137,6 +141,8 @@ public class PtrClassicIndicator extends LinearLayout implements IIndicator {
 
             case REFRESHING:
                 mTxtTitle.setText(R.string.refreshing);
+                float rotation = mIcProgress.getRotation();
+                mRotationAnim.setFloatValues(rotation, mRotationDirection == ProgressRotationDirection.CLOCKWISE ? rotation + 360f : rotation - 360f);
                 mRotationAnim.start();
                 break;
 
