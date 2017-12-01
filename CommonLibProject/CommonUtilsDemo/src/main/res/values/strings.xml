@@ -101,6 +101,14 @@
     <string name="hor_nest_ver_scroll_view">横向嵌套竖向滑动布局</string>
     <!-- 嵌套布局相关 -->
 
+    <!-- 下拉刷新相关 -->
+    <string name="pull_to_refresh">下拉刷新</string>
+    <string name="classic_indicator_with_ptl">Classic Indicator</string>
+    <string name="classic_pro_indicator_with_ptl">Classic pro Indicator</string>
+    <string name="gif_indicator_with_ptl">Gif Indicator</string>
+    <string name="large_image_indicator_with_ptr">Large Image Indicator</string>
+    <!-- 下拉刷新相关 -->
+
     <!-- DebugFragment相关 -->
     <string name="debug">Debug</string>
     <!-- DebugFragment相关 -->

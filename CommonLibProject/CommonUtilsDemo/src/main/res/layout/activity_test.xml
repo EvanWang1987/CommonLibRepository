@@ -4,13 +4,10 @@
     android:id="@+id/ptr_frame_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/Gray">
+    android:background="@color/White">
 
-    <com.github.evan.common_utils.ui.view.ptr.indicator.PtrClassicIndicator
+    <com.github.evan.common_utils.ui.view.ptr.indicator.ClassicIndicator
         android:id="@+id/ptr_indicator"
-        app:is_progress_rotation_when_drag="true"
-        app:progress_rotation_direction="anti_clockwise"
-        app:progress_drawable="@mipmap/icon_loading_small"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 

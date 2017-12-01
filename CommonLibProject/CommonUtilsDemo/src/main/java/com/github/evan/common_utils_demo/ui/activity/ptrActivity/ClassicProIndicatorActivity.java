@@ -1,14 +1,14 @@
-package com.github.evan.common_utils_demo.ui.activity;
+package com.github.evan.common_utils_demo.ui.activity.ptrActivity;
 
 import android.os.Bundle;
+import android.os.Message;
+import android.os.SystemClock;
 import android.support.annotation.Nullable;
 
 import com.github.evan.common_utils.ui.activity.BaseActivity;
 import com.github.evan.common_utils.ui.view.ptr.OnRefreshListener;
 import com.github.evan.common_utils.ui.view.ptr.PtrFrameLayout;
 import com.github.evan.common_utils.ui.view.ptr.PullToRefreshSwitcher;
-import com.github.evan.common_utils.ui.view.ptr.indicator.ClassicIndicator;
-import com.github.evan.common_utils.ui.view.ptr.indicator.LargeImageAnimationIndicator;
 import com.github.evan.common_utils.utils.ToastUtil;
 import com.github.evan.common_utils_demo.R;
 
@@ -16,18 +16,11 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 /**
- * Created by Evan on 2017/11/24.
+ * Created by Evan on 2017/12/1.
  */
-public class TestActivity extends BaseActivity implements PullToRefreshSwitcher, OnRefreshListener {
-    @BindView(R.id.ptr_frame_layout)
+public class ClassicProIndicatorActivity extends BaseActivity implements PullToRefreshSwitcher, OnRefreshListener {
+    @BindView(R.id.ptr_layout_classic_pro_indicator)
     PtrFrameLayout mPtrLayout;
-    @BindView(R.id.ptr_indicator)
-    ClassicIndicator mIndicator;
-
-    @Override
-    public int getLayoutResId() {
-        return R.layout.activity_test;
-    }
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -35,6 +28,18 @@ public class TestActivity extends BaseActivity implements PullToRefreshSwitcher,
         ButterKnife.bind(this);
         mPtrLayout.setRefreshableSwitcher(this);
         mPtrLayout.setRefreshListener(this);
+        postDelay(new Runnable() {
+            @Override
+            public void run() {
+                mPtrLayout.autoRefresh(true);
+                onRefresh();
+            }
+        }, 1000);
+    }
+
+    @Override
+    public int getLayoutResId() {
+        return R.layout.activity_classic_pro_indicator_with_ptr;
     }
 
     @Override
@@ -49,12 +54,20 @@ public class TestActivity extends BaseActivity implements PullToRefreshSwitcher,
 
     @Override
     public void onRefresh() {
-        postDelay(new Runnable() {
+        new Thread(){
             @Override
             public void run() {
-                mPtrLayout.refreshComplete(true);
-                ToastUtil.showToastWithShortDuration("刷新完毕");
+                SystemClock.sleep(2000);
+                sendEmptyMessage(LOAD_COMPLETE);
             }
-        }, 5000);
+        }.start();
+    }
+
+    @Override
+    public void onHandleMessage(Message message) {
+        if(message.what == LOAD_COMPLETE){
+            ToastUtil.showToastWithShortDuration("刷新完成");
+            mPtrLayout.refreshComplete(true);
+        }
     }
 }

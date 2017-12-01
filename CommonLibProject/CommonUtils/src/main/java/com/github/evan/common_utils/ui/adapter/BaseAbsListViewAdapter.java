@@ -43,6 +43,10 @@ public abstract class BaseAbsListViewAdapter<Data> extends BaseAdapter {
         }
     }
 
+    public void addAll(List<Data> data){
+        mData.addAll(data);
+    }
+
     public void remove(Data data){
         if(mData.contains(data)){
             mData.remove(data);

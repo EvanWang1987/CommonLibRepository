@@ -1,9 +1,6 @@
 package com.github.evan.common_utils.ui.view.ptr.indicator;
 
-import android.content.Context;
-import android.util.AttributeSet;
 import android.view.View;
-
 import com.github.evan.common_utils.ui.view.ptr.PtrStatus;
 
 /**
@@ -18,9 +15,5 @@ public interface IIndicator {
     public PtrStatus getStatus();
 
     public void setOffsetY(int offsetFromDownPoint, int offsetFromLastMoved);
-
-    public void setUpdateTime();
-
-    public void initAttributes(Context context, AttributeSet attrs, int[] styleable);
 
 }

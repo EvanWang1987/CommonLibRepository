@@ -20,6 +20,14 @@ import java.util.LinkedList;
  * Created by Evan on 2017/11/3.
  */
 public abstract class BaseActivity extends AppCompatActivity implements SoftHandlerReceiver {
+    protected static final int IDLE = 0;
+    protected static final int UNKNOW_ERROR = -1;
+    protected static final int LOAD_COMPLETE = 1;
+    protected static final int NET_UNAVAILABLE = 2;
+    protected static final int NET_TIME_OUT = 3;
+    protected static final int LOAD_EMPTY = 4;
+    protected static final int LOAD_ERROR = 5;
+
     public abstract @LayoutRes int getLayoutResId();
 //    public abstract BaseActivityConfig onCreateActivityConfig();
 

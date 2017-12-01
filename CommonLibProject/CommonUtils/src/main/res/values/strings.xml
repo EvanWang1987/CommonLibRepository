@@ -6,8 +6,9 @@
     <string name="loading_pager_empty_data">没有数据...</string>
     <string name="loading_pager_unknown_error">未知错误...</string>
     <string name="limit_text_notify_text_when_over_rang_limit_count">您输入的字符已经超出%1$d的限制</string>
-    <string name="pulling">下拉可进行刷新</string>
+    <string name="pulling">下拉进行刷新</string>
     <string name="release_to_refresh">释放立即刷新</string>
     <string name="last_refresh_time">上次刷新于: %1$s</string>
     <string name="refreshing">正在刷新</string>
+    <string name="jd_make_your_shopping_faster">京西,让购物更快捷</string>
 </resources>

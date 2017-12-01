@@ -14,6 +14,10 @@
         </activity>
 
         <activity android:name=".ui.activity.TestActivity"/>
+        <activity android:name=".ui.activity.ptrActivity.ClassicIndicatorActivity"/>
+        <activity android:name=".ui.activity.ptrActivity.ClassicProIndicatorActivity"/>
+        <activity android:name=".ui.activity.ptrActivity.GifIndicatorActivity"/>
+        <activity android:name=".ui.activity.ptrActivity.LargeImageIndicatorActivity"/>
     </application>
 
 </manifest>
