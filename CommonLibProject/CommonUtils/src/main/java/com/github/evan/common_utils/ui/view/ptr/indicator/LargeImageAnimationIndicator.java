@@ -56,7 +56,11 @@ public class LargeImageAnimationIndicator extends BaseIndicator {
         int indicatorHeight = getIndicatorView().getHeight();
         int sunHeight = mIcSun.getHeight();
         float translationY = mIcSun.getTranslationY();
-        if(translationY == -(indicatorHeight - sunHeight - SUN_TOP_MARGIN)){
+        if(offsetYFromLastMoved > 0 && translationY == -(indicatorHeight - sunHeight - SUN_TOP_MARGIN)){
+            return;
+        }
+
+        if(offsetYFromLastMoved < 0 && translationY == sunHeight){
             return;
         }
 

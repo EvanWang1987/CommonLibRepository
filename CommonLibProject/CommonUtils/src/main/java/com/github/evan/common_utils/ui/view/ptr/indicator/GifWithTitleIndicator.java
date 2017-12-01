@@ -55,7 +55,11 @@ public class GifWithTitleIndicator extends BaseIndicator {
         float scaleX = mGifView.getScaleX();
         float scaleY = mGifView.getScaleY();
         float alpha = mGifView.getAlpha();
-        if(scaleX == 1 && scaleY == 1 && alpha == 1){
+        if(offsetYFromLastMoved > 0 && scaleX == 1 && scaleY == 1 && alpha == 1){
+            return;
+        }
+
+        if(offsetYFromLastMoved <0 && scaleX == 0 && scaleY == 0 && alpha == 0){
             return;
         }
 
