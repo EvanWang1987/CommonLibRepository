@@ -49,4 +49,9 @@ public class ImagePagerHolder extends BasePagerHolder<Integer> {
     @Override
     public void destroyItem(ViewGroup container, int position, Object object) {
     }
+
+    @OnClick({R.id.img_image_pager_holder})
+    void onClick(View view){
+        ToastUtil.showToastWithShortDuration("Pager clicked！ position is : " + getPosition());
+    }
 }

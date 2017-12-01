@@ -28,7 +28,6 @@ public class TouchEventInterceptor {
             mDownY = event.getY();
             if(interceptMode == InterceptMode.ALL_BY_MYSELF || interceptMode == InterceptMode.ALL_BY_MYSELF_BUT_THRESHOLD){
                 destination.getParent().requestDisallowInterceptTouchEvent(true);
-                return true;
             }
         } else if (actionMasked == MotionEvent.ACTION_MOVE) {
             float currentX = event.getX();
@@ -41,8 +40,6 @@ public class TouchEventInterceptor {
             TouchEventDirection xDirection = currentX >= mDownX ? TouchEventDirection.LEFT_TO_RIGHT : TouchEventDirection.RIGHT_TO_LEFT;
             TouchEventDirection yDirection = currentY >= mDownY ? TouchEventDirection.TOP_TO_BOTTOM : TouchEventDirection.BOTTOM_TO_TOP;
             boolean isArriveTouchEventThreshold = thresholdSwitchable.isArriveTouchEventThreshold(interceptMode, xDirection, yDirection);
-//            Log.d("Evan", "isArriveTouchEventThreshold: " + isArriveTouchEventThreshold);
-
 
             if (interceptMode == InterceptMode.ALL_BY_MYSELF) {
                 if (isAchieveHorizontalScrollSlop || isAchieveVerticalScrollSlop) {
