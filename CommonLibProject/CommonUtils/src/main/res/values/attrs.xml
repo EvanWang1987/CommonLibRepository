@@ -29,10 +29,20 @@
         <attr name="update_time_flag" format="string"/>
     </declare-styleable>
 
+    <declare-styleable name="ClassicIndicator">
+        <attr name="classic_indicator_progress_drawable" format="reference"/>
+        <attr name="classic_indicator_progress_rotation_duration" format="integer"/>
+        <attr name="classic_indicator_progress_rotation_direction" format="enum">
+            <enum name="clockwise" value="0"/>
+            <enum name="anti_clockwise" value="1"/>
+        </attr>
+    </declare-styleable>
+
     <declare-styleable name="ClassicProIndicator">
-        <attr name="progress_drawable" format="reference"/>
+        <attr name="classic_pro_indicator_progress_drawable" format="reference"/>
+        <attr name="classic_pro_rotation_duration" format="integer"/>
         <attr name="is_progress_rotation_when_drag" format="boolean"/>
-        <attr name="progress_rotation_direction" format="enum">
+        <attr name="classic_pro_indicator_progress_rotation_direction" format="enum">
             <enum name="clockwise" value="0"/>
             <enum name="anti_clockwise" value="1"/>
         </attr>

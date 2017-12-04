@@ -30,7 +30,7 @@ public class ClassicIndicator extends TimeFlagIndicator {
     private ObjectAnimator mRotationAnim, mArrowAnim;
     private Drawable mProgressDrawable;
     private ProgressRotationDirection mRotationDirection;
-    private boolean mIsRotationProgressWhenDragging;
+    private int mProgressRotationDuration = 500;
 
     public ClassicIndicator(Context context) {
         super(context);
@@ -69,25 +69,25 @@ public class ClassicIndicator extends TimeFlagIndicator {
     }
 
     private void init(Context context, AttributeSet attrs) {
+        if (null != attrs) {
+            TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.ClassicIndicator);
+            int anInt = typedArray.getInt(R.styleable.ClassicIndicator_classic_indicator_progress_rotation_direction, ProgressRotationDirection.CLOCKWISE.value);
+            mRotationDirection = ProgressRotationDirection.valueOf(anInt);
+            mProgressDrawable = typedArray.getDrawable(R.styleable.ClassicIndicator_classic_indicator_progress_drawable);
+            if (null == mProgressDrawable) {
+                mProgressDrawable = getResources().getDrawable(R.mipmap.icon_loading_small);
+            }
+            mProgressRotationDuration = typedArray.getInt(R.styleable.ClassicIndicator_classic_indicator_progress_rotation_duration, 500);
+            typedArray.recycle();
+        }
         mRotationAnim = ObjectAnimator.ofFloat(mIcProgress, "rotation", 0f, 360f);
         mRotationAnim.setRepeatCount(ObjectAnimator.INFINITE);
         mRotationAnim.setRepeatMode(ObjectAnimator.RESTART);
-        mRotationAnim.setDuration(800);
+        mRotationAnim.setDuration(mProgressRotationDuration);
         LinearInterpolator linearInterpolator = new LinearInterpolator();
         mRotationAnim.setInterpolator(linearInterpolator);
         mArrowAnim = ObjectAnimator.ofFloat(mIcArrow, "rotation", 0f, 180f);
         mArrowAnim.setDuration(300);
-        if (null != attrs) {
-            TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.ClassicProIndicator);
-            mIsRotationProgressWhenDragging = typedArray.getBoolean(R.styleable.ClassicProIndicator_is_progress_rotation_when_drag, true);
-            int anInt = typedArray.getInt(R.styleable.ClassicProIndicator_progress_rotation_direction, ProgressRotationDirection.CLOCKWISE.value);
-            mRotationDirection = ProgressRotationDirection.valueOf(anInt);
-            mProgressDrawable = typedArray.getDrawable(R.styleable.ClassicProIndicator_progress_drawable);
-            if (null == mProgressDrawable) {
-                mProgressDrawable = getResources().getDrawable(R.mipmap.icon_loading_small);
-            }
-            typedArray.recycle();
-        }
         mIcProgress.setImageDrawable(mProgressDrawable);
     }
 
@@ -96,6 +96,8 @@ public class ClassicIndicator extends TimeFlagIndicator {
         switch (status) {
             case IDLE:
                 mRotationAnim.cancel();
+                mArrowAnim.cancel();
+                mIcArrow.setRotationY(0f);
                 break;
 
             case START_PULL:
@@ -114,8 +116,11 @@ public class ClassicIndicator extends TimeFlagIndicator {
 
             case PULLING:
                 mTxtTitle.setText(R.string.pulling);
-                mArrowAnim.setFloatValues(180f, 360f);
-                mArrowAnim.start();
+                if(mIcArrow.getRotation() == 180f){
+                    mArrowAnim.setFloatValues(180f, 360f);
+                    mArrowAnim.start();
+                }
+
                 break;
 
             case RELEASE_TO_REFRESH:

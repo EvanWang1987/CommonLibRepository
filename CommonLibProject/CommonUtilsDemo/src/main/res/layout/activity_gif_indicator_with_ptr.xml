@@ -13,7 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
-        android:text="@string/gif_indicator_with_ptl"
+        android:text="@string/ptr_with_gif_indicator"
         android:textColor="@color/text_color_black"
         android:textSize="16sp" />
 

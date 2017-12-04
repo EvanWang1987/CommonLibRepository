@@ -55,7 +55,7 @@ public class MultiNestingPagerHolder extends BasePagerHolder<TitleInteger> {
         int N = ImagePagerAdapter.IMAGES.length;
         List<Integer> data = new ArrayList<>(N);
         for (int i = 0; i < N; i++) {
-            data.add(i + 1);
+            data.add(ImagePagerAdapter.IMAGES[i]);
         }
         mImagePagerAdapter.replace(data);
         mViewPager.setAdapter(mImagePagerAdapter);

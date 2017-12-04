@@ -10,8 +10,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:is_progress_rotation_when_drag="true"
-        app:progress_drawable="@mipmap/icon_loading_small"
-        app:progress_rotation_direction="clockwise"
+        app:classic_indicator_progress_drawable="@mipmap/icon_loading_small"
+        app:classic_indicator_progress_rotation_direction="clockwise"
         app:update_time_flag="ptr_with_view_activity_last_update_time" />
 
 
@@ -20,7 +20,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
-        android:text="@string/classic_indicator_with_ptl"
+        android:text="@string/with_view"
         android:textColor="@color/text_color_black"
         android:textSize="16sp" />
 </com.github.evan.common_utils.ui.view.ptr.PtrFrameLayout>

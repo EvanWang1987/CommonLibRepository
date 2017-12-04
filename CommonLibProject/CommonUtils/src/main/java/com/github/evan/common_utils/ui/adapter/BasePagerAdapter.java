@@ -44,6 +44,10 @@ public abstract class BasePagerAdapter<Data> extends PagerAdapter {
         }
     }
 
+    public void addAll(List<Data> data){
+        mData.addAll(data);
+    }
+
     public void remove(Data data){
         if(mData.contains(data)){
             mData.remove(data);

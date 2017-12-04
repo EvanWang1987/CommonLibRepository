@@ -13,7 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
-        android:text="@string/large_image_indicator_with_ptr"
+        android:text="@string/ptr_with_large_image_indicator"
         android:textColor="@color/text_color_black"
         android:textSize="16sp" />
 

@@ -9,20 +9,20 @@
         android:id="@+id/ptr_frame_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:ad_view_id="@+id/prt_ad"
+        app:ad_view_id="@+id/prt_ad_test_activity"
         app:auto_refresh_duration="700"
-        app:content_id="@+id/ptr_content"
-        app:indicator_id="@+id/ptr_indicator"
+        app:content_id="@+id/ptr_content_test_activity"
+        app:indicator_id="@+id/ptr_indicator_test_activity"
         app:release_line_of_indicator_height_multiple="1"
         app:slide_dumping="0.5">
 
         <com.github.evan.common_utils.ui.view.ptr.indicator.ClassicProIndicator
-            android:id="@id/ptr_indicator"
+            android:id="@id/ptr_indicator_test_activity"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
         <FrameLayout
-            android:id="@id/ptr_content"
+            android:id="@id/ptr_content_test_activity"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
@@ -37,7 +37,7 @@
 
 
         <ImageView
-            android:id="@id/prt_ad"
+            android:id="@id/prt_ad_test_activity"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@mipmap/ad" />

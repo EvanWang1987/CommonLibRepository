@@ -30,6 +30,7 @@ public class ClassicProIndicator extends TimeFlagIndicator implements IIndicator
     private Drawable mProgressDrawable;
     private ProgressRotationDirection mRotationDirection;
     private boolean mIsRotationProgressWhenDragging;
+    private int mProgressRotationDuration = 500;
 
     public ClassicProIndicator(Context context) {
         super(context);
@@ -68,23 +69,24 @@ public class ClassicProIndicator extends TimeFlagIndicator implements IIndicator
     }
 
     private void init(Context context, AttributeSet attrs) {
-        mRotationAnim = ObjectAnimator.ofFloat(mIcProgress, "rotation", 0f, 360f);
-        mRotationAnim.setRepeatCount(ObjectAnimator.INFINITE);
-        mRotationAnim.setRepeatMode(ObjectAnimator.RESTART);
-        mRotationAnim.setDuration(800);
-        LinearInterpolator linearInterpolator = new LinearInterpolator();
-        mRotationAnim.setInterpolator(linearInterpolator);
         if (null != attrs) {
             TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.ClassicProIndicator);
             mIsRotationProgressWhenDragging = typedArray.getBoolean(R.styleable.ClassicProIndicator_is_progress_rotation_when_drag, true);
-            int anInt = typedArray.getInt(R.styleable.ClassicProIndicator_progress_rotation_direction, ProgressRotationDirection.CLOCKWISE.value);
+            int anInt = typedArray.getInt(R.styleable.ClassicProIndicator_classic_pro_indicator_progress_rotation_direction, ProgressRotationDirection.CLOCKWISE.value);
             mRotationDirection = ProgressRotationDirection.valueOf(anInt);
-            mProgressDrawable = typedArray.getDrawable(R.styleable.ClassicProIndicator_progress_drawable);
+            mProgressDrawable = typedArray.getDrawable(R.styleable.ClassicProIndicator_classic_pro_indicator_progress_drawable);
             if (null == mProgressDrawable) {
                 mProgressDrawable = getResources().getDrawable(R.mipmap.icon_loading_small);
             }
+            mProgressRotationDuration = typedArray.getInteger(R.styleable.ClassicProIndicator_classic_pro_rotation_duration, 500);
             typedArray.recycle();
         }
+        mRotationAnim = ObjectAnimator.ofFloat(mIcProgress, "rotation", 0f, 360f);
+        mRotationAnim.setRepeatCount(ObjectAnimator.INFINITE);
+        mRotationAnim.setRepeatMode(ObjectAnimator.RESTART);
+        mRotationAnim.setDuration(mProgressRotationDuration);
+        LinearInterpolator linearInterpolator = new LinearInterpolator();
+        mRotationAnim.setInterpolator(linearInterpolator);
         mIcProgress.setImageDrawable(mProgressDrawable);
     }
 
