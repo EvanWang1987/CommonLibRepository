@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/White"
+    android:background="@color/light_gray"
     android:orientation="vertical">
 
     <com.github.evan.common_utils.ui.view.ptr.PtrLayout
@@ -23,16 +23,17 @@
             android:id="@id/ptr_with_view_indicator"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            app:is_progress_rotation_when_drag="true"
             app:progress_drawable="@mipmap/icon_loading_small"
             app:progress_rotation_direction="clockwise"
             app:progress_rotation_duration="750"
-            app:is_progress_rotation_when_drag="true"
             app:update_time_flag="@string/with_view" />
 
         <TextView
             android:id="@id/ptr_with_view_content"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:background="@color/White"
             android:gravity="center"
             android:text="@string/ptr_with_classic_pro_indicator"
             android:textColor="@color/Black"
@@ -40,9 +41,10 @@
 
         <ImageView
             android:id="@id/ptr_with_view_ad"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@mipmap/ad" />
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:src="@mipmap/adidas" />
 
 
     </com.github.evan.common_utils.ui.view.ptr.PtrLayout>
