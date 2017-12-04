@@ -55,34 +55,45 @@ public class GifWithTitleIndicator extends BaseIndicator {
         float scaleX = mGifView.getScaleX();
         float scaleY = mGifView.getScaleY();
         float alpha = mGifView.getAlpha();
-        if(offsetYFromLastMoved > 0 && scaleX == 1 && scaleY == 1 && alpha == 1){
-            return;
+
+        boolean isTop2BottomMove = offsetYFromLastMoved >= 0;
+        if (isTop2BottomMove) {
+            scaleX += 0.008f;
+            scaleY += 0.008f;
+            alpha += 0.008f;
+
+            if (scaleX > 1) {
+                scaleX = 1;
+            }
+
+            if (scaleY > 1) {
+                scaleY = 1;
+            }
+
+            if (alpha > 1) {
+                alpha = 1;
+            }
+        } else {
+            scaleX -= 0.008f;
+            scaleY -= 0.008f;
+            alpha -= 0.008f;
+
+            if (scaleX < 0) {
+                scaleX = 0;
+            }
+
+            if (scaleY < 0) {
+                scaleY = 0;
+            }
+
+            if (alpha < 0) {
+                alpha = 0;
+            }
         }
 
-        if(offsetYFromLastMoved <0 && scaleX == 0 && scaleY == 0 && alpha == 0){
-            return;
-        }
-
-        float dstScaleX = offsetYFromLastMoved >= 0 ? scaleX + 0.01f : scaleX - 0.01f;
-        float dstScaleY = offsetYFromLastMoved >= 0 ? scaleY + 0.01f : scaleY - 0.01f;
-        float dstAlpha = offsetYFromLastMoved >= 0 ? alpha + 0.01f : alpha - 0.01f;
-        if (dstScaleX >= 1) {
-            dstScaleX = 1;
-        }
-        if (dstScaleY >= 1) {
-            dstScaleY = 1;
-        }
-        if (dstAlpha >= 1) {
-            dstAlpha = 1;
-            mIcDrawable.setVisibility(INVISIBLE);
-        }
-
-        Logger.d("dstAlpha: " + dstAlpha);
-        Logger.d("dstScaleX: " + dstScaleX);
-        Logger.d("dstScaleY: " + dstScaleY);
-        mGifView.setScaleX(dstScaleX);
-        mGifView.setScaleY(dstScaleY);
-        mGifView.setAlpha(dstAlpha);
+        mGifView.setScaleX(scaleX);
+        mGifView.setScaleY(scaleY);
+        mGifView.setAlpha(alpha);
     }
 
     private void handleViewsWithPtrStatus(PtrStatus ptrStatus) {
@@ -103,14 +114,15 @@ public class GifWithTitleIndicator extends BaseIndicator {
 
             case PULLING:
                 mTxtDesc.setText(R.string.pulling);
+                mIcDrawable.setVisibility(VISIBLE);
                 break;
 
             case RELEASE_TO_REFRESH:
                 mTxtDesc.setText(R.string.release_to_refresh);
                 mIcDrawable.setVisibility(INVISIBLE);
-                mGifView.setScaleX(1);
-                mGifView.setScaleY(1);
-                mGifView.setAlpha(1);
+//                mGifView.setScaleX(1);
+//                mGifView.setScaleY(1);
+//                mGifView.setAlpha(1);
                 break;
 
             case REFRESHING:

@@ -70,14 +70,14 @@ public class ClassicIndicator extends TimeFlagIndicator {
 
     private void init(Context context, AttributeSet attrs) {
         if (null != attrs) {
-            TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.ClassicIndicator);
-            int anInt = typedArray.getInt(R.styleable.ClassicIndicator_classic_indicator_progress_rotation_direction, ProgressRotationDirection.CLOCKWISE.value);
+            TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.BaseIndicator);
+            int anInt = typedArray.getInt(R.styleable.BaseIndicator_progress_rotation_direction, ProgressRotationDirection.CLOCKWISE.value);
             mRotationDirection = ProgressRotationDirection.valueOf(anInt);
-            mProgressDrawable = typedArray.getDrawable(R.styleable.ClassicIndicator_classic_indicator_progress_drawable);
+            mProgressDrawable = typedArray.getDrawable(R.styleable.BaseIndicator_progress_drawable);
             if (null == mProgressDrawable) {
                 mProgressDrawable = getResources().getDrawable(R.mipmap.icon_loading_small);
             }
-            mProgressRotationDuration = typedArray.getInt(R.styleable.ClassicIndicator_classic_indicator_progress_rotation_duration, 500);
+            mProgressRotationDuration = typedArray.getInt(R.styleable.BaseIndicator_progress_rotation_duration, 500);
             typedArray.recycle();
         }
         mRotationAnim = ObjectAnimator.ofFloat(mIcProgress, "rotation", 0f, 360f);

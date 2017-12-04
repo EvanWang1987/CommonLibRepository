@@ -7,15 +7,13 @@ import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 
 import com.github.evan.common_utils.ui.fragment.BaseFragment;
-import com.github.evan.common_utils.ui.view.ptr.indicator.GifWithTitleIndicator;
 import com.github.evan.common_utils_demo.R;
-import com.github.evan.common_utils_demo.ui.activity.ptrActivity.GifIndicatorActivity;
-import com.github.evan.common_utils_demo.ui.activity.ptrActivity.LargeImageIndicatorActivity;
-import com.github.evan.common_utils_demo.ui.activity.ptrActivity.ClassicIndicatorActivity;
-import com.github.evan.common_utils_demo.ui.activity.ptrActivity.ClassicProIndicatorActivity;
+import com.github.evan.common_utils_demo.ui.activity.ptrActivity.PtrWithClassicProIndicatorActivity;
+import com.github.evan.common_utils_demo.ui.activity.ptrActivity.PtrWithGifIndicatorActivity;
+import com.github.evan.common_utils_demo.ui.activity.ptrActivity.PtrWithLargeImageIndicatorActivity;
+import com.github.evan.common_utils_demo.ui.activity.ptrActivity.PtrWithClassicIndicatorActivity;
 import com.github.evan.common_utils_demo.ui.activity.ptrActivity.PtrWithGridViewActivity;
 import com.github.evan.common_utils_demo.ui.activity.ptrActivity.PtrWithListViewActivity;
 import com.github.evan.common_utils_demo.ui.activity.ptrActivity.PtrWithRecyclerViewActivity;
@@ -82,19 +80,19 @@ public class PullToRefreshFragment extends BaseFragment {
                 break;
 
             case R.id.card_ptr_with_classic_indicator:
-                dstActivity = ClassicIndicatorActivity.class;
+                dstActivity = PtrWithClassicIndicatorActivity.class;
                 break;
 
             case R.id.card_ptr_with_classic_pro_indicator:
-                dstActivity = ClassicProIndicatorActivity.class;
+                dstActivity = PtrWithClassicProIndicatorActivity.class;
                 break;
 
             case R.id.card_ptr_with_gif_indicator:
-                dstActivity = GifIndicatorActivity.class;
+                dstActivity = PtrWithGifIndicatorActivity.class;
                 break;
 
             case R.id.card_ptr_with_large_image_indicator:
-                dstActivity = LargeImageIndicatorActivity.class;
+                dstActivity = PtrWithLargeImageIndicatorActivity.class;
                 break;
         }
         loadActivity(dstActivity, null, false, -1);

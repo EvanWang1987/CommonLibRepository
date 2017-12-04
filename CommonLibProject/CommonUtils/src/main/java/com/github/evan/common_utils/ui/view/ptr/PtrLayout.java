@@ -15,6 +15,7 @@ import android.widget.TextView;
 import com.github.evan.common_utils.R;
 import com.github.evan.common_utils.simpleImplementInterface.SaveLastValueAnimatorUpdateListener;
 import com.github.evan.common_utils.ui.view.ptr.indicator.IIndicator;
+import com.github.evan.common_utils.utils.Logger;
 
 /**
  * Created by Evan on 2017/12/2.
@@ -40,7 +41,7 @@ public class PtrLayout extends ViewGroup {
     private ValueAnimator mRollBackAnim = ValueAnimator.ofInt();
     private int mRollBackToIdleDuration = 500;
     private int mRollBackToRefreshingDuration = 300;
-    private int mAutoRefreshDuration = 700;
+    private int mAutoRefreshDuration = 1000;
 
     public PtrLayout(Context context) {
         super(context);
@@ -168,6 +169,7 @@ public class PtrLayout extends ViewGroup {
             mIndicator.setStatus(mPtrStatus);
             mPtrStatus = PtrStatus.REFRESHING;
             mIndicator.setStatus(mPtrStatus);
+            PtrLayout.this.scrollTo(0, mReleaseToRefreshDividingLine);
         } else {
             mAutoRefreshAnim.setIntValues(0, mReleaseToRefreshDividingLine);
             mAutoRefreshAnim.addUpdateListener(new SaveLastValueAnimatorUpdateListener() {
@@ -181,7 +183,8 @@ public class PtrLayout extends ViewGroup {
                         }
                     }
 
-                    mIndicator.setOffsetY(value, null == lastValue ? value : value - (int) lastValue);
+                    int offsetFromLast = null == lastValue ? 0 : Math.abs(value) - Math.abs((int) lastValue);
+                    mIndicator.setOffsetY(Math.abs(value), offsetFromLast);
                     PtrLayout.this.scrollTo(0, value);
                     if (value == mReleaseToRefreshDividingLine) {
                         mPtrStatus = PtrStatus.REFRESHING;
@@ -409,6 +412,7 @@ public class PtrLayout extends ViewGroup {
             scrollTo(0, 0);
             mIndicatorHeight = indicatorView.getHeight();
             mReleaseToRefreshDividingLine = (int) -(mIndicatorHeight * mReleaseLineOfIndicatorHeightMultiple);
+            mIndicator.setStatus(mPtrStatus);
         }
     }
 

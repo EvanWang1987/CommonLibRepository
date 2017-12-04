@@ -4,42 +4,38 @@ import android.os.Bundle;
 import android.os.Message;
 import android.os.SystemClock;
 import android.support.annotation.Nullable;
+import android.view.View;
 
 import com.github.evan.common_utils.ui.activity.BaseActivity;
 import com.github.evan.common_utils.ui.view.ptr.OnRefreshListener;
 import com.github.evan.common_utils.ui.view.ptr.PtrFrameLayout;
+import com.github.evan.common_utils.ui.view.ptr.PtrLayout;
 import com.github.evan.common_utils.ui.view.ptr.PullToRefreshSwitcher;
 import com.github.evan.common_utils.utils.ToastUtil;
 import com.github.evan.common_utils_demo.R;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 /**
  * Created by Evan on 2017/12/1.
  */
-public class ClassicProIndicatorActivity extends BaseActivity implements PullToRefreshSwitcher, OnRefreshListener {
-    @BindView(R.id.ptr_layout_classic_pro_indicator)
-    PtrFrameLayout mPtrLayout;
+public class PtrWithClassicProIndicatorActivity extends BaseActivity implements PullToRefreshSwitcher, OnRefreshListener {
+    @BindView(R.id.ptr_layout_ptr_with_view)
+    PtrLayout mPtrLayout;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ButterKnife.bind(this);
-        mPtrLayout.setRefreshableSwitcher(this);
+        mPtrLayout.setPtrSwitcher(this);
         mPtrLayout.setRefreshListener(this);
-        postDelay(new Runnable() {
-            @Override
-            public void run() {
-                mPtrLayout.autoRefresh(true);
-                onRefresh();
-            }
-        }, 1000);
     }
 
     @Override
     public int getLayoutResId() {
-        return R.layout.activity_classic_pro_indicator_with_ptr;
+        return R.layout.activity_ptr_with_classic_pro_indicator;
     }
 
     @Override
@@ -57,7 +53,7 @@ public class ClassicProIndicatorActivity extends BaseActivity implements PullToR
         new Thread(){
             @Override
             public void run() {
-                SystemClock.sleep(2000);
+                SystemClock.sleep(3000);
                 sendEmptyMessage(LOAD_COMPLETE);
             }
         }.start();
@@ -69,5 +65,11 @@ public class ClassicProIndicatorActivity extends BaseActivity implements PullToR
             ToastUtil.showToastWithShortDuration("刷新完成");
             mPtrLayout.refreshComplete(true);
         }
+    }
+
+    @OnClick(R.id.btn_auto_ptr)
+    void onClick(View view){
+        mPtrLayout.autoRefresh(true);
+        onRefresh();
     }
 }

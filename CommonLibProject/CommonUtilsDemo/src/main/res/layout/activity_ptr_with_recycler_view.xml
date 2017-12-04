@@ -23,9 +23,9 @@
             android:id="@id/ptr_with_view_indicator"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:classic_pro_indicator_progress_drawable="@mipmap/icon_loading_small"
-            app:classic_pro_indicator_progress_rotation_direction="clockwise"
-            app:classic_pro_rotation_duration="750"
+            app:progress_drawable="@mipmap/icon_loading_small"
+            app:progress_rotation_direction="clockwise"
+            app:progress_rotation_duration="750"
             app:is_progress_rotation_when_drag="true"
             app:update_time_flag="@string/with_recycler_view" />
 
