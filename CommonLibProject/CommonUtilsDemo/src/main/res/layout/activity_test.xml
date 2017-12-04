@@ -1,31 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.github.evan.common_utils.ui.view.ptr.PtrFrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/ptr_frame_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/White">
 
-    <com.github.evan.common_utils.ui.view.ptr.indicator.ClassicIndicator
-        android:id="@+id/ptr_indicator"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
-    <LinearLayout
+    <com.github.evan.common_utils.ui.view.ptr.PtrLayout
+        android:id="@+id/ptr_frame_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/Grey_Material_Design_400_saturation"
-        android:gravity="center">
+        app:ad_view_id="@+id/prt_ad"
+        app:content_id="@+id/ptr_content"
+        app:indicator_id="@+id/ptr_indicator">
 
-        <TextView
+        <com.github.evan.common_utils.ui.view.ptr.indicator.ClassicProIndicator
+            android:id="@id/ptr_indicator"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <FrameLayout
+            android:id="@id/ptr_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ListView
+                android:id="@+id/list_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:divider="@color/Alpha"
+                android:dividerHeight="5dp" />
+
+        </FrameLayout>
+
+
+        <ImageView
+            android:id="@id/prt_ad"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="test"
-            android:textColor="@color/text_color_black"
-            android:textSize="16sp" />
-
-    </LinearLayout>
+            android:src="@mipmap/ad" />
 
 
-</com.github.evan.common_utils.ui.view.ptr.PtrFrameLayout>
+    </com.github.evan.common_utils.ui.view.ptr.PtrLayout>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/btn_click_to_ptr"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|left"
+        android:layout_marginBottom="5dp"
+        android:layout_marginLeft="5dp"
+        android:src="@drawable/selector_ptr_white"
+        app:elevation="5dp"
+        app:useCompatPadding="true" />
+
+</android.support.design.widget.CoordinatorLayout>

@@ -58,26 +58,26 @@ public class PtrFrameLayout extends ViewGroup {
         if (isWithAnimation) {
             final ValueAnimator animator = ValueAnimator.ofInt(mIndicator.getIndicatorView().getHeight(), 0);
             animator.setDuration(800);
-            animator.addUpdateListener(new SaveLastValueAnimatorUpdateListener(){
+            animator.addUpdateListener(new SaveLastValueAnimatorUpdateListener() {
                 @Override
                 public void onUpdateAnimation(ValueAnimator animator, Object lastValue) {
                     int indicatorHeight = mIndicator.getIndicatorView().getHeight();
                     int currentValue = (int) animator.getAnimatedValue();
                     int lastDstValue = null == lastValue ? indicatorHeight + 1 : (int) lastValue;
 
-                    if(currentValue < indicatorHeight && currentValue > 0 && (mPtrStatus == PtrStatus.START_PULL || mPtrStatus == PtrStatus.IDLE)){
+                    if (currentValue < indicatorHeight && currentValue > 0 && (mPtrStatus == PtrStatus.START_PULL || mPtrStatus == PtrStatus.IDLE)) {
                         mPtrStatus = PtrStatus.PULLING;
                         mIndicator.setStatus(mPtrStatus);
                     }
 
-                    if(currentValue == 0 && mPtrStatus == PtrStatus.PULLING){
+                    if (currentValue == 0 && mPtrStatus == PtrStatus.PULLING) {
                         mPtrStatus = PtrStatus.RELEASE_TO_REFRESH;
                         mIndicator.setStatus(mPtrStatus);
                     }
                     mIndicator.setOffsetY(indicatorHeight - currentValue, currentValue - lastDstValue);
                     PtrFrameLayout.this.scrollTo(0, currentValue);
 
-                    if(currentValue == 0 && mPtrStatus == PtrStatus.RELEASE_TO_REFRESH){
+                    if (currentValue == 0 && mPtrStatus == PtrStatus.RELEASE_TO_REFRESH) {
                         mPtrStatus = PtrStatus.REFRESHING;
                         mIndicator.setStatus(mPtrStatus);
                         animator.removeUpdateListener(this);
@@ -133,12 +133,6 @@ public class PtrFrameLayout extends ViewGroup {
 
     @Override
     public boolean dispatchTouchEvent(MotionEvent ev) {
-        
-
-
-
-
-
 
 
         return super.dispatchTouchEvent(ev);
@@ -160,7 +154,6 @@ public class PtrFrameLayout extends ViewGroup {
             boolean isArriveMinVerticalSlideSlop = offsetY >= mTouchSlop;
             boolean isTopToBottomSlide = currentY > mDownY;
             if (isVerticalSlide && isArriveMinVerticalSlideSlop && isTopToBottomSlide && mRefreshableSwitcher.checkCanPullToRefresh()) {
-                getParent().requestDisallowInterceptTouchEvent(true);
                 isIntercept = true;
                 if (mSpringBackAnim.isRunning()) {
                     mSpringBackAnim.cancel();
@@ -241,7 +234,6 @@ public class PtrFrameLayout extends ViewGroup {
             mIndicator.setOffsetY(offsetYSinceDown, offsetYSinceLastMoved);
             scrollBy(0, -offsetYSinceLastMoved);
         } else if (actionMasked == MotionEvent.ACTION_UP || actionMasked == MotionEvent.ACTION_CANCEL) {
-            getParent().requestDisallowInterceptTouchEvent(false);
             int scrollY = getScrollY();
             if (mPtrStatus == PtrStatus.REFRESHING || mPtrStatus == PtrStatus.PULLING || mPtrStatus == PtrStatus.RELEASE_TO_REFRESH) {
                 if (mPtrStatus == PtrStatus.REFRESHING) {
@@ -338,16 +330,14 @@ public class PtrFrameLayout extends ViewGroup {
 
     @Override
     protected void onLayout(boolean changed, int l, int t, int r, int b) {
-        if (changed) {
-            View indicator = mIndicator.getIndicatorView();
-            View content = this.mContent;
-            indicator.layout(l, t, r, indicator.getMeasuredHeight());
-            MarginLayoutParams lps = (MarginLayoutParams) content.getLayoutParams();
-            content.layout(l + lps.leftMargin, t + indicator.getMeasuredHeight() + lps.topMargin, r + lps.rightMargin, b - lps.bottomMargin);
-            if (mPtrStatus == PtrStatus.IDLE) {
-                scrollTo(0, mIndicator.getIndicatorView().getMeasuredHeight());
-                mIndicator.setStatus(mPtrStatus);
-            }
+        View indicator = mIndicator.getIndicatorView();
+        View content = this.mContent;
+        indicator.layout(l, t, r, indicator.getMeasuredHeight());
+        MarginLayoutParams lps = (MarginLayoutParams) content.getLayoutParams();
+        content.layout(l + lps.leftMargin, t + indicator.getMeasuredHeight() + lps.topMargin, r + lps.rightMargin, b - lps.bottomMargin);
+        if (mPtrStatus == PtrStatus.IDLE) {
+            scrollTo(0, mIndicator.getIndicatorView().getMeasuredHeight());
+            mIndicator.setStatus(mPtrStatus);
         }
     }
 

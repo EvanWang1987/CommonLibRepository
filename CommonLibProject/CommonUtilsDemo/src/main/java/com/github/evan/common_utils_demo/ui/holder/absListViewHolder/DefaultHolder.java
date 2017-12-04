@@ -43,7 +43,7 @@ public class DefaultHolder extends BaseAbsListViewHolder<Integer> {
 
     @Override
     public void onRefreshHolder(Integer data) {
-        mTxtPosition.setText(data + "");
+        mTxtPosition.setText(getPosition() + 1 + "");
     }
 
     @OnClick({R.id.layout_root_default_holder, R.id.txt_thumb_up_default_holder})

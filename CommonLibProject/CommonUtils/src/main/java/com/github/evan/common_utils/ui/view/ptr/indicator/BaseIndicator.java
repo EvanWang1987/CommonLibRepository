@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
 import com.github.evan.common_utils.ui.view.ptr.PtrStatus;
+import com.github.evan.common_utils.utils.Logger;
 
 /**
  * Created by Evan on 2017/11/30.
@@ -51,6 +52,7 @@ public abstract class BaseIndicator extends LinearLayout implements IIndicator {
 
     @Override
     public final void setStatus(PtrStatus status) {
+        Logger.d("PtrStatus: " + status);
         mPtrStatus = status;
         onPtrStatusChange(status);
     }
