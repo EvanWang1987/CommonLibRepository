@@ -23,8 +23,8 @@ import com.github.evan.common_utils.utils.ResourceUtil;
  * Created by Evan on 2017/11/2.
  */
 public class LoadingPager extends FrameLayout {
-    private Drawable mLoadingDrawable, mUnknownDrawable, mLoadEmptyDrawable, mNetUnAvailableDrawable, mNetTimeoutDrawable;
-    private CharSequence mLoadingText, mUnknownText, mLoadEmptyText, mNetUnAvailableText, mNetTimeoutText;
+    private Drawable mLoadingDrawable, mUnknownDrawable, mLoadEmptyDrawable, mNetUnAvailableDrawable, mNetTimeoutDrawable, mNoSearchContentDrawable;
+    private CharSequence mLoadingText, mUnknownText, mLoadEmptyText, mNetUnAvailableText, mNetTimeoutText, mNoSearchContentText;
     private ImageView mStatusDrawable;
     private TextView mStatusText;
     private LinearLayout mStatusContainer;
@@ -35,7 +35,7 @@ public class LoadingPager extends FrameLayout {
 
 
     public enum LoadingStatus {
-        IDLE, LOADING, UNKNOWN_ERROR, LOAD_EMPTY, NET_UNAVAILABLE, NET_TIME_OUT,
+        IDLE, LOADING, UNKNOWN_ERROR, LOAD_EMPTY, NET_UNAVAILABLE, NET_TIME_OUT, NO_SEARCH_CONTENT,
     }
 
     private LoadingStatus mLoadingStatus;
@@ -82,6 +82,8 @@ public class LoadingPager extends FrameLayout {
             mNetUnAvailableText = typedArray.getText(R.styleable.LoadingPager_loadingText);
             mNetTimeoutDrawable = typedArray.getDrawable(R.styleable.LoadingPager_loadingDrawable);
             mNetTimeoutText = typedArray.getText(R.styleable.LoadingPager_loadingText);
+            mNoSearchContentDrawable = typedArray.getDrawable(R.styleable.LoadingPager_noSearchContentDrawable);
+            mNoSearchContentText = typedArray.getString(R.styleable.LoadingPager_noSearchContentText);
             mStatusTextColor = typedArray.getColor(R.styleable.LoadingPager_textColor, ResourceUtil.getColor(R.color.DarkGray));
             mStatusTextSize = (int) typedArray.getDimension(R.styleable.LoadingPager_textSize, DensityUtil.sp2px(16));
             mIsLoadingWithRotateAnim = typedArray.getBoolean(R.styleable.LoadingPager_isLoadingWithRotateAnimation, true);
@@ -92,11 +94,13 @@ public class LoadingPager extends FrameLayout {
             mLoadEmptyDrawable = ResourceUtil.getDrawable(R.mipmap.status_empty_data);
             mNetUnAvailableDrawable = ResourceUtil.getDrawable(R.mipmap.status_net_unavailable);
             mNetTimeoutDrawable = ResourceUtil.getDrawable(R.mipmap.status_net_timeout);
+            mNoSearchContentDrawable = ResourceUtil.getDrawable(R.mipmap.status_no_search_content);
             mLoadingText = ResourceUtil.getString(R.string.loading_pager_loading);
             mUnknownText = ResourceUtil.getString(R.string.loading_pager_unknown_error);
             mLoadEmptyText = ResourceUtil.getString(R.string.loading_pager_empty_data);
             mNetUnAvailableText = ResourceUtil.getString(R.string.loading_pager_net_unavailable);
             mNetTimeoutText = ResourceUtil.getString(R.string.loading_pager_net_timeout);
+            mNoSearchContentText = ResourceUtil.getString(R.string.loading_pager_no_search_content);
             mStatusTextColor = ResourceUtil.getColor(R.color.DarkGray);
             mStatusTextSize = DensityUtil.sp2px(16);
             mIsLoadingWithRotateAnim = true;
@@ -157,6 +161,12 @@ public class LoadingPager extends FrameLayout {
             case NET_TIME_OUT:
                 mStatusDrawable.setImageDrawable(mLoadingDrawable);
                 mStatusText.setText(mLoadingText);
+                stopRotateAnim();
+                break;
+
+            case NO_SEARCH_CONTENT:
+                mStatusDrawable.setImageDrawable(mNoSearchContentDrawable);
+                mStatusText.setText(mNoSearchContentText);
                 stopRotateAnim();
                 break;
         }

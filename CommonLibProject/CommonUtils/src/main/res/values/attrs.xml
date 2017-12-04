@@ -94,6 +94,8 @@
         <attr name="netUnAvailableText" format="string" />
         <attr name="netTimeoutDrawable" format="reference" />
         <attr name="netTimeoutText" format="string" />
+        <attr name="noSearchContentDrawable" format="reference" />
+        <attr name="noSearchContentText" format="string" />
         <attr name="textSize" format="dimension" />
         <attr name="textColor" format="color" />
         <attr name="isLoadingWithRotateAnimation" format="boolean" />

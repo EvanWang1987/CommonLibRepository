@@ -5,6 +5,7 @@
     <string name="loading_pager_net_timeout">网络链接超时...</string>
     <string name="loading_pager_empty_data">没有数据...</string>
     <string name="loading_pager_unknown_error">未知错误...</string>
+    <string name="loading_pager_no_search_content">没有搜索到任何东西...</string>
     <string name="limit_text_notify_text_when_over_rang_limit_count">您输入的字符已经超出%1$d的限制</string>
     <string name="pulling">下拉进行刷新</string>
     <string name="release_to_refresh">释放立即刷新</string>

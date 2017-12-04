@@ -169,7 +169,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 
             case R.id.functionPullToRefresh:
                 visibleFragment = fragmentManager.findFragmentByTag(PullToRefreshFragment.class.getName());
-                isExpand = false;
+                isExpand = true;
                 break;
 
             case R.id.functionCustomEditText:
