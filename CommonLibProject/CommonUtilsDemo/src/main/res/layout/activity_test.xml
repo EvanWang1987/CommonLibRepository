@@ -10,8 +10,11 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:ad_view_id="@+id/prt_ad"
+        app:auto_refresh_duration="700"
         app:content_id="@+id/ptr_content"
-        app:indicator_id="@+id/ptr_indicator">
+        app:indicator_id="@+id/ptr_indicator"
+        app:release_line_of_indicator_height_multiple="1"
+        app:slide_dumping="0.5">
 
         <com.github.evan.common_utils.ui.view.ptr.indicator.ClassicProIndicator
             android:id="@id/ptr_indicator"

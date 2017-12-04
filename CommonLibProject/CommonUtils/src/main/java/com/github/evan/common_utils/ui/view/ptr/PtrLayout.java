@@ -3,6 +3,7 @@ package com.github.evan.common_utils.ui.view.ptr;
 import android.animation.ValueAnimator;
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.support.annotation.FloatRange;
 import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.view.MotionEvent;
@@ -14,7 +15,6 @@ import android.widget.TextView;
 import com.github.evan.common_utils.R;
 import com.github.evan.common_utils.simpleImplementInterface.SaveLastValueAnimatorUpdateListener;
 import com.github.evan.common_utils.ui.view.ptr.indicator.IIndicator;
-import com.github.evan.common_utils.utils.Logger;
 
 /**
  * Created by Evan on 2017/12/2.
@@ -23,17 +23,24 @@ public class PtrLayout extends ViewGroup {
     private PtrStatus mPtrStatus = PtrStatus.IDLE;
     private int mTouchSlop;
     private int mDownX, mDownY, mLastY;
+    @FloatRange(from = 0.5f, to = 1.5f)
+    private float mDumpingMultiple = 0.7f;
+    @FloatRange(from = 0.7f, to = 1.5f)
+    private float mReleaseLineOfIndicatorHeightMultiple = 1f;
     private PullToRefreshSwitcher mPtrSwitcher;
     private OnRefreshListener mRefreshListener;
     private int mIndicatorId = -1, mContentId = -1, mAdViewId = -1;
     private IIndicator mIndicator;
     private View mContent;
     private View mAdView;
-    private boolean mDisableHorizontalSlideCheck = false;
+    private boolean mIsCalledStartPullListener = false;
     private int mIndicatorHeight;
     private int mReleaseToRefreshDividingLine;
-    private ValueAnimator mPtrAnim = ValueAnimator.ofInt();
+    private ValueAnimator mAutoRefreshAnim = ValueAnimator.ofInt();
     private ValueAnimator mRollBackAnim = ValueAnimator.ofInt();
+    private int mRollBackToIdleDuration = 500;
+    private int mRollBackToRefreshingDuration = 300;
+    private int mAutoRefreshDuration = 700;
 
     public PtrLayout(Context context) {
         super(context);
@@ -56,11 +63,89 @@ public class PtrLayout extends ViewGroup {
             mIndicatorId = typedArray.getResourceId(R.styleable.PtrLayout_indicator_id, -1);
             mContentId = typedArray.getResourceId(R.styleable.PtrLayout_content_id, -1);
             mAdViewId = typedArray.getResourceId(R.styleable.PtrLayout_ad_view_id, -1);
+            float dumping = typedArray.getFloat(R.styleable.PtrLayout_slide_dumping, 0.7f);
+            float releaseLineMultiple = typedArray.getFloat(R.styleable.PtrLayout_release_line_of_indicator_height_multiple, 1f);
+            mRollBackToIdleDuration = typedArray.getInt(R.styleable.PtrLayout_roll_back_to_idle_duration, 500);
+            mRollBackToRefreshingDuration = typedArray.getInt(R.styleable.PtrLayout_roll_back_to_refreshing_duration, 300);
+            mAutoRefreshDuration = typedArray.getInt(R.styleable.PtrLayout_auto_refresh_duration, mAutoRefreshDuration);
+            if (dumping >= 0.5f || dumping <= 1.5f) {
+                mDumpingMultiple = dumping;
+            }
+            if (dumping >= 0.7f || dumping <= 1.5f) {
+                mReleaseLineOfIndicatorHeightMultiple = releaseLineMultiple;
+            }
             typedArray.recycle();
         }
         mTouchSlop = ViewConfiguration.get(getContext()).getScaledTouchSlop();
-        mRollBackAnim.setDuration(750);
-        mPtrAnim.setDuration(750);
+        mAutoRefreshAnim.setDuration(mAutoRefreshDuration);
+    }
+
+    public int getIndicatorId() {
+        return mIndicatorId;
+    }
+
+    public void setIndicatorId(int indicatorId) {
+        this.mIndicatorId = indicatorId;
+    }
+
+    public int getContentId() {
+        return mContentId;
+    }
+
+    public void setContentId(int contentId) {
+        this.mContentId = contentId;
+    }
+
+    public int getAdViewId() {
+        return mAdViewId;
+    }
+
+    public void setAdViewId(int adViewId) {
+        this.mAdViewId = adViewId;
+    }
+
+    public int getRollBackToIdleDuration() {
+        return mRollBackToIdleDuration;
+    }
+
+    public void setRollBackToIdleDuration(long rollBackToIdleDuration) {
+        this.mRollBackToIdleDuration = (int) rollBackToIdleDuration;
+    }
+
+    public int getRollBackToRefreshingDuration() {
+        return mRollBackToRefreshingDuration;
+    }
+
+    public void setRollBackToRefreshingDuration(long rollBackToRefreshingDuration) {
+        this.mRollBackToRefreshingDuration = (int) rollBackToRefreshingDuration;
+    }
+
+    public int getAutoRefreshDuration() {
+        return mAutoRefreshDuration;
+    }
+
+    public void setAutoRefreshDuration(long autoRefreshDuration) {
+        this.mAutoRefreshDuration = (int) autoRefreshDuration;
+    }
+
+    public float getDumpingMultiple() {
+        return mDumpingMultiple;
+    }
+
+    public void setDumpingMultiple(@FloatRange(from = 0.5f, to = 1.5f) float dumpingMultiple) {
+        if (dumpingMultiple >= 0.5f && dumpingMultiple <= 1.5f) {
+            this.mDumpingMultiple = dumpingMultiple;
+        }
+    }
+
+    public float getReleaseLineOfIndicatorHeightMultiple() {
+        return mReleaseLineOfIndicatorHeightMultiple;
+    }
+
+    public void setReleaseLineOfIndicatorHeightMultiple(@FloatRange(from = 0.7f, to = 1.5f) float releaseLineOfIndicatorHeightMultiple) {
+        if (releaseLineOfIndicatorHeightMultiple >= 0.7f && releaseLineOfIndicatorHeightMultiple <= 1.5f) {
+            this.mReleaseLineOfIndicatorHeightMultiple = releaseLineOfIndicatorHeightMultiple;
+        }
     }
 
     public void setPtrSwitcher(PullToRefreshSwitcher ptrSwitcher) {
@@ -84,8 +169,8 @@ public class PtrLayout extends ViewGroup {
             mPtrStatus = PtrStatus.REFRESHING;
             mIndicator.setStatus(mPtrStatus);
         } else {
-            mPtrAnim.setIntValues(0, mReleaseToRefreshDividingLine);
-            mPtrAnim.addUpdateListener(new SaveLastValueAnimatorUpdateListener() {
+            mAutoRefreshAnim.setIntValues(0, mReleaseToRefreshDividingLine);
+            mAutoRefreshAnim.addUpdateListener(new SaveLastValueAnimatorUpdateListener() {
                 @Override
                 public void onUpdateAnimation(ValueAnimator animator, Object lastValue) {
                     int value = (int) animator.getAnimatedValue();
@@ -101,16 +186,14 @@ public class PtrLayout extends ViewGroup {
                     if (value == mReleaseToRefreshDividingLine) {
                         mPtrStatus = PtrStatus.REFRESHING;
                         mIndicator.setStatus(mPtrStatus);
-                        mPtrAnim.removeUpdateListener(this);
+                        mAutoRefreshAnim.removeUpdateListener(this);
                     }
                 }
             });
             mPtrStatus = PtrStatus.START_PULL;
             mIndicator.setStatus(mPtrStatus);
-            mPtrAnim.start();
+            mAutoRefreshAnim.start();
         }
-
-
     }
 
     public void refreshComplete(boolean withAnimation) {
@@ -158,7 +241,9 @@ public class PtrLayout extends ViewGroup {
                 return true;
             }
         } else if (actionMasked == MotionEvent.ACTION_UP || actionMasked == MotionEvent.ACTION_CANCEL) {
-
+            mDownX = 0;
+            mDownY = 0;
+            mLastY = 0;
         }
         return false;
     }
@@ -174,6 +259,7 @@ public class PtrLayout extends ViewGroup {
             mIndicator.setStatus(mPtrStatus);
             if (mPtrStatus == PtrStatus.START_PULL && mRefreshListener != null) {
                 mRefreshListener.onStartPulling();
+                mIsCalledStartPullListener = true;
             }
         } else if (actionMasked == MotionEvent.ACTION_MOVE) {
             int currentY = (int) event.getY();
@@ -189,6 +275,10 @@ public class PtrLayout extends ViewGroup {
                 } else {
                     mPtrStatus = PtrStatus.START_PULL;
                     mIndicator.setStatus(mPtrStatus);
+                    if (!mIsCalledStartPullListener) {
+                        mRefreshListener.onStartPulling();
+                        mIsCalledStartPullListener = true;
+                    }
                     return true;
                 }
             } else if (mPtrStatus == PtrStatus.START_PULL) {
@@ -206,7 +296,7 @@ public class PtrLayout extends ViewGroup {
             } else if (mPtrStatus == PtrStatus.PULLING) {
                 if (!isTop2BottomSlide) {
                     if (destinationScrollY > 0) {
-                        destinationScrollY = 0;
+                        offsetYBetweenLast = 0;
                     }
                 } else {
                     if (destinationScrollY <= mReleaseToRefreshDividingLine) {
@@ -228,8 +318,14 @@ public class PtrLayout extends ViewGroup {
             }
 
             mIndicator.setOffsetY(offsetY, offsetYBetweenLast);
-            scrollTo(0, destinationScrollY);
+            int position = (int) (-offsetYBetweenLast * mDumpingMultiple);
+            scrollBy(0, position);
         } else if (actionMasked == MotionEvent.ACTION_UP || actionMasked == MotionEvent.ACTION_CANCEL) {
+            mDownX = 0;
+            mDownY = 0;
+            mLastY = 0;
+            mIsCalledStartPullListener = false;
+
             if (mPtrStatus == PtrStatus.RELEASE_TO_REFRESH || mPtrStatus == PtrStatus.REFRESHING) {
                 //回到分界线
                 if (mPtrStatus == PtrStatus.RELEASE_TO_REFRESH) {
@@ -241,6 +337,7 @@ public class PtrLayout extends ViewGroup {
                 }
                 int scrollY = getScrollY();
                 mRollBackAnim.setIntValues(scrollY, mReleaseToRefreshDividingLine);
+                mRollBackAnim.setDuration(mRollBackToRefreshingDuration);
                 mRollBackAnim.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
                     @Override
                     public void onAnimationUpdate(ValueAnimator animation) {
@@ -258,6 +355,7 @@ public class PtrLayout extends ViewGroup {
                 mIndicator.setStatus(mPtrStatus);
                 int scrollY = getScrollY();
                 mRollBackAnim.setIntValues(scrollY, 0);
+                mRollBackAnim.setDuration(mRollBackToIdleDuration);
                 mRollBackAnim.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
                     @Override
                     public void onAnimationUpdate(ValueAnimator animation) {
@@ -308,10 +406,9 @@ public class PtrLayout extends ViewGroup {
         }
 
         if (mPtrStatus == PtrStatus.IDLE) {
-            Logger.d("=======IDLE========");
             scrollTo(0, 0);
             mIndicatorHeight = indicatorView.getHeight();
-            mReleaseToRefreshDividingLine = -mIndicatorHeight;
+            mReleaseToRefreshDividingLine = (int) -(mIndicatorHeight * mReleaseLineOfIndicatorHeightMultiple);
         }
     }
 

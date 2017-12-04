@@ -5,10 +5,11 @@
         <attr name="indicator_id" format="reference"/>
         <attr name="content_id" format="reference"/>
         <attr name="ad_view_id" format="reference"/>
-        <attr name="indicator_top_space" format="dimension"/>
-        <attr name="ad_view_bottom_space" format="dimension"/>
-        <attr name="ad_view_left_space" format="dimension"/>
-        <attr name="ad_view_right_space" format="dimension"/>
+        <attr name="slide_dumping" format="float"/>
+        <attr name="release_line_of_indicator_height_multiple" format="float"/>
+        <attr name="roll_back_to_idle_duration" format="integer"/>
+        <attr name="roll_back_to_refreshing_duration" format="integer"/>
+        <attr name="auto_refresh_duration" format="integer"/>
     </declare-styleable>
 
     <declare-styleable name="GifView">
