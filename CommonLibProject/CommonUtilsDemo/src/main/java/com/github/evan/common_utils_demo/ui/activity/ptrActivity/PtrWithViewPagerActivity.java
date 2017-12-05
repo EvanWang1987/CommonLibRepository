@@ -31,7 +31,7 @@ public class PtrWithViewPagerActivity extends BaseActivity implements PullToRefr
     @BindView(R.id.ptr_with_view_content)
     ViewPager mViewPager;
     ImagePagerAdapter mAdapter;
-    private List<Integer> mNewData;
+    private List<String> mNewData;
 
 
     @Override
@@ -66,9 +66,9 @@ public class PtrWithViewPagerActivity extends BaseActivity implements PullToRefr
             public void run() {
                 SystemClock.sleep(3000);
                 int N = 5;
-                List<Integer> data = new ArrayList<>(N);
+                List<String> data = new ArrayList<>(N);
                 for (int i = 0; i < N; i++) {
-                    int image = ImagePagerAdapter.IMAGES[i];
+                    String image = ImagePagerAdapter.IMAGES[i];
                     data.add(image);
                 }
                 mNewData = data;

@@ -110,6 +110,7 @@ public abstract class BasePagerAdapter<Data> extends PagerAdapter {
         }
         holder.setPosition(position);
         holder.setData(data);
+        holder.setDisplaying(true);
         holder.instantiateItem(container, position);
         mConvertViews.put(position, convertView);
         container.addView(convertView);
@@ -121,6 +122,7 @@ public abstract class BasePagerAdapter<Data> extends PagerAdapter {
         View convertView = mConvertViews.get(position);
         container.removeView(convertView);
         BasePagerHolder<Data> holder = (BasePagerHolder<Data>) convertView.getTag();
+        holder.setDisplaying(false);
         holder.destroyItem(container, position, object);
         if(!mIsCacheAllItemView){
             mConvertViews.remove(position);

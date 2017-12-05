@@ -15,6 +15,10 @@
     <string name="flag_view">自定义标记View</string>
     <string name="tint">着色</string>
 
+    <string name="warning">警告</string>
+    <string name="exit">退出</string>
+    <string name="you_do_not_give_the_permission">您没有基于以下权限,App无法正常运行,请重新打开App或者在系统设置中给予响应的权限. \n %1$s</string>
+
 
     <string name="time_flag_text_view">带时间标记的TextView</string>
     <string name="left_top_corner">左上角</string>

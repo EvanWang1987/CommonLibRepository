@@ -38,7 +38,8 @@ public class NestingViewPager extends ViewPager implements Nestable, ThresholdSw
         if (actionMasked == MotionEvent.ACTION_DOWN || actionMasked == MotionEvent.ACTION_UP || actionMasked == MotionEvent.ACTION_CANCEL) {
             super.onInterceptTouchEvent(event);
         }
-        return mInterceptor.interceptTouchEvent(event, mInterceptMode, this, this);
+        boolean result = mInterceptor.interceptTouchEvent(event, mInterceptMode, this, this);
+        return result;
     }
 
     @Override

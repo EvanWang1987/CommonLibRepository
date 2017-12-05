@@ -1,5 +1,9 @@
 package com.github.evan.common_utils_demo.ui.activity;
 
+import android.Manifest;
+import android.content.DialogInterface;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -8,11 +12,14 @@ import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
 import android.view.Menu;
@@ -21,6 +28,8 @@ import android.view.View;
 
 import com.github.evan.common_utils.ui.activity.BaseActivity;
 import com.github.evan.common_utils.utils.FragmentUtil;
+import com.github.evan.common_utils.utils.PackageUtil;
+import com.github.evan.common_utils.utils.ResourceUtil;
 import com.github.evan.common_utils.utils.UiUtil;
 import com.github.evan.common_utils_demo.R;
 import com.github.evan.common_utils_demo.ui.fragment.CustomEditTextFragment;
@@ -36,6 +45,9 @@ import com.github.evan.common_utils_demo.ui.fragment.DebugFragment;
 import com.github.evan.common_utils_demo.ui.fragment.TintFragment;
 import com.github.evan.common_utils_demo.ui.fragment.ViewPagerFragment;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -44,6 +56,7 @@ import butterknife.OnClick;
  * Created by Evan on 2017/11/9.
  */
 public class MainActivity extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener {
+    private static final int PERMISSION_REQUEST_CODE = 101;
     private static final String[] fragmentNames = {HomeFragment.class.getName(), ScreenInformationFragment.class.getName(), ListGridViewFragment.class.getName(), RecyclerViewFragment.class.getName(), ViewPagerFragment.class.getName(), VerNestHorScrollViewFragment.class.getName(), HorNestVerScrollViewFragment.class.getName(), PullToRefreshFragment.class.getName(), CustomEditTextFragment.class.getName(), FlagViewFragment.class.getName(), TintFragment.class.getName(), DebugFragment.class.getName()};
 
     @BindView(R.id.mainActivity_appBar)
@@ -60,6 +73,8 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     public CoordinatorLayout mCoordinatorLayout;
     @BindView(R.id.btn_share)
     public FloatingActionButton mBtnShare;
+
+    AlertDialog mUnrequestedAllPermissionDialog;
 
 
     @Override
@@ -79,6 +94,49 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         mNavigationView.setNavigationItemSelectedListener(this);
         FragmentUtil.addAllFragmentAndShowSomeOne(this, getSupportFragmentManager(), R.id.fragmentContainer, fragmentNames, true, null, HomeFragment.class.getName());
         mNavigationView.setCheckedItem(R.id.functionHome);
+        List<String> unRequestedPermission = PackageUtil.checkPermission(Manifest.permission.INTERNET, Manifest.permission.WRITE_EXTERNAL_STORAGE, Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN ? Manifest.permission.READ_EXTERNAL_STORAGE : null);
+        if(!unRequestedPermission.isEmpty()){
+            String[] permissions = new String[unRequestedPermission.size()];
+            permissions = unRequestedPermission.toArray(permissions);
+            ActivityCompat.requestPermissions(this, permissions, PERMISSION_REQUEST_CODE);
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if(requestCode == PERMISSION_REQUEST_CODE){
+            List<String> unRequestedPermission = new ArrayList<>();
+            for (int i = 0; i < grantResults.length; i++) {
+                int grantResult = grantResults[i];
+                if(grantResult == PackageManager.PERMISSION_DENIED){
+                    unRequestedPermission.add(permissions[i]);
+                }
+            }
+
+            if(!unRequestedPermission.isEmpty()){
+                StringBuilder sBuilder = new StringBuilder();
+                for (int i = 0; i < unRequestedPermission.size(); i++) {
+                    String s = unRequestedPermission.get(i);
+                    sBuilder.append("\r\n");
+                    sBuilder.append(s);
+                }
+                AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                builder.setTitle(R.string.warning);
+                builder.setMessage(ResourceUtil.getString(R.string.you_do_not_give_the_permission, sBuilder.toString()));
+                builder.setPositiveButton(R.string.exit, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                        MainActivity.this.finish();
+                    }
+                });
+                builder.setCancelable(false);
+                mUnrequestedAllPermissionDialog = builder.create();
+                mUnrequestedAllPermissionDialog.setCanceledOnTouchOutside(false);
+                mUnrequestedAllPermissionDialog.show();
+            }
+        }
     }
 
     @OnClick(R.id.btn_share)

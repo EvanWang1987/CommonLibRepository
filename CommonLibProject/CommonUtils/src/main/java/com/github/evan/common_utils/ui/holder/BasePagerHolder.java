@@ -22,6 +22,7 @@ public abstract class BasePagerHolder<Data> {
     private View mRootView;
     private int mPosition;
     private Data mData;
+    private boolean mIsDisplaying;
 
     public BasePagerHolder(Context context, ViewGroup parent) {
         if(null == context){
@@ -70,4 +71,11 @@ public abstract class BasePagerHolder<Data> {
         this.mData = data;
     }
 
+    public boolean isDisplaying() {
+        return mIsDisplaying;
+    }
+
+    public void setDisplaying(boolean isDisplaying) {
+        this.mIsDisplaying = isDisplaying;
+    }
 }

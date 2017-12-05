@@ -11,6 +11,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.Gravity;
+import android.view.animation.LinearInterpolator;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -62,6 +63,7 @@ public class LoadingPager extends FrameLayout {
 
         LayoutParams containerParams = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
         LinearLayout.LayoutParams drawableParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        drawableParams.gravity = Gravity.CENTER;
         LinearLayout.LayoutParams textParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
         containerParams.gravity = Gravity.CENTER;
 
@@ -69,7 +71,10 @@ public class LoadingPager extends FrameLayout {
         mStatusContainer.addView(mStatusText, textParams);
         this.addView(mStatusContainer, containerParams);
         mRotateAnim = ObjectAnimator.ofFloat(mStatusDrawable, "rotation", 0f, 360f);
+        mRotateAnim.setDuration(750);
         mRotateAnim.setRepeatCount(ObjectAnimator.INFINITE);
+        mRotateAnim.setRepeatMode(ObjectAnimator.RESTART);
+        mRotateAnim.setInterpolator(new LinearInterpolator());
         if (null != attrs) {
             TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.LoadingPager);
             mLoadingDrawable = typedArray.getDrawable(R.styleable.LoadingPager_loadingDrawable);

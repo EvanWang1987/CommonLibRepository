@@ -14,12 +14,26 @@
         android:layout_height="match_parent"
         android:background="@drawable/shape_white_bkg_with_round_corner">
 
+        <com.github.evan.common_utils.ui.view.LoadingPager
+            android:id="@+id/loading_pager_image_pager_holder"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:visibility="visible"
+            app:isLoadingWithRotateAnimation="true"
+            app:loadEmptyDrawable="@mipmap/status_image_load_failed"
+            app:loadingDrawable="@mipmap/status_loading"
+            app:netTimeoutDrawable="@mipmap/status_net_timeout"
+            app:netUnAvailableDrawable="@mipmap/status_net_unavailable"
+            app:unknownDrawable="@mipmap/status_unknown_error" />
+
         <com.github.evan.common_utils.ui.view.imageView.RoundedImageView
             android:id="@+id/img_image_pager_holder"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:clickable="true"
             android:scaleType="centerCrop"
+            android:visibility="gone"
             app:riv_corner_radius="5dp" />
 
         <TextView

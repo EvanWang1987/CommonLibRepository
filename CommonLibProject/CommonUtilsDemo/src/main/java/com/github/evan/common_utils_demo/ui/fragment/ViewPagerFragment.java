@@ -39,8 +39,6 @@ public class ViewPagerFragment extends BaseFragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_view_pager, null);
         ButterKnife.bind(this, root);
-        ViewCompat.setElevation(mTabLayout, DensityUtil.dp2px(5));
-        ViewCompat.setTranslationZ(mTabLayout, DensityUtil.dp2px(5));
         mNestingAdapter = new MultiNestingPagerAdapter(getContext(), true);
         int N = 10;
         List<TitleInteger> data = new ArrayList<>(N);
