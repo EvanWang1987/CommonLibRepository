@@ -9,6 +9,7 @@ import android.widget.HorizontalScrollView;
 import com.github.evan.common_utils.R;
 import com.github.evan.common_utils.gesture.interceptor.InterceptMode;
 import com.github.evan.common_utils.gesture.interceptor.ThresholdSwitchable;
+import com.github.evan.common_utils.gesture.interceptor.ThresholdSwitcher;
 import com.github.evan.common_utils.gesture.interceptor.TouchEventDirection;
 import com.github.evan.common_utils.gesture.interceptor.TouchEventInterceptor;
 
@@ -19,6 +20,7 @@ import com.github.evan.common_utils.gesture.interceptor.TouchEventInterceptor;
 public class NestingHorizontalScrollView extends HorizontalScrollView implements Nestable, ThresholdSwitchable {
     private InterceptMode mInterceptMode = InterceptMode.HORIZONTAL;
     private TouchEventInterceptor mInterceptor;
+    private ThresholdSwitcher mThresholdSwitcher;
 
     public NestingHorizontalScrollView(Context context) {
         super(context);
@@ -36,6 +38,7 @@ public class NestingHorizontalScrollView extends HorizontalScrollView implements
     }
 
     private void init(Context context, AttributeSet attrs, int style){
+        mThresholdSwitcher = new ThresholdSwitcher(context);
         mInterceptor = new TouchEventInterceptor(context);
         if(null != attrs){
             mInterceptMode = pickupInterceptMode(attrs, R.styleable.NestingHorizontalScrollView, style);
@@ -43,16 +46,20 @@ public class NestingHorizontalScrollView extends HorizontalScrollView implements
     }
 
     @Override
+    public boolean dispatchTouchEvent(MotionEvent ev) {
+        mThresholdSwitcher.dispatchThreshold(ev, mInterceptMode, this, this);
+        return super.dispatchTouchEvent(ev);
+    }
+
+    @Override
     public boolean onInterceptTouchEvent(MotionEvent event) {
         int actionMasked = event.getActionMasked();
-        if(actionMasked == MotionEvent.ACTION_DOWN){
-            super.onInterceptTouchEvent(event);
-        }else if(actionMasked == MotionEvent.ACTION_UP || actionMasked == MotionEvent.ACTION_CANCEL){
+        if(actionMasked == MotionEvent.ACTION_DOWN || actionMasked == MotionEvent.ACTION_UP || actionMasked == MotionEvent.ACTION_CANCEL){
+            //保证父类初始化数据
             super.onInterceptTouchEvent(event);
         }
-        //Make sense super do itself's work.
 
-        return mInterceptor.interceptTouchEvent(event, mInterceptMode, this, this);
+        return mInterceptor.interceptTouchEvent(event, InterceptMode.HORIZONTAL, this, true);
     }
 
     @Override

@@ -56,7 +56,7 @@ public class ImagePagerHolder extends BasePagerHolder<String> implements Request
     @Override
     public void instantiateItem(ViewGroup container, int position) {
         String data = getData();
-        mLoadingPager.setLoadingStatus(LoadingPager.LoadingStatus.LOADING);
+        mLoadingPager.setLoadingStatus(LoadingPager.LoadingStatus.LOAD_EMPTY);
         mLoadingPager.setVisibility(View.VISIBLE);
         mImgPhoto.setVisibility(View.GONE);
 
@@ -79,7 +79,7 @@ public class ImagePagerHolder extends BasePagerHolder<String> implements Request
             }
         };
 
-        Glide.with(getContext()).load(getData()).asBitmap().listener(this).into(target);
+//        Glide.with(getContext()).load(getData()).asBitmap().listener(this).into(target);
         mTxtPosition.setText(getPosition() + 1 + " / " + ImagePagerAdapter.IMAGES.length);
     }
 

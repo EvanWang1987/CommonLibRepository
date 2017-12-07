@@ -21,7 +21,7 @@
             android:layout_gravity="center"
             android:visibility="visible"
             app:isLoadingWithRotateAnimation="true"
-            app:loadEmptyDrawable="@mipmap/status_image_load_failed"
+            app:loadEmptyDrawable="@mipmap/status_empty_data"
             app:loadingDrawable="@mipmap/status_loading"
             app:netTimeoutDrawable="@mipmap/status_net_timeout"
             app:netUnAvailableDrawable="@mipmap/status_net_unavailable"

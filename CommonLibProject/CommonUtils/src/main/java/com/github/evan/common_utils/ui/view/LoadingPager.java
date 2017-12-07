@@ -79,14 +79,14 @@ public class LoadingPager extends FrameLayout {
             TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.LoadingPager);
             mLoadingDrawable = typedArray.getDrawable(R.styleable.LoadingPager_loadingDrawable);
             mLoadingText = typedArray.getText(R.styleable.LoadingPager_loadingText);
-            mUnknownDrawable = typedArray.getDrawable(R.styleable.LoadingPager_loadingDrawable);
-            mUnknownText = typedArray.getText(R.styleable.LoadingPager_loadingText);
-            mLoadEmptyDrawable = typedArray.getDrawable(R.styleable.LoadingPager_loadingDrawable);
-            mLoadEmptyText = typedArray.getText(R.styleable.LoadingPager_loadingText);
-            mNetUnAvailableDrawable = typedArray.getDrawable(R.styleable.LoadingPager_loadingDrawable);
-            mNetUnAvailableText = typedArray.getText(R.styleable.LoadingPager_loadingText);
-            mNetTimeoutDrawable = typedArray.getDrawable(R.styleable.LoadingPager_loadingDrawable);
-            mNetTimeoutText = typedArray.getText(R.styleable.LoadingPager_loadingText);
+            mUnknownDrawable = typedArray.getDrawable(R.styleable.LoadingPager_unknownDrawable);
+            mUnknownText = typedArray.getText(R.styleable.LoadingPager_unknownText);
+            mLoadEmptyDrawable = typedArray.getDrawable(R.styleable.LoadingPager_loadEmptyDrawable);
+            mLoadEmptyText = typedArray.getText(R.styleable.LoadingPager_loadEmptyText);
+            mNetUnAvailableDrawable = typedArray.getDrawable(R.styleable.LoadingPager_netUnAvailableDrawable);
+            mNetUnAvailableText = typedArray.getText(R.styleable.LoadingPager_netUnAvailableText);
+            mNetTimeoutDrawable = typedArray.getDrawable(R.styleable.LoadingPager_netTimeoutDrawable);
+            mNetTimeoutText = typedArray.getText(R.styleable.LoadingPager_netTimeoutText);
             mNoSearchContentDrawable = typedArray.getDrawable(R.styleable.LoadingPager_noSearchContentDrawable);
             mNoSearchContentText = typedArray.getString(R.styleable.LoadingPager_noSearchContentText);
             mStatusTextColor = typedArray.getColor(R.styleable.LoadingPager_textColor, ResourceUtil.getColor(R.color.DarkGray));
@@ -146,26 +146,26 @@ public class LoadingPager extends FrameLayout {
                 break;
 
             case UNKNOWN_ERROR:
-                mStatusDrawable.setImageDrawable(mLoadingDrawable);
-                mStatusText.setText(mLoadingText);
+                mStatusDrawable.setImageDrawable(mUnknownDrawable);
+                mStatusText.setText(mUnknownText);
                 stopRotateAnim();
                 break;
 
             case LOAD_EMPTY:
-                mStatusDrawable.setImageDrawable(mLoadingDrawable);
-                mStatusText.setText(mLoadingText);
+                mStatusDrawable.setImageDrawable(mLoadEmptyDrawable);
+                mStatusText.setText(mLoadEmptyText);
                 stopRotateAnim();
                 break;
 
             case NET_UNAVAILABLE:
-                mStatusDrawable.setImageDrawable(mLoadingDrawable);
-                mStatusText.setText(mLoadingText);
+                mStatusDrawable.setImageDrawable(mNetUnAvailableDrawable);
+                mStatusText.setText(mNetUnAvailableText);
                 stopRotateAnim();
                 break;
 
             case NET_TIME_OUT:
-                mStatusDrawable.setImageDrawable(mLoadingDrawable);
-                mStatusText.setText(mLoadingText);
+                mStatusDrawable.setImageDrawable(mNetTimeoutDrawable);
+                mStatusText.setText(mNetTimeoutText);
                 stopRotateAnim();
                 break;
 
