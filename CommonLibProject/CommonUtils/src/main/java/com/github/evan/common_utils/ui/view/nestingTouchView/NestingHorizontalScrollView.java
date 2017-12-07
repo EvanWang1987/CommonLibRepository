@@ -49,7 +49,7 @@ public class NestingHorizontalScrollView extends HorizontalScrollView implements
 
     @Override
     public boolean dispatchTouchEvent(MotionEvent ev) {
-        mThresholdSwitcher.dispatchThreshold(ev, mInterceptMode, this, this);
+        mThresholdSwitcher.dispatchThreshold(ev, mInterceptMode, this, this, mIsHandleParallelSlide);
         return super.dispatchTouchEvent(ev);
     }
 

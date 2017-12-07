@@ -40,7 +40,7 @@ public class NestingViewPager extends ViewPager implements Nestable, ThresholdSw
 
     @Override
     public boolean dispatchTouchEvent(MotionEvent event) {
-        mThresholdSwitcher.dispatchThreshold(event, mInterceptMode, this, this);
+        mThresholdSwitcher.dispatchThreshold(event, mInterceptMode, this, this, mIsHandleParallelSlide);
         return super.dispatchTouchEvent(event);
     }
 
