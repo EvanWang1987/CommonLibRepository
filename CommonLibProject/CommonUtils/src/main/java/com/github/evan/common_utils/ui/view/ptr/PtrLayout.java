@@ -320,7 +320,7 @@ public class PtrLayout extends ViewGroup {
                 }
             }
 
-            mIndicator.setOffsetY(offsetY, offsetYBetweenLast);
+            mIndicator.setOffsetY(offsetY, (int) (offsetYBetweenLast * mDumpingMultiple));
             int position = (int) (-offsetYBetweenLast * mDumpingMultiple);
             scrollBy(0, position);
         } else if (actionMasked == MotionEvent.ACTION_UP || actionMasked == MotionEvent.ACTION_CANCEL) {

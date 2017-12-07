@@ -58,9 +58,9 @@ public class GifWithTitleIndicator extends BaseIndicator {
 
         boolean isTop2BottomMove = offsetYFromLastMoved >= 0;
         if (isTop2BottomMove) {
-            scaleX += 0.008f;
-            scaleY += 0.008f;
-            alpha += 0.008f;
+            scaleX += 0.01f;
+            scaleY += 0.01f;
+            alpha += 0.01f;
 
             if (scaleX > 1) {
                 scaleX = 1;
@@ -74,9 +74,9 @@ public class GifWithTitleIndicator extends BaseIndicator {
                 alpha = 1;
             }
         } else {
-            scaleX -= 0.008f;
-            scaleY -= 0.008f;
-            alpha -= 0.008f;
+            scaleX -= 0.01f;
+            scaleY -= 0.01f;
+            alpha -= 0.01f;
 
             if (scaleX < 0) {
                 scaleX = 0;
