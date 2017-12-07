@@ -20,6 +20,7 @@ public class NestingScrollView extends ScrollView implements Nestable, Threshold
     private InterceptMode mInterceptMode = InterceptMode.VERTICAL;
     private TouchEventInterceptor mInterceptor;
     private ThresholdSwitcher mThresholdSwitcher;
+    private boolean mIsHandleParallelSlide = false;
 
 
     public NestingScrollView(Context context) {
@@ -80,6 +81,7 @@ public class NestingScrollView extends ScrollView implements Nestable, Threshold
     @Override
     public InterceptMode pickupInterceptMode(AttributeSet attr, int[] declareStyleable, int style) {
         TypedArray typedArray = getContext().obtainStyledAttributes(attr, declareStyleable);
+        mIsHandleParallelSlide = typedArray.getBoolean(R.styleable.NestingScrollView_nesting_scroll_view_handle_parallel_Slide, mIsHandleParallelSlide);
         int anInt = typedArray.getInt(R.styleable.NestingScrollView_nesting_scroll_view_touch_intercept_mode, InterceptMode.VERTICAL.value);
         InterceptMode interceptMode = InterceptMode.valueOf(anInt);
         typedArray.recycle();

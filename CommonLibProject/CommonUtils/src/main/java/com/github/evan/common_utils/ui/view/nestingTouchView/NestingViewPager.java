@@ -23,6 +23,7 @@ public class NestingViewPager extends ViewPager implements Nestable, ThresholdSw
     private InterceptMode mInterceptMode = InterceptMode.HORIZONTAL;
     private TouchEventInterceptor mInterceptor;
     private ThresholdSwitcher mThresholdSwitcher;
+    private boolean mIsHandleParallelSlide = true;
 
     public NestingViewPager(Context context) {
         super(context);
@@ -56,6 +57,7 @@ public class NestingViewPager extends ViewPager implements Nestable, ThresholdSw
     @Override
     public InterceptMode pickupInterceptMode(AttributeSet attr, int[] declareStyleable, int style) {
         TypedArray typedArray = getContext().obtainStyledAttributes(attr, declareStyleable);
+        mIsHandleParallelSlide = typedArray.getBoolean(R.styleable.NestingViewPager_nesting_view_pager_handle_parallel_Slide, mIsHandleParallelSlide);
         int anInt = typedArray.getInt(R.styleable.NestingViewPager_nesting_view_pager_touch_intercept_mode, InterceptMode.HORIZONTAL_BUT_THRESHOLD.value);
         InterceptMode interceptMode = InterceptMode.valueOf(anInt);
         typedArray.recycle();

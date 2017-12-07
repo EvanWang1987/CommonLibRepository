@@ -12,6 +12,7 @@ import com.github.evan.common_utils.gesture.interceptor.ThresholdSwitchable;
 import com.github.evan.common_utils.gesture.interceptor.ThresholdSwitcher;
 import com.github.evan.common_utils.gesture.interceptor.TouchEventDirection;
 import com.github.evan.common_utils.gesture.interceptor.TouchEventInterceptor;
+import com.github.evan.common_utils.utils.Logger;
 
 
 /**
@@ -19,6 +20,7 @@ import com.github.evan.common_utils.gesture.interceptor.TouchEventInterceptor;
  */
 public class NestingHorizontalScrollView extends HorizontalScrollView implements Nestable, ThresholdSwitchable {
     private InterceptMode mInterceptMode = InterceptMode.HORIZONTAL_BUT_THRESHOLD;
+    private boolean mIsHandleParallelSlide = true;
     private TouchEventInterceptor mInterceptor;
     private ThresholdSwitcher mThresholdSwitcher;
 
@@ -79,6 +81,7 @@ public class NestingHorizontalScrollView extends HorizontalScrollView implements
     @Override
     public InterceptMode pickupInterceptMode(AttributeSet attr, int[] declareStyleable, int style) {
         TypedArray typedArray = getContext().obtainStyledAttributes(attr, declareStyleable);
+        mIsHandleParallelSlide = typedArray.getBoolean(R.styleable.NestingHorizontalScrollView_nesting_horizontal_scroll_view_handle_parallel_Slide, mIsHandleParallelSlide);
         int anInt = typedArray.getInt(R.styleable.NestingHorizontalScrollView_nesting_horizontal_scroll_view_touch_intercept_mode, InterceptMode.HORIZONTAL.value);
         InterceptMode interceptMode = InterceptMode.valueOf(anInt);
         typedArray.recycle();

@@ -45,6 +45,7 @@
             <enum name="vertical" value="4" />
             <enum name="vertical__but_threshold" value="5" />
         </attr>
+        <attr name="nesting_recycler_view_handle_parallel_Slide" format="boolean" />
     </declare-styleable>
 
     <declare-styleable name="NestingViewPager">
@@ -57,6 +58,7 @@
             <enum name="vertical" value="4" />
             <enum name="vertical__but_threshold" value="5" />
         </attr>
+        <attr name="nesting_view_pager_handle_parallel_Slide" format="boolean" />
     </declare-styleable>
 
     <declare-styleable name="NestingScrollView">
@@ -69,6 +71,7 @@
             <enum name="vertical" value="4" />
             <enum name="vertical__but_threshold" value="5" />
         </attr>
+        <attr name="nesting_scroll_view_handle_parallel_Slide" format="boolean" />
     </declare-styleable>
 
     <declare-styleable name="NestingHorizontalScrollView">
@@ -81,6 +84,7 @@
             <enum name="vertical" value="4" />
             <enum name="vertical__but_threshold" value="5" />
         </attr>
+        <attr name="nesting_horizontal_scroll_view_handle_parallel_Slide" format="boolean" />
     </declare-styleable>
 
     <declare-styleable name="NestingListView">
@@ -93,6 +97,7 @@
             <enum name="vertical" value="4" />
             <enum name="vertical__but_threshold" value="5" />
         </attr>
+        <attr name="nesting_list_view_handle_parallel_Slide" format="boolean" />
     </declare-styleable>
 
     <declare-styleable name="NestingGridView">
@@ -105,6 +110,7 @@
             <enum name="vertical" value="4" />
             <enum name="vertical__but_threshold" value="5" />
         </attr>
+        <attr name="nesting_grid_view_handle_parallel_Slide" format="boolean" />
     </declare-styleable>
 
     <declare-styleable name="LoadingPager">

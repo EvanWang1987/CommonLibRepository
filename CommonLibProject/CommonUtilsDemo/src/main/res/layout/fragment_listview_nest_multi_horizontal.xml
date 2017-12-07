@@ -5,12 +5,14 @@
     android:layout_height="match_parent">
 
 
-    <ListView
+    <com.github.evan.common_utils.ui.view.nestingTouchView.NestingListView
         android:id="@+id/list_view_nest_multi_horizontal_fragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:divider="@color/Alpha"
-        android:dividerHeight="5dp" />
+        android:dividerHeight="5dp"
+        app:nesting_list_view_handle_parallel_Slide="true"
+        app:nesting_list_view_touch_intercept_mode="vertical" />
 
 
     <com.github.evan.common_utils.ui.view.LoadingPager

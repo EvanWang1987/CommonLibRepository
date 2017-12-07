@@ -7,7 +7,6 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AbsListView;
 import android.widget.ListView;
 
 import com.github.evan.common_utils.gesture.interceptor.InterceptMode;
@@ -62,7 +61,7 @@ public class ListViewNestMultiHorizontalFragment extends BaseFragment {
         mLoadingPager.setLoadingStatus(LoadingPager.LoadingStatus.LOADING);
         mLoadingPager.setVisibility(View.VISIBLE);
         mListView.setVisibility(View.INVISIBLE);
-        new Thread(){
+        new Thread() {
             @Override
             public void run() {
                 SystemClock.sleep(2000);
@@ -85,7 +84,7 @@ public class ListViewNestMultiHorizontalFragment extends BaseFragment {
 
     @Override
     public void onHandleMessage(Message message) {
-        if(message.what == LOAD_COMPLETE){
+        if (message.what == LOAD_COMPLETE) {
             mListAdapter.replace(mNewListData);
             mListAdapter.notifyDataSetChanged();
             mPagerAdapter.replace(mNewPagerData);

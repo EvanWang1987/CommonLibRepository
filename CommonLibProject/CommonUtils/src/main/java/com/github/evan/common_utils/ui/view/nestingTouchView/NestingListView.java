@@ -21,6 +21,7 @@ public class NestingListView extends ListView implements Nestable, ThresholdSwit
     private ThresholdSwitcher mThresholdSwitcher;
     private TouchEventInterceptor mInterceptor;
     private InterceptMode mInterceptMode = InterceptMode.VERTICAL_BUT_THRESHOLD;
+    private boolean mIsHandleParallelSlide = false;
 
 
     public NestingListView(Context context) {
@@ -42,7 +43,7 @@ public class NestingListView extends ListView implements Nestable, ThresholdSwit
         mThresholdSwitcher = new ThresholdSwitcher(context);
         mInterceptor = new TouchEventInterceptor(context);
         if(null != attrs){
-            pickupInterceptMode(attrs, R.styleable.NestingListView, defStyleAttr);
+            mInterceptMode = pickupInterceptMode(attrs, R.styleable.NestingListView, defStyleAttr);
         }
     }
 
@@ -77,7 +78,8 @@ public class NestingListView extends ListView implements Nestable, ThresholdSwit
 
     @Override
     public InterceptMode pickupInterceptMode(AttributeSet attr, int[] declareStyleable, int style) {
-        TypedArray typedArray = getContext().obtainStyledAttributes(attr, R.styleable.NestingListView);
+        TypedArray typedArray = getContext().obtainStyledAttributes(attr, declareStyleable);
+        mIsHandleParallelSlide = typedArray.getBoolean(R.styleable.NestingListView_nesting_list_view_handle_parallel_Slide, mIsHandleParallelSlide);
         int anInt = typedArray.getInt(R.styleable.NestingListView_nesting_list_view_touch_intercept_mode, InterceptMode.VERTICAL_BUT_THRESHOLD.value);
         InterceptMode interceptMode = InterceptMode.valueOf(anInt);
         typedArray.recycle();

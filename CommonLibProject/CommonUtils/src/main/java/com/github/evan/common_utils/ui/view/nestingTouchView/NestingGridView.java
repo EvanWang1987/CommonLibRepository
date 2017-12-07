@@ -20,6 +20,7 @@ import com.github.evan.common_utils.gesture.interceptor.TouchEventInterceptor;
 public class NestingGridView extends GridView implements Nestable, ThresholdSwitchable {
     private ThresholdSwitcher mThresholdSwitcher;
     private TouchEventInterceptor mInterceptor;
+    private boolean mIsHandleParallelSlide = false;
     private InterceptMode mInterceptMode = InterceptMode.VERTICAL_BUT_THRESHOLD;
 
     public NestingGridView(Context context) {
@@ -41,7 +42,7 @@ public class NestingGridView extends GridView implements Nestable, ThresholdSwit
         mThresholdSwitcher = new ThresholdSwitcher(context);
         mInterceptor = new TouchEventInterceptor(context);
         if(null != attrs){
-            pickupInterceptMode(attrs, R.styleable.NestingListView, defStyleAttr);
+            mInterceptMode = pickupInterceptMode(attrs, R.styleable.NestingListView, defStyleAttr);
         }
     }
 
@@ -57,7 +58,7 @@ public class NestingGridView extends GridView implements Nestable, ThresholdSwit
         if(actionMasked == MotionEvent.ACTION_DOWN || actionMasked == MotionEvent.ACTION_UP || actionMasked == MotionEvent.ACTION_CANCEL){
             super.onInterceptTouchEvent(ev);
         }
-        return mInterceptor.interceptTouchEvent(ev, mInterceptMode, this, true);
+        return mInterceptor.interceptTouchEvent(ev, mInterceptMode, this, mIsHandleParallelSlide);
     }
 
     @Override
@@ -77,6 +78,7 @@ public class NestingGridView extends GridView implements Nestable, ThresholdSwit
     @Override
     public InterceptMode pickupInterceptMode(AttributeSet attr, int[] declareStyleable, int style) {
         TypedArray typedArray = getContext().obtainStyledAttributes(attr, declareStyleable);
+        mIsHandleParallelSlide = typedArray.getBoolean(R.styleable.NestingGridView_nesting_grid_view_handle_parallel_Slide, mIsHandleParallelSlide);
         int anInt = typedArray.getInt(R.styleable.NestingGridView_nesting_grid_view_touch_intercept_mode, InterceptMode.VERTICAL_BUT_THRESHOLD.value);
         InterceptMode interceptMode = InterceptMode.valueOf(anInt);
         typedArray.recycle();

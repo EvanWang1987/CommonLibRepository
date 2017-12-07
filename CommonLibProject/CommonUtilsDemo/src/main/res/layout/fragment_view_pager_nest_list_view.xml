@@ -14,5 +14,6 @@
         android:id="@+id/nesting_view_pager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        app:nesting_view_pager_handle_parallel_Slide="false"
         app:nesting_view_pager_touch_intercept_mode="horizontal" />
 </LinearLayout>
