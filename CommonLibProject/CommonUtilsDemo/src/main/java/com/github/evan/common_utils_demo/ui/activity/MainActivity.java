@@ -16,7 +16,6 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
@@ -37,6 +36,7 @@ import com.github.evan.common_utils_demo.ui.fragment.FlagViewFragment;
 import com.github.evan.common_utils_demo.ui.fragment.HomeFragment;
 import com.github.evan.common_utils_demo.ui.fragment.HorNestVerScrollViewFragment;
 import com.github.evan.common_utils_demo.ui.fragment.ListGridViewFragment;
+import com.github.evan.common_utils_demo.ui.fragment.ListViewNestMultiHorizontalFragment;
 import com.github.evan.common_utils_demo.ui.fragment.PullToRefreshFragment;
 import com.github.evan.common_utils_demo.ui.fragment.VerNestHorScrollViewFragment;
 import com.github.evan.common_utils_demo.ui.fragment.RecyclerViewFragment;
@@ -44,6 +44,7 @@ import com.github.evan.common_utils_demo.ui.fragment.ScreenInformationFragment;
 import com.github.evan.common_utils_demo.ui.fragment.DebugFragment;
 import com.github.evan.common_utils_demo.ui.fragment.TintFragment;
 import com.github.evan.common_utils_demo.ui.fragment.ViewPagerFragment;
+import com.github.evan.common_utils_demo.ui.fragment.ViewPagerNestListViewFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -57,7 +58,7 @@ import butterknife.OnClick;
  */
 public class MainActivity extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener {
     private static final int PERMISSION_REQUEST_CODE = 101;
-    private static final String[] fragmentNames = {HomeFragment.class.getName(), ScreenInformationFragment.class.getName(), ListGridViewFragment.class.getName(), RecyclerViewFragment.class.getName(), ViewPagerFragment.class.getName(), VerNestHorScrollViewFragment.class.getName(), HorNestVerScrollViewFragment.class.getName(), PullToRefreshFragment.class.getName(), CustomEditTextFragment.class.getName(), FlagViewFragment.class.getName(), TintFragment.class.getName(), DebugFragment.class.getName()};
+    private static final String[] fragmentNames = {HomeFragment.class.getName(), ScreenInformationFragment.class.getName(), ListGridViewFragment.class.getName(), RecyclerViewFragment.class.getName(), VerNestHorScrollViewFragment.class.getName(), HorNestVerScrollViewFragment.class.getName(), ViewPagerFragment.class.getName(), ViewPagerNestListViewFragment.class.getName(), PullToRefreshFragment.class.getName(), CustomEditTextFragment.class.getName(), FlagViewFragment.class.getName(), TintFragment.class.getName(), DebugFragment.class.getName()};
 
     @BindView(R.id.mainActivity_appBar)
     public AppBarLayout mAppbarLayout;
@@ -210,11 +211,6 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                 isExpand = true;
                 break;
 
-            case R.id.functionViewPager:
-                visibleFragment = fragmentManager.findFragmentByTag(ViewPagerFragment.class.getName());
-                isExpand = true;
-                break;
-
             case R.id.functionVerNestHorScrollView:
                 visibleFragment = fragmentManager.findFragmentByTag(VerNestHorScrollViewFragment.class.getName());
                 isExpand = false;
@@ -222,6 +218,16 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 
             case R.id.functionHorNestVerScrollView:
                 visibleFragment = fragmentManager.findFragmentByTag(HorNestVerScrollViewFragment.class.getName());
+                isExpand = false;
+                break;
+
+            case R.id.functionViewPager:
+                visibleFragment = fragmentManager.findFragmentByTag(ViewPagerFragment.class.getName());
+                isExpand = true;
+                break;
+
+            case R.id.functionViewPagerNestMultiHorizontalScroll:
+                visibleFragment = fragmentManager.findFragmentByTag(ViewPagerNestListViewFragment.class.getName());
                 isExpand = false;
                 break;
 

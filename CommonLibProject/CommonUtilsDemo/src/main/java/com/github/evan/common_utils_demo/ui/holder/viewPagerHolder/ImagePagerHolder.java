@@ -79,7 +79,7 @@ public class ImagePagerHolder extends BasePagerHolder<String> implements Request
             }
         };
 
-//        Glide.with(getContext()).load(getData()).asBitmap().listener(this).into(target);
+        Glide.with(getContext()).load(getData()).asBitmap().listener(this).into(target);
         mTxtPosition.setText(getPosition() + 1 + " / " + ImagePagerAdapter.IMAGES.length);
     }
 

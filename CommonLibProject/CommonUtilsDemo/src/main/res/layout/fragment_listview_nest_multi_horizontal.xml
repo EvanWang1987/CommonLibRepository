@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <ListView
+        android:id="@+id/list_view_nest_multi_horizontal_fragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:divider="@color/Alpha"
+        android:dividerHeight="5dp" />
+
+
+    <com.github.evan.common_utils.ui.view.LoadingPager
+        android:id="@+id/loadingPager_list_view_nest_multi_horizontal_fragment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        app:loadEmptyDrawable="@mipmap/status_empty_data"
+        app:loadingDrawable="@mipmap/status_loading"
+        app:netTimeoutDrawable="@mipmap/status_net_timeout"
+        app:netUnAvailableDrawable="@mipmap/status_net_unavailable"
+        app:noSearchContentDrawable="@mipmap/status_no_search_content"
+        app:unknownDrawable="@mipmap/status_unknown_error" />
+
+</FrameLayout>

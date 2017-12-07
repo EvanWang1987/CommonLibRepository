@@ -27,7 +27,7 @@ import butterknife.ButterKnife;
 /**
  * Created by Evan on 2017/11/24.
  */
-public class MultiNestingPagerHolder extends BasePagerHolder<TitleInteger> {
+public class PagerNestPagerHolder extends BasePagerHolder<TitleInteger> {
 
     @BindView(R.id.nesting_view_pager_multi_nesting_holder)
     NestingViewPager mViewPager;
@@ -36,7 +36,7 @@ public class MultiNestingPagerHolder extends BasePagerHolder<TitleInteger> {
     private ImagePagerAdapter mImagePagerAdapter;
     private DefaultRecyclerAdapter mRecyclerAdapter;
 
-    public MultiNestingPagerHolder(Context context, ViewGroup parent) {
+    public PagerNestPagerHolder(Context context, ViewGroup parent) {
         super(context, parent);
     }
 

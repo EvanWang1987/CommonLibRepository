@@ -18,7 +18,7 @@ import com.github.evan.common_utils.gesture.interceptor.TouchEventInterceptor;
  * Created by Evan on 2017/11/26.
  */
 public class NestingHorizontalScrollView extends HorizontalScrollView implements Nestable, ThresholdSwitchable {
-    private InterceptMode mInterceptMode = InterceptMode.HORIZONTAL;
+    private InterceptMode mInterceptMode = InterceptMode.HORIZONTAL_BUT_THRESHOLD;
     private TouchEventInterceptor mInterceptor;
     private ThresholdSwitcher mThresholdSwitcher;
 
