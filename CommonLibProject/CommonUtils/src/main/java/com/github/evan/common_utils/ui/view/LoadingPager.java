@@ -66,6 +66,7 @@ public class LoadingPager extends FrameLayout {
         drawableParams.gravity = Gravity.CENTER;
         LinearLayout.LayoutParams textParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
         containerParams.gravity = Gravity.CENTER;
+        textParams.setMargins(0, DensityUtil.dp2px(20), 0, 0);
 
         mStatusContainer.addView(mStatusDrawable, drawableParams);
         mStatusContainer.addView(mStatusText, textParams);

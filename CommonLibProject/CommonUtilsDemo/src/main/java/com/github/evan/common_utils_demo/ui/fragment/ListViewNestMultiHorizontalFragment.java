@@ -28,7 +28,7 @@ import butterknife.ButterKnife;
  * Created by Evan on 2017/12/7.
  */
 public class ListViewNestMultiHorizontalFragment extends BaseFragment {
-    @BindView(R.id.loadingPager_list_view_nest_multi_horizontal_fragment)
+    @BindView(R.id.loading_pager_list_view_nest_multi_horizontal_fragment)
     LoadingPager mLoadingPager;
     @BindView(R.id.list_view_nest_multi_horizontal_fragment)
     ListView mListView;

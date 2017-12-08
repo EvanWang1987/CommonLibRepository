@@ -1,12 +1,16 @@
 package com.github.evan.common_utils_demo.ui.fragment;
 
 import android.os.Bundle;
+import android.os.Message;
+import android.os.SystemClock;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
 import com.github.evan.common_utils.ui.fragment.BaseFragment;
+import com.github.evan.common_utils.ui.view.LoadingPager;
 import com.github.evan.common_utils.ui.view.nestingTouchView.NestingViewPager;
 import com.github.evan.common_utils_demo.R;
 import com.github.evan.common_utils_demo.bean.TitleInteger;
@@ -27,7 +31,10 @@ public class ViewPagerFragment extends BaseFragment {
     TabLayout mTabLayout;
     @BindView(R.id.nesting_view_pager_view_pager_fragment)
     NestingViewPager mViewPager;
+    @BindView(R.id.loading_pager_view_pager_fragment)
+    LoadingPager mLoadingPager;
     private PagerNestPagerAdapter mNestingAdapter;
+    private List<TitleInteger> mData;
 
     @Nullable
     @Override
@@ -35,14 +42,6 @@ public class ViewPagerFragment extends BaseFragment {
         View root = inflater.inflate(R.layout.fragment_view_pager, null);
         ButterKnife.bind(this, root);
         mNestingAdapter = new PagerNestPagerAdapter(getContext(), true);
-        int N = 10;
-        List<TitleInteger> data = new ArrayList<>(N);
-        for (int i = 0; i < N; i++) {
-            data.add(new TitleInteger(i + 1));
-            TabLayout.Tab tab = mTabLayout.newTab();
-            mTabLayout.addTab(tab, i == 0);
-        }
-        mNestingAdapter.replace(data);
         mViewPager.setAdapter(mNestingAdapter);
         mTabLayout.setupWithViewPager(mViewPager);
         return root;
@@ -50,5 +49,35 @@ public class ViewPagerFragment extends BaseFragment {
 
     @Override
     protected void loadData() {
+        mLoadingPager.setLoadingStatus(LoadingPager.LoadingStatus.LOADING);
+        mLoadingPager.setVisibility(View.VISIBLE);
+        mViewPager.setVisibility(View.GONE);
+        new Thread() {
+            @Override
+            public void run() {
+                SystemClock.sleep(3000);
+                int N = 10;
+                List<TitleInteger> data = new ArrayList<>(N);
+                for (int i = 0; i < N; i++) {
+                    data.add(new TitleInteger(i + 1));
+                }
+                mData = data;
+                sendEmptyMessage(LOAD_COMPLETE);
+            }
+        }.start();
+    }
+
+    @Override
+    public void onHandleMessage(Message message) {
+        if (message.what == LOAD_COMPLETE) {
+            for (int i = 0; i < mData.size(); i++) {
+                TabLayout.Tab tab = mTabLayout.newTab();
+                mTabLayout.addTab(tab, i == 0);
+            }
+            mNestingAdapter.replace(mData);
+            mNestingAdapter.notifyDataSetChanged();
+            mLoadingPager.setVisibility(View.GONE);
+            mViewPager.setVisibility(View.VISIBLE);
+        }
     }
 }

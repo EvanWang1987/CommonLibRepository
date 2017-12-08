@@ -2,6 +2,7 @@ package com.github.evan.common_utils_demo.ui.fragment;
 
 import android.os.Bundle;
 import android.os.Message;
+import android.os.SystemClock;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabItem;
 import android.support.design.widget.TabLayout;
@@ -19,6 +20,7 @@ import android.widget.RadioGroup;
 import com.github.evan.common_utils.ui.fragment.BaseFragment;
 import com.github.evan.common_utils.ui.itemDecoration.GridDecoration;
 import com.github.evan.common_utils.ui.itemDecoration.ListDecoration;
+import com.github.evan.common_utils.ui.view.LoadingPager;
 import com.github.evan.common_utils.utils.DensityUtil;
 import com.github.evan.common_utils_demo.R;
 import com.github.evan.common_utils_demo.ui.adapter.recyclerViewAdapter.RecyclerAdapter;
@@ -46,6 +48,8 @@ public class RecyclerViewFragment extends BaseFragment implements TabLayout.OnTa
     TabLayout mTabLayout;
     @BindView(R.id.recycler_view)
     RecyclerView mRecyclerView;
+    @BindView(R.id.loading_pager_recycler_view_fragment)
+    LoadingPager mLoadingPager;
     private RecyclerAdapter mRecyclerAdapter;
 
     @Nullable
@@ -64,14 +68,21 @@ public class RecyclerViewFragment extends BaseFragment implements TabLayout.OnTa
             TabLayout.Tab tab = mTabLayout.getTabAt(0);
             tab.select();
             onTabSelected(tab);
+            mLoadingPager.setLoadingStatus(LoadingPager.LoadingStatus.IDLE);
+            mLoadingPager.setVisibility(View.GONE);
+            mRecyclerView.setVisibility(View.VISIBLE);
         }
     }
 
     @Override
     protected void loadData() {
+        mLoadingPager.setLoadingStatus(LoadingPager.LoadingStatus.LOADING);
+        mLoadingPager.setVisibility(View.VISIBLE);
+        mRecyclerView.setVisibility(View.GONE);
         new Thread() {
             @Override
             public void run() {
+                SystemClock.sleep(3000);
                 int N = 20;
                 List<Integer> data = new ArrayList<>(N);
                 for (int i = 0; i < N; i++) {

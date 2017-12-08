@@ -2,6 +2,7 @@ package com.github.evan.common_utils_demo.ui.fragment;
 
 import android.os.Bundle;
 import android.os.Message;
+import android.os.SystemClock;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.view.LayoutInflater;
@@ -12,6 +13,7 @@ import android.widget.GridView;
 import android.widget.ListView;
 
 import com.github.evan.common_utils.ui.fragment.BaseFragment;
+import com.github.evan.common_utils.ui.view.LoadingPager;
 import com.github.evan.common_utils_demo.R;
 import com.github.evan.common_utils_demo.ui.adapter.absListViewAdapter.GridAdapter;
 import com.github.evan.common_utils_demo.ui.adapter.absListViewAdapter.DefaultAdapter;
@@ -34,6 +36,8 @@ public class ListGridViewFragment extends BaseFragment implements TabLayout.OnTa
     ListView mListView;
     @BindView(R.id.grid_view)
     GridView mGridView;
+    @BindView(R.id.loadingPager_list_grid_view_fragment)
+    LoadingPager mLoadingPager;
     private DefaultAdapter mDefaultAdapter;
     private TwoStyleItemAdapter mTwoStyleItemAdapter;
     private ThreeStyleItemAdapter mThreeStyleItemAdapter;
@@ -63,14 +67,23 @@ public class ListGridViewFragment extends BaseFragment implements TabLayout.OnTa
             TabLayout.Tab tab = mTabLayout.getTabAt(0);
             tab.select();
             onTabSelected(tab);
+            mTabLayout.setEnabled(true);
+            mLoadingPager.setLoadingStatus(LoadingPager.LoadingStatus.IDLE);
+            mLoadingPager.setVisibility(View.GONE);
         }
     }
 
     @Override
     protected void loadData() {
+        mLoadingPager.setLoadingStatus(LoadingPager.LoadingStatus.LOADING);
+        mTabLayout.setEnabled(false);
+        mLoadingPager.setVisibility(View.VISIBLE);
+        mListView.setVisibility(View.GONE);
+        mGridView.setVisibility(View.GONE);
         new Thread(){
             @Override
             public void run() {
+                SystemClock.sleep(3000);
                 int N = 30;
                 List<Integer> data = new ArrayList<>(N);
                 for (int i = 0; i < N; i++) {
