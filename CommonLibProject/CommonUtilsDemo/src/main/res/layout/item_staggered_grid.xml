@@ -9,14 +9,38 @@
     app:cardPreventCornerOverlap="false"
     app:cardUseCompatPadding="true">
 
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-    <com.github.evan.common_utils.ui.view.imageView.RoundedImageView
-        android:id="@+id/img_preview_layout_root_staggered_grid_holder"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:scaleType="centerCrop"
-        android:src="@mipmap/img_video_preview"
-        app:riv_corner_radius="5dp" />
+
+        <com.github.evan.common_utils.ui.view.LoadingPager
+            android:id="@+id/loading_pager_staggered_grid_holder"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            app:isLoadingWithRotateAnimation="true"
+            app:loadEmptyDrawable="@mipmap/status_empty_data"
+            app:loadEmptyText="@string/loading_pager_empty_data"
+            app:loadingDrawable="@mipmap/status_loading"
+            app:loadingText="@string/loading_pager_loading"
+            app:netTimeoutDrawable="@mipmap/status_net_timeout"
+            app:netTimeoutText="@string/loading_pager_net_timeout"
+            app:netUnAvailableDrawable="@mipmap/status_net_unavailable"
+            app:netUnAvailableText="@string/loading_pager_net_unavailable"
+            app:noSearchContentDrawable="@mipmap/status_no_search_content"
+            app:unknownDrawable="@mipmap/status_unknown_error"
+            app:unknownText="@string/loading_pager_unknown_error" />
+
+        <com.github.evan.common_utils.ui.view.imageView.RoundedImageView
+            android:id="@+id/img_preview_layout_root_staggered_grid_holder"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:scaleType="centerCrop"
+            android:src="@mipmap/img_video_preview"
+            app:riv_corner_radius="5dp" />
+
+    </FrameLayout>
 
 
 </android.support.v7.widget.CardView>

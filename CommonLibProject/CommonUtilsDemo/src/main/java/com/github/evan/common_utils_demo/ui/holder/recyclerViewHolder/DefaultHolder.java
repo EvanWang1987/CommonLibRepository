@@ -19,7 +19,7 @@ import butterknife.OnClick;
 /**
  * Created by Evan on 2017/11/20.
  */
-public class DefaultHolder extends BaseRecyclerViewHolder<Integer> {
+public class DefaultHolder extends BaseRecyclerViewHolder<String> {
     @BindView(R.id.img_icon_default_holder)
     ImageView mImgIcon;
     @BindView(R.id.txt_title_default_holder)
@@ -38,7 +38,7 @@ public class DefaultHolder extends BaseRecyclerViewHolder<Integer> {
 
 
     @Override
-    public void onRefreshHolder(Integer integer) {
+    public void onRefreshHolder(String data) {
         mTxtPosition.setText((getAdapterPosition() + 1) + "");
     }
 

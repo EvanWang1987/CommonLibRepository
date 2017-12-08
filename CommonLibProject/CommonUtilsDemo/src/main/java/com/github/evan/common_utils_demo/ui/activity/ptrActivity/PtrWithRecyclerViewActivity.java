@@ -30,7 +30,7 @@ public class PtrWithRecyclerViewActivity extends BaseActivity implements PullToR
     @BindView(R.id.ptr_with_view_content)
     RecyclerView mRecyclerView;
     DefaultRecyclerAdapter mAdapter;
-    private List<Integer> newData;
+    private List<String> newData;
 
     @Override
     public final int getLayoutResId() {
@@ -66,9 +66,9 @@ public class PtrWithRecyclerViewActivity extends BaseActivity implements PullToR
             public void run() {
                 SystemClock.sleep(3000);
                 int N = 10;
-                List<Integer> data = new ArrayList<>(N);
+                List<String> data = new ArrayList<>(N);
                 for (int i = 0; i < N; i++) {
-                    data.add(i + 1);
+                    data.add("" + i);
                 }
                 newData = data;
                 sendEmptyMessage(LOAD_COMPLETE);

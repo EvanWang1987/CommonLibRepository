@@ -16,7 +16,7 @@ import butterknife.OnClick;
 /**
  * Created by Evan on 2017/11/22.
  */
-public class MultiPreviewHolder extends BaseRecyclerViewHolder<Integer> {
+public class MultiPreviewHolder extends BaseRecyclerViewHolder<String> {
     public static final int ITEM_VIEW_TYPE_MULTI_PREVIEW = 2;
 
     @BindView(R.id.img_first_icon_three_preview_holder)
@@ -41,7 +41,7 @@ public class MultiPreviewHolder extends BaseRecyclerViewHolder<Integer> {
 
 
     @Override
-    public void onRefreshHolder(Integer integer) {
+    public void onRefreshHolder(String data) {
         mTxtPosition.setText(getAdapterPosition() + "");
     }
 

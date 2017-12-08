@@ -36,9 +36,9 @@ public class NestingPagerHolder extends BasePagerHolder<PagerTitleUsableInteger>
     @Override
     public void instantiateItem(ViewGroup container, int position) {
         int N = 30;
-        List<Integer> data = new ArrayList<>(N);
+        List<String> data = new ArrayList<>(N);
         for (int i = 0; i < N; i++) {
-            data.add(i + 1);
+            data.add(i + "");
         }
         mAdapter.replace(data);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));

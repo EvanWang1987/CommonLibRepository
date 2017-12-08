@@ -38,10 +38,16 @@ import butterknife.OnItemSelected;
  * Created by Evan on 2017/11/20.
  */
 public class RecyclerViewFragment extends BaseFragment implements TabLayout.OnTabSelectedListener {
-    private static final int[] STAGGERED_IMAGE = {R.mipmap.img_staggered_one, R.mipmap.img_staggered_two, R.mipmap.img_staggered_three,
-            R.mipmap.img_staggered_four, R.mipmap.img_staggered_five, R.mipmap.img_staggered_six, R.mipmap.img_staggered_seven, R.mipmap.img_staggered_eight, R.mipmap.img_staggered_nine, R.mipmap.img_staggered_ten,
-            R.mipmap.img_staggered_eleven, R.mipmap.img_staggered_twelve, R.mipmap.img_staggered_thirteen, R.mipmap.img_staggered_fourteen, R.mipmap.img_staggered_fifteen, R.mipmap.img_staggered_sixteen, R.mipmap.img_staggered_seventeen,
-            R.mipmap.img_staggered_eighteen, R.mipmap.img_staggered_nineteen, R.mipmap.img_staggered_twenty};
+    private static final String[] STAGGERED_IMAGE = {"https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=766881540,2545592682&fm=27&gp=0.jpg", "https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=859659734,30821133&fm=27&gp=0.jpg",
+            "https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=26890901,3717469767&fm=27&gp=0.jpg", "https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=3793268867,2253056783&fm=27&gp=0.jpg",
+            "https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=3617658691,1266352621&fm=27&gp=0.jpg", "https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=449224247,2721763316&fm=27&gp=0.jpg",
+            "https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=1305044176,1000394676&fm=27&gp=0.jpg", "https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=876784344,2672678338&fm=27&gp=0.jpg",
+            "https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=3500537501,96033095&fm=27&gp=0.jpg", "https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=3341468609,1267172742&fm=27&gp=0.jpg",
+            "https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=2838846681,2406154032&fm=27&gp=0.jpg", "https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=1329527429,4206454328&fm=27&gp=0.jpg",
+            "https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=3432984473,4220412296&fm=27&gp=0.jpg", "https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=3098561018,1240663525&fm=27&gp=0.jpg",
+            "https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=3535935581,749405034&fm=27&gp=0.jpg",
+            "https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=906875671,995099983&fm=27&gp=0.jpg", "https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=3951944368,2310462383&fm=27&gp=0.jpg",
+            "https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=2811995463,1316736047&fm=27&gp=0.jpg", "https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=2386538619,1388062622&fm=27&gp=0.jpg", "https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=174473989,1257616128&fm=27&gp=0.jpg"};
 
 
     @BindView(R.id.tab_layout_recycler_view_fragment)
@@ -83,8 +89,8 @@ public class RecyclerViewFragment extends BaseFragment implements TabLayout.OnTa
             @Override
             public void run() {
                 SystemClock.sleep(3000);
-                int N = 20;
-                List<Integer> data = new ArrayList<>(N);
+                int N = STAGGERED_IMAGE.length;
+                List<String> data = new ArrayList<>(N);
                 for (int i = 0; i < N; i++) {
                     data.add(STAGGERED_IMAGE[i]);
                 }

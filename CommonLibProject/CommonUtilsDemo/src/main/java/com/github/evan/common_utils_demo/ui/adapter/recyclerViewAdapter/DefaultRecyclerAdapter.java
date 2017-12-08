@@ -17,7 +17,7 @@ import com.github.evan.common_utils_demo.ui.holder.recyclerViewHolder.StaggeredH
 /**
  * Created by Evan on 2017/11/21.
  */
-public class DefaultRecyclerAdapter extends SwitchRecyclerAdapter<Integer> {
+public class DefaultRecyclerAdapter extends SwitchRecyclerAdapter<String> {
 
     public DefaultRecyclerAdapter(Context context) {
         super(context);
@@ -52,8 +52,8 @@ public class DefaultRecyclerAdapter extends SwitchRecyclerAdapter<Integer> {
     }
 
     @Override
-    public BaseRecyclerViewHolder<Integer> onCreateHolderWithSwitchMode(View itemView, ViewGroup parent, int viewType, int switchMode) {
-        BaseRecyclerViewHolder<Integer> holder = null;
+    public BaseRecyclerViewHolder<String> onCreateHolderWithSwitchMode(View itemView, ViewGroup parent, int viewType, int switchMode) {
+        BaseRecyclerViewHolder<String> holder = null;
         if(switchMode == LIST_MODE_VERTICAL){
             switch (viewType){
                 default:

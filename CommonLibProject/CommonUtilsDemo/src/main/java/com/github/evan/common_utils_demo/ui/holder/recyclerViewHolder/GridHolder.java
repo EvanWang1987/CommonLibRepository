@@ -22,7 +22,7 @@ import butterknife.OnClick;
 /**
  * Created by Evan on 2017/11/21.
  */
-public class GridHolder extends BaseRecyclerViewHolder<Integer> implements PopupMenu.OnMenuItemClickListener {
+public class GridHolder extends BaseRecyclerViewHolder<String> implements PopupMenu.OnMenuItemClickListener {
     @BindView(R.id.img_preview_grid_item)
     RoundedImageView mImgPreview;
     @BindView(R.id.txt_title_grid_item)
@@ -49,7 +49,7 @@ public class GridHolder extends BaseRecyclerViewHolder<Integer> implements Popup
 
 
     @Override
-    public void onRefreshHolder(Integer integer) {
+    public void onRefreshHolder(String data) {
 
     }
 

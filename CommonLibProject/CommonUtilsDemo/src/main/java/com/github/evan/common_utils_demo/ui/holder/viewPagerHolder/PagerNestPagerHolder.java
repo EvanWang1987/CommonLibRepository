@@ -61,9 +61,9 @@ public class PagerNestPagerHolder extends BasePagerHolder<TitleInteger> {
         mViewPager.setAdapter(mImagePagerAdapter);
 
         int Z = 15;
-        List<Integer> listData = new ArrayList<>(Z);
+        List<String> listData = new ArrayList<>(Z);
         for (int i = 0; i < Z; i++) {
-            listData.add(i + i);
+            listData.add(i + "");
         }
         mRecyclerAdapter.replace(listData);
         mRecyclerView.setAdapter(mRecyclerAdapter);

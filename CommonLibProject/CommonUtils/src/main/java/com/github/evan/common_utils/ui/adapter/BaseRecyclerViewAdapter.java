@@ -71,6 +71,9 @@ public abstract class BaseRecyclerViewAdapter<Data> extends RecyclerView.Adapter
     @Override
     public void onBindViewHolder(BaseRecyclerViewHolder<Data> holder, int position) {
         Data data = mData.get(position);
+        if(!holder.isContextExists()){
+            holder.setContext(mContext);
+        }
         holder.setData(data);
         holder.onRefreshHolder(data);
     }
