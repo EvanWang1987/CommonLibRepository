@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.github.evan.common_utils.manager.threadManager.ThreadManager;
 import com.github.evan.common_utils.ui.fragment.BaseFragment;
 import com.github.evan.common_utils.ui.view.LoadingPager;
 import com.github.evan.common_utils.ui.view.nestingTouchView.NestingViewPager;
@@ -25,7 +26,6 @@ import butterknife.ButterKnife;
 /**
  * Created by Evan on 2017/11/22.
  */
-
 public class ViewPagerFragment extends BaseFragment {
     @BindView(R.id.tab_layout_view_pager_fragment)
     TabLayout mTabLayout;
@@ -52,7 +52,8 @@ public class ViewPagerFragment extends BaseFragment {
         mLoadingPager.setLoadingStatus(LoadingPager.LoadingStatus.LOADING);
         mLoadingPager.setVisibility(View.VISIBLE);
         mViewPager.setVisibility(View.GONE);
-        new Thread() {
+
+        Runnable runnable = new Runnable() {
             @Override
             public void run() {
                 SystemClock.sleep(3000);
@@ -64,7 +65,9 @@ public class ViewPagerFragment extends BaseFragment {
                 mData = data;
                 sendEmptyMessage(LOAD_COMPLETE);
             }
-        }.start();
+        };
+
+        ThreadManager.getInstance().getIOThreadPool().execute(runnable);
     }
 
     @Override

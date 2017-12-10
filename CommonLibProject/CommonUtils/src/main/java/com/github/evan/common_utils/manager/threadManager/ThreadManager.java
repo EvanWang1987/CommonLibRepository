@@ -4,8 +4,6 @@ import com.github.evan.common_utils.utils.DeviceUtil;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.concurrent.Executor;
-import java.util.concurrent.Executors;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.SynchronousQueue;
 import java.util.concurrent.ThreadPoolExecutor;
@@ -42,8 +40,8 @@ public class ThreadManager {
         ThreadPoolExecutor ioPool = new ThreadPoolExecutor(numberOfCPUCores * 2, numberOfCPUCores * 4, 1, TimeUnit.MINUTES, new LinkedBlockingQueue<Runnable>(), new ThreadFactory("IO Thread Pool"), new ThreadPoolExecutor.AbortPolicy());
         ThreadPoolExecutor singlePool = new ThreadPoolExecutor(1, 1, 0, TimeUnit.MINUTES, new LinkedBlockingQueue<Runnable>(), new ThreadFactory("Single Thread Pool"), new ThreadPoolExecutor.AbortPolicy());
 
-        otherPool.prestartCoreThread();
-        netWorkPool.prestartAllCoreThreads();
+        otherPool.prestartCoreThread();         //预创建1个线程
+        netWorkPool.prestartAllCoreThreads();   //预创建所有线程
         ioPool.prestartAllCoreThreads();
         singlePool.prestartCoreThread();
 
@@ -53,7 +51,7 @@ public class ThreadManager {
         mPoolExecutors.put(SINGLE_POOL, singlePool);
     }
 
-    public ThreadPoolExecutor getIoThreadPool(){
+    public ThreadPoolExecutor getIOThreadPool(){
         return mPoolExecutors.get(IO_POOL);
     }
 

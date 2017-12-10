@@ -12,6 +12,7 @@ import android.widget.CompoundButton;
 import android.widget.GridView;
 import android.widget.ListView;
 
+import com.github.evan.common_utils.manager.threadManager.ThreadManager;
 import com.github.evan.common_utils.ui.fragment.BaseFragment;
 import com.github.evan.common_utils.ui.view.LoadingPager;
 import com.github.evan.common_utils_demo.R;
@@ -22,6 +23,8 @@ import com.github.evan.common_utils_demo.ui.adapter.absListViewAdapter.TwoStyleI
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.Future;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnCheckedChanged;
@@ -80,7 +83,7 @@ public class ListGridViewFragment extends BaseFragment implements TabLayout.OnTa
         mLoadingPager.setVisibility(View.VISIBLE);
         mListView.setVisibility(View.GONE);
         mGridView.setVisibility(View.GONE);
-        new Thread(){
+        Runnable runnable = new Runnable() {
             @Override
             public void run() {
                 SystemClock.sleep(3000);
@@ -99,7 +102,9 @@ public class ListGridViewFragment extends BaseFragment implements TabLayout.OnTa
                 mGridAdapter.replace(data);
                 sendEmptyMessage(LOAD_COMPLETE);
             }
-        }.start();
+        };
+
+        ThreadManager.getInstance().getIOThreadPool().execute(runnable);
     }
 
     @Override

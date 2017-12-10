@@ -14,9 +14,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CompoundButton;
+import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
+import com.github.evan.common_utils.manager.threadManager.ThreadManager;
 import com.github.evan.common_utils.ui.fragment.BaseFragment;
 import com.github.evan.common_utils.ui.itemDecoration.GridDecoration;
 import com.github.evan.common_utils.ui.itemDecoration.ListDecoration;
@@ -77,15 +79,26 @@ public class RecyclerViewFragment extends BaseFragment implements TabLayout.OnTa
             mLoadingPager.setLoadingStatus(LoadingPager.LoadingStatus.IDLE);
             mLoadingPager.setVisibility(View.GONE);
             mRecyclerView.setVisibility(View.VISIBLE);
+            LinearLayout tabStrip = (LinearLayout) mTabLayout.getChildAt(0);
+            for (int i = 0; i < tabStrip.getChildCount(); i++) {
+                View childAt = tabStrip.getChildAt(i);
+                childAt.setClickable(true);
+            }
         }
     }
 
     @Override
     protected void loadData() {
+        LinearLayout tabStrip = (LinearLayout) mTabLayout.getChildAt(0);
+        for (int i = 0; i < tabStrip.getChildCount(); i++) {
+            View childAt = tabStrip.getChildAt(i);
+            childAt.setClickable(false);
+        }
         mLoadingPager.setLoadingStatus(LoadingPager.LoadingStatus.LOADING);
         mLoadingPager.setVisibility(View.VISIBLE);
         mRecyclerView.setVisibility(View.GONE);
-        new Thread() {
+
+        Runnable runnable = new Runnable() {
             @Override
             public void run() {
                 SystemClock.sleep(3000);
@@ -99,7 +112,9 @@ public class RecyclerViewFragment extends BaseFragment implements TabLayout.OnTa
                 mRecyclerAdapter.replace(data);
                 sendEmptyMessage(LOAD_COMPLETE);
             }
-        }.start();
+        };
+
+        ThreadManager.getInstance().getIOThreadPool().execute(runnable);
     }
 
     @Override

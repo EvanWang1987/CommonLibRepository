@@ -8,8 +8,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
-
 import com.github.evan.common_utils.gesture.interceptor.InterceptMode;
+import com.github.evan.common_utils.manager.threadManager.ThreadManager;
 import com.github.evan.common_utils.ui.fragment.BaseFragment;
 import com.github.evan.common_utils.ui.view.LoadingPager;
 import com.github.evan.common_utils.ui.view.nestingTouchView.NestingViewPager;
@@ -17,10 +17,8 @@ import com.github.evan.common_utils.utils.DensityUtil;
 import com.github.evan.common_utils_demo.R;
 import com.github.evan.common_utils_demo.ui.adapter.absListViewAdapter.NestMultiHorizontalScrollAdapter;
 import com.github.evan.common_utils_demo.ui.adapter.viewPagerAdapter.ImagePagerAdapter;
-
 import java.util.ArrayList;
 import java.util.List;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -61,7 +59,8 @@ public class ListViewNestMultiHorizontalFragment extends BaseFragment {
         mLoadingPager.setLoadingStatus(LoadingPager.LoadingStatus.LOADING);
         mLoadingPager.setVisibility(View.VISIBLE);
         mListView.setVisibility(View.INVISIBLE);
-        new Thread() {
+
+        Runnable runnable = new Runnable() {
             @Override
             public void run() {
                 SystemClock.sleep(2000);
@@ -79,7 +78,9 @@ public class ListViewNestMultiHorizontalFragment extends BaseFragment {
                 mNewPagerData = pagerData;
                 sendEmptyMessage(LOAD_COMPLETE);
             }
-        }.start();
+        };
+
+        ThreadManager.getInstance().getIOThreadPool().submit(runnable);
     }
 
     @Override
