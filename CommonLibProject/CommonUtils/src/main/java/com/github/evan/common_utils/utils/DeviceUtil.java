@@ -6,11 +6,47 @@ import android.telephony.TelephonyManager;
 
 import com.github.evan.common_utils.BaseApplication;
 
+import java.io.File;
+import java.io.FileFilter;
+
 /**
  * Created by Evan on 2017/10/4.
  */
 
 public class DeviceUtil {
+
+    /**
+     * 获取CPU核心数
+     * @return
+     */
+    public static int getNumberOfCPUCores() {
+        int cores;
+        try {
+            cores = new File("/sys/devices/system/cpu/").listFiles(CPU_FILTER).length;
+        } catch (SecurityException e) {
+            cores = -1;
+        } catch (NullPointerException e) {
+            cores = -1;
+        }
+        return cores;
+    }
+
+    private static final FileFilter CPU_FILTER = new FileFilter() {
+        @Override
+        public boolean accept(File pathname) {
+            String path = pathname.getName();
+            //regex is slow, so checking char by char.
+            if (path.startsWith("cpu")) {
+                for (int i = 3; i < path.length(); i++) {
+                    if (path.charAt(i) < '0' || path.charAt(i) > '9') {
+                        return false;
+                    }
+                }
+                return true;
+            }
+            return false;
+        }
+    };
 
     /**
      * 获取设备硬件信息
