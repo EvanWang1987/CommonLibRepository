@@ -139,6 +139,7 @@ public class LoadingPager extends FrameLayout {
         if(mIsLoadingWithRotateAnim){
             if(mRotateAnim.isRunning()){
                 mRotateAnim.cancel();
+                mStatusDrawable.setRotation(0f);
             }
         }
     }
