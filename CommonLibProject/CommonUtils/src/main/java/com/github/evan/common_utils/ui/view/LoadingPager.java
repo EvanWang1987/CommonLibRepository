@@ -16,6 +16,7 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
 import com.github.evan.common_utils.R;
 import com.github.evan.common_utils.utils.DensityUtil;
 import com.github.evan.common_utils.utils.ResourceUtil;
@@ -42,19 +43,21 @@ public class LoadingPager extends FrameLayout {
     private LoadingStatus mLoadingStatus;
 
     public LoadingPager(@NonNull Context context) {
-        this(context, null, 0);
+        super(context);
+        setup(context, null, 0);
     }
 
     public LoadingPager(@NonNull Context context, @Nullable AttributeSet attrs) {
-        this(context, attrs, 0);
+        super(context, attrs);
+        setup(context, attrs, 0);
     }
 
     public LoadingPager(@NonNull Context context, @Nullable AttributeSet attrs, @AttrRes int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        setup(context, attrs);
+        setup(context, attrs, defStyleAttr);
     }
 
-    private void setup(Context context, AttributeSet attrs) {
+    private void setup(Context context, AttributeSet attrs, int defStyleAttr) {
         mStatusContainer = new LinearLayout(context);
         mStatusDrawable = new ImageView(context);
         mStatusText = new TextView(context);
@@ -93,6 +96,19 @@ public class LoadingPager extends FrameLayout {
             mStatusTextColor = typedArray.getColor(R.styleable.LoadingPager_textColor, ResourceUtil.getColor(R.color.DarkGray));
             mStatusTextSize = (int) typedArray.getDimension(R.styleable.LoadingPager_textSize, DensityUtil.sp2px(16));
             mIsLoadingWithRotateAnim = typedArray.getBoolean(R.styleable.LoadingPager_isLoadingWithRotateAnimation, true);
+
+            mLoadingDrawable = null == mLoadingDrawable ? ResourceUtil.getDrawable(R.mipmap.status_loading) : mLoadingDrawable;
+            mUnknownDrawable = null == mUnknownDrawable ? ResourceUtil.getDrawable(R.mipmap.status_unknown_error) : mUnknownDrawable;
+            mLoadEmptyDrawable = null == mLoadEmptyDrawable ? ResourceUtil.getDrawable(R.mipmap.status_empty_data) : mLoadEmptyDrawable;
+            mNetUnAvailableDrawable = null == mNetUnAvailableDrawable ? ResourceUtil.getDrawable(R.mipmap.status_net_unavailable) : mNetUnAvailableDrawable;
+            mNetTimeoutDrawable = null == mNetTimeoutDrawable ? ResourceUtil.getDrawable(R.mipmap.status_net_timeout) : mNetTimeoutDrawable;
+            mNoSearchContentDrawable = null == mNoSearchContentDrawable ? ResourceUtil.getDrawable(R.mipmap.status_no_search_content) : mNoSearchContentDrawable;
+            mLoadingText = null == mLoadingText ? ResourceUtil.getString(R.string.loading_pager_loading) : mLoadingText;
+            mUnknownText = null == mUnknownText ? ResourceUtil.getString(R.string.loading_pager_unknown_error) : mUnknownText;
+            mLoadEmptyText = null == mLoadEmptyText ? ResourceUtil.getString(R.string.loading_pager_empty_data) : mLoadEmptyText;
+            mNetUnAvailableText = null == mNetUnAvailableText ? ResourceUtil.getString(R.string.loading_pager_net_unavailable) : mNetUnAvailableText;
+            mNetTimeoutText = null == mNetTimeoutText ? ResourceUtil.getString(R.string.loading_pager_net_timeout) : mNetTimeoutText;
+            mNoSearchContentText = null == mNoSearchContentText ? ResourceUtil.getString(R.string.loading_pager_no_search_content) : mNoSearchContentText;
             typedArray.recycle();
         } else {
             mLoadingDrawable = ResourceUtil.getDrawable(R.mipmap.status_loading);
