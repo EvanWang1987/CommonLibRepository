@@ -3,7 +3,9 @@ package com.github.evan.common_utils.manager.threadManager;
 import com.github.evan.common_utils.utils.DeviceUtil;
 
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
+import java.util.Set;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.SynchronousQueue;
 import java.util.concurrent.ThreadPoolExecutor;
@@ -36,7 +38,7 @@ public class ThreadManager {
     private ThreadManager(){
         int numberOfCPUCores = DeviceUtil.getNumberOfCPUCores();
         ThreadPoolExecutor otherPool = new ThreadPoolExecutor(3, 6, 1, TimeUnit.MINUTES, new LinkedBlockingQueue<Runnable>(), new ThreadFactory("Other Thread Pool"), new ThreadPoolExecutor.AbortPolicy());
-        ThreadPoolExecutor netWorkPool = new ThreadPoolExecutor(5, 5, 0, TimeUnit.MINUTES, new SynchronousQueue<Runnable>(), new ThreadFactory("Network Thread Pool"), new ThreadPoolExecutor.AbortPolicy());
+        ThreadPoolExecutor netWorkPool = new ThreadPoolExecutor(5, 10, 0, TimeUnit.MINUTES, new LinkedBlockingQueue<Runnable>(), new ThreadFactory("Network Thread Pool"), new ThreadPoolExecutor.AbortPolicy());
         ThreadPoolExecutor ioPool = new ThreadPoolExecutor(numberOfCPUCores * 2, numberOfCPUCores * 4, 1, TimeUnit.MINUTES, new LinkedBlockingQueue<Runnable>(), new ThreadFactory("IO Thread Pool"), new ThreadPoolExecutor.AbortPolicy());
         ThreadPoolExecutor singlePool = new ThreadPoolExecutor(1, 1, 0, TimeUnit.MINUTES, new LinkedBlockingQueue<Runnable>(), new ThreadFactory("Single Thread Pool"), new ThreadPoolExecutor.AbortPolicy());
 
@@ -49,6 +51,26 @@ public class ThreadManager {
         mPoolExecutors.put(NET_WORK_POOL, netWorkPool);
         mPoolExecutors.put(IO_POOL, ioPool);
         mPoolExecutors.put(SINGLE_POOL, singlePool);
+    }
+
+    public void shutDown(){
+        Set<Map.Entry<String, ThreadPoolExecutor>> entries = mPoolExecutors.entrySet();
+        Iterator<Map.Entry<String, ThreadPoolExecutor>> iterator = entries.iterator();
+        while (iterator.hasNext()){
+            Map.Entry<String, ThreadPoolExecutor> next = iterator.next();
+            ThreadPoolExecutor value = next.getValue();
+            value.shutdown();
+        }
+    }
+
+    public void shutDownNow(){
+        Set<Map.Entry<String, ThreadPoolExecutor>> entries = mPoolExecutors.entrySet();
+        Iterator<Map.Entry<String, ThreadPoolExecutor>> iterator = entries.iterator();
+        while (iterator.hasNext()){
+            Map.Entry<String, ThreadPoolExecutor> next = iterator.next();
+            ThreadPoolExecutor value = next.getValue();
+            value.shutdownNow();
+        }
     }
 
     public ThreadPoolExecutor getIOThreadPool(){
