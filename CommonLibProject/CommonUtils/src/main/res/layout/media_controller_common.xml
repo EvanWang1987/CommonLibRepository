@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:id="@+id/title_common_media_controller"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top"
+        android:background="#50000000"
+        android:padding="5dp">
+
+        <ImageButton
+            android:id="@+id/btn_back_common_media_controller"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:background="@null"
+            android:src="@mipmap/player_icon_nav_back" />
+
+        <LinearLayout
+            android:id="@+id/title_action_layout_common_media_controller"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:divider="@drawable/shape_alpha_divider"
+            android:dividerPadding="5dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:showDividers="middle">
+
+            <CheckBox
+                android:id="@+id/toggle_danmark_common_media_controller"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/selector_danmark"
+                android:button="@null" />
+
+            <ImageButton
+                android:id="@+id/btn_share_title_common_media_controller"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:src="@mipmap/player_icon_share" />
+
+            <ImageButton
+                android:id="@+id/btn_more_common_media_controller"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:src="@mipmap/player_icon_more" />
+
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <com.github.evan.common_utils.ui.view.BatteryView
+                    android:id="@+id/battery_view_common_media_controller"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    tools:src="@mipmap/battery_20" />
+
+                <com.github.evan.common_utils.ui.view.TimeView
+                    android:id="@+id/time_view_common_media_controller"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/text_color_white"
+                    android:textSize="12sp"
+                    tools:text="20:03" />
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+
+        <TextView
+            android:id="@+id/txt_title_common_media_controller"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_toLeftOf="@id/title_action_layout_common_media_controller"
+            android:layout_toRightOf="@id/btn_back_common_media_controller"
+            android:gravity="left|center_vertical"
+            android:maxLines="1"
+            android:textColor="@color/text_color_white"
+            android:textSize="16sp"
+            tools:text="测试" />
+
+
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:id="@+id/bottom_common_media_controller"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:background="#50000000"
+        android:padding="5dp">
+
+        <CheckBox
+            android:id="@+id/toggle_play_bottom_common_media_controller"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:background="@drawable/selector_play"
+            android:button="@null" />
+
+        <ImageButton
+            android:id="@+id/btn_next_common_media_controller"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="5dp"
+            android:layout_toRightOf="@id/toggle_play_bottom_common_media_controller"
+            android:background="@null"
+            android:src="@mipmap/player_ctrl_icon_next" />
+
+        <TextView
+            android:id="@+id/txt_current_position_bottom_common_media_controller"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="5dp"
+            android:layout_toRightOf="@id/btn_next_common_media_controller"
+            android:textColor="@color/text_color_gray"
+            android:textSize="14sp"
+            tools:text="1:00" />
+
+        <TextView
+            android:id="@+id/txt_definition_bottom_common_media_controller"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="5dp"
+            android:textColor="@color/text_color_white"
+            android:textSize="16sp"
+            tools:text="高清" />
+
+
+        <CheckBox
+            android:id="@+id/toggle_mute_bottom_common_media_controller"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@id/txt_definition_bottom_common_media_controller"
+            android:background="@drawable/selector_mute"
+            android:button="@null" />
+
+        <TextView
+            android:id="@+id/txt_duration_bottom_common_media_controller"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_toLeftOf="@id/toggle_mute_bottom_common_media_controller"
+            android:textColor="@color/text_color_gray"
+            android:textSize="14sp"
+            tools:text="1:00" />
+
+
+        <SeekBar
+            android:id="@+id/seek_bar_bottom_common_media_controller"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:max="100"
+            android:layout_toLeftOf="@id/txt_duration_bottom_common_media_controller"
+            android:layout_toRightOf="@id/txt_current_position_bottom_common_media_controller" />
+
+    </RelativeLayout>
+
+
+    <CheckBox
+        android:id="@+id/toggle_lock_screen_common_media_controller"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="left|center_vertical"
+        android:layout_marginLeft="15dp"
+        android:background="@drawable/selector_lock_screen"
+        android:button="@null" />
+
+    <ImageButton
+        android:id="@+id/btn_screen_shot_common_media_controller"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right|center_vertical"
+        android:layout_marginRight="15dp"
+        android:background="@null"
+        android:src="@mipmap/player_icon_screen_shot" />
+
+    <LinearLayout
+        android:id="@+id/slide_controller_layout_common_media_controller"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:orientation="vertical"
+        android:visibility="invisible">
+
+        <ImageView
+            android:id="@+id/ic_image_common_media_controller"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/ic_light_show" />
+
+        <TextView
+            android:id="@+id/ic_text_common_media_controller"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:textColor="@color/text_color_black"
+            android:textSize="16sp" />
+
+    </LinearLayout>
+
+
+</FrameLayout>

@@ -1,11 +1,8 @@
 package com.github.evan.common_utils.utils;
 
-import android.graphics.Paint;
 import android.os.Environment;
-
 import com.github.evan.common_utils.BaseApplication;
 import com.github.evan.common_utils.exception.DeleteTargetFileFailWhenRollbackCutFileException;
-
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;

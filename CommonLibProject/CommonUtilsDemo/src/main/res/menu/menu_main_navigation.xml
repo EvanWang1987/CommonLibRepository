@@ -10,6 +10,7 @@
         <item android:id="@+id/functionViewPager" android:title="@string/view_pager" android:icon="@drawable/selector_button_view_pager_black_72dp" />
         <item android:id="@+id/functionViewPagerNestMultiHorizontalScroll" android:title="@string/view_pager_nest_multi_horizontal_scroll" android:icon="@drawable/selector_button_view_pager_black_72dp" />
         <item android:id="@+id/functionPullToRefresh" android:title="@string/pull_to_refresh" android:icon="@drawable/selector_ptr_black" />
+        <item android:id="@+id/functionMediaController" android:title="@string/media_controller" android:icon="@drawable/selector_media_controller_black" />
         <item android:id="@+id/functionCustomEditText" android:title="@string/edit_text" android:icon="@drawable/selector_action_button_edit_dark" />
         <item android:id="@+id/functionFlagView" android:title="@string/flag_view" android:icon="@drawable/selector_action_button_flag_dark" />
         <item android:id="@+id/functionTint" android:title="@string/tint" android:icon="@drawable/selector_tint_black" />

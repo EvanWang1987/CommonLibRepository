@@ -3,6 +3,7 @@ package com.github.evan.common_utils.utils;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
+import java.util.TimeZone;
 import java.util.logging.SimpleFormatter;
 
 /**
@@ -10,6 +11,9 @@ import java.util.logging.SimpleFormatter;
  */
 public class DateUtil {
     public static final String yyyy_MM_dd_HH_mm_ss = "yyyy-MM-dd HH:mm:ss";
+    public static final String HH_mm = "HH:mm";
+    public static final String HH_mm_ss = "HH:mm:ss";
+    public static final String mm_ss = "mm:ss";
 
     /**
      * 获取当前时间的Calendar
@@ -42,6 +46,23 @@ public class DateUtil {
         Calendar calendar = Calendar.getInstance();
         calendar.setTimeInMillis(time);
         SimpleDateFormat formatter = new SimpleDateFormat(template, locale);
+        String value = formatter.format(calendar.getTime());
+        return value;
+    }
+
+    /**
+     * 计算时长, 计算一段时间差值的时分秒
+     * @param time
+     * @param template
+     * @return
+     */
+    public static String time2String(long time, String template, String templateIfNoHour){
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTimeInMillis(time);
+        calendar.setTimeZone(TimeZone.getTimeZone("GMT+00:00"));
+        int hour = calendar.get(Calendar.HOUR);
+        SimpleDateFormat formatter = new SimpleDateFormat(hour <= 0 ? templateIfNoHour : template);
+        formatter.setTimeZone(TimeZone.getTimeZone("GMT+00:00"));
         String value = formatter.format(calendar.getTime());
         return value;
     }
@@ -108,9 +129,5 @@ public class DateUtil {
         Calendar calendar = getCalendarOfCurrentTimeMillis();
         return calendar.get(Calendar.DAY_OF_WEEK) - 1;  //老外每周第一天是星期日
     }
-
-
-
-
 
 }

@@ -109,6 +109,10 @@
     <string name="hor_nest_ver_scroll_view">横向嵌套竖向滑动布局</string>
     <!-- 嵌套布局相关 -->
 
+    <!-- 视频控制器相关 -->
+    <string name="media_controller">视频控制器</string>
+    <!-- 视频控制器相关 -->
+
     <!-- 下拉刷新相关 -->
     <string name="pull_to_refresh">下拉刷新</string>
     <string name="with_view">Ptr with View</string>

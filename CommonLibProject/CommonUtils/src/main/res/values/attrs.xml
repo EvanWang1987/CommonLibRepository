@@ -140,29 +140,6 @@
         <attr name="totalInputCountTextColor" format="color" />
     </declare-styleable>
 
-    <declare-styleable name="ExtraButtonEditText">
-        <attr name="isShowLeftButton" format="boolean" />
-        <attr name="isShowRightButton" format="boolean" />
-        <attr name="leftButtonDrawableRes" format="reference" />
-        <attr name="rightButtonDrawableRes" format="reference" />
-        <attr name="isAutoClearTextWhenClickRightButton" format="boolean" />
-        <attr name="isAutoClearTextWhenClickLeftButton" format="boolean" />
-    </declare-styleable>
-
-    <declare-styleable name="PasswordEditText">
-        <attr name="passwordVisibilityDrawable" format="reference" />
-        <attr name="passwordVisibilityChecked" format="boolean" />
-    </declare-styleable>
-
-    <declare-styleable name="LoginEditText">
-        <attr name="isShowClearButton" format="boolean" />
-        <attr name="isShowDisplayPwdButton" format="boolean" />
-        <attr name="isShowLeftIcon" format="boolean" />
-        <attr name="clearButtonDrawable" format="reference" />
-        <attr name="displayPwdButtonDrawable" format="reference" />
-        <attr name="leftIcon" format="reference" />
-    </declare-styleable>
-
     <declare-styleable name="CircleImageView">
         <attr name="civ_border_width" format="dimension" />
         <attr name="civ_border_color" format="color" />

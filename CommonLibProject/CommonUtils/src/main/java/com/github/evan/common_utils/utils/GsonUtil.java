@@ -49,6 +49,10 @@ public class GsonUtil {
         return mGson.toJson(dst);
     }
 
+    public String toJsonWithObject(Object object) {
+        return mGson.toJson(object);
+    }
+
     public <DST> String toJson(List<DST> list) {
         Type type = new TypeToken<List<DST>>() {
         }.getType();
