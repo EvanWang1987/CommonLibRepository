@@ -2,12 +2,15 @@ package com.github.evan.common_utils.ui.view.mediaController;
 
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
+import android.app.Activity;
 import android.content.Context;
 import android.media.AudioManager;
 import android.provider.MediaStore;
 import android.support.annotation.AttrRes;
+import android.support.annotation.IntDef;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.widget.PopupMenuCompat;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.ScaleGestureDetector;
@@ -26,6 +29,7 @@ import com.github.evan.common_utils.gesture.CommonGestures;
 import com.github.evan.common_utils.ui.view.BatteryView;
 import com.github.evan.common_utils.ui.view.TimeView;
 import com.github.evan.common_utils.utils.BatteryUtil;
+import com.github.evan.common_utils.utils.BrightnessUtil;
 import com.github.evan.common_utils.utils.DateUtil;
 import com.github.evan.common_utils.utils.Logger;
 
@@ -41,7 +45,7 @@ public class CommonMediaController extends BaseMediaController implements View.O
     private ViewGroup mSlideControllerLayout, mTitleLayout, mBottomLayout;
     private ImageView mImgSlideIcon;
     private ImageButton mBtnBack, mBtnShare, mBtnMore, mBtnNext, mBtnSnapShot;
-    private CheckBox mToggleDanMark, mToggleLockScreen, mTogglePlay, mToggleMute;
+    private CheckBox mToggleDanMark, mToggleLockScreen, mTogglePlay, mToggleMute, mToggleFullScreen;
     private TextView mTxtTitle, mTxtDefinition, mTxtPosition, mTxtDuration, mTxtSlideIcon;
     private TimeView mTimeView;
     private BatteryView mBatteryView;
@@ -50,6 +54,8 @@ public class CommonMediaController extends BaseMediaController implements View.O
     private AnimatorSet mShowControllersAnim, mDismissControllerAnim;
     private boolean isControllersShowed = true;
     private long mVideoDuration;
+    private boolean isHorSlideAtFirst = false;
+    private boolean isVerSlideAtFirst = false;
 
     public CommonMediaController(@NonNull Context context) {
         super(context);
@@ -158,21 +164,62 @@ public class CommonMediaController extends BaseMediaController implements View.O
     @Override
     public void onGestureEnd() {
         mSlideControllerLayout.setVisibility(GONE);
+        isHorSlideAtFirst = false;
+        isVerSlideAtFirst = false;
         super.onGestureEnd();
     }
 
     @Override
     public void onHorizontalSlide(float horizontalSlidePercent, float verticalSlidePercent, float distanceX, float distanceY, int downPositionAtParent) {
+        if(!isHorSlideAtFirst && !isVerSlideAtFirst){
+            isHorSlideAtFirst = true;
+        }
+
+        if(isVerSlideAtFirst){
+            onVerticalSlide(horizontalSlidePercent, verticalSlidePercent, distanceX, distanceY, downPositionAtParent);
+            return;
+        }
+
+        Logger.d("onHorizontalSlide");
         mSlideControllerLayout.setVisibility(VISIBLE);
         mImgSlideIcon.setImageResource(R.mipmap.ic_light_show);
+
         super.onHorizontalSlide(horizontalSlidePercent, verticalSlidePercent, distanceX, distanceY, downPositionAtParent);
     }
 
     @Override
     public void onVerticalSlide(float horizontalSlidePercent, float verticalSlidePercent, float distanceX, float distanceY, int downPositionAtParent) {
+        if(!isHorSlideAtFirst && !isVerSlideAtFirst){
+            isVerSlideAtFirst = true;
+        }
+
+        if(isHorSlideAtFirst){
+            onHorizontalSlide(horizontalSlidePercent, verticalSlidePercent, distanceX, distanceY, downPositionAtParent);
+            return;
+        }
+
         mSlideControllerLayout.setVisibility(VISIBLE);
         boolean isDownAtLeft = downPositionAtParent == CommonGestures.LEFT_AT_PARENT;
         mImgSlideIcon.setImageResource(isDownAtLeft ? R.mipmap.ic_vol_show : R.mipmap.ic_light_show);
+        if(isDownAtLeft){
+            mAudioManager.adjustStreamVolume(AudioManager.STREAM_MUSIC, verticalSlidePercent <= 0 ? AudioManager.ADJUST_RAISE : AudioManager.ADJUST_LOWER, AudioManager.FLAG_PLAY_SOUND);
+        }else{
+            Activity activity = (Activity) getContext();
+            float activityBrightness = BrightnessUtil.getActivityBrightness(activity);
+            if(activityBrightness == -1){
+                activityBrightness = BrightnessUtil.getSystemBrightness(getContext()) / 255;
+            }
+
+            activityBrightness += -verticalSlidePercent;
+            if(activityBrightness > 1){
+                activityBrightness = 1;
+            }
+
+            if(activityBrightness < 0){
+                activityBrightness = 0;
+            }
+            BrightnessUtil.setActivityBrightness(activity, activityBrightness);
+        }
         super.onVerticalSlide(horizontalSlidePercent, verticalSlidePercent, distanceX, distanceY, downPositionAtParent);
     }
 
@@ -221,6 +268,7 @@ public class CommonMediaController extends BaseMediaController implements View.O
         mSlideControllerLayout = findViewById(R.id.slide_controller_layout_common_media_controller);
         mImgSlideIcon = findViewById(R.id.ic_image_common_media_controller);
         mTxtSlideIcon = findViewById(R.id.ic_text_common_media_controller);
+        mToggleFullScreen = findViewById(R.id.toggle_full_screen_bottom_common_media_controller);
         mBatteryView.startMonitoringBattery();
         mTimeView.refreshCurrentTime();
         mTimeView.startAutoRefreshTime(1, TimeUnit.SECONDS);
@@ -236,6 +284,7 @@ public class CommonMediaController extends BaseMediaController implements View.O
         mToggleLockScreen.setOnCheckedChangeListener(this);
         mTogglePlay.setOnCheckedChangeListener(this);
         mToggleMute.setOnCheckedChangeListener(this);
+        mToggleFullScreen.setOnCheckedChangeListener(this);
 
         mTitleShowAnim = ObjectAnimator.ofFloat(mTitleLayout, "translationY", -mTitleLayout.getHeight(), 0);
         mTitleDismissAnim = ObjectAnimator.ofFloat(mTitleLayout, "translationY", 0, -mTitleLayout.getHeight());
@@ -254,7 +303,6 @@ public class CommonMediaController extends BaseMediaController implements View.O
         mDismissControllerAnim = new AnimatorSet();
         mDismissControllerAnim.setDuration(300);
         mDismissControllerAnim.playTogether(mTitleDismissAnim, mBottomDismissAnim, mLockerDismissAnim, mScreenShotDismissAnim);
-
     }
 
     @Override
@@ -295,6 +343,8 @@ public class CommonMediaController extends BaseMediaController implements View.O
             }
         } else if (i == R.id.toggle_play_bottom_common_media_controller) {
             id = MediaControllerListener.VIEW_ID_PLAY_TOGGLE;
+        } else if (i == R.id.toggle_full_screen_bottom_common_media_controller) {
+            id = MediaControllerListener.VIEW_ID_FULL_SCREEN_TOGGLE;
         }
 
         if (null != mListener) {

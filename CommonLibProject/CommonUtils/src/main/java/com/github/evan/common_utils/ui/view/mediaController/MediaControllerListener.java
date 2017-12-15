@@ -16,7 +16,8 @@ public interface MediaControllerListener {
     public static final int VIEW_ID_PLAY_TOGGLE = 7;
     public static final int VIEW_ID_VIDEO_DEFINITION_BUTTON = 8;
     public static final int VIEW_ID_MUTE_TOGGLE = 9;
-    public static final int VIEW_ID_NEXT_BUTTON = 10;
+    public static final int VIEW_ID_FULL_SCREEN_TOGGLE = 10;
+    public static final int VIEW_ID_NEXT_BUTTON = 11;
 
     void onButtonClicked(int id);
 

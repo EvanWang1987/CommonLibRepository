@@ -166,14 +166,14 @@ public class CommonGestures {
                 float wholeDistanceX = Math.abs(e2.getX() - e1.getX()), wholeDistanceY = Math.abs(e2.getY() - e1.getY());
                 if (wholeDistanceX >= wholeDistanceY) {
                     float oldX = e1.getX(), oldY = e1.getY();
-                    float horizontalPercent = (oldX - e2.getX(0)) / mParentWidth;
-                    float verticalPercent = (oldY - e2.getY(0)) / mParentHeight;
+                    float horizontalPercent = (e2.getX(0) - oldX) / mParentWidth;
+                    float verticalPercent = (e2.getY(0) - oldY) / mParentHeight;
 
                     mListener.onHorizontalSlide(horizontalPercent, verticalPercent, e2.getX() - e1.getX(), e2.getY() - e1.getY(), mDownXPositionAtParent);
                 } else {
                     float oldX = e1.getX(), oldY = e1.getY();
-                    float horizontalPercent = (oldX - e2.getX(0)) / mParentWidth;
-                    float verticalPercent = (oldY - e2.getY(0)) / mParentHeight;
+                    float horizontalPercent = (e2.getX(0) - oldX) / mParentWidth;
+                    float verticalPercent = (e2.getY(0) - oldY) / mParentHeight;
 
                     mListener.onVerticalSlide(horizontalPercent, verticalPercent, e2.getX() - e1.getX(), e2.getY() - e1.getY(), mDownXPositionAtParent);
                 }

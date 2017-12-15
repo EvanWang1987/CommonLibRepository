@@ -65,4 +65,13 @@ public class BitmapUtil {
 
         return bitmap;
     }
+
+    public static Bitmap copyBitmap(Bitmap source){
+        if(null == source || source.isRecycled()){
+            return null;
+        }
+
+        Bitmap copy = source.copy(source.getConfig(), false);
+        return copy;
+    }
 }

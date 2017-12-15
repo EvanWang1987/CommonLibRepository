@@ -95,8 +95,6 @@
             android:textColor="@color/text_color_white"
             android:textSize="16sp"
             tools:text="测试" />
-
-
     </RelativeLayout>
 
 
@@ -108,67 +106,94 @@
         android:background="#50000000"
         android:padding="5dp">
 
-        <CheckBox
-            android:id="@+id/toggle_play_bottom_common_media_controller"
+        <LinearLayout
+            android:id="@+id/left_bottom_layout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
-            android:background="@drawable/selector_play"
-            android:button="@null" />
+            android:divider="@drawable/shape_alpha_divider"
+            android:dividerPadding="5dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:showDividers="middle">
 
-        <ImageButton
-            android:id="@+id/btn_next_common_media_controller"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="5dp"
-            android:layout_toRightOf="@id/toggle_play_bottom_common_media_controller"
-            android:background="@null"
-            android:src="@mipmap/player_ctrl_icon_next" />
+            <CheckBox
+                android:id="@+id/toggle_play_bottom_common_media_controller"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/selector_play"
+                android:button="@null" />
 
-        <TextView
-            android:id="@+id/txt_current_position_bottom_common_media_controller"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="5dp"
-            android:layout_toRightOf="@id/btn_next_common_media_controller"
-            android:textColor="@color/text_color_gray"
-            android:textSize="14sp"
-            tools:text="1:00" />
+            <ImageButton
+                android:id="@+id/btn_next_common_media_controller"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:background="@null"
+                android:src="@mipmap/player_ctrl_icon_next" />
 
-        <TextView
-            android:id="@+id/txt_definition_bottom_common_media_controller"
+            <TextView
+                android:id="@+id/txt_current_position_bottom_common_media_controller"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:textColor="@color/text_color_gray"
+                android:textSize="14sp"
+                tools:text="1:00" />
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/right_bottom_layout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:layout_marginLeft="5dp"
-            android:textColor="@color/text_color_white"
-            android:textSize="16sp"
-            tools:text="高清" />
+            android:divider="@drawable/shape_alpha_divider"
+            android:dividerPadding="5dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:showDividers="middle">
 
 
-        <CheckBox
-            android:id="@+id/toggle_mute_bottom_common_media_controller"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_toLeftOf="@id/txt_definition_bottom_common_media_controller"
-            android:background="@drawable/selector_mute"
-            android:button="@null" />
+            <TextView
+                android:id="@+id/txt_duration_bottom_common_media_controller"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:textColor="@color/text_color_gray"
+                android:textSize="14sp"
+                tools:text="1:00" />
 
-        <TextView
-            android:id="@+id/txt_duration_bottom_common_media_controller"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="5dp"
-            android:layout_marginRight="5dp"
-            android:layout_toLeftOf="@id/toggle_mute_bottom_common_media_controller"
-            android:textColor="@color/text_color_gray"
-            android:textSize="14sp"
-            tools:text="1:00" />
+            <CheckBox
+                android:id="@+id/toggle_mute_bottom_common_media_controller"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/selector_mute"
+                android:button="@null" />
+
+
+            <CheckBox
+                android:id="@+id/toggle_full_screen_bottom_common_media_controller"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/selector_full_screen"
+                android:button="@null" />
+
+
+            <TextView
+                android:id="@+id/txt_definition_bottom_common_media_controller"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/text_color_white"
+                android:textSize="16sp"
+                tools:text="高清" />
+
+
+        </LinearLayout>
 
 
         <SeekBar
@@ -176,9 +201,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:max="100"
-            android:layout_toLeftOf="@id/txt_duration_bottom_common_media_controller"
-            android:layout_toRightOf="@id/txt_current_position_bottom_common_media_controller" />
+            android:layout_toLeftOf="@id/right_bottom_layout"
+            android:layout_toRightOf="@id/left_bottom_layout"
+            android:max="100" />
 
     </RelativeLayout>
 

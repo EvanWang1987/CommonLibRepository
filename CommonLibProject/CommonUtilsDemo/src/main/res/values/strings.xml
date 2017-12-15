@@ -111,6 +111,8 @@
 
     <!-- 视频控制器相关 -->
     <string name="media_controller">视频控制器</string>
+    <string name="common_media_controller_title">钢铁侠3预告</string>
+    <string name="releasing_video_file">正在释放视频文件</string>
     <!-- 视频控制器相关 -->
 
     <!-- 下拉刷新相关 -->

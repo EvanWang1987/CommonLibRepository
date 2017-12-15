@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.view.ViewParent;
 import android.view.ViewTreeObserver;
 import android.widget.FrameLayout;
+
 import com.github.evan.common_utils.gesture.CommonGestures;
 import com.github.evan.common_utils.gesture.interceptor.InterceptMode;
 import com.github.evan.common_utils.gesture.interceptor.ThresholdSwitchable;
@@ -39,6 +40,7 @@ public abstract class BaseMediaController extends FrameLayout implements IMediaC
     protected int mMaxBirghtness = 255;
     private int mCurrentBrightness;
 
+
     public BaseMediaController(@NonNull Context context) {
         super(context);
         init();
@@ -62,7 +64,7 @@ public abstract class BaseMediaController extends FrameLayout implements IMediaC
         mAudioManager = (AudioManager) getContext().getSystemService(Context.AUDIO_SERVICE);
         mMaxVol = mAudioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC);
         mCurrentVol = mAudioManager.getStreamVolume(AudioManager.STREAM_MUSIC);
-        mCurrentBrightness = BrightnessUtil.getScreenBrightness(getContext());
+        mCurrentBrightness = BrightnessUtil.getSystemBrightness(getContext());
         mInterceptor = new TouchEventInterceptor(getContext());
         mThresholdSwitcher = new ThresholdSwitcher(getContext());
         mGestures = new CommonGestures(getContext().getApplicationContext());
