@@ -28,7 +28,9 @@ public abstract class BaseActivity extends AppCompatActivity implements SoftHand
     protected static final int LOAD_EMPTY = 4;
     protected static final int LOAD_ERROR = 5;
 
-    public abstract @LayoutRes int getLayoutResId();
+    public abstract
+    @LayoutRes
+    int getLayoutResId();
 //    public abstract BaseActivityConfig onCreateActivityConfig();
 
     private LayoutInflater mLayoutInflater;
@@ -65,69 +67,78 @@ public abstract class BaseActivity extends AppCompatActivity implements SoftHand
 //        BaseActivityConfig baseActivityConfig = onCreateActivityConfig();
     }
 
-    public LayoutInflater getLayoutInflater(){
+    public LayoutInflater getLayoutInflater() {
         return mLayoutInflater;
     }
 
-    public void loadActivity(Class<? extends Activity> activity){
+    public void loadActivity(Class<? extends Activity> activity) {
         loadActivity(activity, null, false, -1);
     }
 
-    public void loadActivity(Class<? extends Activity> destination, Bundle extras, boolean isForResult, int requestCode){
+    public void loadActivity(Class<? extends Activity> destination, Bundle extras, boolean isForResult, int requestCode) {
         Intent intent = new Intent(this, destination);
-        if(null != extras){
+        if (null != extras) {
             intent.putExtras(extras);
         }
 
-        if(isForResult){
+        if (isForResult) {
             startActivityForResult(intent, requestCode);
-        }else{
+        } else {
             startActivity(intent);
         }
     }
 
-    public void loadActivity(String action, Bundle extras, boolean isForResult, int requestCode){
+    public void loadActivity(String action, Bundle extras, boolean isForResult, int requestCode) {
         Intent intent = new Intent(action);
-        if(null != extras){
+        if (null != extras) {
             intent.putExtras(extras);
         }
 
-        if(isForResult){
+        if (isForResult) {
             startActivityForResult(intent, requestCode);
-        }else{
+        } else {
             startActivity(intent);
         }
     }
 
-    public boolean postDelay(Runnable runnable, long delay){
+    public boolean postDelay(Runnable runnable, long delay) {
         return mHandler.postDelayed(runnable, delay < 0 ? 0 : delay);
     }
 
-    protected void sendEmptyMessage(int what){
-        sendMessage(what, -1, -1, null);
+    protected void sendEmptyMessage(int what) {
+        sendMessage(what, -1, -1, null, null, -1);
     }
 
-    protected void sendMessage(int what, int arg1, int arg2, Bundle bundle){
+    protected void sendEmptyMessageDelay(int what, long delay) {
+        sendMessage(what, -1, -1, null, null, delay);
+    }
+
+    protected void sendMessage(int what, int arg1, int arg2, Object object, Bundle bundle, long delay) {
         Message message = Message.obtain();
         message.what = what;
         message.arg1 = arg1;
         message.arg2 = arg2;
+        message.obj = object;
         message.setData(bundle);
         boolean receiverExists = mHandler.isReceiverExists();
-        if(receiverExists){
+        if (receiverExists) {
             BaseActivity receiver = mHandler.getReceiver();
-            if(receiver.hashCode() != this.hashCode()){
+            if (receiver.hashCode() != this.hashCode()) {
                 mHandler.clearReceiver();
                 mHandler.setReceiver(this);
             }
-        }else{
+        } else {
             mHandler.setReceiver(this);
         }
 
-        mHandler.sendMessage(message);
+        if (delay <= 0) {
+            mHandler.sendMessage(message);
+        } else {
+            mHandler.sendMessageDelayed(message, delay);
+        }
     }
 
-    public boolean isForegroundActivity(){
+    public boolean isForegroundActivity() {
         return mActivities.getFirst().hashCode() == this.hashCode();
     }
 

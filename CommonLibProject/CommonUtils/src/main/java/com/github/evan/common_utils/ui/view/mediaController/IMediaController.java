@@ -16,4 +16,9 @@ public interface IMediaController {
 
     void setTitle(CharSequence title);
 
+    void resetIdle();
+
+    void showReplayButton();
+
+    void showPlayToggle();
 }

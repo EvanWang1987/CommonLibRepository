@@ -26,7 +26,6 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.github.evan.common_utils.ui.activity.BaseActivity;
-import com.github.evan.common_utils.utils.BatteryUtil;
 import com.github.evan.common_utils.utils.FragmentUtil;
 import com.github.evan.common_utils.utils.PackageUtil;
 import com.github.evan.common_utils.utils.ResourceUtil;
@@ -37,8 +36,7 @@ import com.github.evan.common_utils_demo.ui.fragment.FlagViewFragment;
 import com.github.evan.common_utils_demo.ui.fragment.HomeFragment;
 import com.github.evan.common_utils_demo.ui.fragment.HorNestVerScrollViewFragment;
 import com.github.evan.common_utils_demo.ui.fragment.ListGridViewFragment;
-import com.github.evan.common_utils_demo.ui.fragment.ListViewNestMultiHorizontalFragment;
-import com.github.evan.common_utils_demo.ui.fragment.MediaControllerFragment;
+import com.github.evan.common_utils_demo.ui.fragment.QRCodeFragment;
 import com.github.evan.common_utils_demo.ui.fragment.PullToRefreshFragment;
 import com.github.evan.common_utils_demo.ui.fragment.VerNestHorScrollViewFragment;
 import com.github.evan.common_utils_demo.ui.fragment.RecyclerViewFragment;
@@ -60,7 +58,7 @@ import butterknife.OnClick;
  */
 public class MainActivity extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener {
     private static final int PERMISSION_REQUEST_CODE = 101;
-    private static final String[] fragmentNames = {HomeFragment.class.getName(), ScreenInformationFragment.class.getName(), ListGridViewFragment.class.getName(), RecyclerViewFragment.class.getName(), VerNestHorScrollViewFragment.class.getName(), HorNestVerScrollViewFragment.class.getName(), ViewPagerFragment.class.getName(), ViewPagerNestListViewFragment.class.getName(), PullToRefreshFragment.class.getName(), MediaControllerFragment.class.getName(), CustomEditTextFragment.class.getName(), FlagViewFragment.class.getName(), TintFragment.class.getName(), DebugFragment.class.getName()};
+    private static final String[] fragmentNames = {HomeFragment.class.getName(), ScreenInformationFragment.class.getName(), ListGridViewFragment.class.getName(), RecyclerViewFragment.class.getName(), VerNestHorScrollViewFragment.class.getName(), HorNestVerScrollViewFragment.class.getName(), ViewPagerFragment.class.getName(), ViewPagerNestListViewFragment.class.getName(), PullToRefreshFragment.class.getName(), QRCodeFragment.class.getName(), CustomEditTextFragment.class.getName(), FlagViewFragment.class.getName(), TintFragment.class.getName(), DebugFragment.class.getName()};
 
     @BindView(R.id.mainActivity_appBar)
     public AppBarLayout mAppbarLayout;
@@ -97,7 +95,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         mNavigationView.setNavigationItemSelectedListener(this);
         FragmentUtil.addAllFragmentAndShowSomeOne(this, getSupportFragmentManager(), R.id.fragmentContainer, fragmentNames, true, null, HomeFragment.class.getName());
         mNavigationView.setCheckedItem(R.id.functionHome);
-        List<String> unRequestedPermission = PackageUtil.checkPermission(Manifest.permission.INTERNET, Manifest.permission.WRITE_EXTERNAL_STORAGE, Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN ? Manifest.permission.READ_EXTERNAL_STORAGE : null);
+        List<String> unRequestedPermission = PackageUtil.checkPermission(Manifest.permission.CAMERA, Manifest.permission.INTERNET, Manifest.permission.WRITE_EXTERNAL_STORAGE, Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN ? Manifest.permission.READ_EXTERNAL_STORAGE : null);
         if(!unRequestedPermission.isEmpty()){
             String[] permissions = new String[unRequestedPermission.size()];
             permissions = unRequestedPermission.toArray(permissions);
@@ -238,8 +236,8 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                 isExpand = true;
                 break;
 
-            case R.id.functionMediaController:
-                visibleFragment = fragmentManager.findFragmentByTag(MediaControllerFragment.class.getName());
+            case R.id.functionQRCode:
+                visibleFragment = fragmentManager.findFragmentByTag(QRCodeFragment.class.getName());
                 isExpand = false;
                 break;
 

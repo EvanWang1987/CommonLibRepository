@@ -115,6 +115,20 @@
     <string name="releasing_video_file">正在释放视频文件</string>
     <!-- 视频控制器相关 -->
 
+    <!-- 视频控制器相关 -->
+    <string name="about_qr_code">二维码相关</string>
+    <string name="scan">扫一扫</string>
+    <string name="scan_from_gallery">从相册中选择</string>
+    <string name="generate_qr_code">生成二维码</string>
+    <string name="generate_qr_code_with_logo">生成带logo的二维码</string>
+    <string name="scan_result">扫描结果:</string>
+    <string name="decode_fail">解码失败</string>
+    <string name="decoding_qr_code">正在解析二维码图片</string>
+    <string name="please_input_your_qr_code">请输入你的二维码</string>
+    <string name="encoding_qr_bitmap">正在生成二维码图片</string>
+    <string name="encode_fail">编码失败</string>
+    <!-- 视频控制器相关 -->
+
     <!-- 下拉刷新相关 -->
     <string name="pull_to_refresh">下拉刷新</string>
     <string name="with_view">Ptr with View</string>

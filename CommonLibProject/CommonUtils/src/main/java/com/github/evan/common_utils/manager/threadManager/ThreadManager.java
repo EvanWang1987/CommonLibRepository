@@ -6,6 +6,9 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.Executor;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.SynchronousQueue;
 import java.util.concurrent.ThreadPoolExecutor;
@@ -32,6 +35,7 @@ public class ThreadManager {
     private static final String NET_WORK_POOL = "NET_WORK_POOL";
     private static final String IO_POOL = "IO_POOL";
     private static final String SINGLE_POOL = "SINGLE_POOL";
+    private static final String QR_POOL = "QR_POOL";
 
     private Map<String, ThreadPoolExecutor> mPoolExecutors = new HashMap<>();
 
@@ -41,16 +45,19 @@ public class ThreadManager {
         ThreadPoolExecutor netWorkPool = new ThreadPoolExecutor(5, 10, 0, TimeUnit.MINUTES, new LinkedBlockingQueue<Runnable>(), new ThreadFactory("Network Thread Pool"), new ThreadPoolExecutor.AbortPolicy());
         ThreadPoolExecutor ioPool = new ThreadPoolExecutor(numberOfCPUCores * 2, numberOfCPUCores * 4, 1, TimeUnit.MINUTES, new LinkedBlockingQueue<Runnable>(), new ThreadFactory("IO Thread Pool"), new ThreadPoolExecutor.AbortPolicy());
         ThreadPoolExecutor singlePool = new ThreadPoolExecutor(1, 1, 0, TimeUnit.MINUTES, new LinkedBlockingQueue<Runnable>(), new ThreadFactory("Single Thread Pool"), new ThreadPoolExecutor.AbortPolicy());
+        ThreadPoolExecutor qrPool = new ThreadPoolExecutor(1, 1, 0, TimeUnit.MILLISECONDS, new LinkedBlockingQueue<Runnable>(), new ThreadFactory("QR Scan Thread Pool"), new ThreadPoolExecutor.AbortPolicy());
 
         otherPool.prestartCoreThread();         //预创建1个线程
         netWorkPool.prestartAllCoreThreads();   //预创建所有线程
         ioPool.prestartAllCoreThreads();
         singlePool.prestartCoreThread();
+        qrPool.prestartCoreThread();
 
         mPoolExecutors.put(OTHER_POOL, otherPool);
         mPoolExecutors.put(NET_WORK_POOL, netWorkPool);
         mPoolExecutors.put(IO_POOL, ioPool);
         mPoolExecutors.put(SINGLE_POOL, singlePool);
+        mPoolExecutors.put(QR_POOL, qrPool);
     }
 
     public void shutDown(){
@@ -87,5 +94,9 @@ public class ThreadManager {
 
     public ThreadPoolExecutor getOtherThreadPool(){
         return mPoolExecutors.get(OTHER_POOL);
+    }
+
+    public ThreadPoolExecutor getQrScanThreadPool() {
+        return mPoolExecutors.get(QR_POOL);
     }
 }

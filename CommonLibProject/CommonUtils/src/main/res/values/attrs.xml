@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <declare-styleable name="ScannerView">
+        <attr name="rim_long" format="dimension"/>
+        <attr name="rim_width" format="dimension"/>
+        <attr name="rim_color" format="color"/>
+        <attr name="horizontal_rim_space" format="dimension"/>
+        <attr name="vertical_rim_space" format="dimension"/>
+        <attr name="hollow_rectangle_stroke_width" format="dimension"/>
+        <attr name="hollow_rectangle_stroke_color" format="color"/>
+        <attr name="scanner_line" format="reference"/>
+
+    </declare-styleable>
+
     <declare-styleable name="PtrLayout">
         <attr name="indicator_id" format="reference" />
         <attr name="content_id" format="reference" />

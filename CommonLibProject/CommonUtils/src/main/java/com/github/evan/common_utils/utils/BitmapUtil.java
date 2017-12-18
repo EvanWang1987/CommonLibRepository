@@ -25,6 +25,22 @@ public class BitmapUtil {
     }
 
     /**
+     * 获取较小位图
+     * @param bitmap
+     * @return
+     */
+    public static Bitmap getSmallerBitmap(Bitmap bitmap){
+        int size = bitmap.getWidth()*bitmap.getHeight() / 160000;
+        if (size <= 1) return bitmap; // 如果小于
+        else {
+            Matrix matrix = new Matrix();
+            matrix.postScale((float) (1 / Math.sqrt(size)), (float) (1 / Math.sqrt(size)));
+            Bitmap resizeBitmap = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), matrix, true);
+            return resizeBitmap;
+        }
+    }
+
+    /**
      * 获取位图
      * @param context
      * @param resId

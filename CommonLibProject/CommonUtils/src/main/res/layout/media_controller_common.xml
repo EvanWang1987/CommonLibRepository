@@ -118,12 +118,29 @@
             android:orientation="horizontal"
             android:showDividers="middle">
 
-            <CheckBox
-                android:id="@+id/toggle_play_bottom_common_media_controller"
+            <FrameLayout
+                android:id="@+id/toggle_play_layout"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/selector_play"
-                android:button="@null" />
+                android:layout_height="wrap_content">
+
+                <CheckBox
+                    android:layout_gravity="center"
+                    android:id="@+id/toggle_play_bottom_common_media_controller"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/selector_play"
+                    android:button="@null" />
+
+                <ImageButton
+                    android:layout_gravity="center"
+                    android:id="@+id/btn_replay_bottom_common_media_controller"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@null"
+                    android:src="@mipmap/player_icon_replayer_small" />
+
+            </FrameLayout>
+
 
             <ImageButton
                 android:id="@+id/btn_next_common_media_controller"

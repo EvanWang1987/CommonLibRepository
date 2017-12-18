@@ -44,7 +44,7 @@ import java.util.concurrent.TimeUnit;
 public class CommonMediaController extends BaseMediaController implements View.OnClickListener, CompoundButton.OnCheckedChangeListener {
     private ViewGroup mSlideControllerLayout, mTitleLayout, mBottomLayout;
     private ImageView mImgSlideIcon;
-    private ImageButton mBtnBack, mBtnShare, mBtnMore, mBtnNext, mBtnSnapShot;
+    private ImageButton mBtnBack, mBtnShare, mBtnMore, mBtnNext, mBtnSnapShot, mBtnReplay;
     private CheckBox mToggleDanMark, mToggleLockScreen, mTogglePlay, mToggleMute, mToggleFullScreen;
     private TextView mTxtTitle, mTxtDefinition, mTxtPosition, mTxtDuration, mTxtSlideIcon;
     private TimeView mTimeView;
@@ -152,6 +152,24 @@ public class CommonMediaController extends BaseMediaController implements View.O
         mTxtTitle.setText(title);
     }
 
+    @Override
+    public void resetIdle() {
+        mTogglePlay.setChecked(false);
+        hideControllers();
+    }
+
+    @Override
+    public void showReplayButton() {
+        mBtnReplay.setVisibility(VISIBLE);
+        mTogglePlay.setVisibility(GONE);
+    }
+
+    @Override
+    public void showPlayToggle() {
+        mBtnReplay.setVisibility(GONE);
+        mTogglePlay.setVisibility(VISIBLE);
+    }
+
     public boolean isControllersShowed() {
         return isControllersShowed;
     }
@@ -249,6 +267,7 @@ public class CommonMediaController extends BaseMediaController implements View.O
         mBottomLayout = findViewById(R.id.bottom_common_media_controller);
 
         mBtnBack = findViewById(R.id.btn_back_common_media_controller);
+        mBtnReplay = findViewById(R.id.btn_replay_bottom_common_media_controller);
         mBtnShare = findViewById(R.id.btn_share_title_common_media_controller);
         mToggleDanMark = findViewById(R.id.toggle_danmark_common_media_controller);
         mBtnMore = findViewById(R.id.btn_more_common_media_controller);
@@ -279,6 +298,7 @@ public class CommonMediaController extends BaseMediaController implements View.O
         mBtnNext.setOnClickListener(this);
         mTxtDefinition.setOnClickListener(this);
         mBtnSnapShot.setOnClickListener(this);
+        mBtnReplay.setOnClickListener(this);
 
         mToggleDanMark.setOnCheckedChangeListener(this);
         mToggleLockScreen.setOnCheckedChangeListener(this);
@@ -319,6 +339,8 @@ public class CommonMediaController extends BaseMediaController implements View.O
             id = MediaControllerListener.VIEW_ID_NEXT_BUTTON;
         } else if (i == R.id.btn_screen_shot_common_media_controller) {
             id = MediaControllerListener.VIEW_ID_SCREEN_SNAP_SHOT_BUTTON;
+        }else if(i == R.id.btn_replay_bottom_common_media_controller){
+            id = MediaControllerListener.VIEW_ID_REPLAY_BUTTON;
         }
 
         if (null != mListener) {

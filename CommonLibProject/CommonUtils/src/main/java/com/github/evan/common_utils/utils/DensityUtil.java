@@ -7,6 +7,7 @@ import android.os.Build;
 import android.util.DisplayMetrics;
 import android.view.Display;
 import android.view.WindowManager;
+
 import com.github.evan.common_utils.BaseApplication;
 
 import java.lang.reflect.Field;
@@ -20,6 +21,7 @@ public class DensityUtil {
 
     /**
      * 获取设备屏幕真实宽度
+     *
      * @return
      */
     public static int getRealScreenWidthOfPx() {
@@ -33,7 +35,7 @@ public class DensityUtil {
                 width = point.x;
             } else {
                 DisplayMetrics displayMetrics = new DisplayMetrics();
-                width = (int)display.getClass().getMethod("getRawWidth").invoke(displayMetrics);
+                width = (int) display.getClass().getMethod("getRawWidth").invoke(displayMetrics);
             }
         } catch (IllegalAccessException e) {
             e.printStackTrace();
@@ -47,6 +49,7 @@ public class DensityUtil {
 
     /**
      * 获取设备屏幕真实高度
+     *
      * @return
      */
     public static int getRealScreenHeightOfPx() {
@@ -60,7 +63,7 @@ public class DensityUtil {
                 height = point.y;
             } else {
                 DisplayMetrics displayMetrics = new DisplayMetrics();
-                height = (int)display.getClass().getMethod("getRawHeight").invoke(displayMetrics);
+                height = (int) display.getClass().getMethod("getRawHeight").invoke(displayMetrics);
             }
         } catch (IllegalAccessException e) {
             e.printStackTrace();
@@ -74,9 +77,10 @@ public class DensityUtil {
 
     /**
      * 获取屏幕宽高比
+     *
      * @return
      */
-    private static String getScreenAspectRatioString(){
+    private static String getScreenAspectRatioString() {
         //TODO:
 
         return "";
@@ -84,9 +88,10 @@ public class DensityUtil {
 
     /**
      * 获取屏幕尺寸(对角线)
+     *
      * @return
      */
-    public static float getScreenSize(){
+    public static float getScreenSize() {
         float xDpi = getXDpi();
         float yDpi = getYDpi();
         int realScreenWidthOfPx = getRealScreenWidthOfPx();
@@ -103,6 +108,7 @@ public class DensityUtil {
 
     /**
      * 获取系统状态栏高度
+     *
      * @return
      */
     public static float getStatusBarHeight() {
@@ -160,9 +166,10 @@ public class DensityUtil {
 
     /**
      * 获取屏幕DPI
+     *
      * @return
      */
-    public static int getScreenDpi(){
+    public static int getScreenDpi() {
         int realScreenWidthOfPx = getRealScreenWidthOfPx();
         int realScreenHeightOfPx = getRealScreenHeightOfPx();
         float screenSize = getScreenSize();
@@ -240,5 +247,13 @@ public class DensityUtil {
      */
     public static int[] getResolution() {
         return new int[]{getRealScreenWidthOfPx(), getRealScreenHeightOfPx()};
+    }
+
+    public static Point getScreenResolution() {
+        DisplayMetrics metrics = BaseApplication.getApplication().getResources().getDisplayMetrics();
+        if (metrics != null)
+            return new Point(metrics.widthPixels, metrics.heightPixels);
+
+        return null;
     }
 }
