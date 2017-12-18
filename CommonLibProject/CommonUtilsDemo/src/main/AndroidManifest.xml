@@ -13,7 +13,7 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".ui.activity.TestActivity"/>
+        <activity android:name=".ui.activity.TestActivity" android:theme="@style/AppCompatLightNoActionBarTransparentActivityWithLeftToRightAnim"/>
         <activity android:name=".ui.activity.ptrActivity.PtrWithViewActivity"/>
         <activity android:name=".ui.activity.ptrActivity.PtrWithViewGroupActivity"/>
         <activity android:name=".ui.activity.ptrActivity.PtrWithListViewActivity"/>
@@ -26,6 +26,10 @@
         <activity android:name=".ui.activity.ptrActivity.PtrWithGifIndicatorActivity"/>
         <activity android:name=".ui.activity.ptrActivity.PtrWithLargeImageIndicatorActivity"/>
         <activity android:name=".ui.activity.mediaControllerActivity.CommonMediaControllerActivity"/>
+        <activity android:name=".ui.activity.slideExitActivity.SlideExitLeftToRightActivity" android:theme="@style/AppCompatLightNoActionBarTransparentActivityWithLeftToRightAnim"/>
+        <activity android:name=".ui.activity.slideExitActivity.SlideExitRightToLeftActivity" android:theme="@style/AppCompatLightNoActionBarTransparentActivityWithRightToLeftAnim"/>
+        <activity android:name=".ui.activity.slideExitActivity.SlideExitTopToBottomActivity" android:theme="@style/AppCompatLightNoActionBarTransparentActivityWithTopToBottomAnim"/>
+        <activity android:name=".ui.activity.slideExitActivity.SlideExitBottomToTopActivity" android:theme="@style/AppCompatLightNoActionBarTransparentActivityWithBottomToTopAnim"/>
     </application>
 
 </manifest>

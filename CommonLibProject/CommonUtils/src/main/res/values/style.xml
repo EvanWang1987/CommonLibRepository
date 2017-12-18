@@ -68,5 +68,74 @@
         <item name="android:textColor">@drawable/selector_text_color_dark</item>
     </style>
 
-    <style name="Widget.GifView" parent="@android:style/Widget"/>
+    <style name="Widget.GifView" parent="@android:style/Widget" />
+
+    <style name="windowAnimationLeftToRight" >
+        <item name="android:windowEnterAnimation">@anim/activity_left_to_right_enter</item>
+        <item name="android:windowExitAnimation">@anim/activity_left_to_right_exit</item>
+    </style>
+
+    <style name="windowAnimationRightToLeft" >
+        <item name="android:windowEnterAnimation">@anim/activity_right_to_left_enter</item>
+        <item name="android:windowExitAnimation">@anim/activity_right_to_left_exit</item>
+    </style>
+
+    <style name="windowAnimationTopToBottom" >
+        <item name="android:windowEnterAnimation">@anim/activity_top_to_bottom_enter</item>
+        <item name="android:windowExitAnimation">@anim/activity_top_to_bottom_exit</item>
+    </style>
+
+    <style name="windowAnimationBottomToTop" >
+        <item name="android:windowEnterAnimation">@anim/activity_bottom_to_top_enter</item>
+        <item name="android:windowExitAnimation">@anim/activity_bottom_to_top_exit</item>
+    </style>
+
+    <style name="AppCompatLightNoActionBarTransparentActivityWithLeftToRightAnim" parent="ThemeAppCompatLightNoActionBar">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowAnimationStyle">@style/windowAnimationLeftToRight</item>
+    </style>
+
+    <style name="AppCompatLightWithActionBarTransparentActivityWithLeftToRightAnim" parent="ThemeAppCompatLightDarkActionBar">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowAnimationStyle">@style/windowAnimationLeftToRight</item>
+    </style>
+
+    <style name="AppCompatLightNoActionBarTransparentActivityWithRightToLeftAnim" parent="ThemeAppCompatLightNoActionBar">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowAnimationStyle">@style/windowAnimationRightToLeft</item>
+    </style>
+
+    <style name="AppCompatLightWithActionBarTransparentActivityWithRightToLeftAnim" parent="ThemeAppCompatLightDarkActionBar">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowAnimationStyle">@style/windowAnimationRightToLeft</item>
+    </style>
+
+    <style name="AppCompatLightNoActionBarTransparentActivityWithTopToBottomAnim" parent="ThemeAppCompatLightNoActionBar">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowAnimationStyle">@style/windowAnimationTopToBottom</item>
+    </style>
+
+    <style name="AppCompatLightWithActionBarTransparentActivityWithTopToBottomAnim" parent="ThemeAppCompatLightDarkActionBar">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowAnimationStyle">@style/windowAnimationTopToBottom</item>
+    </style>
+
+    <style name="AppCompatLightNoActionBarTransparentActivityWithBottomToTopAnim" parent="ThemeAppCompatLightNoActionBar">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowAnimationStyle">@style/windowAnimationBottomToTop</item>
+    </style>
+
+    <style name="AppCompatLightWithActionBarTransparentActivityWithBottomToTopAnim" parent="ThemeAppCompatLightDarkActionBar">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowAnimationStyle">@style/windowAnimationBottomToTop</item>
+    </style>
+
 </resources>
