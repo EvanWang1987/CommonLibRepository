@@ -9,10 +9,7 @@ import android.view.ViewGroup;
 import com.github.evan.common_utils.ui.activity.slideExitActivity.SlideExitDirection;
 import com.github.evan.common_utils.ui.fragment.BaseFragment;
 import com.github.evan.common_utils_demo.R;
-import com.github.evan.common_utils_demo.ui.activity.slideExitActivity.SlideExitBottomToTopActivity;
-import com.github.evan.common_utils_demo.ui.activity.slideExitActivity.SlideExitLeftToRightActivity;
-import com.github.evan.common_utils_demo.ui.activity.slideExitActivity.SlideExitRightToLeftActivity;
-import com.github.evan.common_utils_demo.ui.activity.slideExitActivity.SlideExitTopToBottomActivity;
+import com.github.evan.common_utils_demo.ui.activity.slideExitActivity.SlideExitDemoActivity;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -35,19 +32,23 @@ public class SlideExitActivityFragment extends BaseFragment {
         Bundle bundle = new Bundle();
         switch (view.getId()){
             case R.id.card_slide_exit_left_to_right:
-                loadActivity(SlideExitLeftToRightActivity.class, bundle, false, -1);
+                bundle.putInt(SlideExitDemoActivity.SLIDE_EXIT_DIRECTION, SlideExitDirection.LEFT_TO_RIGHT.value);
+                loadActivity(SlideExitDemoActivity.class, bundle, false, -1);
                 break;
 
             case R.id.card_slide_exit_right_to_left:
-                loadActivity(SlideExitRightToLeftActivity.class, bundle, false, -1);
+                bundle.putInt(SlideExitDemoActivity.SLIDE_EXIT_DIRECTION, SlideExitDirection.RIGHT_TO_LEFT.value);
+                loadActivity(SlideExitDemoActivity.class, bundle, false, -1);
                 break;
 
             case R.id.card_slide_exit_top_to_bottom:
-                loadActivity(SlideExitTopToBottomActivity.class, bundle, false, -1);
+                bundle.putInt(SlideExitDemoActivity.SLIDE_EXIT_DIRECTION, SlideExitDirection.TOP_TO_BOTTOM.value);
+                loadActivity(SlideExitDemoActivity.class, bundle, false, -1);
                 break;
 
             case R.id.card_slide_exit_bottom_to_top:
-                loadActivity(SlideExitBottomToTopActivity.class, bundle, false, -1);
+                bundle.putInt(SlideExitDemoActivity.SLIDE_EXIT_DIRECTION, SlideExitDirection.BOTTOM_TO_TOP.value);
+                loadActivity(SlideExitDemoActivity.class, bundle, false, -1);
                 break;
         }
     }

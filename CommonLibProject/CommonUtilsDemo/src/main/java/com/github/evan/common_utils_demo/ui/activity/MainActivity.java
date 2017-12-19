@@ -27,6 +27,7 @@ import android.view.View;
 
 import com.github.evan.common_utils.ui.activity.BaseActivity;
 import com.github.evan.common_utils.utils.FragmentUtil;
+import com.github.evan.common_utils.utils.Logger;
 import com.github.evan.common_utils.utils.PackageUtil;
 import com.github.evan.common_utils.utils.ResourceUtil;
 import com.github.evan.common_utils.utils.UiUtil;
@@ -102,6 +103,24 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
             permissions = unRequestedPermission.toArray(permissions);
             ActivityCompat.requestPermissions(this, permissions, PERMISSION_REQUEST_CODE);
         }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Logger.d("onResume");
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        Logger.d("onPause");
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        Logger.d("onStop");
     }
 
     @Override
