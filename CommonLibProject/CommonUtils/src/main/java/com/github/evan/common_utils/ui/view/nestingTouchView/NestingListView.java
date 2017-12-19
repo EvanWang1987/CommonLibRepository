@@ -69,8 +69,8 @@ public class NestingListView extends ListView implements Nestable, ThresholdSwit
             if (adapter == null) {
                 return true;
             }
-            boolean isArriveTopThreshold = canScrollVertically(-1);
-            boolean isArriveBottomThreshold = canScrollVertically(1);
+            boolean isArriveTopThreshold = !canScrollVertically(-1);
+            boolean isArriveBottomThreshold = !canScrollVertically(1);
             return yDirection == TouchEventDirection.TOP_TO_BOTTOM ? isArriveTopThreshold : isArriveBottomThreshold;
         }
         return false;

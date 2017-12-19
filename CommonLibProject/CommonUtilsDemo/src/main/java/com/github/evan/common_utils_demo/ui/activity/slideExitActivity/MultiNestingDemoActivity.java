@@ -11,6 +11,7 @@ import com.github.evan.common_utils.manager.threadManager.ThreadManager;
 import com.github.evan.common_utils.ui.activity.BaseActivity;
 import com.github.evan.common_utils.ui.adapter.SimpleFragmentStateAdapter;
 import com.github.evan.common_utils.ui.view.LoadingPager;
+import com.github.evan.common_utils.ui.view.nestingTouchView.NestingTabLayout;
 import com.github.evan.common_utils.ui.view.nestingTouchView.NestingViewPager;
 import com.github.evan.common_utils_demo.R;
 import com.github.evan.common_utils_demo.ui.fragment.MultiNestingInnerFragment;
@@ -26,7 +27,7 @@ import butterknife.ButterKnife;
 public class MultiNestingDemoActivity extends BaseActivity {
     private static final String[] fragments = {MultiNestingInnerFragment.class.getName(), MultiNestingInnerFragment.class.getName(), MultiNestingInnerFragment.class.getName(), MultiNestingInnerFragment.class.getName(), MultiNestingInnerFragment.class.getName(), MultiNestingInnerFragment.class.getName(), MultiNestingInnerFragment.class.getName(), MultiNestingInnerFragment.class.getName(), MultiNestingInnerFragment.class.getName(), MultiNestingInnerFragment.class.getName()};
     @BindView(R.id.tab_layout_multi_nesting_fragment)
-    TabLayout mTabLayout;
+    NestingTabLayout mTabLayout;
     @BindView(R.id.loading_pager_multi_nesting_fragment)
     LoadingPager mLoadingPager;
     @BindView(R.id.view_pager_multi_nesting_fragment)

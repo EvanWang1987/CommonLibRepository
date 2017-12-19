@@ -58,7 +58,7 @@ public class MultiNestingInnerFragment extends BaseFragment {
         mPagerAdapter.notifyDataSetChanged();
 
         List<String> listData = new ArrayList<>();
-        for (int i = 0; i < 30; i++) {
+        for (int i = 0; i < 15; i++) {
             listData.add("" + i);
         }
         mAdapter.replace(listData);

@@ -20,7 +20,7 @@ import butterknife.OnClick;
 
 public class PayAttentionHolder extends BaseRecyclerViewHolder<TitleInteger> {
     @BindView(R.id.ic_portrait_pay_attention_holder)
-    ImageView mImgPortraint;
+    ImageView mImgPortrait;
     @BindView(R.id.txt_channel_pay_attention_holder)
     TextView mTxtChannel;
     @BindView(R.id.btn_pay_attention_holder)
@@ -33,7 +33,8 @@ public class PayAttentionHolder extends BaseRecyclerViewHolder<TitleInteger> {
 
     @Override
     public void onRefreshHolder(TitleInteger integer) {
-
+        mImgPortrait.setImageResource(integer.getValue());
+        mTxtChannel.setText(integer.getTitle());
     }
 
     @Override
@@ -43,6 +44,6 @@ public class PayAttentionHolder extends BaseRecyclerViewHolder<TitleInteger> {
 
     @OnClick({R.id.btn_pay_attention_holder})
     void onClick(View view){
-        ToastUtil.showToastWithShortDuration("item clicked! position: " + getLayoutPosition() + getData().getTitle());
+        ToastUtil.showToastWithShortDuration("item clicked! position: " + getLayoutPosition());
     }
 }

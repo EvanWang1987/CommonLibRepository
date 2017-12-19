@@ -19,7 +19,7 @@ import java.util.List;
  */
 
 public class MultiNestingInnerHolder extends BaseRecyclerViewHolder<String> {
-    private static final int[] protraits = {R.mipmap.portrait_01, R.mipmap.portrait_02, R.mipmap.portrait_03, R.mipmap.portrait_04, R.mipmap.portrait_05, R.mipmap.portrait_06, R.mipmap.portrait_07, R.mipmap.portrait_08, R.mipmap.portrait_09, R.mipmap.portrait_10};
+    private static final int[] portraits = {R.mipmap.portrait_01, R.mipmap.portrait_02, R.mipmap.portrait_03, R.mipmap.portrait_04, R.mipmap.portrait_05, R.mipmap.portrait_06, R.mipmap.portrait_07, R.mipmap.portrait_08, R.mipmap.portrait_09, R.mipmap.portrait_10};
     private NestingRecyclerView mRecyclerView;
     private PayAttentionAdapter mAdapter;
 
@@ -34,10 +34,10 @@ public class MultiNestingInnerHolder extends BaseRecyclerViewHolder<String> {
     @Override
     public void onRefreshHolder(String string) {
         List<TitleInteger> data = new ArrayList<>();
-        for (int i = 0; i < protraits.length; i++) {
-            int res = protraits[i];
+        for (int i = 0; i < portraits.length; i++) {
+            int res = portraits[i];
             TitleInteger titleInteger = new TitleInteger(res);
-            titleInteger.setTitle("频道 " + i);
+            titleInteger.setTitle("频道 " + (i + 1));
             data.add(titleInteger);
         }
         mAdapter.replace(data);

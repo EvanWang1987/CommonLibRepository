@@ -3,6 +3,7 @@ package com.github.evan.common_utils.ui.view.nestingTouchView;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
@@ -13,6 +14,7 @@ import com.github.evan.common_utils.gesture.interceptor.ThresholdSwitchable;
 import com.github.evan.common_utils.gesture.interceptor.ThresholdSwitcher;
 import com.github.evan.common_utils.gesture.interceptor.TouchEventDirection;
 import com.github.evan.common_utils.gesture.interceptor.TouchEventInterceptor;
+import com.github.evan.common_utils.utils.Logger;
 
 
 /**
@@ -40,10 +42,10 @@ public class NestingRecyclerView extends RecyclerView implements Nestable, Thres
         init(context, attrs, defStyle);
     }
 
-    private void init(Context context, AttributeSet attrs, int defStyle){
+    private void init(Context context, AttributeSet attrs, int defStyle) {
         mThresholdSwitcher = new ThresholdSwitcher(context);
         mInterceptor = new TouchEventInterceptor(context);
-        if(null != attrs){
+        if (null != attrs) {
             mInterceptMode = pickupInterceptMode(attrs, R.styleable.NestingRecyclerView, defStyle);
         }
     }
@@ -65,7 +67,7 @@ public class NestingRecyclerView extends RecyclerView implements Nestable, Thres
     @Override
     public boolean onInterceptTouchEvent(MotionEvent e) {
         int actionMasked = e.getActionMasked();
-        if(actionMasked == MotionEvent.ACTION_DOWN || actionMasked == MotionEvent.ACTION_UP || actionMasked == MotionEvent.ACTION_CANCEL){
+        if (actionMasked == MotionEvent.ACTION_DOWN || actionMasked == MotionEvent.ACTION_UP || actionMasked == MotionEvent.ACTION_CANCEL) {
             super.onInterceptTouchEvent(e);
         }
         return mInterceptor.interceptTouchEvent(e, mInterceptMode, this, true);
@@ -73,8 +75,22 @@ public class NestingRecyclerView extends RecyclerView implements Nestable, Thres
 
     @Override
     public boolean isArriveTouchEventThreshold(InterceptMode interceptMode, TouchEventDirection xDirection, TouchEventDirection yDirection) {
-        if(interceptMode == InterceptMode.ALL_BY_MYSELF_BUT_THRESHOLD || interceptMode == InterceptMode.VERTICAL_BUT_THRESHOLD || interceptMode == InterceptMode.HORIZONTAL_BUT_THRESHOLD){
-            return yDirection == TouchEventDirection.TOP_TO_BOTTOM ? canScrollVertically(-1) : canScrollVertically(1);
+        if (interceptMode == InterceptMode.ALL_BY_MYSELF_BUT_THRESHOLD || interceptMode == InterceptMode.VERTICAL_BUT_THRESHOLD || interceptMode == InterceptMode.HORIZONTAL_BUT_THRESHOLD) {
+            LayoutManager layoutManager = getLayoutManager();
+            if (layoutManager instanceof LinearLayoutManager) {
+                LinearLayoutManager linearLayoutManager = (LinearLayoutManager) layoutManager;
+                boolean isVertical = linearLayoutManager.getOrientation() == VERTICAL;
+                if (isVertical) {
+                    return yDirection == TouchEventDirection.TOP_TO_BOTTOM ? !canScrollVertically(-1) : !canScrollVertically(1);
+                } else {
+                    boolean isArrive = xDirection == TouchEventDirection.LEFT_TO_RIGHT ? !canScrollHorizontally(-1) : !canScrollHorizontally(1);
+                    Logger.d("xDirection: " + xDirection);
+                    Logger.d("isArrive: " + isArrive);
+                    return isArrive;
+                }
+            } else {
+                return yDirection == TouchEventDirection.TOP_TO_BOTTOM ? !canScrollVertically(-1) : !canScrollVertically(1);
+            }
         }
         return false;
     }
@@ -91,7 +107,7 @@ public class NestingRecyclerView extends RecyclerView implements Nestable, Thres
 
     @Override
     public void setInterceptMode(InterceptMode mode) {
-        if(null == mode)
+        if (null == mode)
             return;
 
         mInterceptMode = mode;

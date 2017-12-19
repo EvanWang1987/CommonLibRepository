@@ -47,6 +47,19 @@
         <attr name="update_time_flag" format="string" />
     </declare-styleable>
 
+    <declare-styleable name="NestingTabLayout">
+        <attr name="nesting_tab_layout_touch_intercept_mode" format="enum">
+            <enum name="use_supper_default" value="-1" />
+            <enum name="all_by_myself" value="0" />
+            <enum name="all_by_myself_but_threshold" value="1" />
+            <enum name="horizontal" value="2" />
+            <enum name="horizontal_but_threshold" value="3" />
+            <enum name="vertical" value="4" />
+            <enum name="vertical__but_threshold" value="5" />
+        </attr>
+        <attr name="nesting_tab_layout_handle_parallel_Slide" format="boolean" />
+    </declare-styleable>
+
     <declare-styleable name="NestingRecyclerView">
         <attr name="nesting_recycler_view_touch_intercept_mode" format="enum">
             <enum name="use_supper_default" value="-1" />

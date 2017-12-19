@@ -105,7 +105,7 @@
         </android.support.v7.widget.CardView>
 
 
-<!--        <android.support.v7.widget.CardView
+        <android.support.v7.widget.CardView
             android:id="@+id/card_slide_exit_multi_nesting"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -125,7 +125,7 @@
                 android:textColor="@color/text_color_black"
                 android:textSize="16sp" />
 
-        </android.support.v7.widget.CardView>-->
+        </android.support.v7.widget.CardView>
 
 
     </android.support.v7.widget.GridLayout>

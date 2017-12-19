@@ -10,10 +10,12 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <android.support.design.widget.TabLayout
+        <com.github.evan.common_utils.ui.view.nestingTouchView.NestingTabLayout
             android:id="@+id/tab_layout_multi_nesting_fragment"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            app:nesting_tab_layout_handle_parallel_Slide="true"
+            app:nesting_tab_layout_touch_intercept_mode="all_by_myself_but_threshold"
             app:tabGravity="fill"
             app:tabMode="scrollable" />
 
@@ -30,7 +32,9 @@
             <com.github.evan.common_utils.ui.view.nestingTouchView.NestingViewPager
                 android:id="@+id/view_pager_multi_nesting_fragment"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent"
+                app:nesting_view_pager_handle_parallel_Slide="true"
+                app:nesting_view_pager_touch_intercept_mode="horizontal_but_threshold" />
 
         </FrameLayout>
 

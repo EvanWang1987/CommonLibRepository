@@ -107,24 +107,6 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     }
 
     @Override
-    protected void onResume() {
-        super.onResume();
-        Logger.d("onResume");
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        Logger.d("onPause");
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-        Logger.d("onStop");
-    }
-
-    @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if(requestCode == PERMISSION_REQUEST_CODE){

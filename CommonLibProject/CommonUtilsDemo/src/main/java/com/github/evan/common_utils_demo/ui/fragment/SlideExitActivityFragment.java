@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import com.github.evan.common_utils.ui.activity.slideExitActivity.SlideExitDirection;
 import com.github.evan.common_utils.ui.fragment.BaseFragment;
 import com.github.evan.common_utils_demo.R;
+import com.github.evan.common_utils_demo.ui.activity.slideExitActivity.MultiNestingDemoActivity;
 import com.github.evan.common_utils_demo.ui.activity.slideExitActivity.SlideExitDemoActivity;
 
 import butterknife.ButterKnife;
@@ -27,7 +28,7 @@ public class SlideExitActivityFragment extends BaseFragment {
         return root;
     }
 
-    @OnClick({R.id.card_slide_exit_left_to_right, R.id.card_slide_exit_right_to_left, R.id.card_slide_exit_top_to_bottom, R.id.card_slide_exit_bottom_to_top})
+    @OnClick({R.id.card_slide_exit_left_to_right, R.id.card_slide_exit_right_to_left, R.id.card_slide_exit_top_to_bottom, R.id.card_slide_exit_bottom_to_top, R.id.card_slide_exit_multi_nesting})
     void onClick(View view){
         Bundle bundle = new Bundle();
         switch (view.getId()){
@@ -51,9 +52,9 @@ public class SlideExitActivityFragment extends BaseFragment {
                 loadActivity(SlideExitDemoActivity.class, bundle, false, -1);
                 break;
 
-//            case R.id.card_slide_exit_multi_nesting:
-//                loadActivity(MultiNestingDemoActivity.class, bundle, false, -1);
-//                break;
+            case R.id.card_slide_exit_multi_nesting:
+                loadActivity(MultiNestingDemoActivity.class, bundle, false, -1);
+                break;
         }
     }
 
