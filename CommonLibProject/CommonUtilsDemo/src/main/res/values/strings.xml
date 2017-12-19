@@ -135,7 +135,14 @@
     <string name="right_to_left_slide_exit">从右向左滑动退出</string>
     <string name="top_to_bottom_slide_exit">从上向下滑动退出</string>
     <string name="bottom_to_top_slide_exit">从下向上滑动退出</string>
+    <string name="slide_exit_multi_nesting_demo">多重嵌套示例</string>
     <!-- 滑动退出Activity相关 -->
+
+    <!-- 多重嵌套 -->
+    <string name="multi_nesting_scroll">多重嵌套</string>
+    <string name="pay_attention">关注</string>
+    <string name="girl_channel">女生频道</string>
+    <!-- 多重嵌套 -->
 
     <!-- 下拉刷新相关 -->
     <string name="pull_to_refresh">下拉刷新</string>

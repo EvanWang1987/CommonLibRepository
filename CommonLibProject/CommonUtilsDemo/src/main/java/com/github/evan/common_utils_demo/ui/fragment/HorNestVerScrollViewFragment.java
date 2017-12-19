@@ -18,7 +18,7 @@ public class HorNestVerScrollViewFragment extends BaseFragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_hor__nest_ver_scrollview, null);
+        return inflater.inflate(R.layout.fragment_hor_nest_ver_scrollview, null);
     }
 
     @Override

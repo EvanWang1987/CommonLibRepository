@@ -50,6 +50,10 @@ public class SlideExitActivityFragment extends BaseFragment {
                 bundle.putInt(SlideExitDemoActivity.SLIDE_EXIT_DIRECTION, SlideExitDirection.BOTTOM_TO_TOP.value);
                 loadActivity(SlideExitDemoActivity.class, bundle, false, -1);
                 break;
+
+//            case R.id.card_slide_exit_multi_nesting:
+//                loadActivity(MultiNestingDemoActivity.class, bundle, false, -1);
+//                break;
         }
     }
 

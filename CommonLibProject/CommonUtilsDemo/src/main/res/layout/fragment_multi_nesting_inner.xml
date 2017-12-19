@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <com.github.evan.common_utils.ui.view.nestingTouchView.NestingViewPager
+        android:id="@+id/view_pager_multi_nesting_inner_fragment"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        app:nesting_view_pager_handle_parallel_Slide="true"
+        app:nesting_view_pager_touch_intercept_mode="all_by_myself_but_threshold" />
+
+    <com.github.evan.common_utils.ui.view.nestingTouchView.NestingRecyclerView
+        android:id="@+id/recycler_view_multi_nesting_inner_fragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:nesting_recycler_view_handle_parallel_Slide="true"
+        app:nesting_recycler_view_touch_intercept_mode="vertical" />
+
+</LinearLayout>

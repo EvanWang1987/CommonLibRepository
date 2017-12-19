@@ -48,6 +48,14 @@ public class NestingRecyclerView extends RecyclerView implements Nestable, Thres
         }
     }
 
+    public boolean isHandleParallelSlide() {
+        return mIsHandleParallelSlide;
+    }
+
+    public void setHandleParallelSlide(boolean isHandleParallelSlide) {
+        this.mIsHandleParallelSlide = isHandleParallelSlide;
+    }
+
     @Override
     public boolean dispatchTouchEvent(MotionEvent ev) {
         mThresholdSwitcher.dispatchThreshold(ev, mInterceptMode, this, this, mIsHandleParallelSlide);
