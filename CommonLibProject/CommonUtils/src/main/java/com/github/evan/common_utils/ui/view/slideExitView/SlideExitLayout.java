@@ -29,7 +29,7 @@ public class SlideExitLayout extends ViewGroup {
     private View mContent;
     private View mDecorView;
     private SlideExitDirection mExitDirection = SlideExitDirection.LEFT_TO_RIGHT;
-    private InterceptMode mInterceptMode = InterceptMode.HORIZONTAL;
+    private InterceptMode mInterceptMode = InterceptMode.HORIZONTAL_ONLY_LEFT_TO_RIGHT;
     private TouchEventInterceptor mInterceptor;
     private int mDownX, mDownY;
     @FloatRange(from = 0.2f, to = 0.8)
@@ -419,19 +419,19 @@ public class SlideExitLayout extends ViewGroup {
         InterceptMode interceptMode = null;
         switch (mExitDirection) {
             case LEFT_TO_RIGHT:
-                interceptMode = InterceptMode.HORIZONTAL;
+                interceptMode = InterceptMode.HORIZONTAL_ONLY_LEFT_TO_RIGHT;
                 break;
 
             case RIGHT_TO_LEFT:
-                interceptMode = InterceptMode.HORIZONTAL;
+                interceptMode = InterceptMode.HORIZONTAL_ONLY_RIGHT_TO_LEFT;
                 break;
 
             case TOP_TO_BOTTOM:
-                interceptMode = InterceptMode.VERTICAL;
+                interceptMode = InterceptMode.VERTICAL_ONLY_TOP_TO_BOTTOM;
                 break;
 
             case BOTTOM_TO_TOP:
-                interceptMode = InterceptMode.VERTICAL;
+                interceptMode = InterceptMode.VERTICAL_ONLY_BOTTOM_TO_TOP;
                 break;
         }
         mInterceptMode = interceptMode;

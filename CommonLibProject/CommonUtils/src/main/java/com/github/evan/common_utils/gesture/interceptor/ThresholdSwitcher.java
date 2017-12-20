@@ -23,6 +23,7 @@ public class ThresholdSwitcher {
     public void dispatchThreshold(MotionEvent event, InterceptMode interceptMode, View dst, ThresholdSwitchable thresholdSwitchable, boolean isHandleParallelSlide) {
         int actionMasked = event.getActionMasked();
         if (actionMasked == MotionEvent.ACTION_DOWN) {
+            Logger.d("DOWN " + dst + ", " + interceptMode);
             if (interceptMode == InterceptMode.ALL_BY_MYSELF || interceptMode == InterceptMode.ALL_BY_MYSELF_BUT_THRESHOLD || interceptMode == InterceptMode.HORIZONTAL_BUT_THRESHOLD || interceptMode == InterceptMode.VERTICAL_BUT_THRESHOLD) {
                 dst.getParent().requestDisallowInterceptTouchEvent(true);
             }
@@ -51,7 +52,9 @@ public class ThresholdSwitcher {
                         dst.getParent().requestDisallowInterceptTouchEvent(false);
                     }
                 } else {
+                    Logger.d("准备解开 " + isArriveHorizontalSlop);
                     if (isArriveTouchEventThreshold) {
+                        Logger.d("解开 " + dst + ", " + interceptMode);
                         dst.getParent().requestDisallowInterceptTouchEvent(false);
                     }
                 }
