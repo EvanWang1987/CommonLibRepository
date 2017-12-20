@@ -1,5 +1,6 @@
 package com.github.evan.common_utils_demo.ui.activity.slideExitActivity;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.os.Message;
 import android.os.SystemClock;
@@ -9,10 +10,13 @@ import android.view.View;
 
 import com.github.evan.common_utils.manager.threadManager.ThreadManager;
 import com.github.evan.common_utils.ui.activity.BaseActivity;
+import com.github.evan.common_utils.ui.activity.slideExitActivity.SlideExitDirection;
 import com.github.evan.common_utils.ui.adapter.SimpleFragmentStateAdapter;
 import com.github.evan.common_utils.ui.view.LoadingPager;
 import com.github.evan.common_utils.ui.view.nestingTouchView.NestingTabLayout;
 import com.github.evan.common_utils.ui.view.nestingTouchView.NestingViewPager;
+import com.github.evan.common_utils.ui.view.slideExitView.OnSlideExitListener;
+import com.github.evan.common_utils.ui.view.slideExitView.SlideExitLayout;
 import com.github.evan.common_utils_demo.R;
 import com.github.evan.common_utils_demo.ui.fragment.MultiNestingInnerFragment;
 
@@ -24,8 +28,10 @@ import butterknife.ButterKnife;
 /**
  * Created by Evan on 2017/12/19.
  */
-public class MultiNestingDemoActivity extends BaseActivity {
+public class MultiNestingDemoActivity extends BaseActivity implements OnSlideExitListener {
     private static final String[] fragments = {MultiNestingInnerFragment.class.getName(), MultiNestingInnerFragment.class.getName(), MultiNestingInnerFragment.class.getName(), MultiNestingInnerFragment.class.getName(), MultiNestingInnerFragment.class.getName(), MultiNestingInnerFragment.class.getName(), MultiNestingInnerFragment.class.getName(), MultiNestingInnerFragment.class.getName(), MultiNestingInnerFragment.class.getName(), MultiNestingInnerFragment.class.getName()};
+    @BindView(R.id.slide_exit_layout_multi_nesting_activity)
+    SlideExitLayout mSlideExitLayout;
     @BindView(R.id.tab_layout_multi_nesting_fragment)
     NestingTabLayout mTabLayout;
     @BindView(R.id.loading_pager_multi_nesting_fragment)
@@ -40,6 +46,9 @@ public class MultiNestingDemoActivity extends BaseActivity {
         ButterKnife.bind(this);
         mFragmentAdapter = new SimpleFragmentStateAdapter(getSupportFragmentManager(), this, Arrays.asList(fragments));
         mTabLayout.setupWithViewPager(mViewPager);
+        mSlideExitLayout.setExitListener(this);
+        mSlideExitLayout.setSlideExitDirection(SlideExitDirection.LEFT_TO_RIGHT);
+        mSlideExitLayout.setSlidingPercentRelativeActivityWhenExit(0.3f);
         loadData();
     }
 
@@ -70,5 +79,10 @@ public class MultiNestingDemoActivity extends BaseActivity {
             }
         };
         ThreadManager.getInstance().getIOThreadPool().execute(runnable);
+    }
+
+    @Override
+    public void onSlideExit(SlideExitDirection direction, View dst, Activity activity) {
+        activity.finish();
     }
 }
