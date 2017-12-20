@@ -32,6 +32,7 @@ public class MultiNestingInnerAdapter extends BaseRecyclerViewAdapter<String> {
                 NestingRecyclerView recyclerView = (NestingRecyclerView) inflater.inflate(R.layout.item_pay_attention_parent, null);
                 recyclerView.setInterceptMode(InterceptMode.HORIZONTAL_BUT_THRESHOLD);
                 recyclerView.setHandleParallelSlide(true);
+                recyclerView.setNestedInSameInterceptModeParent(true);
                 itemView = recyclerView;
                 break;
         }

@@ -7,6 +7,8 @@ import android.view.View;
 import android.view.ViewConfiguration;
 import android.view.ViewGroup;
 
+import com.github.evan.common_utils.utils.Logger;
+
 /**
  * Created by Evan on 2017/11/25.
  */
@@ -25,6 +27,9 @@ public class TouchEventInterceptor {
             mDownY = event.getY();
             mLastX = mDownX;
             mLastY = mDownY;
+            if (interceptMode == InterceptMode.ALL_BY_MYSELF || interceptMode == InterceptMode.ALL_BY_MYSELF_BUT_THRESHOLD || interceptMode == InterceptMode.HORIZONTAL_BUT_THRESHOLD || interceptMode == InterceptMode.VERTICAL_BUT_THRESHOLD) {
+                dst.getParent().requestDisallowInterceptTouchEvent(true);
+            }
         } else if (actionMasked == MotionEvent.ACTION_MOVE) {
             float currentX = event.getX();
             float currentY = event.getY();

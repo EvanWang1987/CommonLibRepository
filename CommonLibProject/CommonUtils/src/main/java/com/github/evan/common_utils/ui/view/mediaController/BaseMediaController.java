@@ -75,7 +75,7 @@ public abstract class BaseMediaController extends FrameLayout implements IMediaC
 
     @Override
     public boolean dispatchTouchEvent(MotionEvent ev) {
-        mThresholdSwitcher.dispatchThreshold(ev, mInterceptMode, this, BaseMediaController.this, true);
+        mThresholdSwitcher.dispatchThreshold(ev, mInterceptMode, this, BaseMediaController.this, true, false);
         return super.dispatchTouchEvent(ev);
     }
 

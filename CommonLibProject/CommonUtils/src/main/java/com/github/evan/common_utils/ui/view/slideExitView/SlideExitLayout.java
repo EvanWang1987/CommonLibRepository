@@ -5,12 +5,14 @@ import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;
 import android.support.annotation.FloatRange;
+import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewConfiguration;
 import android.view.ViewGroup;
+import android.view.ViewParent;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.animation.DecelerateInterpolator;
 import android.view.animation.Interpolator;
@@ -19,13 +21,19 @@ import android.widget.TextView;
 
 import com.github.evan.common_utils.R;
 import com.github.evan.common_utils.gesture.interceptor.InterceptMode;
+import com.github.evan.common_utils.gesture.interceptor.ThresholdSwitchable;
+import com.github.evan.common_utils.gesture.interceptor.ThresholdSwitcher;
+import com.github.evan.common_utils.gesture.interceptor.TouchEventDirection;
 import com.github.evan.common_utils.gesture.interceptor.TouchEventInterceptor;
 import com.github.evan.common_utils.ui.activity.slideExitActivity.SlideExitDirection;
+import com.github.evan.common_utils.ui.view.nestingTouchView.Nestable;
+
+import java.lang.reflect.Field;
 
 /**
  * Created by Evan on 2017/12/19.
  */
-public class SlideExitLayout extends ViewGroup {
+public class SlideExitLayout extends ViewGroup implements Nestable, ThresholdSwitchable{
     private View mContent;
     private View mDecorView;
     private SlideExitDirection mExitDirection = SlideExitDirection.LEFT_TO_RIGHT;
@@ -436,5 +444,77 @@ public class SlideExitLayout extends ViewGroup {
         }
         mInterceptMode = interceptMode;
         mInterceptor = new TouchEventInterceptor(getContext());
+    }
+
+    @Deprecated
+    @Override
+    public InterceptMode pickupInterceptMode(AttributeSet attr, int[] declareStyleable, int style) {
+        return null;
+    }
+
+    @Deprecated
+    @Override
+    public void setInterceptMode(InterceptMode mode) {
+
+    }
+
+    @Override
+    public InterceptMode getInterceptMode() {
+        return mInterceptMode;
+    }
+
+    @Override
+    public void requestDisallowInterceptTouchEventJustToParent(boolean disallowIntercept) {
+        try {
+            Class<ViewGroup> viewGroupClass = ViewGroup.class;
+
+            Field mGroupFlagsField = viewGroupClass.getSuperclass().getDeclaredField("mGroupFlags");
+            mGroupFlagsField.setAccessible(true);
+            int mGroupFlags = (int) mGroupFlagsField.get(this);
+
+            Field flag_disallow_interceptField = viewGroupClass.getSuperclass().getDeclaredField("FLAG_DISALLOW_INTERCEPT");
+            flag_disallow_interceptField.setAccessible(true);
+            int FLAG_DISALLOW_INTERCEPT = (int) flag_disallow_interceptField.get(this);
+
+            Field mParentField = viewGroupClass.getSuperclass().getSuperclass().getDeclaredField("mParent");
+            mParentField.setAccessible(true);
+            ViewParent mParent = (ViewParent) mParentField.get(this);
+
+            if (disallowIntercept == ((mGroupFlags & FLAG_DISALLOW_INTERCEPT) != 0)) {
+                // We're already in this state, assume our ancestors are too
+                return;
+            }
+
+            if (disallowIntercept) {
+                mGroupFlags |= FLAG_DISALLOW_INTERCEPT;
+                mGroupFlagsField.set(this, mGroupFlags);
+                mParent.requestDisallowInterceptTouchEvent(true);
+            } else {
+                mGroupFlags &= ~FLAG_DISALLOW_INTERCEPT;
+                mGroupFlagsField.set(this, mGroupFlags);
+            }
+
+        } catch (NoSuchFieldException e) {
+            e.printStackTrace();
+            super.requestDisallowInterceptTouchEvent(disallowIntercept);
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+            super.requestDisallowInterceptTouchEvent(disallowIntercept);
+        }
+    }
+
+    @Override
+    public void setNestedInSameInterceptModeParent(boolean nested) {
+
+    }
+
+    @Override
+    public boolean isNestedInSameInterceptModeParent() {
+        return false;
+    }
+
+    @Override
+    public boolean isArriveTouchEventThreshold(InterceptMode interceptMode, TouchEventDirection xDirection, TouchEventDirection yDirection) {
+        return false;
     }
 }

@@ -16,4 +16,9 @@ public interface Nestable {
 
     InterceptMode getInterceptMode();
 
+    void requestDisallowInterceptTouchEventJustToParent(boolean disallowIntercept);
+
+    void setNestedInSameInterceptModeParent(boolean nested);
+
+    boolean isNestedInSameInterceptModeParent();
 }

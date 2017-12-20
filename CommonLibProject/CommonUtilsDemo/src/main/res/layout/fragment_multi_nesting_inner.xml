@@ -10,6 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="150dp"
         app:nesting_view_pager_handle_parallel_Slide="true"
+        app:nesting_view_pager_is_nested_in_same_intercept_mode_parent="false"
         app:nesting_view_pager_touch_intercept_mode="all_by_myself_but_threshold" />
 
     <com.github.evan.common_utils.ui.view.nestingTouchView.NestingRecyclerView
@@ -17,6 +18,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:nesting_recycler_view_handle_parallel_Slide="true"
+        app:nesting_view_pager_is_nested_in_same_intercept_mode_parent="false"
         app:nesting_recycler_view_touch_intercept_mode="vertical" />
 
 </LinearLayout>

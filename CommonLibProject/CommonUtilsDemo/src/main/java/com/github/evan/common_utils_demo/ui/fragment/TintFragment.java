@@ -88,7 +88,6 @@ public class TintFragment extends BaseFragment {
     }
 
     private void tintImage(View view, @ColorInt int tintColor) {
-        Logger.d("tintImage: clickId: " + view.getId());
         Drawable drawable = mImgUnTint.getDrawable();
         Drawable wrap = DrawableCompat.wrap(drawable);
 
