@@ -124,9 +124,9 @@ public class NestingListView extends ListView implements Nestable, ThresholdSwit
         try {
             Class<ListView> listViewClass = ListView.class;
 
-            Method recycleVelocityTrackerMethod = listViewClass.getDeclaredMethod("recycleVelocityTracker", null);
+            Method recycleVelocityTrackerMethod = listViewClass.getDeclaredMethod("recycleVelocityTracker", (Class<?>) null);
             recycleVelocityTrackerMethod.setAccessible(true);
-            recycleVelocityTrackerMethod.invoke(this, null);
+            recycleVelocityTrackerMethod.invoke(this, (Object) null);
 
             Field mGroupFlagsField = listViewClass.getSuperclass().getDeclaredField("mGroupFlags");
             mGroupFlagsField.setAccessible(true);

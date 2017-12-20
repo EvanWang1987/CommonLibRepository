@@ -122,9 +122,9 @@ public class NestingGridView extends GridView implements Nestable, ThresholdSwit
         try {
             Class<GridView> gridViewClass = GridView.class;
 
-            Method recycleVelocityTrackerMethod = gridViewClass.getDeclaredMethod("recycleVelocityTracker", null);
+            Method recycleVelocityTrackerMethod = gridViewClass.getDeclaredMethod("recycleVelocityTracker", (Class<?>) null);
             recycleVelocityTrackerMethod.setAccessible(true);
-            recycleVelocityTrackerMethod.invoke(this, null);
+            recycleVelocityTrackerMethod.invoke(this, (Object) null);
 
             Field mGroupFlagsField = gridViewClass.getSuperclass().getDeclaredField("mGroupFlags");
             mGroupFlagsField.setAccessible(true);

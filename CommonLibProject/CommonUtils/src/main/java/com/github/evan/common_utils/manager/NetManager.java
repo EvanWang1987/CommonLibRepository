@@ -103,21 +103,16 @@ public class NetManager {
                 stringBuffer.append(content);
                 stringBuffer.append("\r\n");
             }
-            Logger.d("pin result content : " + stringBuffer.toString());
             // ping的状态
             int status = p.waitFor();
             if (status == 0) {
-                result = "success";
                 return true;
             } else {
-                result = "failed";
             }
         } catch (IOException e) {
-            result = "IOException";
+            Logger.printStackTrace(e);
         } catch (InterruptedException e) {
-            result = "InterruptedException";
-        } finally {
-            Logger.d("result = " + result);
+            Logger.printStackTrace(e);
         }
         return false;
     }

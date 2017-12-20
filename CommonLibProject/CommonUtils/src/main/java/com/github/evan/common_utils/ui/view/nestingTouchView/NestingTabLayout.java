@@ -125,9 +125,9 @@ public class NestingTabLayout extends TabLayout implements Nestable, ThresholdSw
         try {
             Class<TabLayout> tabLayoutClass = TabLayout.class;
 
-            Method recycleVelocityTrackerMethod = tabLayoutClass.getDeclaredMethod("recycleVelocityTracker", null);
+            Method recycleVelocityTrackerMethod = tabLayoutClass.getDeclaredMethod("recycleVelocityTracker", (Class<?>) null);
             recycleVelocityTrackerMethod.setAccessible(true);
-            recycleVelocityTrackerMethod.invoke(this, null);
+            recycleVelocityTrackerMethod.invoke(this, (Object) null);
 
             Field mGroupFlagsField = tabLayoutClass.getSuperclass().getDeclaredField("mGroupFlags");
             mGroupFlagsField.setAccessible(true);

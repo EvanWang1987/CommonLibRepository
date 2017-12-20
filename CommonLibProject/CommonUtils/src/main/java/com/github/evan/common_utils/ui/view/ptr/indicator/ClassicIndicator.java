@@ -59,7 +59,6 @@ public class ClassicIndicator extends TimeFlagIndicator {
 
     @Override
     public void onPtrStatusChange(PtrStatus status) {
-        Logger.d("status: " + status);
         handleSelfWithPtrStatus(status);
     }
 

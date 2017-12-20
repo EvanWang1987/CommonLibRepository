@@ -153,8 +153,6 @@ public class NestingRecyclerView extends RecyclerView implements Nestable, Thres
                     return yDirection == TouchEventDirection.TOP_TO_BOTTOM ? !canScrollVertically(-1) : !canScrollVertically(1);
                 } else {
                     boolean isArrive = xDirection == TouchEventDirection.LEFT_TO_RIGHT ? !canScrollHorizontally(-1) : !canScrollHorizontally(1);
-                    Logger.d("xDirection: " + xDirection);
-                    Logger.d("isArrive: " + isArrive);
                     return isArrive;
                 }
             } else {

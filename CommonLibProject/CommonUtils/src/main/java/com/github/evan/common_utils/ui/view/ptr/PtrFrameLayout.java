@@ -173,9 +173,6 @@ public class PtrFrameLayout extends ViewGroup {
             mDownX = (int) event.getX();
             mDownY = (int) event.getY();
             mLastMovedY = mDownY;
-            Logger.d("down, mDownX: " + mDownX);
-            Logger.d("down, mDownY: " + mDownY);
-            Logger.d("down, mLastMovedY: " + mLastMovedY);
             boolean isRefreshing = mPtrStatus == PtrStatus.REFRESHING;
             mPtrStatus = isRefreshing ? PtrStatus.REFRESHING : PtrStatus.START_PULL;
             mIndicator.setStatus(mPtrStatus);

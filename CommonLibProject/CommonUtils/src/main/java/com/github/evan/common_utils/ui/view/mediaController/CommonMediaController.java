@@ -198,7 +198,6 @@ public class CommonMediaController extends BaseMediaController implements View.O
             return;
         }
 
-        Logger.d("onHorizontalSlide");
         mSlideControllerLayout.setVisibility(VISIBLE);
         mImgSlideIcon.setImageResource(R.mipmap.ic_light_show);
 

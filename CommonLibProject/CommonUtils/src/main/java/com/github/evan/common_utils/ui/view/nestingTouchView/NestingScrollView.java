@@ -125,9 +125,9 @@ public class NestingScrollView extends ScrollView implements Nestable, Threshold
         try {
             Class<ScrollView> scrollViewClass = ScrollView.class;
 
-            Method recycleVelocityTrackerMethod = scrollViewClass.getDeclaredMethod("recycleVelocityTracker", null);
+            Method recycleVelocityTrackerMethod = scrollViewClass.getDeclaredMethod("recycleVelocityTracker", (Class<?>) null);
             recycleVelocityTrackerMethod.setAccessible(true);
-            recycleVelocityTrackerMethod.invoke(this, null);
+            recycleVelocityTrackerMethod.invoke(this, (Object) null);
 
             Field mGroupFlagsField = scrollViewClass.getSuperclass().getDeclaredField("mGroupFlags");
             mGroupFlagsField.setAccessible(true);

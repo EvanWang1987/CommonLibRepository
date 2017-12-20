@@ -52,7 +52,6 @@ public abstract class BaseIndicator extends LinearLayout implements IIndicator {
 
     @Override
     public final void setStatus(PtrStatus status) {
-        Logger.d("PtrStatus: " + status);
         mPtrStatus = status;
         onPtrStatusChange(status);
     }

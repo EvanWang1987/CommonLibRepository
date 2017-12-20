@@ -122,9 +122,9 @@ public class NestingHorizontalScrollView extends HorizontalScrollView implements
         try {
             Class<HorizontalScrollView> horizontalScrollViewClass = HorizontalScrollView.class;
 
-            Method recycleVelocityTrackerMethod = horizontalScrollViewClass.getDeclaredMethod("recycleVelocityTracker", null);
+            Method recycleVelocityTrackerMethod = horizontalScrollViewClass.getDeclaredMethod("recycleVelocityTracker", (Class<?>) null);
             recycleVelocityTrackerMethod.setAccessible(true);
-            recycleVelocityTrackerMethod.invoke(this, null);
+            recycleVelocityTrackerMethod.invoke(this, (Object) null);
 
             Field mGroupFlagsField = horizontalScrollViewClass.getSuperclass().getDeclaredField("mGroupFlags");
             mGroupFlagsField.setAccessible(true);
