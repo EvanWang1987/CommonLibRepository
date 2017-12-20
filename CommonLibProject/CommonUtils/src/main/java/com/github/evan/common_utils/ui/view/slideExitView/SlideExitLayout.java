@@ -120,12 +120,12 @@ public class SlideExitLayout extends ViewGroup {
 
     @Override
     public boolean onInterceptTouchEvent(MotionEvent event) {
-        int actionMasked = event.getActionMasked();
-        if (actionMasked == MotionEvent.ACTION_DOWN) {
+        boolean isIntercept = mInterceptor.interceptTouchEvent(event, mInterceptMode, this, false);
+        if(isIntercept){
             mDownX = (int) event.getX();
             mDownY = (int) event.getY();
         }
-        return mInterceptor.interceptTouchEvent(event, mInterceptMode, this, false);
+        return isIntercept;
     }
 
     @Override
