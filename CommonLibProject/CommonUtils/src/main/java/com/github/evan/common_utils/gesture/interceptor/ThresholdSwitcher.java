@@ -5,6 +5,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewConfiguration;
 import android.view.ViewParent;
+
 import com.github.evan.common_utils.ui.view.nestingTouchView.Nestable;
 
 /**
@@ -48,16 +49,19 @@ public class ThresholdSwitcher {
                 //永远不解开
             } else if (interceptMode == InterceptMode.ALL_BY_MYSELF_BUT_THRESHOLD) {
                 if (isArriveTouchEventThreshold) {
-                    ViewParent parent = dst.getParent();
-                    while (parent != null) {
-                        if (parent instanceof Nestable) {
-                            Nestable nestable = (Nestable) parent;
-                            nestable.requestDisallowInterceptTouchEventJustToParent(false);
-                            break;
+                    if (isNestedInSameInterceptModeParent) {
+                        ViewParent parent = dst.getParent();
+                        while (parent != null) {
+                            if (parent instanceof Nestable) {
+                                Nestable nestable = (Nestable) parent;
+                                nestable.requestDisallowInterceptTouchEventJustToParent(false);
+                                break;
+                            }
+                            parent = parent.getParent();
                         }
-                        parent = parent.getParent();
+                    } else {
+                        dst.getParent().requestDisallowInterceptTouchEvent(false);
                     }
-                    dst.getParent().requestDisallowInterceptTouchEvent(false);
                 }
             } else if (interceptMode == InterceptMode.HORIZONTAL_BUT_THRESHOLD) {
                 if (!isHorizontalSlide || (isParallelSlide && !isHandleParallelSlide)) {
@@ -75,12 +79,12 @@ public class ThresholdSwitcher {
                                     if (parentMode == InterceptMode.HORIZONTAL || parentMode == InterceptMode.HORIZONTAL_BUT_THRESHOLD) {
                                         nestable.requestDisallowInterceptTouchEventJustToParent(false);
                                         break;
-                                    }else if(parentMode == InterceptMode.HORIZONTAL_ONLY_LEFT_TO_RIGHT){
-                                        if(xDirection == TouchEventDirection.LEFT_TO_RIGHT){
+                                    } else if (parentMode == InterceptMode.HORIZONTAL_ONLY_LEFT_TO_RIGHT) {
+                                        if (xDirection == TouchEventDirection.LEFT_TO_RIGHT) {
                                             nestable.requestDisallowInterceptTouchEventJustToParent(false);
                                         }
-                                    }else if(parentMode == InterceptMode.HORIZONTAL_ONLY_RIGHT_TO_LEFT){
-                                        if(xDirection == TouchEventDirection.RIGHT_TO_LEFT){
+                                    } else if (parentMode == InterceptMode.HORIZONTAL_ONLY_RIGHT_TO_LEFT) {
+                                        if (xDirection == TouchEventDirection.RIGHT_TO_LEFT) {
                                             nestable.requestDisallowInterceptTouchEventJustToParent(false);
                                         }
                                     }
@@ -105,22 +109,22 @@ public class ThresholdSwitcher {
                                 if (parent instanceof Nestable) {
                                     Nestable nestable = (Nestable) parent;
                                     InterceptMode parentMode = nestable.getInterceptMode();
-                                    if (parentMode == InterceptMode.VERTICAL || parentMode == InterceptMode.VERTICAL_BUT_THRESHOLD || parentMode == InterceptMode.VERTICAL_ONLY_TOP_TO_BOTTOM || parentMode == InterceptMode.VERTICAL_ONLY_BOTTOM_TO_TOP) {
+                                    if (parentMode == InterceptMode.VERTICAL || parentMode == InterceptMode.VERTICAL_BUT_THRESHOLD) {
                                         nestable.requestDisallowInterceptTouchEventJustToParent(false);
                                         break;
-                                    }else if(parentMode == InterceptMode.VERTICAL_ONLY_TOP_TO_BOTTOM){
-                                        if(yDirection == TouchEventDirection.TOP_TO_BOTTOM){
+                                    } else if (parentMode == InterceptMode.VERTICAL_ONLY_TOP_TO_BOTTOM) {
+                                        if (yDirection == TouchEventDirection.TOP_TO_BOTTOM) {
                                             nestable.requestDisallowInterceptTouchEventJustToParent(false);
                                         }
-                                    }else if(parentMode == InterceptMode.VERTICAL_ONLY_BOTTOM_TO_TOP){
-                                        if(yDirection == TouchEventDirection.BOTTOM_TO_TOP){
+                                    } else if (parentMode == InterceptMode.VERTICAL_ONLY_BOTTOM_TO_TOP) {
+                                        if (yDirection == TouchEventDirection.BOTTOM_TO_TOP) {
                                             nestable.requestDisallowInterceptTouchEventJustToParent(false);
                                         }
                                     }
                                 }
                                 parent = parent.getParent();
                             }
-                        }else{
+                        } else {
                             dst.getParent().requestDisallowInterceptTouchEvent(false);
                         }
                     }
