@@ -3,26 +3,23 @@ package com.github.evan.common_utils.ui.view.slideExitView;
 import android.animation.ValueAnimator;
 import android.app.Activity;
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.support.annotation.FloatRange;
-import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.ViewConfiguration;
 import android.view.ViewGroup;
 import android.view.ViewParent;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.animation.DecelerateInterpolator;
 import android.view.animation.Interpolator;
-import android.widget.Scroller;
 import android.widget.TextView;
 
 import com.github.evan.common_utils.R;
 import com.github.evan.common_utils.gesture.interceptor.InterceptMode;
 import com.github.evan.common_utils.gesture.interceptor.ThresholdSwitchable;
-import com.github.evan.common_utils.gesture.interceptor.ThresholdSwitcher;
 import com.github.evan.common_utils.gesture.interceptor.TouchEventDirection;
 import com.github.evan.common_utils.gesture.interceptor.TouchEventInterceptor;
 import com.github.evan.common_utils.ui.activity.slideExitActivity.SlideExitDirection;
@@ -33,7 +30,7 @@ import java.lang.reflect.Field;
 /**
  * Created by Evan on 2017/12/19.
  */
-public class SlideExitLayout extends ViewGroup implements Nestable, ThresholdSwitchable{
+public class SlideExitLayout extends ViewGroup implements Nestable, ThresholdSwitchable {
     private View mContent;
     private View mDecorView;
     private SlideExitDirection mExitDirection = SlideExitDirection.LEFT_TO_RIGHT;
@@ -41,7 +38,7 @@ public class SlideExitLayout extends ViewGroup implements Nestable, ThresholdSwi
     private TouchEventInterceptor mInterceptor;
     private int mDownX, mDownY;
     @FloatRange(from = 0.2f, to = 0.8)
-    private float mSlidingPercentWhenExit = 0.3f;
+    private float mSlidingPercentWhenNotExit = 0.3f;
     private long mRollbackDuration = 300;
     private Interpolator mRollbackInterpolator;
     private ValueAnimator mRollbackAnimator = ValueAnimator.ofInt();
@@ -52,26 +49,26 @@ public class SlideExitLayout extends ViewGroup implements Nestable, ThresholdSwi
 
     public SlideExitLayout(Context context) {
         super(context);
-        init();
+        init(context, null, 0);
     }
 
     public SlideExitLayout(Context context, AttributeSet attrs) {
         super(context, attrs);
-        init();
+        init(context, attrs, 0);
     }
 
     public SlideExitLayout(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        init();
+        init(context, attrs, defStyleAttr);
     }
 
     @Override
     protected void onDetachedFromWindow() {
-        if(mRollbackAnimator.isRunning()){
+        if (mRollbackAnimator.isRunning()) {
             mRollbackAnimator.cancel();
         }
         mRollbackAnimator.removeAllUpdateListeners();
-        if(mSlideExitAnimator.isRunning()){
+        if (mSlideExitAnimator.isRunning()) {
             mSlideExitAnimator.cancel();
         }
         mSlideExitAnimator.removeAllUpdateListeners();
@@ -84,11 +81,16 @@ public class SlideExitLayout extends ViewGroup implements Nestable, ThresholdSwi
         mExitDirection = direction;
     }
 
-    public void setSlidingPercentRelativeActivityWhenExit(@FloatRange(from = 0.2f, to = 0.8) float percent) {
+    public void setSlidingPercentRelativeActivityWhenNotExit(@FloatRange(from = 0.2f, to = 0.8) float percent) {
         if (percent < 0.2f || percent > 0.8f)
             return;
 
-        mSlidingPercentWhenExit = percent;
+        mSlidingPercentWhenNotExit = percent;
+    }
+
+    @FloatRange(from = 0.2f, to = 0.8)
+    public float getSlidingPercentWhenNotExit() {
+        return mSlidingPercentWhenNotExit;
     }
 
     public void setRollbackDuration(long duration) {
@@ -109,10 +111,6 @@ public class SlideExitLayout extends ViewGroup implements Nestable, ThresholdSwi
         return mExitDirection;
     }
 
-    @FloatRange(from = 0.2f, to = 0.8)
-    public float getSlidingPercentWhenExit() {
-        return mSlidingPercentWhenExit;
-    }
 
     public long getRollbackDuration() {
         return mRollbackDuration;
@@ -129,7 +127,7 @@ public class SlideExitLayout extends ViewGroup implements Nestable, ThresholdSwi
     @Override
     public boolean onInterceptTouchEvent(MotionEvent event) {
         boolean isIntercept = mInterceptor.interceptTouchEvent(event, mInterceptMode, this, false);
-        if(isIntercept){
+        if (isIntercept) {
             mDownX = (int) event.getX();
             mDownY = (int) event.getY();
         }
@@ -198,14 +196,14 @@ public class SlideExitLayout extends ViewGroup implements Nestable, ThresholdSwi
             int scrollX = mDecorView.getScrollX();
             int scrollY = mDecorView.getScrollY();
             if (mExitDirection == SlideExitDirection.LEFT_TO_RIGHT) {
-                if (scrollX <= -(int) (width * mSlidingPercentWhenExit)) {
+                if (scrollX <= -(int) (width * mSlidingPercentWhenNotExit)) {
                     mSlideExitAnimator.setIntValues(scrollX, -width);
                     mSlideExitAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
                         @Override
                         public void onAnimationUpdate(ValueAnimator animation) {
                             int value = (int) animation.getAnimatedValue();
                             mDecorView.scrollTo(value, 0);
-                            if(value == -mDecorView.getWidth()){
+                            if (value == -mDecorView.getWidth()) {
                                 mSlideExitAnimator.removeAllUpdateListeners();
                                 if (null != mExitListener) {
                                     mExitListener.onSlideExit(mExitDirection, SlideExitLayout.this, (Activity) getContext());
@@ -229,14 +227,14 @@ public class SlideExitLayout extends ViewGroup implements Nestable, ThresholdSwi
                     mRollbackAnimator.start();
                 }
             } else if (mExitDirection == SlideExitDirection.RIGHT_TO_LEFT) {
-                if (scrollX >= (width * mSlidingPercentWhenExit)) {
+                if (scrollX >= (width * mSlidingPercentWhenNotExit)) {
                     mSlideExitAnimator.setIntValues(scrollX, width);
                     mSlideExitAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
                         @Override
                         public void onAnimationUpdate(ValueAnimator animation) {
                             int value = (int) animation.getAnimatedValue();
                             mDecorView.scrollTo(value, 0);
-                            if(value == mDecorView.getWidth()){
+                            if (value == mDecorView.getWidth()) {
                                 mSlideExitAnimator.removeAllUpdateListeners();
                                 if (null != mExitListener) {
                                     mExitListener.onSlideExit(mExitDirection, SlideExitLayout.this, (Activity) getContext());
@@ -260,14 +258,14 @@ public class SlideExitLayout extends ViewGroup implements Nestable, ThresholdSwi
                     mRollbackAnimator.start();
                 }
             } else if (mExitDirection == SlideExitDirection.TOP_TO_BOTTOM) {
-                if (scrollY <= -(height * mSlidingPercentWhenExit)) {
+                if (scrollY <= -(height * mSlidingPercentWhenNotExit)) {
                     mSlideExitAnimator.setIntValues(scrollY, -height);
                     mSlideExitAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
                         @Override
                         public void onAnimationUpdate(ValueAnimator animation) {
                             int value = (int) animation.getAnimatedValue();
                             mDecorView.scrollTo(0, value);
-                            if(value == -mDecorView.getHeight()){
+                            if (value == -mDecorView.getHeight()) {
                                 mSlideExitAnimator.removeAllUpdateListeners();
                                 if (null != mExitListener) {
                                     mExitListener.onSlideExit(mExitDirection, SlideExitLayout.this, (Activity) getContext());
@@ -293,14 +291,14 @@ public class SlideExitLayout extends ViewGroup implements Nestable, ThresholdSwi
                 }
             } else {
                 //bottom to top
-                if (scrollY >= height * mSlidingPercentWhenExit) {
+                if (scrollY >= height * mSlidingPercentWhenNotExit) {
                     mSlideExitAnimator.setIntValues(scrollY, height);
                     mSlideExitAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
                         @Override
                         public void onAnimationUpdate(ValueAnimator animation) {
                             int value = (int) animation.getAnimatedValue();
                             mDecorView.scrollTo(0, value);
-                            if(value == mDecorView.getHeight()){
+                            if (value == mDecorView.getHeight()) {
                                 mSlideExitAnimator.removeAllUpdateListeners();
                                 if (null != mExitListener) {
                                     mExitListener.onSlideExit(mExitDirection, SlideExitLayout.this, (Activity) getContext());
@@ -414,7 +412,20 @@ public class SlideExitLayout extends ViewGroup implements Nestable, ThresholdSwi
         return new MarginLayoutParams(p);
     }
 
-    private void init() {
+    private void init(Context context, AttributeSet attrs, int defStyleAttr) {
+        if(null != attrs){
+            TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.SlideExitLayout);
+            int anInt = typedArray.getInt(R.styleable.SlideExitLayout_slide_exit_direction, SlideExitDirection.LEFT_TO_RIGHT.value);
+            mExitDirection = SlideExitDirection.valueOf(anInt);
+            mRollbackDuration = typedArray.getInt(R.styleable.SlideExitLayout_roll_back_animation_duration, (int) mRollbackDuration);
+            mSlideExitDuration = typedArray.getInt(R.styleable.SlideExitLayout_slide_exit_animation_duration, (int) mSlideExitDuration);
+            mSlidingPercentWhenNotExit = typedArray.getFloat(R.styleable.SlideExitLayout_slide_percent_when_not_exit, mSlidingPercentWhenNotExit);
+            if(mSlidingPercentWhenNotExit < 0.2f || mSlidingPercentWhenNotExit > 0.8f){
+                throw new IllegalArgumentException("SlidingPercentWhenNotExit must be less than 0.8f and greater than 0.2f!");
+            }
+            typedArray.recycle();
+        }
+
         Activity activity = (Activity) getContext();
         mDecorView = activity.getWindow().getDecorView();
         mDecorView.setBackgroundResource(R.color.Alpha);

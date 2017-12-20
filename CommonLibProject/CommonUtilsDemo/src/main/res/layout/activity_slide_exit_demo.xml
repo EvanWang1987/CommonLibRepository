@@ -1,10 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.github.evan.common_utils.ui.view.slideExitView.SlideExitLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/slide_exit_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/Gray"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    app:roll_back_animation_duration="300"
+    app:slide_exit_animation_duration="200"
+    app:slide_percent_when_not_exit="0.3">
 
     <TextView
         android:id="@+id/txt_desc_slide_exit_demo_activity"

@@ -7,7 +7,6 @@ import android.view.ViewConfiguration;
 import android.view.ViewParent;
 import com.github.evan.common_utils.ui.view.nestingTouchView.Nestable;
 
-
 /**
  * Created by Evan on 2017/12/7.
  */

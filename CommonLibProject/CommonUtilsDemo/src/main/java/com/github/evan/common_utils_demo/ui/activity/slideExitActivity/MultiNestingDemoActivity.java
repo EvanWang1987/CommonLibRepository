@@ -48,7 +48,6 @@ public class MultiNestingDemoActivity extends BaseActivity implements OnSlideExi
         mTabLayout.setupWithViewPager(mViewPager);
         mSlideExitLayout.setExitListener(this);
         mSlideExitLayout.setSlideExitDirection(SlideExitDirection.LEFT_TO_RIGHT);
-        mSlideExitLayout.setSlidingPercentRelativeActivityWhenExit(0.3f);
         loadData();
     }
 

@@ -3,7 +3,6 @@ package com.github.evan.common_utils.ui.activity.slideExitActivity;
 /**
  * Created by Evan on 2017/12/18.
  */
-
 public enum  SlideExitDirection {
     LEFT_TO_RIGHT(0), RIGHT_TO_LEFT(1), TOP_TO_BOTTOM(2), BOTTOM_TO_TOP(3);
 

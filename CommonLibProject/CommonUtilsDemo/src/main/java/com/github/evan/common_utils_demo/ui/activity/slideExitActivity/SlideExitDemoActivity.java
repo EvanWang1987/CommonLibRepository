@@ -38,8 +38,6 @@ public class SlideExitDemoActivity extends BaseActivity implements OnSlideExitLi
         }
         mTxtDesc.setText(mSlideExitDirection.toString());
         mSlideExitLayout.setExitListener(this);
-        mSlideExitLayout.setSlideExitDirection(mSlideExitDirection);
-        mSlideExitLayout.setSlidingPercentRelativeActivityWhenExit(0.3f);
     }
 
     @Override
