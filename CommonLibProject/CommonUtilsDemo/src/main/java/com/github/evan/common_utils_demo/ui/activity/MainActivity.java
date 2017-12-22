@@ -27,7 +27,6 @@ import android.view.View;
 
 import com.github.evan.common_utils.ui.activity.BaseActivity;
 import com.github.evan.common_utils.utils.FragmentUtil;
-import com.github.evan.common_utils.utils.Logger;
 import com.github.evan.common_utils.utils.PackageUtil;
 import com.github.evan.common_utils.utils.ResourceUtil;
 import com.github.evan.common_utils.utils.UiUtil;
@@ -37,7 +36,6 @@ import com.github.evan.common_utils_demo.ui.fragment.FlagViewFragment;
 import com.github.evan.common_utils_demo.ui.fragment.HomeFragment;
 import com.github.evan.common_utils_demo.ui.fragment.HorNestVerScrollViewFragment;
 import com.github.evan.common_utils_demo.ui.fragment.ListGridViewFragment;
-import com.github.evan.common_utils_demo.ui.fragment.MultiNestingFragment;
 import com.github.evan.common_utils_demo.ui.fragment.QRCodeFragment;
 import com.github.evan.common_utils_demo.ui.fragment.PullToRefreshFragment;
 import com.github.evan.common_utils_demo.ui.fragment.SlideExitActivityFragment;

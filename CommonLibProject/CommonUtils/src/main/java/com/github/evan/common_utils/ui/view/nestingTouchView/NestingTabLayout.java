@@ -62,17 +62,15 @@ public class NestingTabLayout extends TabLayout implements Nestable, ThresholdSw
 
     @Override
     public boolean onInterceptTouchEvent(MotionEvent event) {
-        if(event.getActionMasked() == MotionEvent.ACTION_DOWN){
-            mThresholdSwitcher.setDownXAndDownY(event.getX(), event.getY());
-        }
-
-        boolean intercept = mInterceptor.interceptTouchEvent(event, mInterceptMode, this, true);
-        if(intercept){
-            event.setAction(MotionEvent.ACTION_DOWN);
+        int actionMasked = event.getActionMasked();
+        if(actionMasked == MotionEvent.ACTION_DOWN || actionMasked == MotionEvent.ACTION_UP || actionMasked == MotionEvent.ACTION_CANCEL){
             super.onInterceptTouchEvent(event);
+            if(actionMasked == MotionEvent.ACTION_DOWN){
+                mThresholdSwitcher.setDownXAndDownY(event.getX(), event.getY());
+            }
         }
 
-        return intercept;
+        return mInterceptor.interceptTouchEvent(event, mInterceptMode, this, true);
     }
 
     @Override

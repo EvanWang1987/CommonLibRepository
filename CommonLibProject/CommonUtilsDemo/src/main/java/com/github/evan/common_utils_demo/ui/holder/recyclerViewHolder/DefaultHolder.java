@@ -6,12 +6,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.github.evan.common_utils.ui.holder.BaseRecyclerViewHolder;
-import com.github.evan.common_utils.utils.Logger;
 import com.github.evan.common_utils.utils.ToastUtil;
 import com.github.evan.common_utils_demo.R;
-
-import org.w3c.dom.Text;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;

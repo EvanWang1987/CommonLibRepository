@@ -5,7 +5,6 @@ import android.view.View;
 import android.widget.TextView;
 import com.github.evan.common_utils.ui.holder.BaseRecyclerViewHolder;
 import com.github.evan.common_utils.ui.view.imageView.RoundedImageView;
-import com.github.evan.common_utils.utils.Logger;
 import com.github.evan.common_utils.utils.ToastUtil;
 import com.github.evan.common_utils_demo.R;
 import butterknife.BindView;

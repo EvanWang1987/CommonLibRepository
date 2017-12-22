@@ -92,9 +92,6 @@ public class TouchEventInterceptor {
             mDownY = 0;
             mLastX = 0;
             mLastY = 0;
-            if (interceptMode == InterceptMode.ALL_BY_MYSELF) {
-                dst.getParent().requestDisallowInterceptTouchEvent(false);
-            }
         }
 
         return false;
