@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.github.evan.common_utils.ui.fragment.BaseFragment;
 import com.github.evan.common_utils.utils.DensityUtil;
 import com.github.evan.common_utils.utils.ResourceUtil;
+import com.github.evan.common_utils.utils.ToastUtil;
 import com.github.evan.common_utils_demo.R;
 
 import butterknife.BindView;
@@ -86,7 +87,14 @@ public class ScreenInformationFragment extends BaseFragment {
 
     @OnClick({R.id.btn_dp_to_px, R.id.btn_sp_to_px, R.id.btn_px_to_dp, R.id.btn_px_to_sp})
     void onClick(View view){
-        float sourceValue = Float.valueOf(mETxtSourceValue.getText().toString());
+        float sourceValue = 0;
+        try {
+            sourceValue = Float.valueOf(mETxtSourceValue.getText().toString());
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
+            ToastUtil.showToastWithShortDuration(R.string.please_input_legitimate_integer_or_decimal);
+            return;
+        }
         float convertedValue = 0f;
         String convertedResult = "";
 

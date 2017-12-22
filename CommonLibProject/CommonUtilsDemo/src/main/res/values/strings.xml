@@ -72,6 +72,7 @@
     <string name="current_device_screen_density">当前设备Density: %1$s</string>
     <string name="current_device_screen_scale_density">当前设备字体Density: %1$s</string>
     <string name="current_device_screen_size">当前设备尺寸: %1$s</string>
+    <string name="please_input_legitimate_integer_or_decimal">请输入合法的整数或小数</string>
     <!-- 屏幕适配相关 -->
 
     <!-- ListGridViewFragment相关 -->
