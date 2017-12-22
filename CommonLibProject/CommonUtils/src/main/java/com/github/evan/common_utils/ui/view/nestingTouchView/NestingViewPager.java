@@ -7,6 +7,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
+import android.view.ViewConfiguration;
 import android.view.ViewParent;
 
 import com.github.evan.common_utils.R;
@@ -30,6 +31,7 @@ public class NestingViewPager extends ViewPager implements Nestable, ThresholdSw
     private ThresholdSwitcher mThresholdSwitcher;
     private boolean mIsHandleParallelSlide = true;
     private boolean mIsNestedInSameInterceptModeParent = false;
+    private float mDownX, mDownY;
 
     public NestingViewPager(Context context) {
         super(context);
@@ -54,13 +56,17 @@ public class NestingViewPager extends ViewPager implements Nestable, ThresholdSw
     public boolean onInterceptTouchEvent(MotionEvent event) {
         int actionMasked = event.getActionMasked();
         if(actionMasked == MotionEvent.ACTION_DOWN){
+            mDownX = event.getX();
+            mDownY = event.getY();
             mThresholdSwitcher.setDownXAndDownY(event.getX(), event.getY());
         }
 
         boolean interceptTouchEvent = mInterceptor.interceptTouchEvent(event, mInterceptMode, this, true);
         if(interceptTouchEvent){
-            event.setAction(MotionEvent.ACTION_DOWN);
-            super.onInterceptTouchEvent(event);
+            MotionEvent e = MotionEvent.obtain(event.getDownTime(), event.getEventTime(), MotionEvent.ACTION_DOWN, mDownX, mDownY, event.getMetaState());
+            super.onInterceptTouchEvent(e);
+            mDownX = 0;
+            mDownY = 0;
         }
         return interceptTouchEvent;
     }
