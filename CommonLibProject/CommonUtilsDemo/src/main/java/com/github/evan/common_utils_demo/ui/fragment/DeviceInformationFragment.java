@@ -8,10 +8,15 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.github.evan.common_utils.manager.ProcessManager;
 import com.github.evan.common_utils.ui.fragment.BaseFragment;
 import com.github.evan.common_utils.utils.DensityUtil;
+import com.github.evan.common_utils.utils.DeviceUtil;
+import com.github.evan.common_utils.utils.FileUtil;
 import com.github.evan.common_utils.utils.ResourceUtil;
+import com.github.evan.common_utils.utils.StringUtil;
 import com.github.evan.common_utils.utils.ToastUtil;
+import com.github.evan.common_utils.utils.UnitConvertUil;
 import com.github.evan.common_utils_demo.R;
 
 import butterknife.BindView;
@@ -21,7 +26,25 @@ import butterknife.OnClick;
 /**
  * Created by Evan on 2017/11/19.
  */
-public class ScreenInformationFragment extends BaseFragment {
+public class DeviceInformationFragment extends BaseFragment {
+    @BindView(R.id.txt_device_brand)
+    TextView mTxtDeviceBrand;
+    @BindView(R.id.txt_device_manufacturer)
+    TextView mTxtDeviceManufacturer;
+    @BindView(R.id.current_device_model)
+    TextView mTxtDeviceModel;
+    @BindView(R.id.current_device_os_version)
+    TextView mTxtDeviceOsVersion;
+    @BindView(R.id.current_device_os_code_build_version)
+    TextView mTxtDeviceOsCodeBuildVersion;
+    @BindView(R.id.current_device_api_level)
+    TextView mTxtDeviceApiLevel;
+    @BindView(R.id.current_device_radio_version)
+    TextView mTxtDeviceRadioVersion;
+    @BindView(R.id.current_device_sdcard)
+    TextView mTxtDeviceSdcard;
+    @BindView(R.id.current_device_ram)
+    TextView mTxtDeviceRam;
     @BindView(R.id.txt_screen_real_width)
     TextView mTxtScreenRealWidth;
     @BindView(R.id.txt_screen_real_height)
@@ -59,6 +82,19 @@ public class ScreenInformationFragment extends BaseFragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        String deviceBrand = DeviceUtil.getDeviceBrand();                   //设备品牌
+        String deviceManufacturer = DeviceUtil.getDeviceManufacturer();     //制造商
+        String deviceModel = DeviceUtil.getDeviceModel();                   //设备型号
+        String osVersionCode = DeviceUtil.getOsVersionCode();               //系统版本号
+        String osCodeBuildVersion = DeviceUtil.getOsCodeBuildVersionName();               //系统代码编译版本
+        int apiLevel = DeviceUtil.getApiLevel();                            //API Level
+        String radioVersion = DeviceUtil.getRadioVersion();                 //基带版本
+        String sdcardSize = FileUtil.getSdcardSize();
+        String sdcardFreeSize = FileUtil.getSdcardFreeSize();
+        String totalRamWithUnit = ProcessManager.getInstance().getTotalRamWithUnit();
+        String availableRamWithUnit = ProcessManager.getInstance().getAvailableRamWithUnit();
+
+
         int realScreenWidthOfPx = DensityUtil.getRealScreenWidthOfPx();
         int realScreenHeightOfPx = DensityUtil.getRealScreenHeightOfPx();
         String resolutionString = realScreenWidthOfPx + " * " + realScreenHeightOfPx;
@@ -69,6 +105,16 @@ public class ScreenInformationFragment extends BaseFragment {
         int screenDpi = DensityUtil.getScreenDpi();
         float density = DensityUtil.getDensity();
         float scaleDensity = DensityUtil.getScaleDensity();
+
+        mTxtDeviceBrand.setText(getString(R.string.current_device_brand, deviceBrand));
+        mTxtDeviceManufacturer.setText(getString(R.string.current_device_manufacturer, deviceManufacturer));
+        mTxtDeviceModel.setText(getString(R.string.current_device_model, deviceModel));
+        mTxtDeviceOsVersion.setText(getString(R.string.current_device_os_version, osVersionCode));
+        mTxtDeviceOsCodeBuildVersion.setText(getString(R.string.current_device_os_code_build_version, osCodeBuildVersion));
+        mTxtDeviceApiLevel.setText(getString(R.string.current_device_api_level, apiLevel + ""));
+        mTxtDeviceRadioVersion.setText(getString(R.string.current_device_radio_version, radioVersion));
+        mTxtDeviceSdcard.setText(getString(R.string.current_device_sdcard, StringUtil.isEmptyString(sdcardSize, true) || StringUtil.isEmptyString(sdcardFreeSize, true) ? getString(R.string.un_available_sdcard) : sdcardFreeSize + " / " + sdcardSize));
+        mTxtDeviceRam.setText(getString(R.string.current_device_ram, StringUtil.isEmptyString(totalRamWithUnit, true) || StringUtil.isEmptyString(availableRamWithUnit, true) ? getString(R.string.un_available_ram) : availableRamWithUnit + " / " + totalRamWithUnit));
 
 
         mTxtScreenRealWidth.setText(ResourceUtil.getString(R.string.current_device_screen_real_width, realScreenWidthOfPx));

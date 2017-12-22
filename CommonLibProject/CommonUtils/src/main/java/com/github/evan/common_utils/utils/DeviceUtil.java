@@ -8,6 +8,7 @@ import com.github.evan.common_utils.BaseApplication;
 
 import java.io.File;
 import java.io.FileFilter;
+import java.io.IOException;
 
 /**
  * Created by Evan on 2017/10/4.
@@ -17,6 +18,7 @@ public class DeviceUtil {
 
     /**
      * 获取CPU核心数
+     *
      * @return
      */
     public static int getNumberOfCPUCores() {
@@ -50,9 +52,10 @@ public class DeviceUtil {
 
     /**
      * 获取设备硬件信息
+     *
      * @return
      */
-    public static String getDeviceInfo(){
+    public static String getDeviceInfo() {
         StringBuilder sBuilder = new StringBuilder();
 
         String board = Build.BOARD;
@@ -114,11 +117,11 @@ public class DeviceUtil {
         return sBuilder.toString();
     }
 
-    public static String getOsInfo(){
+    public static String getOsInfo() {
         StringBuilder sBuilder = new StringBuilder();
         sBuilder.append("System: Android");
         sBuilder.append("\r\n");
-        sBuilder.append("System Version Name: " + getOsVersionName());
+        sBuilder.append("System Version Name: " + getOsCodeBuildVersionName());
         sBuilder.append("\r\n");
         sBuilder.append("System Version Code: " + getOsVersionCode());
         sBuilder.append("\r\n");
@@ -128,55 +131,76 @@ public class DeviceUtil {
     }
 
     /**
-     * 获取设备系统版本名
+     * 获取系统代码编译版本
+     *
      * @return
      */
-    public static String getOsVersionName(){
+    public static String getOsCodeBuildVersionName() {
         String sdk = Build.VERSION.INCREMENTAL;
         return sdk;
     }
 
     /**
      * 获取设备系统版本号
+     *
      * @return
      */
-    public static String getOsVersionCode(){
+    public static String getOsVersionCode() {
         return Build.VERSION.RELEASE;
     }
 
+
     /**
      * 获取API版本号
+     *
      * @return
      */
-    public static int getApiLevel(){
+
+    public static int getApiLevel() {
         return Build.VERSION.SDK_INT;
     }
 
     /**
      * 获取设备型号
+     *
      * @return
      */
-    public static String getDeviceModel(){
+    public static String getDeviceModel() {
         return Build.MODEL;
     }
 
     /**
-     * 获取设备制造商
+     * 获取设备品牌
+     *
      * @return
      */
-    public static String getDeviceManufacturer(){
+    public static String getDeviceBrand() {
+        return Build.BRAND;
+    }
+
+    /**
+     * 获取设备制造商
+     *
+     * @return
+     */
+    public static String getDeviceManufacturer() {
         return Build.MANUFACTURER;
     }
 
     /**
      * 获取IMEI
+     *
      * @return
      */
-    public static String getIMEI(){
+    public static String getIMEI() {
         Context application = BaseApplication.getApplication();
         TelephonyManager telephonyManager = (TelephonyManager) application.getSystemService(Context.TELEPHONY_SERVICE);
         String deviceId = telephonyManager.getDeviceId();
         return deviceId;
+    }
+
+    public static String getRadioVersion() {
+        return Build.getRadioVersion();
     }
 
 

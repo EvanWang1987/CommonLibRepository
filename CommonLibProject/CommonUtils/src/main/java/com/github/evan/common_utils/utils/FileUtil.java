@@ -1,8 +1,10 @@
 package com.github.evan.common_utils.utils;
 
 import android.os.Environment;
+
 import com.github.evan.common_utils.BaseApplication;
 import com.github.evan.common_utils.exception.DeleteTargetFileFailWhenRollbackCutFileException;
+
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -10,6 +12,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.RandomAccessFile;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,7 +20,9 @@ import java.util.List;
  * Created by Evan on 2017/10/2.
  */
 public class FileUtil {
-    /** 默认SharedPreferences文件名 */
+    /**
+     * 默认SharedPreferences文件名
+     */
     public static final String DEFAULT_SHARED_PREFERENCE_FILE_NAME = "default_shared_preferences";
 
     public static final String SUFFIX_NAME_XML = ".xml";
@@ -35,13 +40,43 @@ public class FileUtil {
         WRITE_FAIL, IS_FILE, IS_DIRECTORY, COPY_SUCCESS, COPY_FAIL, CUT_FILE_SUCCESS, CUT_FILE_FAIL
     }
 
+    public static boolean isSdcardMounted() {
+        String externalStorageState = Environment.getExternalStorageState();
+        return externalStorageState.equals(Environment.MEDIA_MOUNTED);
+    }
+
+    public static String getSdcardSize() {
+        if (isSdcardMounted()) {
+            File file = Environment.getExternalStorageDirectory();
+            long totalSpace = file.getTotalSpace();
+            Object[] returnValue = new Object[2];
+            UnitConvertUil.byte2MaxUnit(totalSpace, 3, returnValue);
+            return returnValue[0] + returnValue[1].toString();
+        }
+
+        return "";
+    }
+
+    public static String getSdcardFreeSize() {
+        if (isSdcardMounted()) {
+            File file = Environment.getExternalStorageDirectory();
+            long totalSpace = file.getFreeSpace();
+            Object[] returnValue = new Object[2];
+            UnitConvertUil.byte2MaxUnit(totalSpace, 2, returnValue);
+            return returnValue[0] + returnValue[1].toString();
+        }
+
+        return "";
+    }
+
     /**
      * 判断是否是指定文件后缀名
+     *
      * @param fileName
      * @param suffixName
      * @return
      */
-    public static boolean isFileOfTargetSuffixName(String fileName, String suffixName){
+    public static boolean isFileOfTargetSuffixName(String fileName, String suffixName) {
         return fileName.endsWith(suffixName);
     }
 
@@ -65,24 +100,25 @@ public class FileUtil {
      *
      * @return
      */
-    public static File getSharedPreferenceDir(){
+    public static File getSharedPreferenceDir() {
         return new File(BaseApplication.getApplication().getFilesDir().getParentFile(), "shared_prefs");
     }
 
     /**
      * 列出App SharedPreference目录下所有.xml结尾的文件名
+     *
      * @return
      */
-    public static List<String> listSharedPreferenceFiles(){
+    public static List<String> listSharedPreferenceFiles() {
         List<String> returnValue = new ArrayList<>();
         File sharedPreferenceDir = getSharedPreferenceDir();
         String[] fileNames = sharedPreferenceDir.list();
-        if(null != fileNames){
+        if (null != fileNames) {
             int N = fileNames.length;
             for (int i = 0; i < N; i++) {
                 String fileName = fileNames[i];
                 boolean isXmlFile = isFileOfTargetSuffixName(fileNames[i], SUFFIX_NAME_XML);
-                if(isXmlFile){
+                if (isXmlFile) {
                     returnValue.add(fileName);
                 }
             }
@@ -93,11 +129,12 @@ public class FileUtil {
 
     /**
      * 获取SharedPreference文件
+     *
      * @param isDefaultSpFile
      * @param fileName
      * @return
      */
-    public static File getSharedPreferenceFile(boolean isDefaultSpFile, String fileName){
+    public static File getSharedPreferenceFile(boolean isDefaultSpFile, String fileName) {
         String targetFileName = isDefaultSpFile ? DEFAULT_SHARED_PREFERENCE_FILE_NAME : fileName;
         String dir = getSharedPreferenceDir().getAbsolutePath();
         return new File(dir, targetFileName + SUFFIX_NAME_XML);
@@ -105,31 +142,31 @@ public class FileUtil {
 
     /**
      * 删除SharedPreference文件
+     *
      * @param isDefaultSpName
      * @param spName
      * @return
      */
-    public static FileStatus removeSharedPreferenceFile(boolean isDefaultSpName, String spName){
+    public static FileStatus removeSharedPreferenceFile(boolean isDefaultSpName, String spName) {
         File sharedPreferenceFile = getSharedPreferenceFile(isDefaultSpName, spName);
         return deleteFile(sharedPreferenceFile.getAbsolutePath());
     }
 
     /**
-     *
      * 判断SharedPreference文件是否存在
      *
      * @param isDefaultSp
      * @param spName
      * @return
      */
-    public static boolean isSharedPreferenceFileExistsOnDisk(boolean isDefaultSp, String spName){
+    public static boolean isSharedPreferenceFileExistsOnDisk(boolean isDefaultSp, String spName) {
         boolean returnValue = false;
         String targetSpName = isDefaultSp ? FileUtil.DEFAULT_SHARED_PREFERENCE_FILE_NAME : spName;
 
         List<String> sharedPreferenceFiles = listSharedPreferenceFiles();
         for (int i = 0; i < sharedPreferenceFiles.size(); i++) {
             String fileName = sharedPreferenceFiles.get(i);
-            if(StringUtil.equals(targetSpName + SUFFIX_NAME_XML, fileName, false)){
+            if (StringUtil.equals(targetSpName + SUFFIX_NAME_XML, fileName, false)) {
                 returnValue = true;
                 break;
             }
@@ -468,14 +505,14 @@ public class FileUtil {
      */
     public static FileStatus cutFile(String sourceAbsPath, String targetAbsPath, boolean isDeleteTargetIfExists) {
         FileStatus status = copyFile(sourceAbsPath, targetAbsPath, isDeleteTargetIfExists);
-        switch (status){
+        switch (status) {
             case COPY_SUCCESS:
                 //复制成功，将源文件删除。
                 boolean delete = new File(sourceAbsPath).delete();
-                if(!delete){
+                if (!delete) {
                     //源文件删除失败，删除目标文件，回滚剪切操作，返回剪切失败。
                     boolean targetFileDeleted = new File(targetAbsPath).delete();
-                    if(!targetFileDeleted){
+                    if (!targetFileDeleted) {
                         throw new DeleteTargetFileFailWhenRollbackCutFileException(targetAbsPath);
                     }
                     return FileStatus.CUT_FILE_FAIL;

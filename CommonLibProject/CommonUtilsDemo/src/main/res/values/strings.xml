@@ -54,13 +54,27 @@
     <string name="Tint_Mode_Overly">TintMode: overly</string>
 
     <!-- 屏幕适配相关 -->
-    <string name="screen_information">屏幕相关</string>
+    <string name="device_information">设备信息</string>
     <string name="convert">转换</string>
     <string name="px_convert_to_dp">px转dp</string>
     <string name="px_convert_to_sp">px转sp</string>
     <string name="dp_convert_to_px">dp转px</string>
     <string name="sp_convert_to_px">sp转px</string>
     <string name="input_converting_value">输入要转换的值</string>
+
+    <string name="current_device_brand">设备品牌: %1$s</string>
+    <string name="current_device_manufacturer">硬件制造商: %1$s</string>
+    <string name="current_device_model">设备型号: %1$s</string>
+    <string name="current_device_os_version">系统版本: %1$s</string>
+    <string name="current_device_api_level">Api版本: %1$s</string>
+    <string name="current_device_kernel">内核版本: %1$s</string>
+    <string name="current_device_os_code_build_version">系统代码编译版本: %1$s</string>
+    <string name="current_device_radio_version">基带版本: %1$s</string>
+    <string name="current_device_sdcard">设备存储: %1$s</string>
+    <string name="current_device_ram">设备运行内存: %1$s</string>
+    <string name="current_device_battery_capacity">电池容量: %1$s</string>
+    <string name="current_device_battery_level">当前电量: %1$s</string>
+    <string name="current_device_battery_temperature">电池温度: %1$s</string>
     <string name="current_device_screen_real_width">当前设备屏幕宽: %1$d</string>
     <string name="current_device_screen_real_height">当前设备屏幕高: %1$d</string>
     <string name="current_device_screen_resolution">当前设备屏幕分辨率: %1$s</string>
@@ -73,6 +87,8 @@
     <string name="current_device_screen_scale_density">当前设备字体Density: %1$s</string>
     <string name="current_device_screen_size">当前设备尺寸: %1$s</string>
     <string name="please_input_legitimate_integer_or_decimal">请输入合法的整数或小数</string>
+    <string name="un_available_sdcard">未检测到内部存储设备</string>
+    <string name="un_available_ram">未检测到运行内存</string>
     <!-- 屏幕适配相关 -->
 
     <!-- ListGridViewFragment相关 -->

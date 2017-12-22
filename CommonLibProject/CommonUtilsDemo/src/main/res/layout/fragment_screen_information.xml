@@ -1,128 +1,199 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
     <LinearLayout
-        android:divider="@drawable/shape_alpha_divider_with_five_dp_height"
-        android:showDividers="middle"
-        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <TextView
-            android:id="@+id/txt_screen_real_width"
-            android:text="@string/current_device_screen_real_width"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-        <TextView
-            android:id="@+id/txt_screen_real_height"
-            android:text="@string/current_device_screen_real_height"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-        <TextView
-            android:id="@+id/txt_screen_resolution"
-            android:text="@string/current_device_screen_resolution"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-        <TextView
-            android:id="@+id/txt_screen_size"
-            android:text="@string/current_device_screen_size"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-        <TextView
-            android:id="@+id/txt_screen_status_bar_height"
-            android:text="@string/current_device_system_status_bar_height"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-        <TextView
-            android:id="@+id/txt_screen_xdpi"
-            android:text="@string/current_device_screen_dpi"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-        <TextView
-            android:id="@+id/txt_screen_ydpi"
-            android:text="@string/current_device_screen_dpi"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-        <TextView
-            android:id="@+id/txt_screen_dpi"
-            android:text="@string/current_device_screen_dpi"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-        <TextView
-            android:id="@+id/txt_screen_density"
-            android:text="@string/current_device_screen_density"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-        <TextView
-            android:id="@+id/txt_screen_scale_density"
-            android:text="@string/current_device_screen_scale_density"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
+        android:layout_height="wrap_content"
+        android:divider="@drawable/shape_alpha_divider_with_five_dp_height"
+        android:orientation="vertical"
+        android:showDividers="middle">
 
         <EditText
-            android:layout_marginTop="50dp"
             android:id="@+id/etxt_input_convert_source_value"
-            android:inputType="numberDecimal"
-            android:hint="@string/input_converting_value"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:hint="@string/input_converting_value"
+            android:inputType="numberDecimal" />
 
         <LinearLayout
-            android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
 
             <Button
                 android:id="@+id/btn_dp_to_px"
-                android:layout_weight="1"
-                android:text="@string/dp_convert_to_px"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/dp_convert_to_px" />
 
             <Button
                 android:id="@+id/btn_sp_to_px"
-                android:layout_weight="1"
-                android:text="@string/sp_convert_to_px"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/sp_convert_to_px" />
 
             <Button
                 android:id="@+id/btn_px_to_dp"
-                android:layout_weight="1"
-                android:text="@string/px_convert_to_dp"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/px_convert_to_dp" />
 
             <Button
                 android:id="@+id/btn_px_to_sp"
-                android:layout_weight="1"
-                android:text="@string/px_convert_to_sp"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/px_convert_to_sp" />
 
         </LinearLayout>
 
+
         <TextView
-            android:textColor="@color/Red"
-            android:textSize="16sp"
             android:id="@+id/txt_convert_result"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
+            android:layout_height="wrap_content"
+            android:textColor="@color/Red"
+            android:textSize="16sp" />
 
     </LinearLayout>
 
-</android.support.v4.widget.NestedScrollView>
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_marginTop="20dp"
+            android:divider="@drawable/shape_alpha_divider_with_five_dp_height"
+            android:showDividers="middle"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/txt_device_brand"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/current_device_brand" />
+
+            <TextView
+                android:id="@+id/txt_device_manufacturer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/current_device_manufacturer" />
+
+            <TextView
+                android:id="@+id/current_device_model"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/current_device_model" />
+
+            <TextView
+                android:id="@+id/current_device_os_version"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/current_device_os_version" />
+
+            <TextView
+                android:id="@+id/current_device_api_level"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/current_device_api_level" />
+
+            <TextView
+                android:id="@+id/current_device_os_code_build_version"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/current_device_kernel" />
+
+            <TextView
+                android:id="@+id/current_device_radio_version"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/current_device_radio_version" />
+
+            <TextView
+                android:id="@+id/current_device_sdcard"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/current_device_sdcard" />
+
+            <TextView
+                android:id="@+id/current_device_ram"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/current_device_ram" />
+
+            <TextView
+                android:id="@+id/txt_screen_real_width"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/current_device_screen_real_width" />
+
+            <TextView
+                android:id="@+id/txt_screen_real_height"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/current_device_screen_real_height" />
+
+            <TextView
+                android:id="@+id/txt_screen_resolution"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/current_device_screen_resolution" />
+
+            <TextView
+                android:id="@+id/txt_screen_size"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/current_device_screen_size" />
+
+            <TextView
+                android:id="@+id/txt_screen_status_bar_height"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/current_device_system_status_bar_height" />
+
+            <TextView
+                android:id="@+id/txt_screen_xdpi"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/current_device_screen_dpi" />
+
+            <TextView
+                android:id="@+id/txt_screen_ydpi"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/current_device_screen_dpi" />
+
+            <TextView
+                android:id="@+id/txt_screen_dpi"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/current_device_screen_dpi" />
+
+            <TextView
+                android:id="@+id/txt_screen_density"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/current_device_screen_density" />
+
+            <TextView
+                android:id="@+id/txt_screen_scale_density"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/current_device_screen_scale_density" />
+
+        </LinearLayout>
+
+
+    </android.support.v4.widget.NestedScrollView>
+
+
+</LinearLayout>

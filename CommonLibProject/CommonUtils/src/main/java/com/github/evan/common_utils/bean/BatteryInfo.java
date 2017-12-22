@@ -7,19 +7,19 @@ import com.google.gson.annotations.SerializedName;
  */
 public class BatteryInfo {
     @SerializedName(value = "isAcPowered", alternate = {"AC powered"})
-    private boolean isAcPowered;
+    private boolean isAcPowered;    //充电器充电
     @SerializedName(value = "isUsbPowered", alternate = {"USB powered"})
-    private boolean isUsbPowered;
+    private boolean isUsbPowered;   //usb充电
     @SerializedName(value = "isWirelessPowered", alternate = {"Wireless powered"})
-    private boolean isWirelessPowered;
+    private boolean isWirelessPowered;  //无线充电
     @SerializedName(value = "isPresent", alternate = {"present"})
     private boolean isPresent;
-    private int health;
-    private int level;
+    private int health;     //寿命
+    private int level;      //电量
     private int scale;
-    private int status;
-    private String technology;
-    private int temperature;
+    private int status;     //状态
+    private String technology;  //厂商
+    private int temperature;    //温度
     private int voltage;
 
     public BatteryInfo() {
