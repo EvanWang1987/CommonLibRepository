@@ -91,6 +91,12 @@
     <string name="un_available_ram">未检测到运行内存</string>
     <!-- 屏幕适配相关 -->
 
+    <!-- NetWorkManager -->
+    <string name="network_information">网络相关</string>
+    <string name="start_observe_wifi_signal">开启wifi信号强度监听</string>
+    <string name="stop_observe_wifi_signal">停止wifi信号强度监听</string>
+    <!-- NetWorkManager -->
+
     <!-- ListGridViewFragment相关 -->
     <string name="list_view_and_grid_view">List View &amp; Grid View</string>
     <string name="list_item_title">This is a title.</string>

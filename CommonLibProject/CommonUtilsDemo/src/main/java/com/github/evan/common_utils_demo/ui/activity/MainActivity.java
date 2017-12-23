@@ -37,6 +37,7 @@ import com.github.evan.common_utils_demo.ui.fragment.FlagViewFragment;
 import com.github.evan.common_utils_demo.ui.fragment.HomeFragment;
 import com.github.evan.common_utils_demo.ui.fragment.HorNestVerScrollViewFragment;
 import com.github.evan.common_utils_demo.ui.fragment.ListGridViewFragment;
+import com.github.evan.common_utils_demo.ui.fragment.NetworkManagerFragment;
 import com.github.evan.common_utils_demo.ui.fragment.QRCodeFragment;
 import com.github.evan.common_utils_demo.ui.fragment.PullToRefreshFragment;
 import com.github.evan.common_utils_demo.ui.fragment.SlideExitActivityFragment;
@@ -59,7 +60,7 @@ import butterknife.OnClick;
  */
 public class MainActivity extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener {
     private static final int PERMISSION_REQUEST_CODE = 101;
-    private static final String[] fragmentNames = {HomeFragment.class.getName(), DeviceInformationFragment.class.getName(), ListGridViewFragment.class.getName(), RecyclerViewFragment.class.getName(), VerNestHorScrollViewFragment.class.getName(), HorNestVerScrollViewFragment.class.getName(), ViewPagerFragment.class.getName(), ViewPagerNestListViewFragment.class.getName(), PullToRefreshFragment.class.getName(), SlideExitActivityFragment.class.getName(), QRCodeFragment.class.getName(), CustomEditTextFragment.class.getName(), FlagViewFragment.class.getName(), TintFragment.class.getName(), DebugFragment.class.getName()};
+    private static final String[] fragmentNames = {HomeFragment.class.getName(), DeviceInformationFragment.class.getName(), NetworkManagerFragment.class.getName(), ListGridViewFragment.class.getName(), RecyclerViewFragment.class.getName(), VerNestHorScrollViewFragment.class.getName(), HorNestVerScrollViewFragment.class.getName(), ViewPagerFragment.class.getName(), ViewPagerNestListViewFragment.class.getName(), PullToRefreshFragment.class.getName(), SlideExitActivityFragment.class.getName(), QRCodeFragment.class.getName(), CustomEditTextFragment.class.getName(), FlagViewFragment.class.getName(), TintFragment.class.getName(), DebugFragment.class.getName()};
 
     @BindView(R.id.mainActivity_appBar)
     public AppBarLayout mAppbarLayout;
@@ -96,8 +97,8 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         mNavigationView.setNavigationItemSelectedListener(this);
         FragmentUtil.addAllFragmentAndShowSomeOne(this, getSupportFragmentManager(), R.id.fragmentContainer, fragmentNames, true, null, HomeFragment.class.getName());
         mNavigationView.setCheckedItem(R.id.functionHome);
-        List<String> unRequestedPermission = PackageUtil.checkPermission(Manifest.permission.CAMERA, Manifest.permission.INTERNET, Manifest.permission.WRITE_EXTERNAL_STORAGE, Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN ? Manifest.permission.READ_EXTERNAL_STORAGE : null);
-        if(!unRequestedPermission.isEmpty()){
+        List<String> unRequestedPermission = PackageUtil.checkPermission(Manifest.permission.CAMERA, Manifest.permission.INTERNET, Manifest.permission.ACCESS_WIFI_STATE, Manifest.permission.ACCESS_NETWORK_STATE, Manifest.permission.CHANGE_WIFI_STATE, Manifest.permission.CHANGE_NETWORK_STATE, Manifest.permission.CHANGE_WIFI_MULTICAST_STATE, Manifest.permission.WRITE_EXTERNAL_STORAGE, Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN ? Manifest.permission.READ_EXTERNAL_STORAGE : null);
+        if (!unRequestedPermission.isEmpty()) {
             String[] permissions = new String[unRequestedPermission.size()];
             permissions = unRequestedPermission.toArray(permissions);
             ActivityCompat.requestPermissions(this, permissions, PERMISSION_REQUEST_CODE);
@@ -107,16 +108,16 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if(requestCode == PERMISSION_REQUEST_CODE){
+        if (requestCode == PERMISSION_REQUEST_CODE) {
             List<String> unRequestedPermission = new ArrayList<>();
             for (int i = 0; i < grantResults.length; i++) {
                 int grantResult = grantResults[i];
-                if(grantResult == PackageManager.PERMISSION_DENIED){
+                if (grantResult == PackageManager.PERMISSION_DENIED) {
                     unRequestedPermission.add(permissions[i]);
                 }
             }
 
-            if(!unRequestedPermission.isEmpty()){
+            if (!unRequestedPermission.isEmpty()) {
                 StringBuilder sBuilder = new StringBuilder();
                 for (int i = 0; i < unRequestedPermission.size(); i++) {
                     String s = unRequestedPermission.get(i);
@@ -199,6 +200,11 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 
             case R.id.functionScreenAdaptation:
                 visibleFragment = fragmentManager.findFragmentByTag(DeviceInformationFragment.class.getName());
+                isExpand = true;
+                break;
+
+            case R.id.functionNetwork:
+                visibleFragment = fragmentManager.findFragmentByTag(NetworkManagerFragment.class.getName());
                 isExpand = true;
                 break;
 

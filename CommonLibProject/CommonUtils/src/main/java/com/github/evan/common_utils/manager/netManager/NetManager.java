@@ -1,23 +1,34 @@
-package com.github.evan.common_utils.manager;
+package com.github.evan.common_utils.manager.netManager;
 
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.wifi.WifiInfo;
+import android.net.wifi.WifiManager;
 
+import com.github.evan.common_utils.manager.threadManager.ThreadManager;
 import com.github.evan.common_utils.utils.Logger;
+import com.github.evan.common_utils.utils.StringUtil;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.LinkedList;
+import java.util.ListIterator;
+import java.util.concurrent.Future;
+import java.util.concurrent.ThreadPoolExecutor;
 
 /**
  * Created by Evan on 2017/10/6.
  */
 public class NetManager {
+    private static WifiSignalTask mObserveWifiSignalLevelTask;
     private static final String PING_URL = "www.qq.com";
 
     private static NetManager mInstance = null;
+    private Future<?> mWifiLevelFuture;
+
     public static NetManager getInstance(Context context){
         if(null == mInstance){
             synchronized (NetManager.class){
@@ -30,10 +41,14 @@ public class NetManager {
     private NetManager(Context context) {
         this.mContext = context.getApplicationContext();
         mConnectivityManager = (ConnectivityManager) mContext.getSystemService(Context.CONNECTIVITY_SERVICE);
+        mWifiManager = (WifiManager) context.getApplicationContext().getSystemService(Context.WIFI_SERVICE);
+        mObserveWifiSignalLevelTask = new WifiSignalTask(mWifiManager);
     }
 
     private Context mContext;
     private ConnectivityManager mConnectivityManager;
+    private WifiManager mWifiManager;
+
 
     /**
      * 判断网络是否已连接
@@ -87,6 +102,79 @@ public class NetManager {
      */
     public boolean isEthernetwork(){
         return mConnectivityManager.getActiveNetworkInfo().getType() == ConnectivityManager.TYPE_ETHERNET;
+    }
+
+    public boolean isMobileConnected(){
+        NetworkInfo activeNetworkInfo = mConnectivityManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE);
+        return activeNetworkInfo.isConnected();
+    }
+
+    public boolean isWifiConnected(){
+        NetworkInfo activeNetworkInfo = mConnectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
+        return activeNetworkInfo.isConnected();
+    }
+
+    public boolean isEthernetConnected(){
+        NetworkInfo activeNetworkInfo = mConnectivityManager.getNetworkInfo(ConnectivityManager.TYPE_ETHERNET);
+        return activeNetworkInfo.isConnected();
+    }
+
+    public boolean isWifiEnable(){
+        return mWifiManager.isWifiEnabled();
+    }
+
+    public int getWifiStatus(){
+        return mWifiManager.getWifiState();
+    }
+
+    public boolean startObserveWifiSignalStrength(WifiSignalObserver observer){
+        if(!isWifiConnected()){
+            return false;
+        }
+
+        if(!mObserveWifiSignalLevelTask.getWifiSignalObservers().contains(observer)){
+            ListIterator<WifiSignalObserver> iterator = mObserveWifiSignalLevelTask.getWifiSignalObservers().listIterator();
+            iterator.add(observer);
+        }
+
+        if(mWifiLevelFuture != null && !mWifiLevelFuture.isDone() && !mWifiLevelFuture.isCancelled()){
+            return true;
+        }
+
+        ThreadPoolExecutor networkThreadPool = ThreadManager.getInstance().getNetworkThreadPool();
+        mWifiLevelFuture = networkThreadPool.submit(mObserveWifiSignalLevelTask);
+        return true;
+    }
+
+    public void setObserveWifiSignalInvertTime(long time){
+        mObserveWifiSignalLevelTask.setObserveInvertTime(time);
+    }
+
+    public void removeWifiSignalObserver(WifiSignalObserver observer){
+        LinkedList<WifiSignalObserver> wifiSignalObservers = mObserveWifiSignalLevelTask.getWifiSignalObservers();
+        ListIterator<WifiSignalObserver> iterator = wifiSignalObservers.listIterator();
+        while (iterator.hasNext()){
+            WifiSignalObserver next = iterator.next();
+            if(next == observer){
+                iterator.remove();
+            }
+        }
+    }
+
+    public void removeAllWifiSignalObservers(){
+        LinkedList<WifiSignalObserver> wifiSignalObservers = mObserveWifiSignalLevelTask.getWifiSignalObservers();
+        ListIterator<WifiSignalObserver> iterator = wifiSignalObservers.listIterator();
+        while (iterator.hasNext()){
+            iterator.remove();
+        }
+    }
+
+    public void shutDownObserveWifiSignal(){
+        if(mWifiLevelFuture != null && !mWifiLevelFuture.isDone() && !mWifiLevelFuture.isCancelled()){
+            mObserveWifiSignalLevelTask.setStopObserve(true);
+            mWifiLevelFuture.cancel(true);
+            mWifiLevelFuture = null;
+        }
     }
 
     public final boolean ping(String url) {

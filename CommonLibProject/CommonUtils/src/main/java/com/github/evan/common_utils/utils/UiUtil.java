@@ -1,6 +1,7 @@
 package com.github.evan.common_utils.utils;
 
 import android.view.Menu;
+import android.view.View;
 
 import java.lang.reflect.Method;
 
@@ -26,6 +27,18 @@ public class UiUtil {
                 throw new RuntimeException(e);
             }
         }
+    }
+
+    public static int measureWidth(View view){
+        int measureSpec = View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED);
+        view.measure(measureSpec, measureSpec);
+        return view.getMeasuredWidth();
+    }
+
+    public static int measureHeight(View view){
+        int measureSpec = View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED);
+        view.measure(measureSpec, measureSpec);
+        return view.getMeasuredHeight();
     }
 
 }
