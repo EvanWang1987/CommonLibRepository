@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/log_view"
+    android:layout_width="150dp"
+    android:layout_height="200dp"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/title_layout_logcat_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/colorPrimary"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/title_logcat_view"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_weight="1"
+            android:gravity="left|center_vertical"
+            android:text="@string/logcat"
+            android:textColor="@color/text_color_black"
+            android:textSize="14sp" />
+
+        <ImageButton
+            android:id="@+id/btn_close_logcat_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:background="@null"
+            android:padding="5dp"
+            android:src="@drawable/selector_close_white" />
+
+    </LinearLayout>
+
+
+    <com.github.evan.common_utils.ui.view.nestingTouchView.NestingScrollView
+        android:id="@+id/scroll_view_logcat_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/Gray"
+        android:fillViewport="true"
+        android:scrollbarStyle="outsideInset"
+        app:nesting_scroll_view_handle_parallel_Slide="true"
+        app:nesting_scroll_view_is_nested_in_same_intercept_mode_parent="false"
+        app:nesting_scroll_view_touch_intercept_mode="vertical">
+
+        <LinearLayout
+            android:id="@+id/scroll_inner_layout_logcat_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/log_logcat_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/text_color_white"
+                android:textSize="12sp" />
+
+        </LinearLayout>
+
+    </com.github.evan.common_utils.ui.view.nestingTouchView.NestingScrollView>
+
+</LinearLayout>

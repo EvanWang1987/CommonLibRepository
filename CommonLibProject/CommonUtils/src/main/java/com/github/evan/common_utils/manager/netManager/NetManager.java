@@ -142,6 +142,7 @@ public class NetManager {
         }
 
         ThreadPoolExecutor networkThreadPool = ThreadManager.getInstance().getNetworkThreadPool();
+        mObserveWifiSignalLevelTask.setStopObserve(false);
         mWifiLevelFuture = networkThreadPool.submit(mObserveWifiSignalLevelTask);
         return true;
     }

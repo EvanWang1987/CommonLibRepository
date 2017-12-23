@@ -13,4 +13,5 @@
     <string name="refreshing">正在刷新</string>
     <string name="jd_make_your_shopping_faster">京西,让购物更快捷</string>
     <string name="open_camera_fail">相机打开失败,后台有其它进程正在使用相机</string>
+    <string name="logcat">Logcat</string>
 </resources>
