@@ -15,8 +15,10 @@ import android.widget.ImageView;
 import com.github.evan.common_utils.manager.netManager.NetManager;
 import com.github.evan.common_utils.manager.netManager.WifiSignalObserver;
 import com.github.evan.common_utils.ui.fragment.BaseFragment;
+import com.github.evan.common_utils.utils.DensityUtil;
 import com.github.evan.common_utils.utils.Logger;
 import com.github.evan.common_utils.utils.ToastUtil;
+import com.github.evan.common_utils.utils.UiUtil;
 import com.github.evan.common_utils_demo.R;
 
 import butterknife.ButterKnife;
@@ -31,14 +33,17 @@ public class NetworkManagerFragment extends BaseFragment implements WifiSignalOb
     private ImageView mDragView;
     private WindowManager.LayoutParams mParams;
     private int mDownX, mDownY, mLastX, mLastY;
+    private int mDragViewWidth;
+    private int mDragViewHeight;
+    private View mRoot;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         mWindowManager = getActivity().getWindowManager();
-        View root = inflater.inflate(R.layout.fragment_network_manager, null);
-        ButterKnife.bind(this, root);
-        return root;
+        mRoot = inflater.inflate(R.layout.fragment_network_manager, null);
+        ButterKnife.bind(this, mRoot);
+        return mRoot;
     }
 
 
@@ -56,14 +61,16 @@ public class NetworkManagerFragment extends BaseFragment implements WifiSignalOb
                 mDragView.setOnTouchListener(this);
                 mParams = new WindowManager.LayoutParams();
                 mParams.type = WindowManager.LayoutParams.TYPE_TOAST;
-                mParams.gravity = Gravity.LEFT | Gravity.TOP;
+//                mParams.gravity = Gravity.LEFT | Gravity.TOP;
                 mParams.format = PixelFormat.TRANSLUCENT;// 支持透明
                 mParams.format = PixelFormat.RGBA_8888;
                 mParams.flags |= WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE;// 焦点
                 mParams.width = WindowManager.LayoutParams.WRAP_CONTENT;//窗口的宽和高
                 mParams.height = WindowManager.LayoutParams.WRAP_CONTENT;
-                mParams.x = 0;
-                mParams.y = 0;
+                mDragViewWidth = UiUtil.measureWidth(mDragView);
+                mDragViewHeight = UiUtil.measureHeight(mDragView);
+                mParams.x = mRoot.getWidth() / 2;
+                mParams.y = mRoot.getHeight() / 2;
                 mWindowManager.addView(mDragView, mParams);
                 NetManager.getInstance(getContext()).startObserveWifiSignalStrength(this);
                 break;
@@ -111,9 +118,30 @@ public class NetworkManagerFragment extends BaseFragment implements WifiSignalOb
             int offsetY = currentY - mLastY;
             mLastX = currentX;
             mLastY = currentY;
+            int x = mParams.x;
+            int y = mParams.y;
+            int dstX = x + offsetX;
+            int dstY = y + offsetY;
 
-            mParams.x = mParams.x + offsetX;
-            mParams.y = mParams.y + offsetY;
+
+
+            if(dstX <= -mRoot.getWidth() / 2){
+                dstX = -mRoot.getWidth() / 2;
+            }
+            if(dstX >= mRoot.getWidth() / 2){
+                dstX = mRoot.getWidth() / 2;
+            }
+
+            if(dstY <= -mRoot.getHeight() / 2){
+                dstY = -mRoot.getHeight() / 2;
+            }
+
+            if(dstY >= mRoot.getHeight() / 2){
+                dstY = mRoot.getHeight() / 2;
+            }
+
+            mParams.x = dstX;
+            mParams.y = dstY;
             mWindowManager.updateViewLayout(mDragView, mParams);
         }
         return true;
