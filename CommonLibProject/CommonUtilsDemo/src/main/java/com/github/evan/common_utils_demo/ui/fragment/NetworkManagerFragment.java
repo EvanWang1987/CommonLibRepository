@@ -45,6 +45,10 @@ public class NetworkManagerFragment extends BaseFragment implements WifiSignalOb
     public void onHiddenChanged(boolean hidden) {
         super.onHiddenChanged(hidden);
         if(hidden){
+            boolean observeWifiSignalStrength = NetManager.getInstance(getContext()).isObserveWifiSignalStrength();
+            if(observeWifiSignalStrength){
+                NetManager.getInstance(getContext()).shutDownObserveWifiSignal();
+            }
             onClick(getView().findViewById(R.id.card_stop_observe_wifi_signal));
         }
     }

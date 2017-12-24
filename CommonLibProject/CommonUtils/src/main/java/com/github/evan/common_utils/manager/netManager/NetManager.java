@@ -137,7 +137,7 @@ public class NetManager {
             iterator.add(observer);
         }
 
-        if(mWifiLevelFuture != null && !mWifiLevelFuture.isDone() && !mWifiLevelFuture.isCancelled()){
+        if(isObserveWifiSignalStrength()){
             return true;
         }
 
@@ -145,6 +145,10 @@ public class NetManager {
         mObserveWifiSignalLevelTask.setStopObserve(false);
         mWifiLevelFuture = networkThreadPool.submit(mObserveWifiSignalLevelTask);
         return true;
+    }
+
+    public boolean isObserveWifiSignalStrength(){
+        return mWifiLevelFuture != null && !mWifiLevelFuture.isDone() && !mWifiLevelFuture.isCancelled();
     }
 
     public void setObserveWifiSignalInvertTime(long time){
@@ -171,7 +175,7 @@ public class NetManager {
     }
 
     public void shutDownObserveWifiSignal(){
-        if(mWifiLevelFuture != null && !mWifiLevelFuture.isDone() && !mWifiLevelFuture.isCancelled()){
+        if(isObserveWifiSignalStrength()){
             mObserveWifiSignalLevelTask.setStopObserve(true);
             mWifiLevelFuture.cancel(true);
             mWifiLevelFuture = null;
