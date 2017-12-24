@@ -54,6 +54,10 @@ public class DeskIconManager {
     }
 
     public void prepareRocket() {
+        if(mIsRocketPrepared){
+           return;
+        }
+
         mAssIcon = new AssIcon(mContext);
         mLaunchBaseIcon = new LaunchBaseIcon(mContext);
         mRocketIcon = new RocketIcon(mContext);
@@ -81,6 +85,10 @@ public class DeskIconManager {
     }
 
     public void releaseRocket(){
+        if(!mIsRocketPrepared){
+            return;
+        }
+
         if(null != mAssIcon)    mAssIcon.release();
         if(null != mAssIcon)    mLaunchBaseIcon.release();
         if(null != mAssIcon)    mRocketIcon.release();
@@ -182,36 +190,6 @@ public class DeskIconManager {
         int dustbinBottom = mDustbinIcon.getRootView().getHeight();
 
         return x <= dustbinRight && y <= dustbinBottom;
-    }
-
-    public void showCloseDeskIconConfirmDialog(){
-        if(null == mConfirmCloseRocketDialog){
-            String title = ResourceUtil.getString(R.string.notice);
-            String message = ResourceUtil.getString(R.string.confirm_to_close_rocket);
-            String confirm = ResourceUtil.getString(R.string.confirm);
-            String cancel = ResourceUtil.getString(R.string.cancel);
-            AlertDialog dialog = DialogFactory.createDesignMessageDialog(mContext, -1, title, message);
-            dialog.setButton(AlertDialog.BUTTON_POSITIVE, confirm, new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    release();
-                    dialog.dismiss();
-                }
-            });
-            dialog.setButton(AlertDialog.BUTTON_NEGATIVE, cancel, new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    mAssIcon.setStatus(AssIcon.SHOW);
-                    dialog.dismiss();
-                }
-            });
-            mConfirmCloseRocketDialog = dialog;
-        }
-
-        if(!mConfirmCloseRocketDialog.isShowing()){
-            mConfirmCloseRocketDialog.show();
-        }
-
     }
 
     public void notifyLaunchBaseAndRocketShow() {

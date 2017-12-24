@@ -205,8 +205,7 @@ public class AssIcon extends BaseDeskIcon implements View.OnTouchListener {
             }
         } else if (actionMasked == MotionEvent.ACTION_UP || actionMasked == MotionEvent.ACTION_CANCEL) {
             if (DeskIconManager.getInstance(getContext()).isAboveDustbin(getX(), getY())) {
-                DeskIconManager.getInstance(getContext()).showCloseDeskIconConfirmDialog();
-                DeskIconManager.getInstance(getContext()).resetAllDeskIcons();
+                DeskIconManager.getInstance(getContext()).releaseRocket();
             } else if (DeskIconManager.getInstance(getContext()).isAboveLaunchBase(getX(), getY())) {
                 int x = getLayoutParams().x;
                 boolean isAtWindowLeft = x <= 0;

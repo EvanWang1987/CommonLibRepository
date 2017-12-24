@@ -161,7 +161,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.actionBtn_about) {
-            loadActivity(TestActivity.class);
+            loadActivity(AboutActivity.class);
             return true;
         }else if(item.getItemId() == R.id.actionBtn_open_logcat){
             DeskIconManager.getInstance(this).showLogCatIcon();

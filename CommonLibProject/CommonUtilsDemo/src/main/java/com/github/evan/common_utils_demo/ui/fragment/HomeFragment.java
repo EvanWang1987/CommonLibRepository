@@ -21,34 +21,12 @@ public class HomeFragment extends BaseFragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_home, null);
         ButterKnife.bind(this, root);
-        loadData();
         return root;
     }
 
     @Override
     protected void loadData() {
-        boolean prepared = DeskIconManager.getInstance(getContext()).isRocketPrepared();
-        if(!prepared){
-            DeskIconManager.getInstance(getContext()).prepareRocket();
-        }
     }
 
-    @OnClick({R.id.card_open_rocket, R.id.card_close_rocket})
-    void onClick(View view){
-        boolean prepared = DeskIconManager.getInstance(getContext()).isRocketPrepared();
-        switch (view.getId()){
-            case R.id.card_open_rocket:
-                if(!prepared){
-                    DeskIconManager.getInstance(getContext()).prepareRocket();
-                }
-                break;
 
-
-            case R.id.card_close_rocket:
-                if(prepared){
-                    DeskIconManager.getInstance(getContext()).releaseRocket();
-                }
-                break;
-        }
-    }
 }

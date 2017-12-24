@@ -14,6 +14,7 @@
         </activity>
 
         <activity android:name=".ui.activity.TestActivity"/>
+        <activity android:name=".ui.activity.AboutActivity"/>
         <activity android:name=".ui.activity.ptrActivity.PtrWithViewActivity"/>
         <activity android:name=".ui.activity.ptrActivity.PtrWithViewGroupActivity"/>
         <activity android:name=".ui.activity.ptrActivity.PtrWithListViewActivity"/>
