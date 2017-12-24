@@ -23,10 +23,7 @@ import butterknife.OnClick;
 /**
  * Created by Evan on 2017/12/22.
  */
-
 public class NetworkManagerFragment extends BaseFragment implements WifiSignalObserver, View.OnTouchListener {
-    private static final int LOG_VIEW_ID = 1001;
-
     private WindowManager mWindowManager;
     private ImageView mDragView;
     private WindowManager.LayoutParams mParams;

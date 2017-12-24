@@ -9,6 +9,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.github.evan.common_utils.ui.deskIcon.DeskIconManager;
+import com.github.evan.common_utils.ui.deskIcon.icons.AssIcon;
+import com.github.evan.common_utils.ui.deskIcon.icons.LaunchBaseIcon;
+import com.github.evan.common_utils.ui.deskIcon.icons.RocketIcon;
 import com.github.evan.common_utils.ui.fragment.BaseFragment;
 import com.github.evan.common_utils_demo.R;
 
@@ -21,11 +25,12 @@ public class HomeFragment extends BaseFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_home, null);
+        loadData();
         return root;
     }
 
     @Override
     protected void loadData() {
-
+        DeskIconManager.getInstance().prepare(getContext());
     }
 }
