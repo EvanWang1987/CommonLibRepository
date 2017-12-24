@@ -35,7 +35,10 @@ public class HomeFragment extends BaseFragment {
 
     @Override
     protected void loadData() {
-        DeskIconManager.getInstance(getActivity()).prepare();
+        boolean prepared = DeskIconManager.getInstance(getContext()).isPrepared();
+        if(!prepared){
+            DeskIconManager.getInstance(getContext()).prepare();
+        }
     }
 
     @OnClick({R.id.card_open_rocket, R.id.card_close_rocket})
