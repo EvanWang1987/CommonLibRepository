@@ -43,7 +43,7 @@ public class LaunchBaseIcon extends BaseDeskIcon {
     public void setStatus(int status) {
         if(status == ASS_ABOVE){
             if(!mIsVibrated && mVibrator.hasVibrator()){
-                mVibrator.vibrate(new long[]{200l, 200l, 200l, 200l}, 3);
+                mVibrator.vibrate(200);
                 mIsVibrated = true;
             }
             mLaunchBaseAnim.setVisibility(View.VISIBLE);

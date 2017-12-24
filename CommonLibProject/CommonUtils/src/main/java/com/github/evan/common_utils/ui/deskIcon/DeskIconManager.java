@@ -13,13 +13,14 @@ import com.github.evan.common_utils.ui.deskIcon.icons.LaunchBaseIcon;
 import com.github.evan.common_utils.ui.deskIcon.icons.RocketIcon;
 import com.github.evan.common_utils.ui.deskIcon.icons.SmokeIcon;
 import com.github.evan.common_utils.ui.dialog.DialogFactory;
-import com.github.evan.common_utils.utils.Logger;
 import com.github.evan.common_utils.utils.ResourceUtil;
 
 /**
  * Created by Evan on 2017/12/23.
  */
 public class DeskIconManager {
+    private static DeskIconManager mInstance = null;
+
     private Context mContext;
     private AssIcon mAssIcon;
     private LaunchBaseIcon mLaunchBaseIcon;
@@ -28,8 +29,7 @@ public class DeskIconManager {
     private SoundPool mSoundPool;
     private int mYahooSound;
     private int mYellSound;
-
-    private static DeskIconManager mInstance = null;
+    private boolean mIsPrepared = false;
     private SmokeIcon mSmokeIcon;
     private DustbinIcon mDustbinIcon;
     private AlertDialog mConfirmCloseRocketDialog;
@@ -67,6 +67,11 @@ public class DeskIconManager {
         mSoundPool = new SoundPool(1, AudioManager.STREAM_MUSIC, 0);
         mYellSound = mSoundPool.load(mContext, R.raw.yell, 1);
         mYahooSound = mSoundPool.load(mContext, R.raw.yahoo, 1);
+        mIsPrepared = true;
+    }
+
+    public boolean isPrepared(){
+        return mIsPrepared;
     }
 
     public void release() {
@@ -76,6 +81,8 @@ public class DeskIconManager {
         mSmokeIcon.release();
         mDustbinIcon.release();
         mContext = null;
+        mInstance = null;
+        mIsPrepared = false;
     }
 
     public void resetAllDeskIcons(){
