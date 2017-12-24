@@ -10,8 +10,10 @@ import com.github.evan.common_utils.R;
 import com.github.evan.common_utils.ui.deskIcon.icons.AssIcon;
 import com.github.evan.common_utils.ui.deskIcon.icons.DustbinIcon;
 import com.github.evan.common_utils.ui.deskIcon.icons.LaunchBaseIcon;
+import com.github.evan.common_utils.ui.deskIcon.icons.LogCatDeskIcon;
 import com.github.evan.common_utils.ui.deskIcon.icons.RocketIcon;
 import com.github.evan.common_utils.ui.deskIcon.icons.SmokeIcon;
+import com.github.evan.common_utils.ui.deskIcon.icons.WifiSignalLevelIcon;
 import com.github.evan.common_utils.ui.dialog.DialogFactory;
 import com.github.evan.common_utils.utils.ResourceUtil;
 
@@ -29,10 +31,14 @@ public class DeskIconManager {
     private SoundPool mSoundPool;
     private int mYahooSound;
     private int mYellSound;
-    private boolean mIsPrepared = false;
+    private boolean mIsRocketPrepared = false;
     private SmokeIcon mSmokeIcon;
     private DustbinIcon mDustbinIcon;
     private AlertDialog mConfirmCloseRocketDialog;
+    private LogCatDeskIcon mLogCatDeskIcon;
+    private boolean mIsLogCatIconShowing;
+    private WifiSignalLevelIcon mWifiSignalIcon;
+    private boolean mIsWifiSignalIconShowing;
 
     public static DeskIconManager getInstance(Context context) {
         if (null == mInstance) {
@@ -47,7 +53,7 @@ public class DeskIconManager {
         mContext = context;
     }
 
-    public void prepare() {
+    public void prepareRocket() {
         mAssIcon = new AssIcon(mContext);
         mLaunchBaseIcon = new LaunchBaseIcon(mContext);
         mRocketIcon = new RocketIcon(mContext);
@@ -67,22 +73,95 @@ public class DeskIconManager {
         mSoundPool = new SoundPool(1, AudioManager.STREAM_MUSIC, 0);
         mYellSound = mSoundPool.load(mContext, R.raw.yell, 1);
         mYahooSound = mSoundPool.load(mContext, R.raw.yahoo, 1);
-        mIsPrepared = true;
+        mIsRocketPrepared = true;
     }
 
-    public boolean isPrepared(){
-        return mIsPrepared;
+    public boolean isRocketPrepared(){
+        return mIsRocketPrepared;
     }
+
+    public void releaseRocket(){
+        if(null != mAssIcon)    mAssIcon.release();
+        if(null != mAssIcon)    mLaunchBaseIcon.release();
+        if(null != mAssIcon)    mRocketIcon.release();
+        if(null != mAssIcon)    mSmokeIcon.release();
+        if(null != mAssIcon)    mDustbinIcon.release();
+        mIsRocketPrepared = false;
+    }
+
+    public void showLogCatIcon(){
+        if(mIsLogCatIconShowing){
+           return;
+        }
+
+        if(null == mLogCatDeskIcon){
+            mLogCatDeskIcon = new LogCatDeskIcon(mContext);
+        }
+
+        mLogCatDeskIcon.alert();
+        mIsLogCatIconShowing = true;
+    }
+
+    public boolean isLogCatIconShowing(){
+        return mIsLogCatIconShowing;
+    }
+
+    public void addLog(CharSequence log){
+        mLogCatDeskIcon.addLog(log);
+    }
+
+    public CharSequence getAllLog(){
+        return mLogCatDeskIcon.getAllLog();
+    }
+
+    public void dismissLogCatIcon(){
+        if(mIsLogCatIconShowing){
+            mLogCatDeskIcon.dismiss();
+            mLogCatDeskIcon.release();
+        }
+    }
+
+    public void showWifiSignalIcon(){
+        if(mIsWifiSignalIconShowing){
+            return;
+        }
+
+        if(null == mWifiSignalIcon){
+            mWifiSignalIcon = new WifiSignalLevelIcon(mContext);
+        }
+        mWifiSignalIcon.alert();
+        mIsWifiSignalIconShowing = true;
+    }
+
+    public boolean isWifiSignalIconShowing(){
+        return mIsWifiSignalIconShowing;
+    }
+
+    public void dismissWifiSignalIcon(){
+        if(mIsLogCatIconShowing){
+            mWifiSignalIcon.dismiss();
+            mWifiSignalIcon.release();
+        }
+    }
+
+    public void setWifiSignalIconStatus(int status){
+        if(null == mWifiSignalIcon){
+            return;
+        }
+        mWifiSignalIcon.setStatus(status);
+    }
+
+
 
     public void release() {
-        mAssIcon.release();
-        mLaunchBaseIcon.release();
-        mRocketIcon.release();
-        mSmokeIcon.release();
-        mDustbinIcon.release();
+        if(null != mAssIcon)    mAssIcon.release();
+        if(null != mAssIcon)    mLaunchBaseIcon.release();
+        if(null != mAssIcon)    mRocketIcon.release();
+        if(null != mAssIcon)    mSmokeIcon.release();
+        if(null != mAssIcon)    mDustbinIcon.release();
         mContext = null;
         mInstance = null;
-        mIsPrepared = false;
+        mIsRocketPrepared = false;
     }
 
     public void resetAllDeskIcons(){

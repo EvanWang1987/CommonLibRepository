@@ -26,6 +26,7 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.github.evan.common_utils.ui.activity.BaseActivity;
+import com.github.evan.common_utils.ui.deskIcon.DeskIconManager;
 import com.github.evan.common_utils.utils.FragmentUtil;
 import com.github.evan.common_utils.utils.PackageUtil;
 import com.github.evan.common_utils.utils.ResourceUtil;
@@ -161,6 +162,12 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.actionBtn_about) {
             loadActivity(TestActivity.class);
+            return true;
+        }else if(item.getItemId() == R.id.actionBtn_open_logcat){
+            DeskIconManager.getInstance(this).showLogCatIcon();
+            return true;
+        }else if(item.getItemId() == R.id.actionBtn_close_logcat){
+            DeskIconManager.getInstance(this).dismissLogCatIcon();
             return true;
         }
         return super.onOptionsItemSelected(item);

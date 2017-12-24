@@ -1,6 +1,8 @@
 <resources>
     <string name="app_name">CommonUtilsDemo</string>
     <string name="about">关于</string>
+    <string name="open_log">打开Log显示</string>
+    <string name="close_log">关闭Log显示</string>
 
     <string name="demo_version_name">CommonUtilsDemo version: %1$s</string>
     <string name="os_version">Android version: %1$s</string>
@@ -21,6 +23,10 @@
 
     <string name="open_rocket">打开火箭</string>
     <string name="close_rocket">关闭火箭</string>
+
+    <string name="single_producer_consumer">单生产者单消费者演示</string>
+    <string name="multi_producer_consumer">多生产者多消费者演示</string>
+    <string name="dead_lock">死锁演示</string>
 
 
     <string name="time_flag_text_view">带时间标记的TextView</string>

@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item android:title="@string/open_log" android:icon="@drawable/selector_debug_black" android:id="@+id/actionBtn_open_logcat" app:showAsAction="never" />
+    <item android:title="@string/close_log" android:icon="@drawable/selector_undebug_black" android:id="@+id/actionBtn_close_logcat" app:showAsAction="never" />
     <item android:title="@string/about" android:icon="@drawable/selector_action_button_about_dark" android:id="@+id/actionBtn_about" app:showAsAction="never" />
 </menu>

@@ -27,25 +27,27 @@ public class HomeFragment extends BaseFragment {
 
     @Override
     protected void loadData() {
-        boolean prepared = DeskIconManager.getInstance(getContext()).isPrepared();
+        boolean prepared = DeskIconManager.getInstance(getContext()).isRocketPrepared();
         if(!prepared){
-            DeskIconManager.getInstance(getContext()).prepare();
+            DeskIconManager.getInstance(getContext()).prepareRocket();
         }
     }
 
     @OnClick({R.id.card_open_rocket, R.id.card_close_rocket})
     void onClick(View view){
+        boolean prepared = DeskIconManager.getInstance(getContext()).isRocketPrepared();
         switch (view.getId()){
             case R.id.card_open_rocket:
-                boolean prepared = DeskIconManager.getInstance(getContext()).isPrepared();
                 if(!prepared){
-                    DeskIconManager.getInstance(getContext()).prepare();
+                    DeskIconManager.getInstance(getContext()).prepareRocket();
                 }
                 break;
 
 
             case R.id.card_close_rocket:
-                DeskIconManager.getInstance(getContext()).release();
+                if(prepared){
+                    DeskIconManager.getInstance(getContext()).releaseRocket();
+                }
                 break;
         }
     }
