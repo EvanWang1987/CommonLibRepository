@@ -2,20 +2,12 @@ package com.github.evan.common_utils_demo.ui.fragment;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.design.widget.FloatingActionButton;
-import android.support.v4.view.ViewCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
-
 import com.github.evan.common_utils.ui.deskIcon.DeskIconManager;
-import com.github.evan.common_utils.ui.deskIcon.icons.AssIcon;
-import com.github.evan.common_utils.ui.deskIcon.icons.LaunchBaseIcon;
-import com.github.evan.common_utils.ui.deskIcon.icons.RocketIcon;
 import com.github.evan.common_utils.ui.fragment.BaseFragment;
 import com.github.evan.common_utils_demo.R;
-
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 

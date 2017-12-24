@@ -44,6 +44,9 @@ public class NetworkManagerFragment extends BaseFragment implements WifiSignalOb
     @Override
     public void onHiddenChanged(boolean hidden) {
         super.onHiddenChanged(hidden);
+        if(hidden){
+            onClick(getView().findViewById(R.id.card_stop_observe_wifi_signal));
+        }
     }
 
     @Override
