@@ -47,6 +47,11 @@ public abstract class BaseDeskIcon implements IDeskIcon {
         return mContext;
     }
 
+    @Override
+    public View getRootView() {
+        return mDeskIconView;
+    }
+
     public WindowManager.LayoutParams getLayoutParams() {
         return mLayoutParams;
     }

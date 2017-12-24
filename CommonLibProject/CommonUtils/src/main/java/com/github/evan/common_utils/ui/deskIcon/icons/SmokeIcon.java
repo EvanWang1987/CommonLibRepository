@@ -14,7 +14,6 @@ import com.github.evan.common_utils.utils.UiUtil;
 /**
  * Created by Evan on 2017/12/24.
  */
-
 public class SmokeIcon extends BaseDeskIcon {
     public static final int RESET = 0;
     public static final int LAUNCHING = 1;

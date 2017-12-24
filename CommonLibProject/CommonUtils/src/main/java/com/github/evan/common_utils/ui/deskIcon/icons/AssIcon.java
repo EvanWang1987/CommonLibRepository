@@ -23,6 +23,7 @@ import com.github.evan.common_utils.utils.UiUtil;
  * Created by Evan on 2017/12/23.
  */
 public class AssIcon extends BaseDeskIcon implements View.OnTouchListener {
+
     public static final int RESET_ICON_TO_SCREEN_LEFT = 0;
     public static final int RESET_ICON_TO_SCREEN_RIGHT = 1;
     public static final int RESET_ICON_TO_SCREEN_LEFT_WITH_CENTER_VERTICAL = 2;
@@ -30,6 +31,7 @@ public class AssIcon extends BaseDeskIcon implements View.OnTouchListener {
     public static final int DRAGGING = 4;
     public static final int IN_ROCKET = 5;
     public static final int LAUNCHED = 6;
+    public static final int SHOW = 7;
 
 
     private ImageView mRootView;
@@ -61,7 +63,6 @@ public class AssIcon extends BaseDeskIcon implements View.OnTouchListener {
         mResetAnim.setInterpolator(new AccelerateInterpolator());
         mRunBackLeftAnim = (AnimationDrawable) ResourceUtil.getDrawable(R.drawable.animation_ass_run_left);
         mRunBackRightAnim = (AnimationDrawable) ResourceUtil.getDrawable(R.drawable.animation_ass_run_right);
-        DeskIconManager.getInstance().addIcon(this);
         return config;
     }
 
@@ -144,6 +145,10 @@ public class AssIcon extends BaseDeskIcon implements View.OnTouchListener {
             case LAUNCHED:
                 show();
                 break;
+
+            case SHOW:
+                show();
+                break;
         }
     }
 
@@ -156,7 +161,8 @@ public class AssIcon extends BaseDeskIcon implements View.OnTouchListener {
             mLastX = mDownX;
             mLastY = mDownY;
             setStatus(DRAGGING);
-            DeskIconManager.getInstance().notifyLaunchBaseAndRocketShow();
+            DeskIconManager.getInstance(getContext()).notifyLaunchBaseAndRocketShow();
+            DeskIconManager.getInstance(getContext()).notifyDustbinShow();
         } else if (actionMasked == MotionEvent.ACTION_MOVE) {
             int currentX = (int) event.getRawX();
             int currentY = (int) event.getRawY();
@@ -190,21 +196,29 @@ public class AssIcon extends BaseDeskIcon implements View.OnTouchListener {
             }
 
             move(offsetX, offsetY);
-            if (DeskIconManager.getInstance().isAboveLaunchBase(getX(), getY())) {
-                DeskIconManager.getInstance().notifyLaunchBaseAndRocketInvoke();
+            if (DeskIconManager.getInstance(getContext()).isAboveLaunchBase(getX(), getY())) {
+                DeskIconManager.getInstance(getContext()).notifyLaunchBaseAndRocketInvoke();
+            } else if (DeskIconManager.getInstance(getContext()).isAboveDustbin(getX(), getY())) {
+                DeskIconManager.getInstance(getContext()).notifyAssAboveDustbin();
+            } else if (!DeskIconManager.getInstance(getContext()).isAboveDustbin(getX(), getY())) {
+                DeskIconManager.getInstance(getContext()).notifyDustbinShow();
             }
         } else if (actionMasked == MotionEvent.ACTION_UP || actionMasked == MotionEvent.ACTION_CANCEL) {
-            if (DeskIconManager.getInstance().isAboveLaunchBase(getX(), getY())) {
+            if (DeskIconManager.getInstance(getContext()).isAboveDustbin(getX(), getY())) {
+                DeskIconManager.getInstance(getContext()).showCloseDeskIconConfirmDialog();
+                DeskIconManager.getInstance(getContext()).resetAllDeskIcons();
+            } else if (DeskIconManager.getInstance(getContext()).isAboveLaunchBase(getX(), getY())) {
                 int x = getLayoutParams().x;
                 boolean isAtWindowLeft = x <= 0;
                 setStatus(isAtWindowLeft ? RESET_ICON_TO_SCREEN_LEFT_WITH_CENTER_VERTICAL : RESET_ICON_TO_SCREEN_RIGHT_WITH_CENTER_VERTICAL);
-                DeskIconManager.getInstance().launchRocket();
+                DeskIconManager.getInstance(getContext()).launchRocket();
             } else {
                 int x = getLayoutParams().x;
                 boolean isAtWindowLeft = x <= windowWidth / 2;
                 setStatus(isAtWindowLeft ? RESET_ICON_TO_SCREEN_LEFT : RESET_ICON_TO_SCREEN_RIGHT);
-                DeskIconManager.getInstance().assRested();
+                DeskIconManager.getInstance(getContext()).assRested();
             }
+            DeskIconManager.getInstance(getContext()).notifyDustbinDismiss();
         }
         return true;
     }

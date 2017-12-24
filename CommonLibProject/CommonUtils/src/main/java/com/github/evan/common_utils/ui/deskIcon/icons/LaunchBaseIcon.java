@@ -75,7 +75,6 @@ public class LaunchBaseIcon extends BaseDeskIcon {
         int width = UiUtil.measureWidth(mLaunchBase);
         config.setInitX(windowWidth / 2 - width / 2);
         config.setInitY(windowHeight - height);
-        DeskIconManager.getInstance().addIcon(this);
         mShowIconAnimator = ObjectAnimator.ofFloat(mLaunchBaseLayout, "alpha", 0f, 1f);
         mShowIconAnimator.setDuration(1000);
         mDismissIconAnimator = ObjectAnimator.ofFloat(mLaunchBaseLayout, "alpha", 1f, 0f);

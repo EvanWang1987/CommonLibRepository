@@ -1,11 +1,13 @@
 package com.github.evan.common_utils.ui.deskIcon;
 
+import android.view.View;
+
 /**
  * Created by Evan on 2017/12/23.
  */
 public interface IDeskIcon {
 
-
+    View getRootView();
 
     void alert();
 

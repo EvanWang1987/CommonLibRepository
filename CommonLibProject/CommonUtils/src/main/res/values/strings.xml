@@ -14,4 +14,8 @@
     <string name="jd_make_your_shopping_faster">京西,让购物更快捷</string>
     <string name="open_camera_fail">相机打开失败,后台有其它进程正在使用相机</string>
     <string name="logcat">Logcat</string>
+    <string name="confirm_to_close_rocket">确定关闭火箭?</string>
+    <string name="notice">提示</string>
+    <string name="confirm">确定</string>
+    <string name="cancel">取消</string>
 </resources>

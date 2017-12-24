@@ -31,6 +31,6 @@ public class HomeFragment extends BaseFragment {
 
     @Override
     protected void loadData() {
-        DeskIconManager.getInstance().prepare(getContext());
+        DeskIconManager.getInstance(getActivity()).prepare();
     }
 }

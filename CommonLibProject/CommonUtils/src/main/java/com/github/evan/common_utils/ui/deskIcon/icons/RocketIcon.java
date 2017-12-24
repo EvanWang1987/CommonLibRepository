@@ -83,7 +83,7 @@ public class RocketIcon extends BaseDeskIcon {
                     moveY(dY);
 
                     if(value == mDstLaunchY){
-                        DeskIconManager.getInstance().rocketLaunched();
+                        DeskIconManager.getInstance(getContext()).rocketLaunched();
                         mLaunchingAnimator.removeAllUpdateListeners();
                     }
                 }
@@ -114,7 +114,6 @@ public class RocketIcon extends BaseDeskIcon {
         mDismissIconAnimator.setDuration(1000);
         mLaunchingAnimator = ValueAnimator.ofInt();
         mLaunchingAnimator.setDuration(800);
-        DeskIconManager.getInstance().addIcon(this);
 
         return config;
     }
