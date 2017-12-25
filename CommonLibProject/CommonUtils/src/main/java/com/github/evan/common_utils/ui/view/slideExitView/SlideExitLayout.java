@@ -8,6 +8,7 @@ import android.graphics.Color;
 import android.support.annotation.FloatRange;
 import android.util.AttributeSet;
 import android.util.TypedValue;
+import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,8 +25,11 @@ import com.github.evan.common_utils.gesture.interceptor.TouchEventDirection;
 import com.github.evan.common_utils.gesture.interceptor.TouchEventInterceptor;
 import com.github.evan.common_utils.ui.activity.slideExitActivity.SlideExitDirection;
 import com.github.evan.common_utils.ui.view.nestingTouchView.Nestable;
+import com.github.evan.common_utils.utils.Logger;
 
 import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 
 /**
  * Created by Evan on 2017/12/19.
@@ -61,6 +65,98 @@ public class SlideExitLayout extends ViewGroup implements Nestable, ThresholdSwi
         super(context, attrs, defStyleAttr);
         init(context, attrs, defStyleAttr);
     }
+
+    public boolean replaceContentView(View content) {
+        if (null == content) {
+            return false;
+        }
+
+        try {
+            Class<ViewGroup> superclass = (Class<ViewGroup>) getClass().getSuperclass();
+            Method removeViewInternalMethod = superclass.getDeclaredMethod("removeViewInternal", View.class);
+            removeViewInternalMethod.setAccessible(true);
+            removeViewInternalMethod.invoke(this, mContent);
+            mContent = content;
+            super.addView(content, -1, generateDefaultLayoutParams());
+            return true;
+        } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    @Override
+    @Deprecated
+    public void addView(View child) {
+
+    }
+
+    @Override
+    @Deprecated
+    public void addView(View child, int index) {
+
+    }
+
+    @Override
+    @Deprecated
+    public void addView(View child, int index, LayoutParams params) {
+
+    }
+
+    @Override
+    @Deprecated
+    public void addView(View child, LayoutParams params) {
+    }
+
+    @Override
+    @Deprecated
+    public void addView(View child, int width, int height) {
+    }
+
+    @Override
+    @Deprecated
+    public void removeView(View view) {
+    }
+
+    @Override
+    @Deprecated
+    public void removeViewAt(int index) {
+    }
+
+    @Override
+    @Deprecated
+    protected void removeDetachedView(View child, boolean animate) {
+    }
+
+    @Override
+    @Deprecated
+    public void removeAllViewsInLayout() {
+    }
+
+    @Override
+    @Deprecated
+    public void removeViewInLayout(View view) {
+    }
+
+    @Override
+    @Deprecated
+    public void removeViews(int start, int count) {
+    }
+
+    @Override
+    @Deprecated
+    public void removeViewsInLayout(int start, int count) {
+    }
+
+    @Override
+    @Deprecated
+    public void removeAllViews() {
+    }
+
 
     @Override
     protected void onDetachedFromWindow() {
@@ -118,6 +214,14 @@ public class SlideExitLayout extends ViewGroup implements Nestable, ThresholdSwi
 
     public Interpolator getRollbackInterpolator() {
         return mRollbackInterpolator;
+    }
+
+    public long getSlideExitDuration() {
+        return mSlideExitDuration;
+    }
+
+    public void setSlideExitDuration(long slideExitDuration) {
+        this.mSlideExitDuration = slideExitDuration;
     }
 
     public void setExitListener(OnSlideExitListener exitListener) {
@@ -332,6 +436,7 @@ public class SlideExitLayout extends ViewGroup implements Nestable, ThresholdSwi
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        Logger.d("onMeasure");
         int widthMode = MeasureSpec.getMode(widthMeasureSpec);
         int heightMode = MeasureSpec.getMode(heightMeasureSpec);
         int sourceWidth = MeasureSpec.getSize(widthMeasureSpec);
@@ -364,6 +469,7 @@ public class SlideExitLayout extends ViewGroup implements Nestable, ThresholdSwi
 
     @Override
     protected void onLayout(boolean changed, int l, int t, int r, int b) {
+        Logger.d("onLayout");
         int paddingTop = getPaddingTop();
         int paddingBottom = getPaddingBottom();
         int paddingLeft = getPaddingLeft();
@@ -381,6 +487,7 @@ public class SlideExitLayout extends ViewGroup implements Nestable, ThresholdSwi
     @Override
     protected void onFinishInflate() {
         super.onFinishInflate();
+        Logger.d("onFinishInflate");
         int childCount = getChildCount();
         if (childCount > 1) {
             throw new IllegalArgumentException("SlideExitLayout can only host one child.");
@@ -389,7 +496,9 @@ public class SlideExitLayout extends ViewGroup implements Nestable, ThresholdSwi
             textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
             textView.setTextColor(Color.parseColor("#000000"));
             textView.setText("Did you forget to put your own view into SlideExitLayout?");
+            textView.setGravity(Gravity.CENTER);
             mContent = textView;
+            addView(textView);
             return;
         }
 
@@ -413,14 +522,14 @@ public class SlideExitLayout extends ViewGroup implements Nestable, ThresholdSwi
     }
 
     private void init(Context context, AttributeSet attrs, int defStyleAttr) {
-        if(null != attrs){
+        if (null != attrs) {
             TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.SlideExitLayout);
             int anInt = typedArray.getInt(R.styleable.SlideExitLayout_slide_exit_direction, SlideExitDirection.LEFT_TO_RIGHT.value);
             mExitDirection = SlideExitDirection.valueOf(anInt);
             mRollbackDuration = typedArray.getInt(R.styleable.SlideExitLayout_roll_back_animation_duration, (int) mRollbackDuration);
             mSlideExitDuration = typedArray.getInt(R.styleable.SlideExitLayout_slide_exit_animation_duration, (int) mSlideExitDuration);
             mSlidingPercentWhenNotExit = typedArray.getFloat(R.styleable.SlideExitLayout_slide_percent_when_not_exit, mSlidingPercentWhenNotExit);
-            if(mSlidingPercentWhenNotExit < 0.2f || mSlidingPercentWhenNotExit > 0.8f){
+            if (mSlidingPercentWhenNotExit < 0.2f || mSlidingPercentWhenNotExit > 0.8f) {
                 throw new IllegalArgumentException("SlidingPercentWhenNotExit must be less than 0.8f and greater than 0.2f!");
             }
             typedArray.recycle();

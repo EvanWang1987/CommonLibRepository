@@ -15,6 +15,10 @@
 
         <activity android:name=".ui.activity.TestActivity"/>
         <activity android:name=".ui.activity.AboutActivity"/>
+        <activity android:name=".ui.activity.collectionActivity.VectorActivity" android:theme="@style/AppCompatLightNoActionBarTransparentActivity"/>
+        <activity android:name=".ui.activity.collectionActivity.ArrayListActivity" android:theme="@style/AppCompatLightNoActionBarTransparentActivity"/>
+        <activity android:name=".ui.activity.collectionActivity.LinkedListActivity" android:theme="@style/AppCompatLightNoActionBarTransparentActivity"/>
+        <activity android:name=".ui.activity.collectionActivity.LinkedVectorActivity" android:theme="@style/AppCompatLightNoActionBarTransparentActivity"/>
         <activity android:name=".ui.activity.ptrActivity.PtrWithViewActivity"/>
         <activity android:name=".ui.activity.ptrActivity.PtrWithViewGroupActivity"/>
         <activity android:name=".ui.activity.ptrActivity.PtrWithListViewActivity"/>

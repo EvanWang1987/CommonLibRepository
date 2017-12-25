@@ -30,6 +30,12 @@
     <string name="dead_lock">死锁演示</string>
     <string name="stop_demo">停止演示</string>
 
+    <string name="about_collection">集合相关</string>
+    <string name="vector">Vector</string>
+    <string name="linked_vector">Linked Vector</string>
+    <string name="array_list">Array List</string>
+    <string name="linked_list">Linked List</string>
+
 
     <string name="time_flag_text_view">带时间标记的TextView</string>
     <string name="left_top_corner">左上角</string>

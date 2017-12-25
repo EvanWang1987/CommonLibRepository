@@ -66,6 +66,11 @@ public abstract class BaseFragment extends android.support.v4.app.Fragment imple
         return mHandler.postDelayed(runnable, delayTime);
     }
 
+    public void loadActivity(Class<? extends Activity> destination){
+        Intent intent = new Intent(getContext(), destination);
+        startActivity(intent);
+    }
+
     public void loadActivity(Class<? extends Activity> destination, Bundle extras, boolean isForResult, int requestCode){
         Intent intent = new Intent(getContext(), destination);
         if(null != extras){

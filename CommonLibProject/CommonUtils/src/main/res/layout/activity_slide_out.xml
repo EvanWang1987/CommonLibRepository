@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.github.evan.common_utils.ui.view.slideExitView.SlideExitLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/slide_exit_layout_in_base_slide_exit_activity"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/White"
+    app:roll_back_animation_duration="300"
+    app:slide_exit_animation_duration="200"
+    app:slide_exit_direction="left_to_right"
+    app:slide_percent_when_not_exit="0.3">
+
+</com.github.evan.common_utils.ui.view.slideExitView.SlideExitLayout>
