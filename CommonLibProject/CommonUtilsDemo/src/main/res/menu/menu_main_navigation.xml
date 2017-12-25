@@ -3,6 +3,7 @@
     <group android:id="@+id/functionGroup" android:checkableBehavior="single">
         <item android:id="@+id/functionHome" android:title="@string/home" android:icon="@drawable/selector_action_button_home_dark" />
         <item android:id="@+id/functionScreenAdaptation" android:title="@string/device_information" android:icon="@drawable/selector_screen_adaptation_black" />
+        <item android:id="@+id/functionAboutThread" android:title="@string/about_thread" android:icon="@drawable/selector_thread_black" />
         <item android:id="@+id/functionNetwork" android:title="@string/network_information" android:icon="@drawable/selector_wifi_black" />
         <item android:id="@+id/functionListView" android:title="@string/list_view_and_grid_view" android:icon="@drawable/selector_list_view_black" />
         <item android:id="@+id/functionRecyclerView" android:title="@string/recycler_view" android:icon="@drawable/selector_recycler_view_black" />

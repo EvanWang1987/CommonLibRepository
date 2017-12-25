@@ -1,11 +1,9 @@
 package com.github.evan.common_utils.ui.deskIcon;
 
 import android.content.Context;
-import android.content.DialogInterface;
 import android.media.AudioManager;
 import android.media.SoundPool;
 import android.support.v7.app.AlertDialog;
-
 import com.github.evan.common_utils.R;
 import com.github.evan.common_utils.ui.deskIcon.icons.AssIcon;
 import com.github.evan.common_utils.ui.deskIcon.icons.DustbinIcon;
@@ -14,8 +12,6 @@ import com.github.evan.common_utils.ui.deskIcon.icons.LogCatDeskIcon;
 import com.github.evan.common_utils.ui.deskIcon.icons.RocketIcon;
 import com.github.evan.common_utils.ui.deskIcon.icons.SmokeIcon;
 import com.github.evan.common_utils.ui.deskIcon.icons.WifiSignalLevelIcon;
-import com.github.evan.common_utils.ui.dialog.DialogFactory;
-import com.github.evan.common_utils.utils.ResourceUtil;
 
 /**
  * Created by Evan on 2017/12/23.
@@ -34,7 +30,6 @@ public class DeskIconManager {
     private boolean mIsRocketPrepared = false;
     private SmokeIcon mSmokeIcon;
     private DustbinIcon mDustbinIcon;
-    private AlertDialog mConfirmCloseRocketDialog;
     private LogCatDeskIcon mLogCatDeskIcon;
     private boolean mIsLogCatIconShowing;
     private WifiSignalLevelIcon mWifiSignalIcon;
@@ -94,6 +89,11 @@ public class DeskIconManager {
         if(null != mAssIcon)    mRocketIcon.release();
         if(null != mAssIcon)    mSmokeIcon.release();
         if(null != mAssIcon)    mDustbinIcon.release();
+        mAssIcon = null;
+        mLaunchBaseIcon = null;
+        mRocketIcon = null;
+        mSmokeIcon = null;
+        mDustbinIcon = null;
         mIsRocketPrepared = false;
     }
 
@@ -115,17 +115,23 @@ public class DeskIconManager {
     }
 
     public void addLog(CharSequence log){
-        mLogCatDeskIcon.addLog(log);
+        if(mIsLogCatIconShowing){
+            mLogCatDeskIcon.addLog(log);
+        }
     }
 
     public CharSequence getAllLog(){
-        return mLogCatDeskIcon.getAllLog();
+        if(null != mLogCatDeskIcon){
+            return mLogCatDeskIcon.getAllLog();
+        }
+        return "";
     }
 
     public void dismissLogCatIcon(){
         if(mIsLogCatIconShowing){
-            mLogCatDeskIcon.dismiss();
             mLogCatDeskIcon.release();
+            mLogCatDeskIcon = null;
+            mIsLogCatIconShowing = false;
         }
     }
 
@@ -146,9 +152,10 @@ public class DeskIconManager {
     }
 
     public void dismissWifiSignalIcon(){
-        if(mIsLogCatIconShowing){
-            mWifiSignalIcon.dismiss();
+        if(mIsWifiSignalIconShowing){
             mWifiSignalIcon.release();
+            mWifiSignalIcon = null;
+            mIsWifiSignalIconShowing = false;
         }
     }
 
