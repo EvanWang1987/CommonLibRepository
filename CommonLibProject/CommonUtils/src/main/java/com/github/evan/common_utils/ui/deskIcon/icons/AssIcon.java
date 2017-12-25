@@ -217,7 +217,6 @@ public class AssIcon extends BaseDeskIcon implements View.OnTouchListener {
                 setStatus(isAtWindowLeft ? RESET_ICON_TO_SCREEN_LEFT : RESET_ICON_TO_SCREEN_RIGHT);
                 DeskIconManager.getInstance(getContext()).assRested();
             }
-            DeskIconManager.getInstance(getContext()).notifyDustbinDismiss();
         }
         return true;
     }
