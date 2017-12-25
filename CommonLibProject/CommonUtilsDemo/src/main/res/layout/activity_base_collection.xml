@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <com.github.evan.common_utils.ui.view.LogCatView
+        android:id="@+id/log_cat_base_collection_activity"
+        android:layout_width="match_parent"
+        android:layout_height="250dp" />
+
+    <com.github.evan.common_utils.ui.view.nestingTouchView.NestingScrollView
+        android:id="@+id/nesting_scroll_view_base_collection_activity"
+        android:fillViewport="true"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:nesting_scroll_view_handle_parallel_Slide="false"
+        app:nesting_scroll_view_is_nested_in_same_intercept_mode_parent="false"
+        app:nesting_scroll_view_touch_intercept_mode="vertical">
+
+
+    </com.github.evan.common_utils.ui.view.nestingTouchView.NestingScrollView>
+
+
+</LinearLayout>

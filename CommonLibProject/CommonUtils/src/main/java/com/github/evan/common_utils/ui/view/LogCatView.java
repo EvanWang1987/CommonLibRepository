@@ -43,18 +43,12 @@ public class LogCatView extends LinearLayout implements View.OnClickListener, Co
         init();
     }
 
-    private void init(){
-        LayoutInflater.from(getContext()).inflate(R.layout.view_logcat, this, true);
-        mTitleLayout = findViewById(R.id.title_layout_logcat_view);
-        mTxtTitle = findViewById(R.id.title_logcat_view);
-        mBtnClose = findViewById(R.id.btn_close_logcat_view);
-        mToggleAutoScrollBottom = findViewById(R.id.toggle_auto_scroll_to_bottom_logcat_view);
-        mTxtLog = findViewById(R.id.log_logcat_view);
-        mScrollView = findViewById(R.id.scroll_view_logcat_view);
-        mInnerLayout = findViewById(R.id.scroll_inner_layout_logcat_view);
-        mScrollView.setInterceptMode(InterceptMode.VERTICAL);
-        mBtnClose.setOnClickListener(this);
-        mToggleAutoScrollBottom.setOnCheckedChangeListener(this);
+    public void setCloseButtonVisibility(int visibility){
+        mBtnClose.setVisibility(visibility);
+    }
+
+    public void setAutoScrollBottomToggleVisibility(int visibility){
+        mToggleAutoScrollBottom.setVisibility(visibility);
     }
 
     public void addLog(CharSequence log){
@@ -99,5 +93,19 @@ public class LogCatView extends LinearLayout implements View.OnClickListener, Co
     @Override
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
         mIsAutoScrollToBottom = isChecked;
+    }
+
+    private void init(){
+        LayoutInflater.from(getContext()).inflate(R.layout.view_logcat, this, true);
+        mTitleLayout = findViewById(R.id.title_layout_logcat_view);
+        mTxtTitle = findViewById(R.id.title_logcat_view);
+        mBtnClose = findViewById(R.id.btn_close_logcat_view);
+        mToggleAutoScrollBottom = findViewById(R.id.toggle_auto_scroll_to_bottom_logcat_view);
+        mTxtLog = findViewById(R.id.log_logcat_view);
+        mScrollView = findViewById(R.id.scroll_view_logcat_view);
+        mInnerLayout = findViewById(R.id.scroll_inner_layout_logcat_view);
+        mScrollView.setInterceptMode(InterceptMode.VERTICAL);
+        mBtnClose.setOnClickListener(this);
+        mToggleAutoScrollBottom.setOnCheckedChangeListener(this);
     }
 }

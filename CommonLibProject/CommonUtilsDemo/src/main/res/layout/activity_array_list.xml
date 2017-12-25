@@ -7,11 +7,274 @@
     android:background="@color/White"
     android:orientation="vertical">
 
-    <TextView
+    <android.support.v7.widget.GridLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="center"
-        android:text="@string/array_list"
-        android:textColor="@color/text_color_black" />
+        app:columnCount="2">
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/card_to_string_array_list"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:minHeight="100dp"
+            app:cardCornerRadius="5dp"
+            app:cardElevation="5dp"
+            app:cardPreventCornerOverlap="false"
+            app:cardUseCompatPadding="true"
+            app:layout_columnWeight="1">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:text="@string/to_string"
+                android:textColor="@color/text_color_black"
+                android:textSize="16sp" />
+
+        </android.support.v7.widget.CardView>
+
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/card_add_array_list"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:minHeight="100dp"
+            app:cardCornerRadius="5dp"
+            app:cardElevation="5dp"
+            app:cardPreventCornerOverlap="false"
+            app:cardUseCompatPadding="true"
+            app:layout_columnWeight="1">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:text="@string/add"
+                android:textColor="@color/text_color_black"
+                android:textSize="16sp" />
+
+        </android.support.v7.widget.CardView>
+
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/card_remove_array_list"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:minHeight="100dp"
+            app:cardCornerRadius="5dp"
+            app:cardElevation="5dp"
+            app:cardPreventCornerOverlap="false"
+            app:cardUseCompatPadding="true"
+            app:layout_columnWeight="1">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:text="@string/remove"
+                android:textColor="@color/text_color_black"
+                android:textSize="16sp" />
+
+        </android.support.v7.widget.CardView>
+
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/card_set_array_list"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:minHeight="100dp"
+            app:cardCornerRadius="5dp"
+            app:cardElevation="5dp"
+            app:cardPreventCornerOverlap="false"
+            app:cardUseCompatPadding="true"
+            app:layout_columnWeight="1">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:text="@string/set"
+                android:textColor="@color/text_color_black"
+                android:textSize="16sp" />
+
+        </android.support.v7.widget.CardView>
+
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/card_get_array_list"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:minHeight="100dp"
+            app:cardCornerRadius="5dp"
+            app:cardElevation="5dp"
+            app:cardPreventCornerOverlap="false"
+            app:cardUseCompatPadding="true"
+            app:layout_columnWeight="1">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:text="@string/get"
+                android:textColor="@color/text_color_black"
+                android:textSize="16sp" />
+
+        </android.support.v7.widget.CardView>
+
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/card_go_through_array_list"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:minHeight="100dp"
+            app:cardCornerRadius="5dp"
+            app:cardElevation="5dp"
+            app:cardPreventCornerOverlap="false"
+            app:cardUseCompatPadding="true"
+            app:layout_columnWeight="1">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:text="@string/go_through"
+                android:textColor="@color/text_color_black"
+                android:textSize="16sp" />
+
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/card_go_through_by_iterator_array_list"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:minHeight="100dp"
+            app:cardCornerRadius="5dp"
+            app:cardElevation="5dp"
+            app:cardPreventCornerOverlap="false"
+            app:cardUseCompatPadding="true"
+            app:layout_columnWeight="1">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:text="@string/go_through_by_iterator"
+                android:textColor="@color/text_color_black"
+                android:textSize="16sp" />
+
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/card_go_through_by_list_iterator_array_list"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:minHeight="100dp"
+            app:cardCornerRadius="5dp"
+            app:cardElevation="5dp"
+            app:cardPreventCornerOverlap="false"
+            app:cardUseCompatPadding="true"
+            app:layout_columnWeight="1">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:text="@string/go_through_by_list_iterator"
+                android:textColor="@color/text_color_black"
+                android:textSize="16sp" />
+
+        </android.support.v7.widget.CardView>
+
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/card_clear_array_list"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:minHeight="100dp"
+            app:cardCornerRadius="5dp"
+            app:cardElevation="5dp"
+            app:cardPreventCornerOverlap="false"
+            app:cardUseCompatPadding="true"
+            app:layout_columnWeight="1">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:text="@string/clear"
+                android:textColor="@color/text_color_black"
+                android:textSize="16sp" />
+
+        </android.support.v7.widget.CardView>
+
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/card_sort_array_list"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:minHeight="100dp"
+            app:cardCornerRadius="5dp"
+            app:cardElevation="5dp"
+            app:cardPreventCornerOverlap="false"
+            app:cardUseCompatPadding="true"
+            app:layout_columnWeight="1">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:text="@string/sort"
+                android:textColor="@color/text_color_black"
+                android:textSize="16sp" />
+
+        </android.support.v7.widget.CardView>
+
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/card_multi_thread_array_list"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:minHeight="100dp"
+            app:cardCornerRadius="5dp"
+            app:cardElevation="5dp"
+            app:cardPreventCornerOverlap="false"
+            app:cardUseCompatPadding="true"
+            app:layout_columnWeight="1">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:text="@string/multi_thread"
+                android:textColor="@color/text_color_black"
+                android:textSize="16sp" />
+
+        </android.support.v7.widget.CardView>
+
+
+    </android.support.v7.widget.GridLayout>
+
 
 </LinearLayout>

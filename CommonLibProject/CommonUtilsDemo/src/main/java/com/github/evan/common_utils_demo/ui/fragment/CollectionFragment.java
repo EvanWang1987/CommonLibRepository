@@ -19,7 +19,6 @@ import butterknife.OnClick;
 /**
  * Created by Evan on 2017/12/25.
  */
-
 public class CollectionFragment extends BaseFragment {
 
     @Nullable

@@ -36,6 +36,18 @@
     <string name="array_list">Array List</string>
     <string name="linked_list">Linked List</string>
 
+    <string name="add">增</string>
+    <string name="remove">删</string>
+    <string name="set">改</string>
+    <string name="get">查</string>
+    <string name="to_string">To String</string>
+    <string name="sort">排序</string>
+    <string name="multi_thread">多线程测试</string>
+    <string name="go_through">遍历</string>
+    <string name="go_through_by_iterator">通过iterator遍历</string>
+    <string name="go_through_by_list_iterator">通过ListIterator遍历</string>
+    <string name="clear">清除</string>
+
 
     <string name="time_flag_text_view">带时间标记的TextView</string>
     <string name="left_top_corner">左上角</string>
