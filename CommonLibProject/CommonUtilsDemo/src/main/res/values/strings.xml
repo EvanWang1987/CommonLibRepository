@@ -31,24 +31,94 @@
     <string name="stop_demo">停止演示</string>
 
     <string name="about_collection">集合相关</string>
-    <string name="vector">Vector</string>
-    <string name="linked_vector">Linked Vector</string>
     <string name="array_list">Array List</string>
     <string name="linked_list">Linked List</string>
+    <string name="hash_set">Hash Set</string>
+    <string name="linked_hash_set">Linked Hash Set</string>
+    <string name="tree_set">Tree Set</string>
+    <string name="hash_map">Hash Map</string>
+    <string name="linked_hash_map">Linked Hash Map</string>
+    <string name="tree_map">Tree Map</string>
+    <string name="sparse_array">Sparse Array</string>
+    <string name="array_map">Array Map</string>
 
     <string name="add">增</string>
+    <string name="add_first">头部增</string>
+    <string name="add_last">尾部增</string>
     <string name="remove">删</string>
+    <string name="remove_first">删头部</string>
+    <string name="remove_last">删尾部</string>
     <string name="set">改</string>
     <string name="get">查</string>
     <string name="to_string">To String</string>
+    <string name="features">特性</string>
     <string name="sort">排序</string>
     <string name="multi_thread">多线程测试</string>
     <string name="go_through">遍历</string>
+    <string name="go_through_by_entry_set">通过entry set遍历</string>
     <string name="go_through_by_iterator">通过iterator遍历</string>
     <string name="go_through_by_list_iterator">通过ListIterator遍历</string>
     <string name="clear">清除</string>
-
-
+    <string name="features_array_list">
+        ArrayList的数据结构就是数组。\r\n
+        修改，查询快，增删慢，可存储重复元素，线程不同步。因为index的存在，所以修改，查询直接依赖index进行操作，而增删慢是因为，每次增删都要动态的重新创建内部维护的数组。\r\n
+        默认空参构造时内部数组为一个静态空数组。每次调用add(E e)时，\r\n  会调用ensureCapacityInternal()函数，\r\n  去重新确定数组大小,如果size已经超出了原数组length，创建出一个大小为（原数组length + length / 2）的新数组，如果是空参构造，则创建一个length为10的内部数组\r\n  再将源数组中的元素复制进新数组,再将添加进来的新元素放在最后一个元素的后一位上。
+    </string>
+    <string name="features_linked_list">
+        LinkedList的数据结构为双向链表,每一个元素存储时都对应生成一个Entry对象，Entry对象中存储了preview和next元素，头部元素的preview为尾部元素，尾部元素的next为头部元素,因此是双向链表。\r\n
+        增删快，查询修改慢，可存储重复元素，线程不同步。因为是双向链表，因此添加，删除元素时，只需要在堆内存中创建出对象，并且修改Entry中的preview和next的指针即可。查询修改慢，是因为没有index，所以每次操作都需要遍历整个链表。\r\n
+        LinkedList提供了addFirst,addLast,getFirst,getLast方法可以快速插入头尾部元素。
+    </string>
+    <string name="features_hash_set">
+        HashSet的数据结构为哈希表。\r\n
+        哈希表数据结构就是内部基于数组，依赖哈希算法直接算出index，然后进行增删改查。内部数组中维护的是Entry对象，Entry对象存储了Key、Value、hashCode，Entry是一个单向链表。\r\n
+        HashSet内部其实使用了HashMap,只是value都是null。
+        HashSet无序，不可保存重复对象，线程不同步，重复对象的判断依赖于HashCode和equals的比较结果。
+    </string>
+    <string name="features_linked_hash_set">
+        LinkedHashSet的数据结构为哈希链表 + 双向链表。\r\n
+        特点：根据hash算法快捷算出index来增删改查，并且保留插入顺序。
+    </string>
+    <string name="features_tree_set">
+        TreeSet的数据结构为二叉树。\r\n
+        二叉树就是每个节点都只能有两个子节点，即左子树和右子树，并且每个节点的子节点的排序都是一致的，要么是升序排列，要么是降序排列。\r\n
+        TreeSet的特点就是去重复，元素自动排序，排序依赖于元素实现Comparable接口中的compareTo方法的返回值,或者依赖于构造TreeSet时传递的Comparator对象。\r\n
+        因此TreeSet中的元素都必须实现Comparable接口。\r\n
+        Java中默认实现Comparable的类有很多，比如Integer、String。
+    </string>
+    <string name="features_hash_map">
+        HashMap的数据结构就是哈希表。\r\n
+        哈希表数据结构就是内部基于数组，依赖哈希算法直接算出index，然后进行增删改查。内部数组中维护的是Entry对象，Entry对象存储了Key、Value、hashCode，Entry是一个单向链表。\r\n
+        HashMap是存放键值对的容器，即key - value，key是唯一的，key通过HashCode和equals来保证唯一性。而value则可以不唯一。\r\n
+        HashMap存放键值对，可以使用null作为key，HashMap的操作是线程不同步的。\r\n
+        HashMap在构造时默认创建一个size为16的数组，并且有一个扩容因子，这个因子的作用就是在每次向HashMap中存储键值对时，都判断当前index是否为 size * 因子，如果成立，则开始扩容、重新创建内部数组。\r\n
+        HashMap在put键值对时，会根据key计算出一个HashCode，并且算出这个HashCode对应存放的index，然后查询这个index对应的Entry链表，如果HashCode相同并且equals相同则覆盖旧的Value。如果对应index上没有Entry链表，则直接添加，每次添加时，都判断是否到达了size * 因子，如果到达，则重新扩容内部数组。
+    </string>
+    <string name="features_hash_table">
+        原理同HashMap，HashSet，但线程同步。
+    </string>
+    <string name="features_linked_hash_map">
+        LinkedHashMap的数据结构是哈希 + 链表\r\n
+        内部基于hash算法快捷计算index并实现增删改查，并且使用链表来保证插入顺序。\r\n
+        特点：key唯一，并且保证插入顺序。
+    </string>
+    <string name="features_tree_map">
+        TreeMap的数据结构是二叉树。\r\n
+        二叉树就是每个节点都只能有两个子节点，即左子树和右子树，并且每个节点的子节点的排序都是一致的，要么是升序排列，要么是降序排列。\r\n
+        TreeMap的key必须实现Comparable已确定如何排序。
+        TreeMap可以使用null作为key，线程不同步，key唯一并且自动排序。
+    </string>
+    <string name="features_sparse_array">
+        SparseArray是Android中的集合。SparseArray数据结构为两个映射的数组。\r\n
+        SparseArray存储key - value键值对,但key的数据类型固定为Integer, key不可重复，value可重复，线程不同步。\r\n
+        key数组的数据类型固定为Integer,并且按从小到大顺序排列。通过key进行增删改查时都会用二分查找来进行key的定位，去操作value。\r\n
+        因为每次操作都需要进行一次二分查找，所以当数据量庞大时，比较耗时，但数据量较小时，SparseArray的内存占用，效率都会较HashMap高（key是int[]类型，避免了自动拆箱装箱）。\r\n
+        每次在put时，都会检查内部数组的容量，如果容量不足，就开始扩容，扩容规则为当前size小于4，扩容至8，如果大于4，则两倍扩容。
+    </string>
+    <string name="features_array_map">
+        ArrayMap是Android中的集合。数据结构也是两个映射数组。\r\n
+        和SparseArray原理一样,但key的数据类型为任意类型，key的排序依赖key的HashCode的对比。
+    </string>
     <string name="time_flag_text_view">带时间标记的TextView</string>
     <string name="left_top_corner">左上角</string>
     <string name="left_bottom_corner">左下角</string>

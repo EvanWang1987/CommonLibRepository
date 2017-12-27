@@ -1,9 +1,13 @@
 package com.github.evan.common_utils_demo.ui.activity.collectionActivity;
 
+import android.content.DialogInterface;
+import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 
 import com.github.evan.common_utils.comparator.DictionaryOrderComparator;
+import com.github.evan.common_utils.ui.dialog.DialogFactory;
+import com.github.evan.common_utils.ui.dialog.ScrollMessageMaterialDialog;
 import com.github.evan.common_utils.utils.ToastUtil;
 import com.github.evan.common_utils_demo.R;
 
@@ -24,21 +28,41 @@ import butterknife.OnClick;
 public class ArrayListActivity extends BaseLogCatActivity {
     private ArrayList<String> mArrayList = new ArrayList<>();
     private DictionaryOrderComparator mComparator;
-    private Random mRandom;
+    private AlertDialog mFeaturesDialog;
 
     @Override
     public View onCreateSubView(LayoutInflater inflater) {
         View root = inflater.inflate(R.layout.activity_array_list, null);
         ButterKnife.bind(this, root);
         mComparator = new DictionaryOrderComparator(Locale.US);
-        mRandom = new Random();
         return root;
     }
 
-    @OnClick({R.id.card_add_array_list ,R.id.card_remove_array_list ,R.id.card_set_array_list ,R.id.card_get_array_list ,R.id.card_go_through_array_list ,R.id.card_go_through_by_iterator_array_list, R.id.card_go_through_by_list_iterator_array_list, R.id.card_clear_array_list, R.id.card_to_string_array_list ,R.id.card_sort_array_list ,R.id.card_multi_thread_array_list})
+    @OnClick({R.id.card_features_array_list, R.id.card_add_array_list ,R.id.card_remove_array_list ,R.id.card_set_array_list ,R.id.card_get_array_list ,R.id.card_go_through_array_list ,R.id.card_go_through_by_iterator_array_list, R.id.card_go_through_by_list_iterator_array_list, R.id.card_clear_array_list, R.id.card_to_string_array_list ,R.id.card_sort_array_list ,R.id.card_multi_thread_array_list})
     void onClick(View v){
         int size = mArrayList.size();
         switch (v.getId()){
+
+            case R.id.card_features_array_list:
+                if(null == mFeaturesDialog){
+                    String title = "ArrayList特性";
+                    String message = getString(R.string.features_array_list);
+                    AlertDialog alertDialog = DialogFactory.createDesignMessageDialog(this, -1, title, message);
+                    alertDialog.setTitle(title);
+                    alertDialog.setMessage(message);
+                    alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, getString(R.string.confirm), new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    });
+                    mFeaturesDialog = alertDialog;
+                }
+                if(!mFeaturesDialog.isShowing()){
+                    mFeaturesDialog.show();
+                }
+                break;
+
             case R.id.card_add_array_list:
                 UUID uuid = UUID.randomUUID();
                 mArrayList.add(uuid.toString());

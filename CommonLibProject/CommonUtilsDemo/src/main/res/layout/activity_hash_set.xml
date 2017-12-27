@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v7.widget.GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/slide_exit_layout_array_list_activity"
+    android:id="@+id/slide_exit_layout_hash_set_activity"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/White"
     app:columnCount="2">
 
     <android.support.v7.widget.CardView
-        android:id="@+id/card_features_array_list"
+        android:id="@+id/card_features_hash_set"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:foreground="?android:attr/selectableItemBackground"
@@ -31,7 +31,7 @@
     </android.support.v7.widget.CardView>
 
     <android.support.v7.widget.CardView
-        android:id="@+id/card_to_string_array_list"
+        android:id="@+id/card_to_string_hash_set"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:foreground="?android:attr/selectableItemBackground"
@@ -55,7 +55,7 @@
 
 
     <android.support.v7.widget.CardView
-        android:id="@+id/card_add_array_list"
+        android:id="@+id/card_add_hash_set"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:foreground="?android:attr/selectableItemBackground"
@@ -79,7 +79,7 @@
 
 
     <android.support.v7.widget.CardView
-        android:id="@+id/card_remove_array_list"
+        android:id="@+id/card_remove_hash_set"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:foreground="?android:attr/selectableItemBackground"
@@ -103,7 +103,7 @@
 
 
     <android.support.v7.widget.CardView
-        android:id="@+id/card_set_array_list"
+        android:id="@+id/card_set_hash_set"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:foreground="?android:attr/selectableItemBackground"
@@ -127,7 +127,7 @@
 
 
     <android.support.v7.widget.CardView
-        android:id="@+id/card_get_array_list"
+        android:id="@+id/card_get_hash_set"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:foreground="?android:attr/selectableItemBackground"
@@ -151,7 +151,7 @@
 
 
     <android.support.v7.widget.CardView
-        android:id="@+id/card_go_through_array_list"
+        android:id="@+id/card_go_through_hash_set"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:foreground="?android:attr/selectableItemBackground"
@@ -174,7 +174,7 @@
     </android.support.v7.widget.CardView>
 
     <android.support.v7.widget.CardView
-        android:id="@+id/card_go_through_by_iterator_array_list"
+        android:id="@+id/card_go_through_by_iterator_hash_set"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:foreground="?android:attr/selectableItemBackground"
@@ -197,7 +197,7 @@
     </android.support.v7.widget.CardView>
 
     <android.support.v7.widget.CardView
-        android:id="@+id/card_go_through_by_list_iterator_array_list"
+        android:id="@+id/card_go_through_by_list_iterator_hash_set"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:foreground="?android:attr/selectableItemBackground"
@@ -221,7 +221,7 @@
 
 
     <android.support.v7.widget.CardView
-        android:id="@+id/card_clear_array_list"
+        android:id="@+id/card_clear_hash_set"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:foreground="?android:attr/selectableItemBackground"
@@ -245,7 +245,7 @@
 
 
     <android.support.v7.widget.CardView
-        android:id="@+id/card_sort_array_list"
+        android:id="@+id/card_sort_hash_set"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:foreground="?android:attr/selectableItemBackground"
@@ -269,7 +269,7 @@
 
 
     <android.support.v7.widget.CardView
-        android:id="@+id/card_multi_thread_array_list"
+        android:id="@+id/card_multi_thread_hash_set"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:foreground="?android:attr/selectableItemBackground"

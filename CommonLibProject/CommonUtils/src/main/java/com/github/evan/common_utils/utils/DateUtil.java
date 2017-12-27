@@ -11,6 +11,7 @@ import java.util.logging.SimpleFormatter;
  */
 public class DateUtil {
     public static final String yyyy_MM_dd_HH_mm_ss = "yyyy-MM-dd HH:mm:ss";
+    public static final String yyyy_MM_dd_HH_mm_SS = "yyyy-MM-dd HH:mm:SS";
     public static final String HH_mm = "HH:mm";
     public static final String HH_mm_ss = "HH:mm:ss";
     public static final String mm_ss = "mm:ss";

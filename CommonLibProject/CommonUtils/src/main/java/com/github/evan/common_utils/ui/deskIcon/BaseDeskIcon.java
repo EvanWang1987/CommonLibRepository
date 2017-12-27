@@ -34,8 +34,8 @@ public abstract class BaseDeskIcon implements IDeskIcon {
         mLayoutParams.format = PixelFormat.TRANSLUCENT;
         mLayoutParams.format = PixelFormat.RGBA_8888;
         mLayoutParams.flags |= WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE;
-        mLayoutParams.width = WindowManager.LayoutParams.WRAP_CONTENT;
-        mLayoutParams.height = WindowManager.LayoutParams.WRAP_CONTENT;
+        mLayoutParams.width = deskIconConfig.getWidth();
+        mLayoutParams.height = deskIconConfig.getHeight();
         mLayoutParams.x = deskIconConfig.getInitX();
         mLayoutParams.y = deskIconConfig.getInitY();
         if(deskIconConfig.getGravity() != -1){

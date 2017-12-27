@@ -34,10 +34,19 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:background="@null"
-            android:button="@drawable/toggle_auto_scroll_to_bottom_white"
+            android:button="@drawable/toggle_auto_scroll_to_bottom_black"
             android:checked="true"
             android:padding="5dp"
             android:src="@drawable/selector_pause_white" />
+
+        <ImageButton
+            android:id="@+id/btn_clear_logcat_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:background="@null"
+            android:padding="5dp"
+            android:src="@drawable/selector_dustbin_black" />
 
         <ImageButton
             android:id="@+id/btn_close_logcat_view"
@@ -46,7 +55,7 @@
             android:layout_gravity="center_vertical"
             android:background="@null"
             android:padding="5dp"
-            android:src="@drawable/selector_close_white" />
+            android:src="@drawable/selector_close_black" />
 
     </LinearLayout>
 

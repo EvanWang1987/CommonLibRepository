@@ -15,10 +15,16 @@
 
         <activity android:name=".ui.activity.TestActivity"/>
         <activity android:name=".ui.activity.AboutActivity"/>
-        <activity android:name=".ui.activity.collectionActivity.VectorActivity" android:theme="@style/AppCompatLightNoActionBarTransparentActivity"/>
         <activity android:name=".ui.activity.collectionActivity.ArrayListActivity" android:theme="@style/AppCompatLightNoActionBarTransparentActivity"/>
         <activity android:name=".ui.activity.collectionActivity.LinkedListActivity" android:theme="@style/AppCompatLightNoActionBarTransparentActivity"/>
-        <activity android:name=".ui.activity.collectionActivity.LinkedVectorActivity" android:theme="@style/AppCompatLightNoActionBarTransparentActivity"/>
+        <activity android:name=".ui.activity.collectionActivity.HashSetActivity" android:theme="@style/AppCompatLightNoActionBarTransparentActivity"/>
+        <activity android:name=".ui.activity.collectionActivity.LinkedHashSetActivity" android:theme="@style/AppCompatLightNoActionBarTransparentActivity"/>
+        <activity android:name=".ui.activity.collectionActivity.TreeSetActivity" android:theme="@style/AppCompatLightNoActionBarTransparentActivity"/>
+        <activity android:name=".ui.activity.collectionActivity.HashMapActivity" android:theme="@style/AppCompatLightNoActionBarTransparentActivity"/>
+        <activity android:name=".ui.activity.collectionActivity.LinkedHashMapActivity" android:theme="@style/AppCompatLightNoActionBarTransparentActivity"/>
+        <activity android:name=".ui.activity.collectionActivity.TreeMapActivity" android:theme="@style/AppCompatLightNoActionBarTransparentActivity"/>
+        <activity android:name=".ui.activity.collectionActivity.SparseArrayActivity" android:theme="@style/AppCompatLightNoActionBarTransparentActivity"/>
+        <activity android:name=".ui.activity.collectionActivity.ArrayMapActivity" android:theme="@style/AppCompatLightNoActionBarTransparentActivity"/>
         <activity android:name=".ui.activity.ptrActivity.PtrWithViewActivity"/>
         <activity android:name=".ui.activity.ptrActivity.PtrWithViewGroupActivity"/>
         <activity android:name=".ui.activity.ptrActivity.PtrWithListViewActivity"/>

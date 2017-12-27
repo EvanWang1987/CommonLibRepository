@@ -21,7 +21,7 @@ import com.github.evan.common_utils.ui.view.nestingTouchView.NestingScrollView;
 public class LogCatView extends LinearLayout implements View.OnClickListener, CompoundButton.OnCheckedChangeListener {
     private NestingScrollView mScrollView;
     private LinearLayout mInnerLayout, mTitleLayout;
-    private ImageButton mBtnClose;
+    private ImageButton mBtnClose, mBtnClear;
     private CheckBox mToggleAutoScrollBottom;
     private TextView mTxtLog, mTxtTitle;
     private StringBuffer mStringBuffer = new StringBuffer();
@@ -86,8 +86,10 @@ public class LogCatView extends LinearLayout implements View.OnClickListener, Co
             if(null != mCloseListener){
                 mCloseListener.onClick(v);
             }
+        }else if(i == R.id.btn_clear_logcat_view){
+            mTxtLog.setText("");
+            mStringBuffer.delete(0, mStringBuffer.length());
         }
-
     }
 
     @Override
@@ -100,12 +102,14 @@ public class LogCatView extends LinearLayout implements View.OnClickListener, Co
         mTitleLayout = findViewById(R.id.title_layout_logcat_view);
         mTxtTitle = findViewById(R.id.title_logcat_view);
         mBtnClose = findViewById(R.id.btn_close_logcat_view);
+        mBtnClear = findViewById(R.id.btn_clear_logcat_view);
         mToggleAutoScrollBottom = findViewById(R.id.toggle_auto_scroll_to_bottom_logcat_view);
         mTxtLog = findViewById(R.id.log_logcat_view);
         mScrollView = findViewById(R.id.scroll_view_logcat_view);
         mInnerLayout = findViewById(R.id.scroll_inner_layout_logcat_view);
         mScrollView.setInterceptMode(InterceptMode.VERTICAL);
         mBtnClose.setOnClickListener(this);
+        mBtnClear.setOnClickListener(this);
         mToggleAutoScrollBottom.setOnCheckedChangeListener(this);
     }
 }
