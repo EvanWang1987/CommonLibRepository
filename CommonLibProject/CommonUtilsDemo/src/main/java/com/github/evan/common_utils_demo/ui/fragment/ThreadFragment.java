@@ -97,15 +97,15 @@ public class ThreadFragment extends BaseFragment implements Observer, com.github
 
     private void singleProducerConsumer(){
         mSingleResource = new Resource("商品");
-        mSingleResource.setmObserver(this);
+        mSingleResource.setObserver(this);
         mProduceRunnable = new ProduceRunnable(mSingleResource);
         mConsumerRunnable = new ConsumerRunnable(mSingleResource);
         mProduceRunnable.setStop(false);
         mConsumerRunnable.setStop(false);
         Thread producerThread = new Thread(mProduceRunnable);
         Thread consumerThread = new Thread(mConsumerRunnable);
-        producerThread.setName("生产者");
-        consumerThread.setName("消费者");
+        producerThread.setName("生产者线程 " + producerThread.getId());
+        consumerThread.setName("消费者线程 " + consumerThread.getId());
         DeskIconManager.getInstance(getContext()).showLogCatIcon();
         producerThread.start();
         consumerThread.start();
@@ -123,21 +123,21 @@ public class ThreadFragment extends BaseFragment implements Observer, com.github
         }
 
         if(null != mSingleResource){
-            mSingleResource.setmObserver(null);
+            mSingleResource.setObserver(null);
             mSingleResource = null;
         }
 
     }
 
     private void multiProducerConsumer(){
-        mSingleResource = new Resource("商品");
-        mSingleResource.setmObserver(this);
-        mProduceARunnable = new ProduceRunnable(mSingleResource);
-        mProduceBRunnable = new ProduceRunnable(mSingleResource);
-        mProduceCRunnable = new ProduceRunnable(mSingleResource);
-        mConsumerARunnable = new ConsumerRunnable(mSingleResource);
-        mConsumerBRunnable = new ConsumerRunnable(mSingleResource);
-        mConsumerCRunnable = new ConsumerRunnable(mSingleResource);
+        mMultiResource = new Resource("商品");
+        mMultiResource.setObserver(this);
+        mProduceARunnable = new ProduceRunnable(mMultiResource);
+        mProduceBRunnable = new ProduceRunnable(mMultiResource);
+        mProduceCRunnable = new ProduceRunnable(mMultiResource);
+        mConsumerARunnable = new ConsumerRunnable(mMultiResource);
+        mConsumerBRunnable = new ConsumerRunnable(mMultiResource);
+        mConsumerCRunnable = new ConsumerRunnable(mMultiResource);
         mProduceARunnable.setStop(false);
         mProduceBRunnable.setStop(false);
         mProduceCRunnable.setStop(false);
@@ -150,12 +150,12 @@ public class ThreadFragment extends BaseFragment implements Observer, com.github
         Thread consumerAThread = new Thread(mConsumerARunnable);
         Thread consumerBThread = new Thread(mConsumerBRunnable);
         Thread consumerCThread = new Thread(mConsumerCRunnable);
-        producerAThread.setName("生产者A");
-        producerBThread.setName("生产者B");
-        producerCThread.setName("生产者C");
-        consumerAThread.setName("消费者A");
-        consumerBThread.setName("消费者B");
-        consumerCThread.setName("消费者C");
+        producerAThread.setName("生产者线程 " + producerAThread.getId());
+        producerBThread.setName("生产者线程 " + producerBThread.getId());
+        producerCThread.setName("生产者线程 " + producerCThread.getId());
+        consumerAThread.setName("消费者线程 " + consumerAThread.getId());
+        consumerBThread.setName("消费者线程 " + consumerBThread.getId());
+        consumerCThread.setName("消费者线程 " + consumerCThread.getId());
         DeskIconManager.getInstance(getContext()).showLogCatIcon();
         producerAThread.start();
         producerBThread.start();
@@ -197,7 +197,7 @@ public class ThreadFragment extends BaseFragment implements Observer, com.github
         }
 
         if(null != mMultiResource){
-            mMultiResource.setmObserver(null);
+            mMultiResource.setObserver(null);
             mMultiResource = null;
         }
 

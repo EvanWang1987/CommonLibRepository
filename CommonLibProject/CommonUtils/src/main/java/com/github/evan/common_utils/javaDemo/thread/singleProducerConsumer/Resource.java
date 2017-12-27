@@ -36,25 +36,27 @@ public class Resource {
             count++;
             final String log = Thread.currentThread().getName() + ", 生产: " + mGoodsName + count;
             Logger.d(log);
-            if (null != mObserver) {
-                mHandler.post(new Runnable() {
-                    @Override
-                    public void run() {
+
+            mHandler.post(new Runnable() {
+                @Override
+                public void run() {
+                    if (null != mObserver) {
                         mObserver.onSingleProducerConsumerPrintLog(log);
                     }
-                });
-            }
+                }
+            });
+
         } else {
             final String log = "-" + Thread.currentThread().getName() + ", 消费: " + mGoodsName + count;
             Logger.d(log);
-            if (null != mObserver) {
-                mHandler.post(new Runnable() {
-                    @Override
-                    public void run() {
+            mHandler.post(new Runnable() {
+                @Override
+                public void run() {
+                    if (null != mObserver) {
                         mObserver.onSingleProducerConsumerPrintLog(log);
                     }
-                });
-            }
+                }
+            });
         }
     }
 
@@ -66,7 +68,7 @@ public class Resource {
         return mGoodsName;
     }
 
-    public void setmObserver(Observer observer) {
+    public void setObserver(Observer observer) {
         this.mObserver = observer;
     }
 }
