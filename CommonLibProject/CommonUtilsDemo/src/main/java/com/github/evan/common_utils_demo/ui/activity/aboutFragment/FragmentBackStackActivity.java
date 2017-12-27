@@ -81,7 +81,7 @@ public class FragmentBackStackActivity extends BaseLogCatActivity implements Fra
 
     private void addStack(){
         int backStackEntryCount = mFragmentManager.getBackStackEntryCount();
-        if(backStackEntryCount >  3){
+        if(backStackEntryCount >=  3){
             ToastUtil.showToastWithShortDuration("只演示3个Fragment");
             return;
         }
