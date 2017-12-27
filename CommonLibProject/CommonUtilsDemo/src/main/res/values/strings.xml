@@ -196,6 +196,19 @@
     <string name="stop_observe_wifi_signal">停止wifi信号强度监听</string>
     <!-- NetWorkManager -->
 
+    <!-- Fragment相关 -->
+    <string name="fragment">Fragment</string>
+    <string name="jump">跳转</string>
+    <string name="jump_back">回退</string>
+    <string name="print_stack">打印Fragment栈</string>
+    <string name="fragment_back_stack">Fragment回退栈</string>
+    <string name="fragment_a">Fragment A</string>
+    <string name="jump_fragment_b_with_extra">携带数据跳转到Fragment B</string>
+    <string name="fragment_b">Fragment B</string>
+    <string name="jump_fragment_c_with_extra">携带数据跳转到Fragment C</string>
+    <string name="fragment_c">Fragment C</string>
+    <!-- Fragment相关 -->
+
     <!-- ListGridViewFragment相关 -->
     <string name="list_view_and_grid_view">List View &amp; Grid View</string>
     <string name="list_item_title">This is a title.</string>

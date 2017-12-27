@@ -25,6 +25,7 @@
         <activity android:name=".ui.activity.collectionActivity.TreeMapActivity" android:theme="@style/AppCompatLightNoActionBarTransparentActivity"/>
         <activity android:name=".ui.activity.collectionActivity.SparseArrayActivity" android:theme="@style/AppCompatLightNoActionBarTransparentActivity"/>
         <activity android:name=".ui.activity.collectionActivity.ArrayMapActivity" android:theme="@style/AppCompatLightNoActionBarTransparentActivity"/>
+        <activity android:name=".ui.activity.aboutFragment.FragmentBackStackActivity" android:theme="@style/AppCompatLightNoActionBarTransparentActivity"/>
         <activity android:name=".ui.activity.ptrActivity.PtrWithViewActivity"/>
         <activity android:name=".ui.activity.ptrActivity.PtrWithViewGroupActivity"/>
         <activity android:name=".ui.activity.ptrActivity.PtrWithListViewActivity"/>

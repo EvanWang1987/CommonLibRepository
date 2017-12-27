@@ -6,6 +6,7 @@
         <item android:id="@+id/functionAboutCollection" android:title="@string/about_collection" android:icon="@drawable/selector_collection_black" />
         <item android:id="@+id/functionAboutThread" android:title="@string/about_thread" android:icon="@drawable/selector_thread_black" />
         <item android:id="@+id/functionNetwork" android:title="@string/network_information" android:icon="@drawable/selector_wifi_black" />
+        <item android:id="@+id/functionAboutFragment" android:title="@string/fragment" android:icon="@drawable/selector_fragment_black" />
         <item android:id="@+id/functionListView" android:title="@string/list_view_and_grid_view" android:icon="@drawable/selector_list_view_black" />
         <item android:id="@+id/functionRecyclerView" android:title="@string/recycler_view" android:icon="@drawable/selector_recycler_view_black" />
         <item android:id="@+id/functionVerNestHorScrollView" android:title="@string/ver_nest_hor_scroll_view" android:icon="@drawable/selector_nesting_touch_black" />
