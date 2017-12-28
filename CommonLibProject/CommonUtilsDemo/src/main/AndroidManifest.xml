@@ -21,6 +21,7 @@
         <activity android:name=".ui.activity.collectionActivity.LinkedHashSetActivity" android:theme="@style/AppCompatLightNoActionBarTransparentActivity"/>
         <activity android:name=".ui.activity.collectionActivity.TreeSetActivity" android:theme="@style/AppCompatLightNoActionBarTransparentActivity"/>
         <activity android:name=".ui.activity.collectionActivity.HashMapActivity" android:theme="@style/AppCompatLightNoActionBarTransparentActivity"/>
+        <activity android:name=".ui.activity.collectionActivity.HashTableActivity" android:theme="@style/AppCompatLightNoActionBarTransparentActivity"/>
         <activity android:name=".ui.activity.collectionActivity.LinkedHashMapActivity" android:theme="@style/AppCompatLightNoActionBarTransparentActivity"/>
         <activity android:name=".ui.activity.collectionActivity.TreeMapActivity" android:theme="@style/AppCompatLightNoActionBarTransparentActivity"/>
         <activity android:name=".ui.activity.collectionActivity.SparseArrayActivity" android:theme="@style/AppCompatLightNoActionBarTransparentActivity"/>

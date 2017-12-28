@@ -37,6 +37,7 @@
     <string name="linked_hash_set">Linked Hash Set</string>
     <string name="tree_set">Tree Set</string>
     <string name="hash_map">Hash Map</string>
+    <string name="hash_table">Hash Table</string>
     <string name="linked_hash_map">Linked Hash Map</string>
     <string name="tree_map">Tree Map</string>
     <string name="sparse_array">Sparse Array</string>
@@ -54,6 +55,7 @@
     <string name="features">特性</string>
     <string name="sort">排序</string>
     <string name="multi_thread">多线程测试</string>
+    <string name="stop_multi_thread">停止多线程测试</string>
     <string name="go_through">遍历</string>
     <string name="go_through_by_entry_set">通过entry set遍历</string>
     <string name="go_through_by_iterator">通过iterator遍历</string>

@@ -12,6 +12,7 @@ import com.github.evan.common_utils_demo.ui.activity.collectionActivity.ArrayLis
 import com.github.evan.common_utils_demo.ui.activity.collectionActivity.ArrayMapActivity;
 import com.github.evan.common_utils_demo.ui.activity.collectionActivity.HashMapActivity;
 import com.github.evan.common_utils_demo.ui.activity.collectionActivity.HashSetActivity;
+import com.github.evan.common_utils_demo.ui.activity.collectionActivity.HashTableActivity;
 import com.github.evan.common_utils_demo.ui.activity.collectionActivity.LinkedHashMapActivity;
 import com.github.evan.common_utils_demo.ui.activity.collectionActivity.LinkedHashSetActivity;
 import com.github.evan.common_utils_demo.ui.activity.collectionActivity.LinkedListActivity;
@@ -39,7 +40,7 @@ public class CollectionFragment extends BaseFragment {
 
     }
 
-    @OnClick({R.id.ic_collection_extends, R.id.card_hash_set, R.id.card_linked_hash_set, R.id.card_array_list, R.id.card_linked_list, R.id.card_tree_set, R.id.card_hash_map, R.id.card_linked_hash_map, R.id.card_tree_map, R.id.card_sparse_array, R.id.card_array_map})
+    @OnClick({R.id.ic_collection_extends, R.id.card_hash_set, R.id.card_linked_hash_set, R.id.card_array_list, R.id.card_linked_list, R.id.card_tree_set, R.id.card_hash_map, R.id.card_hash_table, R.id.card_linked_hash_map, R.id.card_tree_map, R.id.card_sparse_array, R.id.card_array_map})
     void onClick(View view){
         switch (view.getId()){
             case R.id.ic_collection_extends:
@@ -70,6 +71,10 @@ public class CollectionFragment extends BaseFragment {
 
             case R.id.card_hash_map:
                 loadActivity(HashMapActivity.class);
+                break;
+
+            case R.id.card_hash_table:
+                loadActivity(HashTableActivity.class);
                 break;
 
             case R.id.card_linked_hash_map:
