@@ -1,48 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.github.evan.common_utils.ui.view.slideExitView.SlideExitLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/slide_exit_layout_multi_nesting_activity"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/White">
+    android:background="@color/White"
+    android:orientation="vertical">
 
-    <LinearLayout
+
+    <com.github.evan.common_utils.ui.view.nestingTouchView.NestingTabLayout
+        android:id="@+id/tab_layout_multi_nesting_fragment"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="wrap_content"
+        app:nesting_tab_layout_handle_parallel_Slide="true"
+        app:nesting_tab_layout_is_nested_in_same_intercept_mode_parent="true"
+        app:nesting_tab_layout_touch_intercept_mode="horizontal_but_threshold"
+        app:tabGravity="fill"
+        app:tabMode="scrollable" />
 
-        <com.github.evan.common_utils.ui.view.nestingTouchView.NestingTabLayout
-            android:id="@+id/tab_layout_multi_nesting_fragment"
-            android:layout_width="match_parent"
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.github.evan.common_utils.ui.view.LoadingPager
+            android:id="@+id/loading_pager_multi_nesting_fragment"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:nesting_tab_layout_handle_parallel_Slide="true"
-            app:nesting_tab_layout_is_nested_in_same_intercept_mode_parent="true"
-            app:nesting_tab_layout_touch_intercept_mode="horizontal_but_threshold"
-            app:tabGravity="fill"
-            app:tabMode="scrollable" />
+            android:layout_gravity="center" />
 
-        <FrameLayout
+        <com.github.evan.common_utils.ui.view.nestingTouchView.NestingViewPager
+            android:id="@+id/view_pager_multi_nesting_fragment"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            app:nesting_view_pager_handle_parallel_Slide="true"
+            app:nesting_view_pager_is_nested_in_same_intercept_mode_parent="true"
+            app:nesting_view_pager_touch_intercept_mode="horizontal_but_threshold" />
 
-            <com.github.evan.common_utils.ui.view.LoadingPager
-                android:id="@+id/loading_pager_multi_nesting_fragment"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center" />
-
-            <com.github.evan.common_utils.ui.view.nestingTouchView.NestingViewPager
-                android:id="@+id/view_pager_multi_nesting_fragment"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                app:nesting_view_pager_handle_parallel_Slide="true"
-                app:nesting_view_pager_is_nested_in_same_intercept_mode_parent="true"
-                app:nesting_view_pager_touch_intercept_mode="horizontal_but_threshold" />
-
-        </FrameLayout>
+    </FrameLayout>
 
 
-    </LinearLayout>
-
-
-</com.github.evan.common_utils.ui.view.slideExitView.SlideExitLayout>
+</LinearLayout>
