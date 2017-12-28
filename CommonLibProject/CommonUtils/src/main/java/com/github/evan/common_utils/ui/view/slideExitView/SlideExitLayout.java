@@ -436,7 +436,6 @@ public class SlideExitLayout extends ViewGroup implements Nestable, ThresholdSwi
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        Logger.d("onMeasure");
         int widthMode = MeasureSpec.getMode(widthMeasureSpec);
         int heightMode = MeasureSpec.getMode(heightMeasureSpec);
         int sourceWidth = MeasureSpec.getSize(widthMeasureSpec);
@@ -469,7 +468,6 @@ public class SlideExitLayout extends ViewGroup implements Nestable, ThresholdSwi
 
     @Override
     protected void onLayout(boolean changed, int l, int t, int r, int b) {
-        Logger.d("onLayout");
         int paddingTop = getPaddingTop();
         int paddingBottom = getPaddingBottom();
         int paddingLeft = getPaddingLeft();
@@ -487,7 +485,6 @@ public class SlideExitLayout extends ViewGroup implements Nestable, ThresholdSwi
     @Override
     protected void onFinishInflate() {
         super.onFinishInflate();
-        Logger.d("onFinishInflate");
         int childCount = getChildCount();
         if (childCount > 1) {
             throw new IllegalArgumentException("SlideExitLayout can only host one child.");

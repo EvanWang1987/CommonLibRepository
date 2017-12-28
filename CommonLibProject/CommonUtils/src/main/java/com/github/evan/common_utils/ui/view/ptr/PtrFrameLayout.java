@@ -227,7 +227,6 @@ public class PtrFrameLayout extends ViewGroup {
                 //refreshed and other unknown status
             }
 
-            Logger.d("scrollY: " + -offsetYSinceLastMoved);
             mIndicator.setOffsetY(offsetYSinceDown, offsetYSinceLastMoved);
             scrollBy(0, -offsetYSinceLastMoved);
         } else if (actionMasked == MotionEvent.ACTION_UP || actionMasked == MotionEvent.ACTION_CANCEL) {

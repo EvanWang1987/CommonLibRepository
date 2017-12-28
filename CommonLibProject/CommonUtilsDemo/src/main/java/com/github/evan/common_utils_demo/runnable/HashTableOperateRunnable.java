@@ -80,7 +80,6 @@ public class HashTableOperateRunnable implements Runnable {
                         break;
                     }
 
-                    Logger.d("random, keys size: " + mKeys.size());
                     int setKeyIndex = mRandom.nextInt(mKeys.size());
                     String setKey = mKeys.get(setKeyIndex);
                     String setValue = UUID.randomUUID().toString();

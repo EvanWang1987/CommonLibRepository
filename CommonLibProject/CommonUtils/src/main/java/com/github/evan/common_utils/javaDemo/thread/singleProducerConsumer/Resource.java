@@ -35,8 +35,6 @@ public class Resource {
         if (isProduced) {
             count++;
             final String log = Thread.currentThread().getName() + ", 生产: " + mGoodsName + count;
-            Logger.d(log);
-
             mHandler.post(new Runnable() {
                 @Override
                 public void run() {
@@ -48,7 +46,6 @@ public class Resource {
 
         } else {
             final String log = "-" + Thread.currentThread().getName() + ", 消费: " + mGoodsName + count;
-            Logger.d(log);
             mHandler.post(new Runnable() {
                 @Override
                 public void run() {
