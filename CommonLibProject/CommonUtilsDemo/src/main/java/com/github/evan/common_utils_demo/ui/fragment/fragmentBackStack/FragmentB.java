@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.github.evan.common_utils.ui.fragment.BaseFragment;
+import com.github.evan.common_utils.utils.StringUtil;
 import com.github.evan.common_utils_demo.R;
 import com.github.evan.common_utils_demo.ui.activity.aboutFragment.FragmentBackStackActivity;
 
@@ -35,7 +36,9 @@ public class FragmentB extends BaseFragment {
         Bundle arguments = getArguments();
         if(null != arguments){
             String extraString = arguments.getString(FragmentBackStackActivity.EXTRA_FROM_LAST_FRAGMENT, "上级Fragment未携带数据");
-            mTxtExtra.setText(extraString);
+            if(!StringUtil.isEmpty(extraString)){
+                mTxtExtra.setText(extraString);
+            }
         }
     }
 

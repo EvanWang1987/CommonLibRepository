@@ -5,6 +5,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v7.widget.AppCompatCheckBox;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
@@ -31,6 +32,8 @@ public class FragmentBackStackActivity extends BaseLogCatActivity implements Fra
 
     @BindView(R.id.btn_jump_next_fragment)
     Button mBtnJumpNext;
+    @BindView(R.id.toggle_with_extras)
+    AppCompatCheckBox mToggleWithExtras;
     private FragmentManager mFragmentManager;
 
     @Override
@@ -50,16 +53,16 @@ public class FragmentBackStackActivity extends BaseLogCatActivity implements Fra
     @Override
     public void onBackPressed() {
         int backStackEntryCount = mFragmentManager.getBackStackEntryCount();
-        if(backStackEntryCount > 0){
+        if (backStackEntryCount > 0) {
             mFragmentManager.popBackStack();
-        }else{
+        } else {
             super.onBackPressed();
         }
     }
 
     @OnClick({R.id.btn_jump_next_fragment, R.id.btn_jump_back_fragment, R.id.btn_print_fragment_stack})
-    void onClick(View view){
-        switch (view.getId()){
+    void onClick(View view) {
+        switch (view.getId()) {
             case R.id.btn_jump_next_fragment:
                 addStack();
                 break;
@@ -79,19 +82,20 @@ public class FragmentBackStackActivity extends BaseLogCatActivity implements Fra
         printStack();
     }
 
-    private void addStack(){
+    private void addStack() {
         int backStackEntryCount = mFragmentManager.getBackStackEntryCount();
-        if(backStackEntryCount >=  3){
+        if (backStackEntryCount >= 3) {
             ToastUtil.showToastWithShortDuration("只演示3个Fragment");
             return;
         }
         Fragment dst = null;
         String extraString = null;
         String fragmentName = null;
-        switch (backStackEntryCount){
+        switch (backStackEntryCount) {
             case 0:
                 dst = mFragmentA;
                 fragmentName = "FragmentA";
+                extraString = "携带来的数据";
                 break;
 
             case 1:
@@ -108,16 +112,16 @@ public class FragmentBackStackActivity extends BaseLogCatActivity implements Fra
         }
         Bundle bundle = new Bundle();
         bundle.putString(EXTRA_FROM_LAST_FRAGMENT, extraString);
-        dst.setArguments(bundle);
+        dst.setArguments(mToggleWithExtras.isChecked() ? bundle : null);
         FragmentTransaction fragmentTransaction = mFragmentManager.beginTransaction();
         fragmentTransaction.addToBackStack(fragmentName);
         fragmentTransaction.replace(R.id.fragment_container_fragment_back_stack, dst);
         fragmentTransaction.commit();
     }
 
-    private void popStack(){
+    private void popStack() {
         int backStackEntryCount = mFragmentManager.getBackStackEntryCount();
-        if(backStackEntryCount <= 0){
+        if (backStackEntryCount <= 0) {
             ToastUtil.showToastWithShortDuration("空栈");
             return;
         }
@@ -125,10 +129,10 @@ public class FragmentBackStackActivity extends BaseLogCatActivity implements Fra
         mFragmentManager.popBackStack();
     }
 
-    private void printStack(){
+    private void printStack() {
         int backStackEntryCount = mFragmentManager.getBackStackEntryCount();
         addLog("Fragment stack count: " + backStackEntryCount);
-        if(backStackEntryCount > 0){
+        if (backStackEntryCount > 0) {
             StringBuilder stringBuilder = new StringBuilder();
             for (int i = backStackEntryCount - 1; i >= 0; i--) {
                 FragmentManager.BackStackEntry backStackEntryAt = mFragmentManager.getBackStackEntryAt(i);
