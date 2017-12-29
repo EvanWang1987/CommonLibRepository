@@ -1,35 +1,68 @@
 <resources>
     <string name="app_name">CommonUtilsDemo</string>
-    <string name="about">关于</string>
-    <string name="open_log">打开Log显示</string>
-    <string name="close_log">关闭Log显示</string>
-
-    <string name="demo_version_name">CommonUtilsDemo version: %1$s</string>
-    <string name="os_version">Android version: %1$s</string>
-    <string name="lib_version_name">CommonUtils Lib version: %1$s</string>
-    <string name="lib_min_support_os">CommonUtils Lib min support OS version: %1$s</string>
-
-    <string name="drawer_open_desc">更多</string>
-    <string name="drawer_close_desc">回到首页</string>
-
-    <string name="home">首页</string>
-    <string name="edit_text">自定义EditText</string>
-    <string name="flag_view">自定义标记View</string>
-    <string name="tint">着色</string>
-
     <string name="warning">警告</string>
     <string name="exit">退出</string>
     <string name="you_do_not_give_the_permission">您没有基于以下权限,App无法正常运行,请重新打开App或者在系统设置中给予响应的权限. \n %1$s</string>
 
+    <!-- ToolBar's Action Button -->
+    <string name="about">关于</string>
+    <string name="open_log">打开Log显示</string>
+    <string name="close_log">关闭Log显示</string>
+    <!-- ToolBar's Action Button -->
+
+    <!-- Drawer's description which in MainActivity -->
+    <string name="drawer_open_desc">更多</string>
+    <string name="drawer_close_desc">回到首页</string>
+    <!-- Drawer's description which in MainActivity -->
+
+    <!-- 关于界面 -->
     <string name="open_rocket">打开火箭</string>
     <string name="close_rocket">关闭火箭</string>
+    <string name="home_page_link">https://github.com/EvanWang1987</string>
+    <!-- 关于界面 -->
 
-    <string name="about_thread">线程相关</string>
-    <string name="single_producer_consumer">单生产者单消费者演示</string>
-    <string name="multi_producer_consumer">多生产者多消费者演示</string>
-    <string name="dead_lock">死锁演示</string>
-    <string name="stop_demo">停止演示</string>
+    <!-- HomeFragment相关 -->
+    <string name="home">首页</string>
+    <!-- HomeFragment相关 -->
 
+    <!-- 设备信息相关 -->
+    <string name="device_information">设备信息</string>
+    <string name="convert">转换</string>
+    <string name="px_convert_to_dp">px转dp</string>
+    <string name="px_convert_to_sp">px转sp</string>
+    <string name="dp_convert_to_px">dp转px</string>
+    <string name="sp_convert_to_px">sp转px</string>
+    <string name="input_converting_value">输入要转换的值</string>
+    <string name="current_device_brand">设备品牌: %1$s</string>
+    <string name="current_device_manufacturer">硬件制造商: %1$s</string>
+    <string name="current_device_model">设备型号: %1$s</string>
+    <string name="current_device_os_version">系统版本: %1$s</string>
+    <string name="current_device_api_level">Api版本: %1$s</string>
+    <string name="current_device_kernel">内核版本: %1$s</string>
+    <string name="current_device_os_code_build_version">系统代码编译版本: %1$s</string>
+    <string name="current_device_radio_version">基带版本: %1$s</string>
+    <string name="current_device_sdcard">设备存储: %1$s</string>
+    <string name="current_device_ram">设备运行内存: %1$s</string>
+    <string name="current_device_battery_capacity">电池容量: %1$s</string>
+    <string name="current_device_battery_level">当前电量: %1$s</string>
+    <string name="current_device_battery_temperature">电池温度: %1$s</string>
+    <string name="current_device_screen_real_width">当前设备屏幕宽: %1$d</string>
+    <string name="current_device_screen_real_height">当前设备屏幕高: %1$d</string>
+    <string name="current_device_screen_resolution">当前设备屏幕分辨率: %1$s</string>
+    <string name="current_device_screen_aspect_ratio">当前设备屏幕宽高比: %1$s</string>
+    <string name="current_device_system_status_bar_height">当前系统状态栏高: %1$s</string>
+    <string name="current_device_screen_xdpi">当前设备x轴DPI: %1$s</string>
+    <string name="current_device_screen_ydpi">当前设备y轴DPI: %1$s</string>
+    <string name="current_device_screen_dpi">当前设备DPI: %1$d</string>
+    <string name="current_device_screen_density">当前设备Density: %1$s</string>
+    <string name="current_device_screen_scale_density">当前设备字体Density: %1$s</string>
+    <string name="current_device_screen_size">当前设备尺寸: %1$s</string>
+    <string name="please_input_legitimate_integer_or_decimal">请输入合法的整数或小数</string>
+    <string name="un_available_sdcard">未检测到内部存储设备</string>
+    <string name="un_available_ram">未检测到运行内存</string>
+    <!-- 设备信息相关 -->
+
+    <!-- CollectionFragment相关 -->
     <string name="about_collection">集合相关</string>
     <string name="array_list">Array List</string>
     <string name="linked_list">Linked List</string>
@@ -121,6 +154,126 @@
         ArrayMap是Android中的集合。数据结构也是两个映射数组。\r\n
         和SparseArray原理一样,但key的数据类型为任意类型，key的排序依赖key的HashCode的对比。
     </string>
+    <!-- CollectionFragment相关 -->
+
+
+    <!-- 线程相关 -->
+    <string name="about_thread">线程相关</string>
+    <string name="single_producer_consumer">单生产者单消费者演示</string>
+    <string name="multi_producer_consumer">多生产者多消费者演示</string>
+    <string name="dead_lock">死锁演示</string>
+    <string name="stop_demo">停止演示</string>
+    <!-- 线程相关 -->
+
+    <!-- Fragment相关 -->
+    <string name="fragment">Fragment</string>
+    <string name="jump">跳转</string>
+    <string name="jump_back">回退</string>
+    <string name="with_extras">携带数据</string>
+    <string name="print_stack">打印栈</string>
+    <string name="fragment_back_stack">Fragment回退栈</string>
+    <string name="fragment_a">Fragment A</string>
+    <string name="jump_fragment_b_with_extra">携带数据跳转到Fragment B</string>
+    <string name="fragment_b">Fragment B</string>
+    <string name="jump_fragment_c_with_extra">携带数据跳转到Fragment C</string>
+    <string name="fragment_c">Fragment C</string>
+    <!-- Fragment相关 -->
+
+    <!-- Handler相关 -->
+    <string name="about_handler">Handler</string>
+    <!-- Handler相关 -->
+
+    <!-- 网络相关 -->
+    <string name="network_information">网络相关</string>
+    <string name="start_observe_wifi_signal">开启wifi信号强度监听</string>
+    <string name="stop_observe_wifi_signal">停止wifi信号强度监听</string>
+    <!-- 网络相关 -->
+
+    <!-- ListView & GridView相关 -->
+    <string name="list_view_and_grid_view">List View &amp; Grid View</string>
+    <string name="list_item_title">This is a title.</string>
+    <string name="list_item_desc">This is description. </string>
+    <string name="list_item_thumb_up">12 thumb up</string>
+    <string name="default_list_item">单Item</string>
+    <string name="two_style_list_item">双Item</string>
+    <string name="three_style_list_item">多Item</string>
+    <string name="grid_view">GridView</string>
+    <!-- ListView & GridView相关 -->
+
+
+
+    <!-- RecyclerView相关 -->
+    <string name="recycler_view">Recycler View</string>
+    <string name="vertical_recycler_item">竖向列表</string>
+    <string name="horizontal_recycler_item">横向列表</string>
+    <string name="grid_recycler_item">网格样式</string>
+    <string name="waterfall_recycler_item">瀑布流</string>
+    <string name="thumb_up">赞</string>
+    <string name="share">分享</string>
+    <string name="search">搜索</string>
+    <!-- RecyclerView相关 -->
+
+    <!-- 横向嵌套竖向 & 竖向嵌套横向 相关 -->
+    <string name="ver_nest_hor_scroll_view">竖向嵌套横向滑动布局</string>
+    <string name="hor_nest_ver_scroll_view">横向嵌套竖向滑动布局</string>
+    <!-- 横向嵌套竖向 & 竖向嵌套横向 相关 -->
+
+    <!-- ViewPager嵌套相关 -->
+    <string name="view_pager">View Pager嵌套</string>
+    <!-- ViewPager嵌套相关 -->
+
+    <!-- ViewPager嵌套多重横向布局相关 -->
+    <string name="view_pager_nest_multi_horizontal_scroll">View Pager嵌套多重横向滑动</string>
+    <!-- ViewPager嵌套多重横向布局相关 -->
+
+    <!-- 下拉刷新相关 -->
+    <string name="pull_to_refresh">下拉刷新</string>
+    <string name="with_view">Ptr with View</string>
+    <string name="with_view_group">Ptr with ViewGroup</string>
+    <string name="with_list_view">Ptr with ListView</string>
+    <string name="with_grid_view">Ptr with GridView</string>
+    <string name="with_recycler_view">Ptr with RecyclerView</string>
+    <string name="with_view_pager">Ptr with ViewPager</string>
+    <string name="with_scroll_view">Ptr with ScrollView</string>
+    <string name="with_horizontal_scroll_view">Ptr with HorizontalScrollView</string>
+    <string name="ptr_with_classic_indicator">Classic Indicator</string>
+    <string name="ptr_with_classic_pro_indicator">Classic pro Indicator</string>
+    <string name="ptr_with_gif_indicator">Gif Indicator</string>
+    <string name="ptr_with_large_image_indicator">Large Image Indicator</string>
+    <!-- 下拉刷新相关 -->
+
+    <!-- 滑动退出Activity相关 -->
+    <string name="slide_exit_activity">滑动退出Activity</string>
+    <string name="left_to_right_slide_exit">从左向右滑动退出</string>
+    <string name="right_to_left_slide_exit">从右向左滑动退出</string>
+    <string name="top_to_bottom_slide_exit">从上向下滑动退出</string>
+    <string name="bottom_to_top_slide_exit">从下向上滑动退出</string>
+    <string name="slide_exit_multi_nesting_demo">多重嵌套示例</string>
+    <string name="multi_nesting_scroll">多重嵌套</string>
+    <string name="pay_attention">关注</string>
+    <string name="girl_channel">女生频道</string>
+    <!-- 滑动退出Activity相关 -->
+
+    <!-- 二维码相关 -->
+    <string name="about_qr_code">二维码相关</string>
+    <string name="scan">扫一扫</string>
+    <string name="scan_from_gallery">从相册中选择</string>
+    <string name="generate_qr_code">生成二维码</string>
+    <string name="generate_qr_code_with_logo">生成带logo的二维码</string>
+    <string name="scan_result">扫描结果:</string>
+    <string name="decode_fail">解码失败</string>
+    <string name="decoding_qr_code">正在解析二维码图片</string>
+    <string name="please_input_your_qr_code">请输入你的二维码</string>
+    <string name="encoding_qr_bitmap">正在生成二维码图片</string>
+    <string name="encode_fail">编码失败</string>
+    <!-- 二维码相关 -->
+
+    <!-- 自定义EditText相关 -->
+    <string name="edit_text">自定义EditText</string>
+    <!-- 自定义EditText相关 -->
+
+    <!-- 自定义标记View相关 -->
+    <string name="flag_view">自定义标记View</string>
     <string name="time_flag_text_view">带时间标记的TextView</string>
     <string name="left_top_corner">左上角</string>
     <string name="left_bottom_corner">左下角</string>
@@ -132,7 +285,10 @@
     <string name="clickToGetLastUpdateTime">上次标记时间</string>
     <string name="lastUpdateTime">上次标记更新时间: %1$s</string>
     <string name="currentUpdateTime">本次标记更新时间: %1$s</string>
+    <!-- 自定义标记View相关 -->
 
+    <!-- 着色 -->
+    <string name="tint">着色</string>
     <string name="ImageViewWithTint">ImageView with tint</string>
     <string name="Image_without_tint">原图</string>
     <string name="Tint_Mode_Src_in">TintMode: src_in</string>
@@ -153,156 +309,17 @@
     <string name="Tint_Mode_Darken">TintMode: darken</string>
     <string name="Tint_Mode_Lighten">TintMode: lighten</string>
     <string name="Tint_Mode_Overly">TintMode: overly</string>
+    <!-- 着色 -->
 
-    <!-- 屏幕适配相关 -->
-    <string name="device_information">设备信息</string>
-    <string name="convert">转换</string>
-    <string name="px_convert_to_dp">px转dp</string>
-    <string name="px_convert_to_sp">px转sp</string>
-    <string name="dp_convert_to_px">dp转px</string>
-    <string name="sp_convert_to_px">sp转px</string>
-    <string name="input_converting_value">输入要转换的值</string>
-
-    <string name="current_device_brand">设备品牌: %1$s</string>
-    <string name="current_device_manufacturer">硬件制造商: %1$s</string>
-    <string name="current_device_model">设备型号: %1$s</string>
-    <string name="current_device_os_version">系统版本: %1$s</string>
-    <string name="current_device_api_level">Api版本: %1$s</string>
-    <string name="current_device_kernel">内核版本: %1$s</string>
-    <string name="current_device_os_code_build_version">系统代码编译版本: %1$s</string>
-    <string name="current_device_radio_version">基带版本: %1$s</string>
-    <string name="current_device_sdcard">设备存储: %1$s</string>
-    <string name="current_device_ram">设备运行内存: %1$s</string>
-    <string name="current_device_battery_capacity">电池容量: %1$s</string>
-    <string name="current_device_battery_level">当前电量: %1$s</string>
-    <string name="current_device_battery_temperature">电池温度: %1$s</string>
-    <string name="current_device_screen_real_width">当前设备屏幕宽: %1$d</string>
-    <string name="current_device_screen_real_height">当前设备屏幕高: %1$d</string>
-    <string name="current_device_screen_resolution">当前设备屏幕分辨率: %1$s</string>
-    <string name="current_device_screen_aspect_ratio">当前设备屏幕宽高比: %1$s</string>
-    <string name="current_device_system_status_bar_height">当前系统状态栏高: %1$s</string>
-    <string name="current_device_screen_xdpi">当前设备x轴DPI: %1$s</string>
-    <string name="current_device_screen_ydpi">当前设备y轴DPI: %1$s</string>
-    <string name="current_device_screen_dpi">当前设备DPI: %1$d</string>
-    <string name="current_device_screen_density">当前设备Density: %1$s</string>
-    <string name="current_device_screen_scale_density">当前设备字体Density: %1$s</string>
-    <string name="current_device_screen_size">当前设备尺寸: %1$s</string>
-    <string name="please_input_legitimate_integer_or_decimal">请输入合法的整数或小数</string>
-    <string name="un_available_sdcard">未检测到内部存储设备</string>
-    <string name="un_available_ram">未检测到运行内存</string>
-    <!-- 屏幕适配相关 -->
-
-    <!-- NetWorkManager -->
-    <string name="network_information">网络相关</string>
-    <string name="start_observe_wifi_signal">开启wifi信号强度监听</string>
-    <string name="stop_observe_wifi_signal">停止wifi信号强度监听</string>
-    <!-- NetWorkManager -->
-
-    <!-- Fragment相关 -->
-    <string name="fragment">Fragment</string>
-    <string name="jump">跳转</string>
-    <string name="jump_back">回退</string>
-    <string name="with_extras">携带数据</string>
-    <string name="print_stack">打印栈</string>
-    <string name="fragment_back_stack">Fragment回退栈</string>
-    <string name="fragment_a">Fragment A</string>
-    <string name="jump_fragment_b_with_extra">携带数据跳转到Fragment B</string>
-    <string name="fragment_b">Fragment B</string>
-    <string name="jump_fragment_c_with_extra">携带数据跳转到Fragment C</string>
-    <string name="fragment_c">Fragment C</string>
-    <!-- Fragment相关 -->
-
-    <!-- ListGridViewFragment相关 -->
-    <string name="list_view_and_grid_view">List View &amp; Grid View</string>
-    <string name="list_item_title">This is a title.</string>
-    <string name="list_item_desc">This is description. </string>
-    <string name="list_item_thumb_up">12 thumb up</string>
-    <string name="default_list_item">单Item</string>
-    <string name="two_style_list_item">双Item</string>
-    <string name="three_style_list_item">多Item</string>
-    <string name="grid_view">GridView</string>
-    <!-- ListViewFragment相关 -->
-
-    <!-- RecyclerViewFragment相关 -->
-    <string name="recycler_view">Recycler View</string>
-    <string name="vertical_recycler_item">竖向列表</string>
-    <string name="horizontal_recycler_item">横向列表</string>
-    <string name="grid_recycler_item">网格样式</string>
-    <string name="waterfall_recycler_item">瀑布流</string>
-    <string name="thumb_up">赞</string>
-    <string name="share">分享</string>
-    <string name="search">搜索</string>
-    <!-- RecyclerViewFragment相关 -->
-
-    <!-- ViewPagerFragment相关 -->
-    <string name="view_pager">View Pager嵌套</string>
-    <!-- ViewPagerFragment相关 -->
-
-    <!-- ViewPagerFragment相关 -->
-    <string name="view_pager_nest_multi_horizontal_scroll">View Pager嵌套多重横向滑动</string>
-    <!-- ViewPagerFragment相关 -->
-
-    <!-- 嵌套布局相关 -->
-    <string name="ver_nest_hor_scroll_view">竖向嵌套横向滑动布局</string>
-    <string name="hor_nest_ver_scroll_view">横向嵌套竖向滑动布局</string>
-    <!-- 嵌套布局相关 -->
+    <!-- DebugFragment相关 -->
+    <string name="debug">Debug</string>
+    <!-- DebugFragment相关 -->
 
     <!-- 视频控制器相关 -->
     <string name="media_controller">视频控制器</string>
     <string name="common_media_controller_title">钢铁侠3预告</string>
     <string name="releasing_video_file">正在释放视频文件</string>
     <!-- 视频控制器相关 -->
-
-    <!-- 二维码相关 -->
-    <string name="about_qr_code">二维码相关</string>
-    <string name="scan">扫一扫</string>
-    <string name="scan_from_gallery">从相册中选择</string>
-    <string name="generate_qr_code">生成二维码</string>
-    <string name="generate_qr_code_with_logo">生成带logo的二维码</string>
-    <string name="scan_result">扫描结果:</string>
-    <string name="decode_fail">解码失败</string>
-    <string name="decoding_qr_code">正在解析二维码图片</string>
-    <string name="please_input_your_qr_code">请输入你的二维码</string>
-    <string name="encoding_qr_bitmap">正在生成二维码图片</string>
-    <string name="encode_fail">编码失败</string>
-    <!-- 二维码相关 -->
-
-    <!-- 滑动退出Activity相关 -->
-    <string name="slide_exit_activity">滑动退出Activity</string>
-    <string name="left_to_right_slide_exit">从左向右滑动退出</string>
-    <string name="right_to_left_slide_exit">从右向左滑动退出</string>
-    <string name="top_to_bottom_slide_exit">从上向下滑动退出</string>
-    <string name="bottom_to_top_slide_exit">从下向上滑动退出</string>
-    <string name="slide_exit_multi_nesting_demo">多重嵌套示例</string>
-    <!-- 滑动退出Activity相关 -->
-
-    <!-- 多重嵌套 -->
-    <string name="multi_nesting_scroll">多重嵌套</string>
-    <string name="pay_attention">关注</string>
-    <string name="girl_channel">女生频道</string>
-    <!-- 多重嵌套 -->
-
-    <!-- 下拉刷新相关 -->
-    <string name="pull_to_refresh">下拉刷新</string>
-    <string name="with_view">Ptr with View</string>
-    <string name="with_view_group">Ptr with ViewGroup</string>
-    <string name="with_list_view">Ptr with ListView</string>
-    <string name="with_grid_view">Ptr with GridView</string>
-    <string name="with_recycler_view">Ptr with RecyclerView</string>
-    <string name="with_view_pager">Ptr with ViewPager</string>
-    <string name="with_scroll_view">Ptr with ScrollView</string>
-    <string name="with_horizontal_scroll_view">Ptr with HorizontalScrollView</string>
-    <string name="ptr_with_classic_indicator">Classic Indicator</string>
-    <string name="ptr_with_classic_pro_indicator">Classic pro Indicator</string>
-    <string name="ptr_with_gif_indicator">Gif Indicator</string>
-    <string name="ptr_with_large_image_indicator">Large Image Indicator</string>
-    <!-- 下拉刷新相关 -->
-
-    <!-- DebugFragment相关 -->
-    <string name="debug">Debug</string>
-    <!-- DebugFragment相关 -->
-
-    <string name="home_page_link">https://github.com/EvanWang1987</string>
 
 
     <string name="test">很早以前，大运河边住着一个叫阿牛的农民。阿牛家里很穷， 他七岁就没了父亲，靠母亲纺织度日。阿牛母亲因子幼丧夫，生活艰辛，经常哭泣，把眼睛都哭烂了。
