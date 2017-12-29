@@ -43,39 +43,40 @@ public class LogCatView extends LinearLayout implements View.OnClickListener, Co
         init();
     }
 
-    public void setCloseButtonVisibility(int visibility){
+    public void setCloseButtonVisibility(int visibility) {
         mBtnClose.setVisibility(visibility);
     }
 
-    public void setAutoScrollBottomToggleVisibility(int visibility){
+    public void setAutoScrollBottomToggleVisibility(int visibility) {
         mToggleAutoScrollBottom.setVisibility(visibility);
     }
 
-    public void addLog(CharSequence log){
+    public void addLog(CharSequence log) {
         boolean isContainsContent = mStringBuffer.length() > 0;
-        if(isContainsContent){
+        if (isContainsContent) {
             mStringBuffer.append("\r\n");
         }
         mStringBuffer.append(log);
-        mTxtLog.setText(mStringBuffer.toString());
-        if(mIsAutoScrollToBottom){
-            Handler handler = getHandler();
-            if(null != handler){
-                handler.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
+
+        Handler handler = getHandler();
+        if (null != handler) {
+            handler.post(new Runnable() {
+                @Override
+                public void run() {
+                    mTxtLog.setText(mStringBuffer.toString());
+                    if (mIsAutoScrollToBottom) {
                         mScrollView.fullScroll(NestingScrollView.FOCUS_DOWN);
                     }
-                }, 500);
-            }
+                }
+            });
         }
     }
 
-    public CharSequence getAllLog(){
+    public CharSequence getAllLog() {
         return mStringBuffer.toString();
     }
 
-    public void setOnCloseClickListener(View.OnClickListener l){
+    public void setOnCloseClickListener(View.OnClickListener l) {
         mCloseListener = l;
     }
 
@@ -83,10 +84,10 @@ public class LogCatView extends LinearLayout implements View.OnClickListener, Co
     public void onClick(View v) {
         int i = v.getId();
         if (i == R.id.btn_close_logcat_view) {
-            if(null != mCloseListener){
+            if (null != mCloseListener) {
                 mCloseListener.onClick(v);
             }
-        }else if(i == R.id.btn_clear_logcat_view){
+        } else if (i == R.id.btn_clear_logcat_view) {
             mTxtLog.setText("");
             mStringBuffer.delete(0, mStringBuffer.length());
         }
@@ -97,7 +98,7 @@ public class LogCatView extends LinearLayout implements View.OnClickListener, Co
         mIsAutoScrollToBottom = isChecked;
     }
 
-    private void init(){
+    private void init() {
         LayoutInflater.from(getContext()).inflate(R.layout.view_logcat, this, true);
         mTitleLayout = findViewById(R.id.title_layout_logcat_view);
         mTxtTitle = findViewById(R.id.title_logcat_view);

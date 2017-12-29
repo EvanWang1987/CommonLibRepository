@@ -181,6 +181,11 @@
 
     <!-- Handler相关 -->
     <string name="about_handler">Handler</string>
+    <string name="send_empty_message_to_ui_thread">发送空消息到UI线程</string>
+    <string name="send_message_with_what_to_ui_thread">发送携带what消息到UI线程</string>
+    <string name="send_message_with_object_to_ui_thread">发送携带Object消息到UI线程</string>
+    <string name="send_message_with_runnable_to_ui_thread">发送携带Runnable消息到UI线程</string>
+    <string name="send_message_with_args1_args2_to_ui_thread">发送携带Integer类型args1, args2参数消息到UI线程</string>
     <!-- Handler相关 -->
 
     <!-- 网络相关 -->

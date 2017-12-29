@@ -147,6 +147,12 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         }
     }
 
+    @Override
+    protected void onDestroy() {
+        DeskIconManager.getInstance(this).release();
+        super.onDestroy();
+    }
+
     @OnClick(R.id.btn_share)
     void onClick(View view) {
         switch (view.getId()) {
