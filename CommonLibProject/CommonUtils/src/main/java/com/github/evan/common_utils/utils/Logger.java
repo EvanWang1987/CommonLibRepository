@@ -65,7 +65,7 @@ public class Logger {
         StackTraceElement[] stackTrace = e.getCause().getStackTrace();
         for (int i = 0; i < stackTrace.length; i++) {
             StackTraceElement stackTraceElement = stackTrace[i];
-            String trace = stackTraceElement.toString();
+            String trace = "at: " + stackTraceElement.toString();
             sBuilder.append(trace);
             sBuilder.append("\r\n");
         }
