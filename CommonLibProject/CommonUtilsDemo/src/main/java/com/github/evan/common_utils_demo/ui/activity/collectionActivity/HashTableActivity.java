@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 
 import com.github.evan.common_utils.collections.SyncArrayList;
+import com.github.evan.common_utils.ui.activity.BaseActivityConfig;
 import com.github.evan.common_utils.ui.dialog.DialogFactory;
 import com.github.evan.common_utils.utils.DateUtil;
 import com.github.evan.common_utils_demo.R;
@@ -45,6 +46,11 @@ public class HashTableActivity extends BaseLogCatActivity implements Observer {
     protected void onDestroy() {
         stopMultiThreadTest();
         super.onDestroy();
+    }
+
+    @Override
+    public BaseActivityConfig onCreateActivityConfig() {
+        return new BaseActivityConfig();
     }
 
     @Override

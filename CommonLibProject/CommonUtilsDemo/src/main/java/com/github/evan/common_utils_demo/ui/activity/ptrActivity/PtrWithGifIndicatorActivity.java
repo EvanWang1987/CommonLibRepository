@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.ListView;
 
 import com.github.evan.common_utils.ui.activity.BaseActivity;
+import com.github.evan.common_utils.ui.activity.BaseActivityConfig;
 import com.github.evan.common_utils.ui.view.ptr.OnRefreshListener;
 import com.github.evan.common_utils.ui.view.ptr.PtrFrameLayout;
 import com.github.evan.common_utils.ui.view.ptr.PtrLayout;
@@ -36,6 +37,11 @@ public class PtrWithGifIndicatorActivity extends BaseActivity implements PullToR
         ButterKnife.bind(this);
         mPtrLayout.setPtrSwitcher(this);
         mPtrLayout.setRefreshListener(this);
+    }
+
+    @Override
+    public BaseActivityConfig onCreateActivityConfig() {
+        return new BaseActivityConfig();
     }
 
     @Override

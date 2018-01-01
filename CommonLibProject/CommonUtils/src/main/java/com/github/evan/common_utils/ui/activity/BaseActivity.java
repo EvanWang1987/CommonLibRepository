@@ -13,6 +13,7 @@ import android.view.LayoutInflater;
 import com.github.evan.common_utils.handler.SoftHandler;
 import com.github.evan.common_utils.handler.SoftHandlerReceiver;
 import com.github.evan.common_utils.ui.fragment.BaseFragment;
+import com.github.evan.common_utils.utils.ToastUtil;
 
 import java.util.LinkedList;
 
@@ -28,15 +29,15 @@ public abstract class BaseActivity extends AppCompatActivity implements SoftHand
     protected static final int LOAD_EMPTY = 4;
     protected static final int LOAD_ERROR = 5;
 
-    public abstract
-    @LayoutRes
-    int getLayoutResId();
-//    public abstract BaseActivityConfig onCreateActivityConfig();
+    public abstract @LayoutRes int getLayoutResId();
+    public abstract BaseActivityConfig onCreateActivityConfig();
 
     private LayoutInflater mLayoutInflater;
     private SoftHandler<BaseActivity> mHandler = new SoftHandler<>(Looper.getMainLooper());
     private boolean mIsDestroyed = false;
     private static LinkedList<BaseActivity> mActivities = new LinkedList<>();
+    private BaseActivityConfig mActivityConfig;
+    private long mLastBackPressedTime = -1;
 
 
     @Override
@@ -44,6 +45,21 @@ public abstract class BaseActivity extends AppCompatActivity implements SoftHand
         super.onCreate(savedInstanceState);
         setContentView(getLayoutResId());
         init();
+    }
+
+    @Override
+    public void onBackPressed() {
+        if(mActivityConfig.isPressTwiceToExit){
+            long currentTimeMillis = System.currentTimeMillis();
+            if(mLastBackPressedTime == -1 || currentTimeMillis - mLastBackPressedTime > mActivityConfig.pressTwiceIntervalTime){
+                ToastUtil.showToastWithShortDuration(mActivityConfig.pressTwiceIntervalNotifyText);
+                mLastBackPressedTime = currentTimeMillis;
+                return;
+            }
+
+            super.onBackPressed();
+        }
+        super.onBackPressed();
     }
 
     @Override
@@ -64,7 +80,7 @@ public abstract class BaseActivity extends AppCompatActivity implements SoftHand
         mLayoutInflater = LayoutInflater.from(this);
         mHandler.setReceiver(this);
         mActivities.addFirst(this);
-//        BaseActivityConfig baseActivityConfig = onCreateActivityConfig();
+        mActivityConfig = onCreateActivityConfig();
     }
 
     public LayoutInflater getLayoutInflater() {

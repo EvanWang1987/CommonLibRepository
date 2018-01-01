@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.ScrollView;
 
 import com.github.evan.common_utils.ui.activity.BaseActivity;
+import com.github.evan.common_utils.ui.activity.BaseActivityConfig;
 import com.github.evan.common_utils.ui.view.ptr.OnRefreshListener;
 import com.github.evan.common_utils.ui.view.ptr.PtrLayout;
 import com.github.evan.common_utils.ui.view.ptr.PullToRefreshSwitcher;
@@ -32,6 +33,11 @@ public class PtrWithScrollViewActivity extends BaseActivity implements PullToRef
     @BindView(R.id.ptr_with_view_content)
     ScrollView mScrollView;
 
+
+    @Override
+    public BaseActivityConfig onCreateActivityConfig() {
+        return new BaseActivityConfig();
+    }
 
     @Override
     public final int getLayoutResId() {

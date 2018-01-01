@@ -4,6 +4,8 @@ import android.content.DialogInterface;
 import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
+
+import com.github.evan.common_utils.ui.activity.BaseActivityConfig;
 import com.github.evan.common_utils.ui.dialog.DialogFactory;
 import com.github.evan.common_utils.utils.DateUtil;
 import com.github.evan.common_utils_demo.R;
@@ -36,6 +38,11 @@ public class HashMapActivity extends BaseLogCatActivity {
         View root = inflater.inflate(R.layout.activity_hash_map, null);
         ButterKnife.bind(this, root);
         return root;
+    }
+
+    @Override
+    public BaseActivityConfig onCreateActivityConfig() {
+        return new BaseActivityConfig();
     }
 
     @OnClick({R.id.card_features_hash_map, R.id.card_add_hash_map, R.id.card_remove_hash_map, R.id.card_set_hash_map, R.id.card_get_hash_map, R.id.card_go_through_hash_map, R.id.card_go_through_by_entry_set_hash_map, R.id.card_go_through_by_iterator_hash_map, R.id.card_go_through_by_list_iterator_hash_map, R.id.card_clear_hash_map, R.id.card_to_string_hash_map, R.id.card_sort_hash_map, R.id.card_multi_thread_hash_map})

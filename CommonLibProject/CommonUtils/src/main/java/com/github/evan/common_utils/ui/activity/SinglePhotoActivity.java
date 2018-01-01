@@ -40,4 +40,9 @@ public class SinglePhotoActivity extends BaseActivity {
     public int getLayoutResId() {
         return R.layout.activity_single_photo;
     }
+
+    @Override
+    public BaseActivityConfig onCreateActivityConfig() {
+        return new BaseActivityConfig();
+    }
 }

@@ -8,6 +8,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import com.github.evan.common_utils.ui.activity.BaseActivity;
+import com.github.evan.common_utils.ui.activity.BaseActivityConfig;
 import com.github.evan.common_utils.ui.view.ptr.OnRefreshListener;
 import com.github.evan.common_utils.ui.view.ptr.PtrLayout;
 import com.github.evan.common_utils.ui.view.ptr.PullToRefreshSwitcher;
@@ -31,6 +32,11 @@ public class PtrWithRecyclerViewActivity extends BaseActivity implements PullToR
     RecyclerView mRecyclerView;
     DefaultRecyclerAdapter mAdapter;
     private List<String> newData;
+
+    @Override
+    public BaseActivityConfig onCreateActivityConfig() {
+        return new BaseActivityConfig();
+    }
 
     @Override
     public final int getLayoutResId() {

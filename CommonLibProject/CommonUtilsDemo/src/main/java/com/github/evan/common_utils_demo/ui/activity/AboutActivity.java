@@ -5,6 +5,7 @@ import android.support.annotation.Nullable;
 import android.view.View;
 
 import com.github.evan.common_utils.ui.activity.BaseActivity;
+import com.github.evan.common_utils.ui.activity.BaseActivityConfig;
 import com.github.evan.common_utils.ui.deskIcon.DeskIconManager;
 import com.github.evan.common_utils_demo.R;
 
@@ -30,6 +31,11 @@ public class AboutActivity extends BaseActivity {
                 DeskIconManager.getInstance(this).prepareRocket();
                 break;
         }
+    }
+
+    @Override
+    public BaseActivityConfig onCreateActivityConfig() {
+        return new BaseActivityConfig();
     }
 
     @Override

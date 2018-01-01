@@ -5,6 +5,7 @@ import android.support.annotation.Nullable;
 import android.view.View;
 
 import com.github.evan.common_utils.ui.activity.BaseActivity;
+import com.github.evan.common_utils.ui.activity.BaseActivityConfig;
 import com.github.evan.common_utils.ui.view.ptr.OnRefreshListener;
 import com.github.evan.common_utils.ui.view.ptr.PtrLayout;
 import com.github.evan.common_utils.ui.view.ptr.PullToRefreshSwitcher;
@@ -21,6 +22,11 @@ import butterknife.OnClick;
 public class PtrWithViewActivity extends BaseActivity implements PullToRefreshSwitcher, OnRefreshListener {
     @BindView(R.id.ptr_layout_ptr_with_view)
     PtrLayout mPtrLayout;
+
+    @Override
+    public BaseActivityConfig onCreateActivityConfig() {
+        return new BaseActivityConfig();
+    }
 
     @Override
     public final int getLayoutResId() {

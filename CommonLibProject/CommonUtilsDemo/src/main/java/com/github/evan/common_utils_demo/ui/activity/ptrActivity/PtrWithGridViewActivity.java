@@ -9,6 +9,7 @@ import android.widget.GridView;
 import android.widget.ListView;
 
 import com.github.evan.common_utils.ui.activity.BaseActivity;
+import com.github.evan.common_utils.ui.activity.BaseActivityConfig;
 import com.github.evan.common_utils.ui.view.ptr.OnRefreshListener;
 import com.github.evan.common_utils.ui.view.ptr.PtrLayout;
 import com.github.evan.common_utils.ui.view.ptr.PullToRefreshSwitcher;
@@ -34,6 +35,11 @@ public class PtrWithGridViewActivity extends BaseActivity implements PullToRefre
     GridView mListView;
     GridAdapter mAdapter;
     private List<Integer> newData;
+
+    @Override
+    public BaseActivityConfig onCreateActivityConfig() {
+        return new BaseActivityConfig();
+    }
 
     @Override
     public final int getLayoutResId() {

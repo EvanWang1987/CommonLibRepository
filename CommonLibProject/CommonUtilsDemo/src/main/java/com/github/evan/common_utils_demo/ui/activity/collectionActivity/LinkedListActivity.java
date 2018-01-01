@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 
 import com.github.evan.common_utils.comparator.DictionaryOrderComparator;
+import com.github.evan.common_utils.ui.activity.BaseActivityConfig;
 import com.github.evan.common_utils.ui.activity.slideExitActivity.SlideExitActivityConfig;
 import com.github.evan.common_utils.ui.activity.slideExitActivity.SlideExitDirection;
 import com.github.evan.common_utils.ui.dialog.DialogFactory;
@@ -42,6 +43,11 @@ public class LinkedListActivity extends BaseLogCatActivity {
         config.setExitDuration(200);
         config.setRollBackDuration(300);
         return config;
+    }
+
+    @Override
+    public BaseActivityConfig onCreateActivityConfig() {
+        return new BaseActivityConfig();
     }
 
     @Override

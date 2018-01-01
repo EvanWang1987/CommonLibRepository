@@ -26,6 +26,7 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.github.evan.common_utils.ui.activity.BaseActivity;
+import com.github.evan.common_utils.ui.activity.BaseActivityConfig;
 import com.github.evan.common_utils.ui.deskIcon.DeskIconManager;
 import com.github.evan.common_utils.utils.FragmentUtil;
 import com.github.evan.common_utils.utils.PackageUtil;
@@ -148,6 +149,15 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     }
 
     @Override
+    public void onBackPressed() {
+        if(mDrawerLayout.isDrawerOpen(Gravity.LEFT)){
+            toggleDrawer(Gravity.LEFT);
+            return;
+        }
+        super.onBackPressed();
+    }
+
+    @Override
     protected void onDestroy() {
         DeskIconManager.getInstance(this).release();
         super.onDestroy();
@@ -186,6 +196,13 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     @Override
     public int getLayoutResId() {
         return R.layout.activity_main;
+    }
+
+    @Override
+    public BaseActivityConfig onCreateActivityConfig() {
+        BaseActivityConfig config = new BaseActivityConfig();
+        config.isPressTwiceToExit = true;
+        return config;
     }
 
     @Override

@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 
+import com.github.evan.common_utils.ui.activity.BaseActivityConfig;
 import com.github.evan.common_utils.utils.ToastUtil;
 import com.github.evan.common_utils_demo.R;
 import com.github.evan.common_utils_demo.ui.activity.collectionActivity.BaseLogCatActivity;
@@ -48,6 +49,11 @@ public class FragmentBackStackActivity extends BaseLogCatActivity implements Fra
         mFragmentManager = getSupportFragmentManager();
         mFragmentManager.addOnBackStackChangedListener(this);
         return root;
+    }
+
+    @Override
+    public BaseActivityConfig onCreateActivityConfig() {
+        return new BaseActivityConfig();
     }
 
     @Override

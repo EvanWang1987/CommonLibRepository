@@ -8,6 +8,7 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import com.github.evan.common_utils.manager.threadManager.ThreadManager;
+import com.github.evan.common_utils.ui.activity.BaseActivityConfig;
 import com.github.evan.common_utils.ui.activity.slideExitActivity.BaseSlideExitActivity;
 import com.github.evan.common_utils.ui.activity.slideExitActivity.SlideExitActivityConfig;
 import com.github.evan.common_utils.ui.activity.slideExitActivity.SlideExitDirection;
@@ -37,6 +38,11 @@ public class MultiNestingDemoActivity extends BaseSlideExitActivity {
     @BindView(R.id.view_pager_multi_nesting_fragment)
     NestingViewPager mViewPager;
     SimpleFragmentStateAdapter mFragmentAdapter;
+
+    @Override
+    public BaseActivityConfig onCreateActivityConfig() {
+        return new BaseActivityConfig();
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater) {

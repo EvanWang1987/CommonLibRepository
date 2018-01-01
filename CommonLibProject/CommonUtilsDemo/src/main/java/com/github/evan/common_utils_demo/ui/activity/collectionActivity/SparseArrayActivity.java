@@ -6,6 +6,7 @@ import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.View;
 
+import com.github.evan.common_utils.ui.activity.BaseActivityConfig;
 import com.github.evan.common_utils.ui.dialog.DialogFactory;
 import com.github.evan.common_utils.utils.ToastUtil;
 import com.github.evan.common_utils_demo.R;
@@ -31,6 +32,11 @@ public class SparseArrayActivity extends BaseLogCatActivity {
         View root = inflater.inflate(R.layout.activity_sparse_array, null);
         ButterKnife.bind(this, root);
         return root;
+    }
+
+    @Override
+    public BaseActivityConfig onCreateActivityConfig() {
+        return new BaseActivityConfig();
     }
 
     @OnClick({R.id.card_features_sparse_array, R.id.card_add_sparse_array ,R.id.card_remove_sparse_array ,R.id.card_set_sparse_array ,R.id.card_get_sparse_array ,R.id.card_go_through_sparse_array ,R.id.card_go_through_by_iterator_sparse_array, R.id.card_go_through_by_list_iterator_sparse_array, R.id.card_clear_sparse_array, R.id.card_to_string_sparse_array ,R.id.card_sort_sparse_array ,R.id.card_multi_thread_sparse_array})

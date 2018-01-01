@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 
 import com.github.evan.common_utils.comparator.DictionaryOrderComparator;
+import com.github.evan.common_utils.ui.activity.BaseActivityConfig;
 import com.github.evan.common_utils.ui.dialog.DialogFactory;
 import com.github.evan.common_utils.ui.dialog.ScrollMessageMaterialDialog;
 import com.github.evan.common_utils.utils.ToastUtil;
@@ -36,6 +37,11 @@ public class ArrayListActivity extends BaseLogCatActivity {
         ButterKnife.bind(this, root);
         mComparator = new DictionaryOrderComparator(Locale.US);
         return root;
+    }
+
+    @Override
+    public BaseActivityConfig onCreateActivityConfig() {
+        return new BaseActivityConfig();
     }
 
     @OnClick({R.id.card_features_array_list, R.id.card_add_array_list ,R.id.card_remove_array_list ,R.id.card_set_array_list ,R.id.card_get_array_list ,R.id.card_go_through_array_list ,R.id.card_go_through_by_iterator_array_list, R.id.card_go_through_by_list_iterator_array_list, R.id.card_clear_array_list, R.id.card_to_string_array_list ,R.id.card_sort_array_list ,R.id.card_multi_thread_array_list})

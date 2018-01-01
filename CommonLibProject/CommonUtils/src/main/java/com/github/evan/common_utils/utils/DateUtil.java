@@ -62,7 +62,7 @@ public class DateUtil {
         calendar.setTimeInMillis(time);
         calendar.setTimeZone(TimeZone.getTimeZone("GMT+00:00"));
         int hour = calendar.get(Calendar.HOUR);
-        SimpleDateFormat formatter = new SimpleDateFormat(hour <= 0 ? templateIfNoHour : template);
+        SimpleDateFormat formatter = new SimpleDateFormat(hour <= 0 && !StringUtil.isEmptyString(templateIfNoHour, true) ? templateIfNoHour : template);
         formatter.setTimeZone(TimeZone.getTimeZone("GMT+00:00"));
         String value = formatter.format(calendar.getTime());
         return value;

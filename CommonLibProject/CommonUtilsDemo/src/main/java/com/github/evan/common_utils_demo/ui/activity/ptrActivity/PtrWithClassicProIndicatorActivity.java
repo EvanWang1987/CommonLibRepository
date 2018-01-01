@@ -7,6 +7,7 @@ import android.support.annotation.Nullable;
 import android.view.View;
 
 import com.github.evan.common_utils.ui.activity.BaseActivity;
+import com.github.evan.common_utils.ui.activity.BaseActivityConfig;
 import com.github.evan.common_utils.ui.view.ptr.OnRefreshListener;
 import com.github.evan.common_utils.ui.view.ptr.PtrFrameLayout;
 import com.github.evan.common_utils.ui.view.ptr.PtrLayout;
@@ -31,6 +32,11 @@ public class PtrWithClassicProIndicatorActivity extends BaseActivity implements 
         ButterKnife.bind(this);
         mPtrLayout.setPtrSwitcher(this);
         mPtrLayout.setRefreshListener(this);
+    }
+
+    @Override
+    public BaseActivityConfig onCreateActivityConfig() {
+        return new BaseActivityConfig();
     }
 
     @Override

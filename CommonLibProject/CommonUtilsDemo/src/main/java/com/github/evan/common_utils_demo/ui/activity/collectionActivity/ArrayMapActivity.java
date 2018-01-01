@@ -5,6 +5,8 @@ import android.support.v4.util.ArrayMap;
 import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
+
+import com.github.evan.common_utils.ui.activity.BaseActivityConfig;
 import com.github.evan.common_utils.ui.dialog.DialogFactory;
 import com.github.evan.common_utils.utils.ToastUtil;
 import com.github.evan.common_utils_demo.R;
@@ -25,6 +27,11 @@ public class ArrayMapActivity extends BaseLogCatActivity {
         View root = inflater.inflate(R.layout.activity_array_map, null);
         ButterKnife.bind(this, root);
         return root;
+    }
+
+    @Override
+    public BaseActivityConfig onCreateActivityConfig() {
+        return new BaseActivityConfig();
     }
 
     @OnClick({R.id.card_features_array_map, R.id.card_add_array_map ,R.id.card_remove_array_map ,R.id.card_set_array_map ,R.id.card_get_array_map ,R.id.card_go_through_array_map ,R.id.card_go_through_by_iterator_array_map, R.id.card_go_through_by_list_iterator_array_map, R.id.card_clear_array_map, R.id.card_to_string_array_map ,R.id.card_sort_array_map ,R.id.card_multi_thread_array_map})

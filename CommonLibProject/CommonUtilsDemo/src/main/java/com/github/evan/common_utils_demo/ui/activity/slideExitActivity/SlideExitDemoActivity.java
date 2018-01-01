@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.github.evan.common_utils.ui.activity.BaseActivity;
+import com.github.evan.common_utils.ui.activity.BaseActivityConfig;
 import com.github.evan.common_utils.ui.activity.slideExitActivity.BaseSlideExitActivity;
 import com.github.evan.common_utils.ui.activity.slideExitActivity.SlideExitActivityConfig;
 import com.github.evan.common_utils.ui.activity.slideExitActivity.SlideExitDirection;
@@ -27,6 +28,11 @@ import butterknife.ButterKnife;
 public class SlideExitDemoActivity extends BaseSlideExitActivity {
     public static final String SLIDE_EXIT_DIRECTION = "slide_exit_direction";
     private SlideExitDirection mSlideExitDirection = SlideExitDirection.LEFT_TO_RIGHT;
+
+    @Override
+    public BaseActivityConfig onCreateActivityConfig() {
+        return new BaseActivityConfig();
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater) {

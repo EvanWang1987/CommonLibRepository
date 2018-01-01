@@ -5,6 +5,7 @@ import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import com.github.evan.common_utils.comparator.DictionaryOrderComparator;
+import com.github.evan.common_utils.ui.activity.BaseActivityConfig;
 import com.github.evan.common_utils.ui.dialog.DialogFactory;
 import com.github.evan.common_utils_demo.R;
 import java.util.HashSet;
@@ -28,6 +29,11 @@ public class HashSetActivity extends BaseLogCatActivity {
         View root = inflater.inflate(R.layout.activity_hash_set, null);
         ButterKnife.bind(this, root);
         return root;
+    }
+
+    @Override
+    public BaseActivityConfig onCreateActivityConfig() {
+        return new BaseActivityConfig();
     }
 
     @OnClick({R.id.card_features_hash_set, R.id.card_add_hash_set, R.id.card_remove_hash_set, R.id.card_set_hash_set, R.id.card_get_hash_set, R.id.card_go_through_hash_set, R.id.card_go_through_by_iterator_hash_set, R.id.card_go_through_by_list_iterator_hash_set, R.id.card_clear_hash_set, R.id.card_to_string_hash_set, R.id.card_sort_hash_set, R.id.card_multi_thread_hash_set})

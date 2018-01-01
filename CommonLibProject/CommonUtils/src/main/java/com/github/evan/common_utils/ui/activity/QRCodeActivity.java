@@ -126,6 +126,11 @@ public class QRCodeActivity extends BaseActivity implements SurfaceHolder.Callba
     }
 
     @Override
+    public BaseActivityConfig onCreateActivityConfig() {
+        return new BaseActivityConfig();
+    }
+
+    @Override
     public void surfaceCreated(SurfaceHolder holder) {
         if (null != mCamera) {
             try {

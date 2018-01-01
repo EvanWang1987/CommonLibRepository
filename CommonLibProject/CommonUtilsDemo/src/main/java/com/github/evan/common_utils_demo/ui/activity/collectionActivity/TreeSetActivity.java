@@ -3,6 +3,7 @@ package com.github.evan.common_utils_demo.ui.activity.collectionActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import com.github.evan.common_utils.comparator.DictionaryOrderComparator;
+import com.github.evan.common_utils.ui.activity.BaseActivityConfig;
 import com.github.evan.common_utils_demo.R;
 import java.util.Iterator;
 import java.util.Locale;
@@ -23,6 +24,11 @@ public class TreeSetActivity extends BaseLogCatActivity {
         View root = inflater.inflate(R.layout.activity_tree_set, null);
         ButterKnife.bind(this, root);
         return root;
+    }
+
+    @Override
+    public BaseActivityConfig onCreateActivityConfig() {
+        return new BaseActivityConfig();
     }
 
     @OnClick({R.id.card_add_tree_set, R.id.card_remove_tree_set, R.id.card_set_tree_set, R.id.card_get_tree_set, R.id.card_go_through_tree_set, R.id.card_go_through_by_iterator_tree_set, R.id.card_go_through_by_list_iterator_tree_set, R.id.card_clear_tree_set, R.id.card_to_string_tree_set, R.id.card_sort_tree_set, R.id.card_multi_thread_tree_set})

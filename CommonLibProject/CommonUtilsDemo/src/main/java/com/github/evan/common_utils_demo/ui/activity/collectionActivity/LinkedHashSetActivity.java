@@ -5,6 +5,7 @@ import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 
+import com.github.evan.common_utils.ui.activity.BaseActivityConfig;
 import com.github.evan.common_utils.ui.dialog.DialogFactory;
 import com.github.evan.common_utils_demo.R;
 
@@ -29,6 +30,11 @@ public class LinkedHashSetActivity extends BaseLogCatActivity {
         View root = inflater.inflate(R.layout.activity_linked_hash_set, null);
         ButterKnife.bind(this, root);
         return root;
+    }
+
+    @Override
+    public BaseActivityConfig onCreateActivityConfig() {
+        return new BaseActivityConfig();
     }
 
     @OnClick({R.id.card_features_linked_hash_set, R.id.card_add_linked_hash_set, R.id.card_remove_linked_hash_set, R.id.card_set_linked_hash_set, R.id.card_get_linked_hash_set, R.id.card_go_through_linked_hash_set, R.id.card_go_through_by_iterator_linked_hash_set, R.id.card_go_through_by_list_iterator_linked_hash_set, R.id.card_clear_linked_hash_set, R.id.card_to_string_linked_hash_set, R.id.card_sort_linked_hash_set, R.id.card_multi_thread_linked_hash_set})
