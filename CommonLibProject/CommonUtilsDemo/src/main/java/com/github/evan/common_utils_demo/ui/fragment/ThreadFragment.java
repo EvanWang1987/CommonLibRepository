@@ -1,6 +1,7 @@
 package com.github.evan.common_utils_demo.ui.fragment;
 
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -204,29 +205,42 @@ public class ThreadFragment extends BaseFragment implements Observer, com.github
     }
 
     private void deadLockDemo(){
+        Object lockA = new Object();
+        Object lockB = new Object();
+
+
         mDeadLockARunnable = new DeadLockARunnable();
+        mDeadLockARunnable.setLockA(lockA);
+        mDeadLockARunnable.setLockB(lockB);
         mDeadLockARunnable.setObserver(this);
         mDeadLockARunnable.setStop(false);
 
         mDeadLockBRunnable = new DeadLockBRunnable();
+        mDeadLockBRunnable.setLockA(lockA);
+        mDeadLockBRunnable.setLockB(lockB);
         mDeadLockBRunnable.setObserver(this);
         mDeadLockBRunnable.setStop(false);
 
         DeskIconManager.getInstance(getContext()).showLogCatIcon();
 
-        ThreadPoolExecutor otherThreadPool = ThreadManager.getInstance().getOtherThreadPool();
-        otherThreadPool.execute(mDeadLockARunnable);
-        otherThreadPool.execute(mDeadLockBRunnable);
+        Thread threadA = new Thread(mDeadLockARunnable);
+        Thread threadB = new Thread(mDeadLockBRunnable);
+        threadA.start();
+        threadB.start();
     }
 
     private void stopDeadLock() {
         if(null != mDeadLockARunnable){
+            mDeadLockARunnable.setLockA(null);
+            mDeadLockARunnable.setLockB(null);
             mDeadLockARunnable.setObserver(null);
             mDeadLockARunnable.setStop(true);
             mDeadLockARunnable = null;
         }
 
         if(null != mDeadLockBRunnable){
+            mDeadLockBRunnable.setLockA(null);
+            mDeadLockBRunnable.setLockB(null);
             mDeadLockBRunnable.setObserver(null);
             mDeadLockBRunnable.setStop(true);
             mDeadLockBRunnable = null;

@@ -8,13 +8,29 @@ import android.os.SystemClock;
 /**
  * Created by Evan on 2017/12/24.
  */
-public class DeadLockARunnable implements Runnable{
+public class DeadLockARunnable implements Runnable {
     private static Handler mHandler = new Handler(Looper.getMainLooper());
     private boolean mIsStop = false;
-
+    private Object mLockA, mLockB;
     private Observer mObserver;
 
     public DeadLockARunnable() {
+    }
+
+    public Object getLockA() {
+        return mLockA;
+    }
+
+    public void setLockA(Object lockA) {
+        this.mLockA = lockA;
+    }
+
+    public Object getLockB() {
+        return mLockB;
+    }
+
+    public void setLockB(Object lockB) {
+        this.mLockB = lockB;
     }
 
     public boolean isStop() {
@@ -31,27 +47,31 @@ public class DeadLockARunnable implements Runnable{
 
     @Override
     public void run() {
-        while (!mIsStop){
-            synchronized (Lock.LOCK_A){
+        while (!mIsStop) {
+            synchronized (mLockA) {
                 final String lockAString = Thread.currentThread().getName() + " 进入LockA";
-                if(null != mObserver){
+                mHandler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        if (null != mObserver) {
+                            mObserver.onPrintDeadLockDemoLog(lockAString);
+                        }
+                    }
+                });
+                SystemClock.sleep(500);
+                synchronized (mLockB) {
+                    final String lockBString = Thread.currentThread().getName() + " 进入LockA";
+
                     mHandler.post(new Runnable() {
                         @Override
                         public void run() {
-                            mObserver.onPrintDeadLockDemoLog(lockAString);
-                        }
-                    });
-                }
-                synchronized (Lock.LOCK_B){
-                    final String lockBString = Thread.currentThread().getName() + " 进入LockA";
-                    if(null != mObserver){
-                        mHandler.post(new Runnable() {
-                            @Override
-                            public void run() {
+                            if (null != mObserver) {
                                 mObserver.onPrintDeadLockDemoLog(lockBString);
                             }
-                        });
-                    }
+                        }
+                    });
+
+                    SystemClock.sleep(500);
                 }
             }
         }
