@@ -64,7 +64,7 @@ public class ThresholdSwitcher {
                     }
                 }
             } else if (interceptMode == InterceptMode.HORIZONTAL_BUT_THRESHOLD) {
-                if (!isHorizontalSlide || (isParallelSlide && !isHandleParallelSlide)) {
+                if (!isHorizontalSlide && !isArriveHorizontalSlop|| (isParallelSlide && !isHandleParallelSlide)) {
                     if (isArriveVerticalSlop) {
                         dst.getParent().requestDisallowInterceptTouchEvent(false);
                     }
@@ -97,7 +97,7 @@ public class ThresholdSwitcher {
                     }
                 }
             } else if (interceptMode == InterceptMode.VERTICAL_BUT_THRESHOLD) {
-                if (isHorizontalSlide || (isParallelSlide && !isHandleParallelSlide)) {
+                if (isHorizontalSlide && !isArriveVerticalSlop|| (isParallelSlide && !isHandleParallelSlide)) {
                     if (isArriveHorizontalSlop) {
                         dst.getParent().requestDisallowInterceptTouchEvent(false);
                     }
