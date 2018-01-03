@@ -31,7 +31,6 @@ import butterknife.OnClick;
  */
 
 public class HashTableActivity extends BaseLogCatActivity implements Observer {
-    private List<String> mKeys = new SyncArrayList<>();
     private Hashtable<String, String> mHashTable = new Hashtable<>();
     private AlertDialog mFeaturesDialog;
     private Random mRandom = new Random();
@@ -90,7 +89,6 @@ public class HashTableActivity extends BaseLogCatActivity implements Observer {
                 UUID uuid = UUID.randomUUID();
                 String addKey = generateKey();
                 mHashTable.put(addKey, uuid.toString());
-                mKeys.add(addKey);
                 addLog("增加元素, key: " + addKey + ", value: " + uuid.toString());
                 break;
 
@@ -100,7 +98,7 @@ public class HashTableActivity extends BaseLogCatActivity implements Observer {
                     return;
                 }
 
-                String removeKey = mKeys.get(mRandom.nextInt(mKeys.size()));
+                String removeKey = pickUpRandomKey();
                 String removeValue = mHashTable.get(removeKey);
                 mHashTable.remove(removeKey);
                 addLog("删除元素, key: " + removeKey + ", value: " + removeValue);
@@ -113,7 +111,7 @@ public class HashTableActivity extends BaseLogCatActivity implements Observer {
                 }
 
                 UUID putUuid = UUID.randomUUID();
-                String putKey = mKeys.get(mRandom.nextInt(mKeys.size()));
+                String putKey = pickUpRandomKey();
                 String oldValue = mHashTable.put(putKey, putUuid.toString());
                 addLog("HashMap更改， key：" + putKey + ", 新value：" + putUuid.toString() + "旧value: " + oldValue);
                 break;
@@ -124,7 +122,7 @@ public class HashTableActivity extends BaseLogCatActivity implements Observer {
                     return;
                 }
 
-                String getKey = mKeys.get(mRandom.nextInt(mKeys.size()));
+                String getKey = pickUpRandomKey();
                 String getValue = mHashTable.get(getKey);
                 addLog("HashMap获取，key：" + getKey + ", value：" + getValue);
                 break;
@@ -179,7 +177,6 @@ public class HashTableActivity extends BaseLogCatActivity implements Observer {
 
             case R.id.card_clear_hash_table:
                 mHashTable.clear();
-                mKeys.clear();
                 addLog("清除完毕");
                 break;
 
@@ -202,12 +199,12 @@ public class HashTableActivity extends BaseLogCatActivity implements Observer {
     }
 
     private void startMultiThreadTest() {
-        runnableA = new HashTableOperateRunnable(mHashTable, mKeys);
-        runnableB = new HashTableOperateRunnable(mHashTable, mKeys);
-        runnableC = new HashTableOperateRunnable(mHashTable, mKeys);
-        runnableD = new HashTableOperateRunnable(mHashTable, mKeys);
-        runnableE = new HashTableOperateRunnable(mHashTable, mKeys);
-        runnableF = new HashTableOperateRunnable(mHashTable, mKeys);
+        runnableA = new HashTableOperateRunnable(mHashTable);
+        runnableB = new HashTableOperateRunnable(mHashTable);
+        runnableC = new HashTableOperateRunnable(mHashTable);
+        runnableD = new HashTableOperateRunnable(mHashTable);
+        runnableE = new HashTableOperateRunnable(mHashTable);
+        runnableF = new HashTableOperateRunnable(mHashTable);
 
         runnableA.setStop(false);
         runnableB.setStop(false);
@@ -282,5 +279,23 @@ public class HashTableActivity extends BaseLogCatActivity implements Observer {
     @Override
     public void onPrintLog(CharSequence log) {
         addLog(log);
+    }
+
+    private String pickUpRandomKey(){
+        Set<String> keySet = mHashTable.keySet();
+        int targetIndex = mRandom.nextInt(keySet.size());
+        int index = 0;
+        String key = "";
+        Iterator<String> iterator = keySet.iterator();
+        while (iterator.hasNext()){
+            String next = iterator.next();
+            index++;
+            if(targetIndex == index){
+                key = next;
+                break;
+            }
+        }
+
+        return key;
     }
 }

@@ -7,11 +7,14 @@ import android.os.SystemClock;
 import com.github.evan.common_utils.collections.SyncArrayList;
 import com.github.evan.common_utils.utils.DateUtil;
 import com.github.evan.common_utils.utils.Logger;
+import com.github.evan.common_utils.utils.StringUtil;
 
 import java.util.Hashtable;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 import java.util.Random;
+import java.util.Set;
 import java.util.UUID;
 
 /**
@@ -20,14 +23,12 @@ import java.util.UUID;
 public class HashTableOperateRunnable implements Runnable {
     private static Handler mHandler = new Handler(Looper.getMainLooper());
     private Hashtable<String, String> mHashTable;
-    private List<String> mKeys;
     private Observer mObserver;
     private boolean mIsStop;
     private Random mRandom = new Random();
 
-    public HashTableOperateRunnable(Hashtable<String, String> mHashTable, List<String> mKeys) {
-        this.mHashTable = mHashTable;
-        this.mKeys = mKeys;
+    public HashTableOperateRunnable(Hashtable<String, String> hashTable) {
+        this.mHashTable = hashTable;
     }
 
     public Observer getObserver() {
@@ -46,6 +47,24 @@ public class HashTableOperateRunnable implements Runnable {
         this.mIsStop = isStop;
     }
 
+    private String pickUpRandomKey(){
+        Set<String> keySet = mHashTable.keySet();
+        int targetIndex = mRandom.nextInt(keySet.size());
+        int index = 0;
+        String key = "";
+        Iterator<String> iterator = keySet.iterator();
+        while (iterator.hasNext()){
+            String next = iterator.next();
+            index++;
+            if(targetIndex == index){
+                key = next;
+                break;
+            }
+        }
+
+        return key;
+    }
+
     @Override
     public void run() {
         while (!mIsStop) {
@@ -57,7 +76,6 @@ public class HashTableOperateRunnable implements Runnable {
                     UUID putValue = UUID.randomUUID();
                     String putKey = DateUtil.currentTime2String(DateUtil.yyyy_MM_dd_HH_mm_SS, Locale.getDefault());
                     mHashTable.put(putKey, putValue.toString());
-                    mKeys.add(putKey);
                     log = "线程" + Thread.currentThread().getId() + ", " + operate.toString() + "操作, key: " + putKey + ", value: " + putValue.toString();
                     break;
 
@@ -67,11 +85,13 @@ public class HashTableOperateRunnable implements Runnable {
                         break;
                     }
 
-                    int deleteKeyIndex = mRandom.nextInt(mKeys.size());
-                    String removeKey = mKeys.get(deleteKeyIndex);
-                    String removedValue = mHashTable.remove(removeKey);
-                    mKeys.remove(removeKey);
-                    log = "线程" + Thread.currentThread().getId() + ", " + operate.toString() + "操作, 删除 key: " + removeKey + ", value: " + removedValue;
+                    String deleteKey = pickUpRandomKey();
+                    if(StringUtil.isEmpty(deleteKey)){
+                        break;
+                    }
+
+                    String removedValue = mHashTable.remove(deleteKey);
+                    log = "线程" + Thread.currentThread().getId() + ", " + operate.toString() + "操作, 删除 key: " + deleteKey + ", value: " + removedValue;
                     break;
 
                 case SET:
@@ -80,8 +100,7 @@ public class HashTableOperateRunnable implements Runnable {
                         break;
                     }
 
-                    int setKeyIndex = mRandom.nextInt(mKeys.size());
-                    String setKey = mKeys.get(setKeyIndex);
+                    String setKey = pickUpRandomKey();
                     String setValue = UUID.randomUUID().toString();
                     String oldValue = mHashTable.put(setKey, setValue);
                     log = "线程" + Thread.currentThread().getId() + ", " + operate.toString() + "操作, 将key: " + setKey + "由" + oldValue + "替换为" + setValue;
@@ -93,9 +112,7 @@ public class HashTableOperateRunnable implements Runnable {
                         break;
                     }
 
-                    Logger.d("random, keys size: " + mKeys.size());
-                    int getKeyIndex = mRandom.nextInt(mKeys.size());
-                    String getKey = mKeys.get(getKeyIndex);
+                    String getKey = pickUpRandomKey();
                     String getValue = mHashTable.get(getKey);
                     log = "线程" + Thread.currentThread().getId() + ", " + operate.toString() + "操作, 获取key: " + getKey + "value: " + getValue;
 
