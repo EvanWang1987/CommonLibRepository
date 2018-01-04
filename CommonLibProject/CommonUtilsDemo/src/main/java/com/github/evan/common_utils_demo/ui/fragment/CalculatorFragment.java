@@ -13,6 +13,8 @@ import com.github.evan.common_utils.ui.fragment.BaseFragment;
 import com.github.evan.common_utils.utils.StringUtil;
 import com.github.evan.common_utils_demo.R;
 
+import java.math.BigDecimal;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -71,27 +73,27 @@ public class CalculatorFragment extends BaseFragment {
 
         String returnValue = null;
         double result = 0d;
-        Double lastFloat = Double.valueOf(lastValue);
-        Double currentFloat = Double.valueOf(currentValue);
+        BigDecimal b1 = new BigDecimal(lastValue);
+        BigDecimal b2 = new BigDecimal(currentValue);
         switch (calculateMethod) {
             case ADDITION:
-                result = lastFloat + currentFloat;
+                result = b1.add(b2).doubleValue();
                 break;
 
             case SUBTRACTION:
-                result = lastFloat - currentFloat;
+                result = b1.subtract(b2).doubleValue();
                 break;
 
             case MULTIPLICATION:
-                result = lastFloat * currentFloat;
+                result = b1.multiply(b2).doubleValue();
                 break;
 
             case DIVISION:
-                result = lastFloat / currentFloat;
+                result = b1.divide(b2).doubleValue();
                 break;
 
             case MEMBRANE:
-                result = lastFloat % currentFloat;
+                result = b1.doubleValue() % b2.doubleValue();
                 break;
         }
 
@@ -128,6 +130,7 @@ public class CalculatorFragment extends BaseFragment {
                     mLastValue = result;
                     mCurrentValue = "";
                     mIsDotCheckedOfLastValue = mLastValue.contains(".");
+                    mIsDotCheckedOfCurrentValue = false;
                     mCalculateMethod = CalculateMethod.ADDITION;
                     mIsInputtedCalculator = true;
                     mIsInputtedEqual = false;
@@ -151,6 +154,7 @@ public class CalculatorFragment extends BaseFragment {
                     mLastValue = result;
                     mCurrentValue = "";
                     mIsDotCheckedOfLastValue = mLastValue.contains(".");
+                    mIsDotCheckedOfCurrentValue = false;
                     mCalculateMethod = CalculateMethod.SUBTRACTION;
                     mIsInputtedCalculator = true;
                     mIsInputtedEqual = false;
@@ -172,6 +176,7 @@ public class CalculatorFragment extends BaseFragment {
                     mTxtResult.setText(result);
                     mLastValue = result;
                     mCurrentValue = "";
+                    mIsDotCheckedOfCurrentValue = false;
                     mIsDotCheckedOfLastValue = mLastValue.contains(".");
                     mCalculateMethod = CalculateMethod.MULTIPLICATION;
                     mIsInputtedCalculator = true;
@@ -194,6 +199,7 @@ public class CalculatorFragment extends BaseFragment {
                     mTxtResult.setText(result);
                     mLastValue = result;
                     mCurrentValue = "";
+                    mIsDotCheckedOfCurrentValue = false;
                     mIsDotCheckedOfLastValue = mLastValue.contains(".");
                     mCalculateMethod = CalculateMethod.DIVISION;
                     mIsInputtedCalculator = true;
@@ -263,7 +269,7 @@ public class CalculatorFragment extends BaseFragment {
                     }
 
                     mCurrentValue += ".";
-                    mTxtResult.setText(mCurrentValue);
+                    mTxtResult.setText(mLastValue + " " +  mCalculateMethod.value + " " + mCurrentValue);
                     mIsDotCheckedOfCurrentValue = true;
                 }
                 break;
@@ -282,7 +288,7 @@ public class CalculatorFragment extends BaseFragment {
                     mCurrentValue += 1;
                     mTxtResult.setText(mLastValue + " " + mCalculateMethod.value + " " + mCurrentValue);
                 }
-
+                mIsInputtedEqual = false;
                 break;
 
             case R.id.card_two_calculator:
@@ -300,6 +306,7 @@ public class CalculatorFragment extends BaseFragment {
                     mCurrentValue += 2;
                     mTxtResult.setText(mLastValue + " " + mCalculateMethod.value + " " + mCurrentValue);
                 }
+                mIsInputtedEqual = false;
                 break;
 
             case R.id.card_three_calculator:
@@ -317,6 +324,7 @@ public class CalculatorFragment extends BaseFragment {
                     mCurrentValue += 3;
                     mTxtResult.setText(mLastValue + " " + mCalculateMethod.value + " " + mCurrentValue);
                 }
+                mIsInputtedEqual = false;
                 break;
 
             case R.id.card_four_calculator:
@@ -334,6 +342,7 @@ public class CalculatorFragment extends BaseFragment {
                     mCurrentValue += 4;
                     mTxtResult.setText(mLastValue + " " + mCalculateMethod.value + " " + mCurrentValue);
                 }
+                mIsInputtedEqual = false;
                 break;
 
             case R.id.card_five_calculator:
@@ -351,6 +360,7 @@ public class CalculatorFragment extends BaseFragment {
                     mCurrentValue += 5;
                     mTxtResult.setText(mLastValue + " " + mCalculateMethod.value + " " + mCurrentValue);
                 }
+                mIsInputtedEqual = false;
                 break;
 
             case R.id.card_six_calculator:
@@ -368,6 +378,7 @@ public class CalculatorFragment extends BaseFragment {
                     mCurrentValue += 6;
                     mTxtResult.setText(mLastValue + " " + mCalculateMethod.value + " " + mCurrentValue);
                 }
+                mIsInputtedEqual = false;
                 break;
 
             case R.id.card_seven_calculator:
@@ -385,6 +396,7 @@ public class CalculatorFragment extends BaseFragment {
                     mCurrentValue += 7;
                     mTxtResult.setText(mLastValue + " " + mCalculateMethod.value + " " + mCurrentValue);
                 }
+                mIsInputtedEqual = false;
                 break;
 
             case R.id.card_eight_calculator:
@@ -402,6 +414,7 @@ public class CalculatorFragment extends BaseFragment {
                     mCurrentValue += 8;
                     mTxtResult.setText(mLastValue + " " + mCalculateMethod.value + " " + mCurrentValue);
                 }
+                mIsInputtedEqual = false;
                 break;
 
             case R.id.card_nine_calculator:
@@ -419,6 +432,7 @@ public class CalculatorFragment extends BaseFragment {
                     mCurrentValue += 9;
                     mTxtResult.setText(mLastValue + " " + mCalculateMethod.value + " " + mCurrentValue);
                 }
+                mIsInputtedEqual = false;
                 break;
 
             case R.id.card_zero_calculator:
@@ -436,6 +450,7 @@ public class CalculatorFragment extends BaseFragment {
                     mCurrentValue += 0;
                     mTxtResult.setText(mLastValue + " " + mCalculateMethod.value + " " + mCurrentValue);
                 }
+                mIsInputtedEqual = false;
                 break;
 
         }
