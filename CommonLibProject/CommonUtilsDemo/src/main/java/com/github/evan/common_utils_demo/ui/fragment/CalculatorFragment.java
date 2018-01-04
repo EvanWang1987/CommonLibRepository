@@ -119,6 +119,10 @@ public class CalculatorFragment extends BaseFragment {
 
             case R.id.card_addition_calculator:
                 if (mIsInputtedCalculator) {
+                    if(StringUtil.isEmpty(mCurrentValue)){
+                        mSoundPool.play(mInputtedWarningSoundID, 1f, 1f, 1, 0, 1f);
+                        break;
+                    }
                     String result = calculate(mLastValue, mCurrentValue, mIsDotCheckedOfLastValue, mIsDotCheckedOfCurrentValue, mCalculateMethod);
                     mTxtResult.setText(result);
                     mLastValue = result;
@@ -138,6 +142,10 @@ public class CalculatorFragment extends BaseFragment {
 
             case R.id.card_subtraction_calculator:
                 if (mIsInputtedCalculator) {
+                    if(StringUtil.isEmpty(mCurrentValue)){
+                        mSoundPool.play(mInputtedWarningSoundID, 1f, 1f, 1, 0, 1f);
+                        break;
+                    }
                     String result = calculate(mLastValue, mCurrentValue, mIsDotCheckedOfLastValue, mIsDotCheckedOfCurrentValue, mCalculateMethod);
                     mTxtResult.setText(result);
                     mLastValue = result;
@@ -156,6 +164,10 @@ public class CalculatorFragment extends BaseFragment {
 
             case R.id.card_multiplication_calculator:
                 if (mIsInputtedCalculator) {
+                    if(StringUtil.isEmpty(mCurrentValue)){
+                        mSoundPool.play(mInputtedWarningSoundID, 1f, 1f, 1, 0, 1f);
+                        break;
+                    }
                     String result = calculate(mLastValue, mCurrentValue, mIsDotCheckedOfLastValue, mIsDotCheckedOfCurrentValue, mCalculateMethod);
                     mTxtResult.setText(result);
                     mLastValue = result;
@@ -174,6 +186,10 @@ public class CalculatorFragment extends BaseFragment {
 
             case R.id.card_division_calculator:
                 if (mIsInputtedCalculator) {
+                    if(StringUtil.isEmpty(mCurrentValue)){
+                        mSoundPool.play(mInputtedWarningSoundID, 1f, 1f, 1, 0, 1f);
+                        break;
+                    }
                     String result = calculate(mLastValue, mCurrentValue, mIsDotCheckedOfLastValue, mIsDotCheckedOfCurrentValue, mCalculateMethod);
                     mTxtResult.setText(result);
                     mLastValue = result;
@@ -192,6 +208,10 @@ public class CalculatorFragment extends BaseFragment {
 
             case R.id.card_membrane_calculator:
                 if (mIsInputtedCalculator) {
+                    if(StringUtil.isEmpty(mCurrentValue)){
+                        mSoundPool.play(mInputtedWarningSoundID, 1f, 1f, 1, 0, 1f);
+                        break;
+                    }
                     String result = calculate(mLastValue, mCurrentValue, mIsDotCheckedOfLastValue, mIsDotCheckedOfCurrentValue, mCalculateMethod);
                     mTxtResult.setText(result);
                     mLastValue = result;
