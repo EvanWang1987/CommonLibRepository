@@ -89,7 +89,16 @@ public class CalculatorFragment extends BaseFragment {
                 break;
 
             case DIVISION:
-                result = b1.divide(b2).doubleValue();
+                String s = b1.divide(b2, BigDecimal.ROUND_HALF_UP).doubleValue() + "";
+                for (int i = s.length() - 1; i >= 0; i--) {
+                    char charAt = s.charAt(i);
+                    if(Character.isDigit(charAt)){
+                        s = s.substring(0, i);
+                        break;
+                    }
+                }
+                result = Double.valueOf(s);
+//                result = b1.divide(b2).doubleValue();
                 break;
 
             case MEMBRANE:
