@@ -4,6 +4,7 @@
         <item android:id="@+id/functionHome" android:title="@string/home" android:icon="@drawable/selector_action_button_home_dark" />
         <item android:id="@+id/functionScreenAdaptation" android:title="@string/device_information" android:icon="@drawable/selector_screen_adaptation_black" />
         <item android:id="@+id/functionCalculator" android:title="@string/calculator" android:icon="@drawable/selector_calculator_black" />
+        <item android:id="@+id/functionArithmetic" android:title="@string/arithmetic" android:icon="@drawable/selector_calculator_black" />
         <item android:id="@+id/functionAboutCollection" android:title="@string/about_collection" android:icon="@drawable/selector_collection_black" />
         <item android:id="@+id/functionAboutThread" android:title="@string/about_thread" android:icon="@drawable/selector_thread_black" />
         <item android:id="@+id/functionAboutHandler" android:title="@string/about_handler" android:icon="@drawable/selector_handler_black" />

@@ -25,28 +25,6 @@
     <string name="home">首页</string>
     <!-- HomeFragment相关 -->
 
-    <!-- 计算器相关 -->
-    <string name="calculator">计算器</string>
-    <string name="addition">+</string>
-    <string name="subtraction">-</string>
-    <string name="multiplication">*</string>
-    <string name="division">/</string>
-    <string name="equal">=</string>
-    <string name="membrane">%</string>
-    <string name="zero">0</string>
-    <string name="one">1</string>
-    <string name="two">2</string>
-    <string name="three">3</string>
-    <string name="four">4</string>
-    <string name="five">5</string>
-    <string name="six">6</string>
-    <string name="seven">7</string>
-    <string name="eight">8</string>
-    <string name="nine">9</string>
-    <string name="dot">.</string>
-    <string name="clear_calculator">C</string>
-    <!-- 计算器相关 -->
-
     <!-- 设备信息相关 -->
     <string name="device_information">设备信息</string>
     <string name="convert">转换</string>
@@ -83,6 +61,36 @@
     <string name="un_available_sdcard">未检测到内部存储设备</string>
     <string name="un_available_ram">未检测到运行内存</string>
     <!-- 设备信息相关 -->
+
+    <!-- 计算器相关 -->
+    <string name="calculator">计算器</string>
+    <string name="addition">+</string>
+    <string name="subtraction">-</string>
+    <string name="multiplication">*</string>
+    <string name="division">/</string>
+    <string name="equal">=</string>
+    <string name="membrane">%</string>
+    <string name="zero">0</string>
+    <string name="one">1</string>
+    <string name="two">2</string>
+    <string name="three">3</string>
+    <string name="four">4</string>
+    <string name="five">5</string>
+    <string name="six">6</string>
+    <string name="seven">7</string>
+    <string name="eight">8</string>
+    <string name="nine">9</string>
+    <string name="dot">.</string>
+    <string name="clear_calculator">C</string>
+    <!-- 计算器相关 -->
+
+    <!-- 算法相关 -->
+    <string name="arithmetic">算法</string>
+    <string name="binary_search">折半查找</string>
+    <string name="select_sort">选择排序</string>
+    <string name="bubble_sort">冒泡排序</string>
+    <string name="merge_sort">归并排序</string>
+    <!-- 算法相关 -->
 
     <!-- CollectionFragment相关 -->
     <string name="about_collection">集合相关</string>

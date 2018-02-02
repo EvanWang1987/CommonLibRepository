@@ -15,6 +15,7 @@ public class DateUtil {
     public static final String HH_mm = "HH:mm";
     public static final String HH_mm_ss = "HH:mm:ss";
     public static final String mm_ss = "mm:ss";
+    public static final String ss = "ss";
 
     /**
      * 获取当前时间的Calendar
@@ -63,6 +64,40 @@ public class DateUtil {
         calendar.setTimeZone(TimeZone.getTimeZone("GMT+00:00"));
         int hour = calendar.get(Calendar.HOUR);
         SimpleDateFormat formatter = new SimpleDateFormat(hour <= 0 && !StringUtil.isEmptyString(templateIfNoHour, true) ? templateIfNoHour : template);
+        formatter.setTimeZone(TimeZone.getTimeZone("GMT+00:00"));
+        String value = formatter.format(calendar.getTime());
+        return value;
+    }
+
+    public static String duration2String(long time, long nanoTime){
+        return duration2String(time, nanoTime, null, null, null);
+    }
+
+    public static String duration2String(long time, long nanoTime, String hourTemplate, String minuteTemplate, String secondTemplate){
+        if(time <= 0 && nanoTime > 0){
+            return nanoTime + "纳秒";
+        }
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTimeInMillis(time);
+        calendar.setTimeZone(TimeZone.getTimeZone("GMT+00:00"));
+        int hour = calendar.get(Calendar.HOUR);
+        int minute = calendar.get(Calendar.MINUTE);
+        int second = calendar.get(Calendar.SECOND);
+        int millSecond = calendar.get(Calendar.MILLISECOND);
+        String targetTemplate = null;
+        if(hour > 0){
+            targetTemplate = StringUtil.isEmptyString(hourTemplate, true) ? HH_mm_ss : hourTemplate;
+        }else if(hour <= 0 && minute > 0){
+            targetTemplate = StringUtil.isEmptyString(minuteTemplate, true) ? mm_ss : minuteTemplate;
+        }else if(hour <= 0 && minute <= 0 && second > 0){
+            targetTemplate = StringUtil.isEmptyString(secondTemplate, true) ? ss : secondTemplate;
+        }else if(hour <= 0 && minute <=0 && second <=0 && millSecond > 0){
+            return time + "毫秒";
+        }else{
+            return nanoTime + "纳秒";
+        }
+        SimpleDateFormat formatter = new SimpleDateFormat(targetTemplate);
         formatter.setTimeZone(TimeZone.getTimeZone("GMT+00:00"));
         String value = formatter.format(calendar.getTime());
         return value;
