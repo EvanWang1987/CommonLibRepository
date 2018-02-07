@@ -80,7 +80,7 @@ public class PullLayout extends ViewGroup implements IPullable {
                     startY = scrollY;
                     dy = Math.abs(scrollY);
                     mScroller.startScroll(0, startY, 0, dy, 800);
-                    invalidate();
+                    postInvalidate();
                     break;
 
                 case BOTTOM_TO_TOP:
@@ -91,7 +91,7 @@ public class PullLayout extends ViewGroup implements IPullable {
                     startY = scrollY;
                     dy = -scrollY;
                     mScroller.startScroll(0, startY, 0, dy, 800);
-                    invalidate();
+                    postInvalidate();
                     break;
 
                 case BOTH_TOP_BOTTOM:
@@ -103,12 +103,12 @@ public class PullLayout extends ViewGroup implements IPullable {
                         startY = scrollY;
                         dy = Math.abs(scrollY);
                         mScroller.startScroll(0, startY, 0, dy, 800);
-                        invalidate();
+                        postInvalidate();
                     } else if (mIsInvokingFromBottom) {
                         startY = scrollY;
                         dy = -scrollY;
                         mScroller.startScroll(0, startY, 0, dy, 800);
-                        invalidate();
+                        postInvalidate();
                     }
 
                     mIsInvokingFromTop = false;
@@ -123,7 +123,7 @@ public class PullLayout extends ViewGroup implements IPullable {
                     startX = scrollX;
                     dx = Math.abs(scrollX);
                     mScroller.startScroll(startX, 0, dx, 0, 800);
-                    invalidate();
+                    postInvalidate();
 
                     break;
 
@@ -135,7 +135,7 @@ public class PullLayout extends ViewGroup implements IPullable {
                     startX = scrollX;
                     dx = -scrollX;
                     mScroller.startScroll(startX, 0, dx, 0, 800);
-                    invalidate();
+                    postInvalidate();
 
                     break;
 
@@ -148,12 +148,12 @@ public class PullLayout extends ViewGroup implements IPullable {
                         startX = scrollX;
                         dx = Math.abs(scrollX);
                         mScroller.startScroll(startX, 0, dx, 0, 800);
-                        invalidate();
+                        postInvalidate();
                     } else if (mIsInvokingFromRight) {
                         startX = scrollX;
                         dx = -scrollX;
                         mScroller.startScroll(startX, 0, dx, 0, 800);
-                        invalidate();
+                        postInvalidate();
                     }
 
                     mIsInvokingFromLeft = false;
