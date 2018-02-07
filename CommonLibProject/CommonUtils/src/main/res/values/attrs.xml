@@ -1,6 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <declare-styleable name="PullLayout">
+        <attr name="pull_direction" format="enum">
+            <enum name="unknown" value="-1"/>
+            <enum name="top_to_bottom" value="1"/>
+            <enum name="bottom_to_top" value="2"/>
+            <enum name="left_to_right" value="3"/>
+            <enum name="right_to_left" value="4"/>
+            <enum name="both_top_bottom" value="5"/>
+            <enum name="both_left_right" value="6"/>
+        </attr>
+
+        <attr name="indicator_display_mode">
+            <enum name="scroll_with_content" value="1"/>
+            <enum name="under_content" value="2"/>
+        </attr>
+    </declare-styleable>
+
     <declare-styleable name="SlideExitLayout">
         <attr name="slide_exit_direction" format="enum">
             <enum name="left_to_right" value="0"/>

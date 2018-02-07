@@ -1,13 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.github.evan.common_utils.ui.view.pullable_view.PullLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/pullable_parent"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    app:indicator_display_mode="scroll_with_content"
+    app:pull_direction="both_left_right">
 
-    <TextView
+    <FrameLayout
+        android:id="@id/id_content_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="5dp"
+        android:background="@color/Red">
+
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/btn_invoking_complete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:src="@drawable/selector_ptr_white"
+            app:elevation="5dp"
+            app:useCompatPadding="true" />
+
+    </FrameLayout>
+
+
+    <com.github.evan.common_utils.ui.view.pullable_view.indicator.VerticalTimeFlagIndicator
+        android:id="@id/id_left_indicator"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="Debug"
-        android:textSize="18sp" />
+        android:layout_height="match_parent" />
 
-</FrameLayout>
+    <com.github.evan.common_utils.ui.view.pullable_view.indicator.VerticalTimeFlagIndicator
+        android:id="@id/id_right_indicator"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent" />
+
+</com.github.evan.common_utils.ui.view.pullable_view.PullLayout>

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="id_top_indicator" type="id">id_top_indicator</item>
+    <item name="id_bottom_indicator" type="id">id_bottom_indicator</item>
+    <item name="id_left_indicator" type="id">id_left_indicator</item>
+    <item name="id_right_indicator" type="id">id_right_indicator</item>
+    <item name="id_content_view" type="id">id_content_view</item>
+</resources>
