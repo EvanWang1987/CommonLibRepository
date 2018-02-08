@@ -1,12 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <declare-styleable name="ClassicProRefreshIndicator">
+        <attr name="pro_indicator_progress_drawable" format="reference"/>
+        <attr name="pro_indicator_progress_rotation_duration" format="integer"/>
+        <attr name="pro_indicator_progress_rotation_direction" format="enum">
+            <enum name="left" value="1"/>
+            <enum name="right" value="2"/>
+        </attr>
+    </declare-styleable>
+
     <declare-styleable name="ClassicRefreshIndicator">
-        <attr name="time_flag" format="string"/>
-        <attr name="progress_drawable" format="reference"/>
-        <attr name="direction_drawable" format="reference"/>
-        <attr name="progress_rotation_direction" format="integer"/>
-        <attr name="progress_rotation_duration" format="integer"/>
+        <attr name="classic_indicator_time_flag" format="string"/>
+        <attr name="classic_indicator_progress_drawable" format="reference"/>
+        <attr name="classic_indicator_direction_drawable" format="reference"/>
+        <attr name="classic_indicator_progress_rotation_duration" format="integer"/>
+        <attr name="classic_indicator_progress_rotation_direction" format="enum">
+            <enum name="left" value="1"/>
+            <enum name="right" value="2"/>
+        </attr>
+    </declare-styleable>
+
+    <declare-styleable name="ClassicRefreshHorIndicator">
+        <attr name="classic_indicator_hor_time_flag" format="string"/>
+        <attr name="classic_indicator_hor_progress_drawable" format="reference"/>
+        <attr name="classic_indicator_hor_direction_drawable" format="reference"/>
+        <attr name="classic_indicator_hor_progress_rotation_duration" format="integer"/>
+        <attr name="classic_indicator_hor_progress_rotation_direction" format="enum">
+            <enum name="left" value="1"/>
+            <enum name="right" value="2"/>
+        </attr>
     </declare-styleable>
 
     <declare-styleable name="PullLayout">

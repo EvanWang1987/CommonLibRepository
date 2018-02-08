@@ -143,12 +143,12 @@ public class ClassicRefreshHorIndicator extends LinearLayout implements IIndicat
         int progressDirection = mProgressRotationDirection;
         long progressRotationDuration = mProgressRotationDuration;
         if (null != attrs) {
-            TypedArray typedArray = getContext().obtainStyledAttributes(attrs, R.styleable.ClassicRefreshIndicator);
-            timeFlag = typedArray.getString(R.styleable.ClassicRefreshIndicator_time_flag);
-            progressDrawable = typedArray.getDrawable(R.styleable.ClassicRefreshIndicator_progress_drawable);
-            arrowDrawable = typedArray.getDrawable(R.styleable.ClassicRefreshIndicator_direction_drawable);
-            progressDirection = typedArray.getInt(R.styleable.ClassicRefreshIndicator_progress_rotation_direction, mProgressRotationDirection);
-            progressRotationDuration = typedArray.getInt(R.styleable.ClassicRefreshIndicator_progress_rotation_duration, (int) mProgressRotationDuration);
+            TypedArray typedArray = getContext().obtainStyledAttributes(attrs, R.styleable.ClassicRefreshHorIndicator);
+            timeFlag = typedArray.getString(R.styleable.ClassicRefreshHorIndicator_classic_indicator_hor_time_flag);
+            progressDrawable = typedArray.getDrawable(R.styleable.ClassicRefreshHorIndicator_classic_indicator_hor_progress_drawable);
+            arrowDrawable = typedArray.getDrawable(R.styleable.ClassicRefreshHorIndicator_classic_indicator_hor_direction_drawable);
+            progressDirection = typedArray.getInt(R.styleable.ClassicRefreshHorIndicator_classic_indicator_hor_progress_rotation_direction, mProgressRotationDirection);
+            progressRotationDuration = typedArray.getInt(R.styleable.ClassicRefreshHorIndicator_classic_indicator_hor_progress_rotation_duration, (int) mProgressRotationDuration);
             typedArray.recycle();
         }
         if (StringUtil.isEmptyString(timeFlag, true)) {

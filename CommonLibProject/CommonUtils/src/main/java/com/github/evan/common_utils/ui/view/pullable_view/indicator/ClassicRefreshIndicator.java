@@ -29,15 +29,15 @@ import java.util.Locale;
 
 public class ClassicRefreshIndicator extends LinearLayout implements IIndicator {
     private PullStatus mLastPullStatus = PullStatus.IDLE;
-    public static final int PROGRESS_ROTATION_DIRECTIOON_LEFT = 1;
-    public static final int PROGRESS_ROTATION_DIRECTIOON_RIGHT = 2;
+    public static final int PROGRESS_ROTATION_DIRECTION_LEFT = 1;
+    public static final int PROGRESS_ROTATION_DIRECTION_RIGHT = 2;
     private ImageView mIcArrow, mIcProgress;
     private TextView mTxtTitle, mTxtDesc;
     private TimeFlagUpdater mTimeUpdater;
     private SpUtil mSpUtils;
     private Drawable mProgressDrawable;
     private Drawable mArrowDrawable;
-    private int mProgressRotationDirection = PROGRESS_ROTATION_DIRECTIOON_RIGHT;
+    private int mProgressRotationDirection = PROGRESS_ROTATION_DIRECTION_RIGHT;
     private long mProgressRotationDuration = 1000;
     private ObjectAnimator mRotationAnim;
     private ObjectAnimator mArrowUpAnim;
@@ -144,11 +144,11 @@ public class ClassicRefreshIndicator extends LinearLayout implements IIndicator 
         long progressRotationDuration = mProgressRotationDuration;
         if (null != attrs) {
             TypedArray typedArray = getContext().obtainStyledAttributes(attrs, R.styleable.ClassicRefreshIndicator);
-            timeFlag = typedArray.getString(R.styleable.ClassicRefreshIndicator_time_flag);
-            progressDrawable = typedArray.getDrawable(R.styleable.ClassicRefreshIndicator_progress_drawable);
-            arrowDrawable = typedArray.getDrawable(R.styleable.ClassicRefreshIndicator_direction_drawable);
-            progressDirection = typedArray.getInt(R.styleable.ClassicRefreshIndicator_progress_rotation_direction, mProgressRotationDirection);
-            progressRotationDuration = typedArray.getInt(R.styleable.ClassicRefreshIndicator_progress_rotation_duration, (int) mProgressRotationDuration);
+            timeFlag = typedArray.getString(R.styleable.ClassicRefreshIndicator_classic_indicator_time_flag);
+            progressDrawable = typedArray.getDrawable(R.styleable.ClassicRefreshIndicator_classic_indicator_progress_drawable);
+            arrowDrawable = typedArray.getDrawable(R.styleable.ClassicRefreshIndicator_classic_indicator_direction_drawable);
+            progressDirection = typedArray.getInt(R.styleable.ClassicRefreshIndicator_classic_indicator_progress_rotation_direction, mProgressRotationDirection);
+            progressRotationDuration = typedArray.getInt(R.styleable.ClassicRefreshIndicator_classic_indicator_progress_rotation_duration, (int) mProgressRotationDuration);
             typedArray.recycle();
         }
         if (StringUtil.isEmptyString(timeFlag, true)) {
@@ -170,7 +170,7 @@ public class ClassicRefreshIndicator extends LinearLayout implements IIndicator 
         mIcArrow.setImageDrawable(mArrowDrawable);
         mIcProgress.setImageDrawable(mProgressDrawable);
         float startAngle = 0;
-        float endAngle = mProgressRotationDirection == PROGRESS_ROTATION_DIRECTIOON_RIGHT ? 360f : -360f;
+        float endAngle = mProgressRotationDirection == PROGRESS_ROTATION_DIRECTION_RIGHT ? 360f : -360f;
         mRotationAnim = ObjectAnimator.ofFloat(mIcProgress, "rotation", startAngle, endAngle);
         mRotationAnim.setDuration(mProgressRotationDuration);
         mRotationAnim.setRepeatCount(ObjectAnimator.INFINITE);

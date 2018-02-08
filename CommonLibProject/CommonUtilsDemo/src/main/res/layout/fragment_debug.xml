@@ -27,25 +27,20 @@
 
     </FrameLayout>
 
-    <com.github.evan.common_utils.ui.view.pullable_view.indicator.ClassicRefreshHorIndicator
+    <com.github.evan.common_utils.ui.view.pullable_view.indicator.ClassicProRefreshHorIndicator
         android:id="@id/id_left_indicator"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        app:time_flag="ptr_at_fragment_debug"
-        app:direction_drawable="@mipmap/ic_arrow_right"
-        app:progress_drawable="@mipmap/icon_loading_small"
-        app:progress_rotation_direction="2"
-        app:progress_rotation_duration="1000" />
+        app:pro_indicator_progress_drawable="@mipmap/icon_loading_small"
+        app:pro_indicator_progress_rotation_direction="right"
+        app:pro_indicator_progress_rotation_duration="1000" />
 
-    <com.github.evan.common_utils.ui.view.pullable_view.indicator.ClassicRefreshHorIndicator
+    <com.github.evan.common_utils.ui.view.pullable_view.indicator.ClassicProRefreshHorIndicator
         android:id="@id/id_right_indicator"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        app:time_flag="ptr_at_fragment_debug"
-        app:direction_drawable="@mipmap/ic_arrow_left"
-        app:progress_drawable="@mipmap/icon_loading_small"
-        app:progress_rotation_direction="2"
-        app:progress_rotation_duration="1000" />
-
+        app:pro_indicator_progress_drawable="@mipmap/icon_loading_small"
+        app:pro_indicator_progress_rotation_direction="right"
+        app:pro_indicator_progress_rotation_duration="1000" />
 
 </com.github.evan.common_utils.ui.view.pullable_view.PullLayout>
