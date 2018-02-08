@@ -18,19 +18,23 @@ import com.github.evan.common_utils.utils.DensityUtil;
  * Created by Evan on 2018/2/5.
  */
 public class PullLayout extends ViewGroup implements IPullable {
-    private PullChecker mPullChecker;
     private IIndicator mFirstIndicator, mSecondIndicator;
     private View mContentView;
+    private OverScroller mScroller = new OverScroller(getContext());
+
     private PullStatus mPullStatus = PullStatus.IDLE;
     private PullDirection mPullDirection = PullDirection.TOP_TO_BOTTOM;
+
     private IndicatorDisplayMode mIndicatorDisplayMode = IndicatorDisplayMode.SCROLL_WITH_CONTENT;
+    private PullChecker mPullChecker;
+    private PullListener mPullListener;
     private int mDownX, mDownY, mLastX, mLastY, mPreviewX, mPreviewY;
     private int mTouchSlop;
     private
     @FloatRange(from = 0.2f, to = 1.2f)
     float mInvokeDemarcationPercent = 1f;
-    private OverScroller mScroller = new OverScroller(getContext());
-    private boolean mCanScrollOverstepIndicator = true;
+
+    private boolean mCanScrollOverstepIndicator = false;
     private boolean mIsInvokingFromTop = false;
     private boolean mIsInvokingFromBottom = false;
     private boolean mIsInvokingFromLeft = false;
@@ -61,6 +65,14 @@ public class PullLayout extends ViewGroup implements IPullable {
             mIndicatorDisplayMode = IndicatorDisplayMode.valueOf(anotherInt);
             typedArray.recycle();
         }
+    }
+
+    public PullListener getPullListener() {
+        return mPullListener;
+    }
+
+    public void setPullListener(PullListener pullListener) {
+        this.mPullListener = pullListener;
     }
 
     public void invokeComplete() {
@@ -110,9 +122,6 @@ public class PullLayout extends ViewGroup implements IPullable {
                         mScroller.startScroll(0, startY, 0, dy, 800);
                         postInvalidate();
                     }
-
-                    mIsInvokingFromTop = false;
-                    mIsInvokingFromBottom = false;
                     break;
 
                 case LEFT_TO_RIGHT:
@@ -124,7 +133,6 @@ public class PullLayout extends ViewGroup implements IPullable {
                     dx = Math.abs(scrollX);
                     mScroller.startScroll(startX, 0, dx, 0, 800);
                     postInvalidate();
-
                     break;
 
                 case RIGHT_TO_LEFT:
@@ -136,7 +144,6 @@ public class PullLayout extends ViewGroup implements IPullable {
                     dx = -scrollX;
                     mScroller.startScroll(startX, 0, dx, 0, 800);
                     postInvalidate();
-
                     break;
 
                 case BOTH_LEFT_RIGHT:
@@ -155,11 +162,13 @@ public class PullLayout extends ViewGroup implements IPullable {
                         mScroller.startScroll(startX, 0, dx, 0, 800);
                         postInvalidate();
                     }
-
-                    mIsInvokingFromLeft = false;
-                    mIsInvokingFromRight = false;
                     break;
             }
+
+            mIsInvokingFromTop = false;
+            mIsInvokingFromBottom = false;
+            mIsInvokingFromLeft = false;
+            mIsInvokingFromRight = false;
             mPullStatus = PullStatus.IDLE;
             mFirstIndicator.onPullStatusChange(PullStatus.IDLE);
             if (mPullDirection == PullDirection.BOTH_TOP_BOTTOM || mPullDirection == PullDirection.BOTH_LEFT_RIGHT) {
@@ -216,12 +225,7 @@ public class PullLayout extends ViewGroup implements IPullable {
     public boolean onInterceptTouchEvent(MotionEvent event) {
         int actionMasked = event.getActionMasked();
         if (actionMasked == MotionEvent.ACTION_DOWN) {
-            mDownX = (int) event.getX();
-            mDownY = (int) event.getY();
-            mLastX = mDownX;
-            mLastY = mDownY;
-            mPreviewX = mDownX;
-            mPreviewY = mDownY;
+            recordDownPosition((int) event.getX(), (int) event.getY(), (int) event.getX(), (int) event.getY(), (int) event.getX(), (int) event.getY(), false, false);
         } else if (actionMasked == MotionEvent.ACTION_MOVE) {
             int currentX = (int) event.getX();
             int currentY = (int) event.getY();
@@ -235,44 +239,18 @@ public class PullLayout extends ViewGroup implements IPullable {
                 if (mPullDirection == PullDirection.TOP_TO_BOTTOM || mPullDirection == PullDirection.BOTTOM_TO_TOP || mPullDirection == PullDirection.BOTH_TOP_BOTTOM) {
                     if (disY >= mTouchSlop) {
                         if (isTop2BottomSlide) {
-                            mDownX = currentX;
-                            mDownY = currentY - 1;
-                            mLastX = currentX;
-                            mLastY = currentY;
+                            recordDownPosition((int) event.getX(), (int) event.getY(), (int) event.getX(), (int) (event.getY() - 1), (int) event.getX(), (int) (event.getY() - 2), false, true);
                         } else if (isBottom2TopSlide) {
-                            mDownX = currentX;
-                            mDownY = currentY + 1;
-                            mLastX = currentX;
-                            mLastY = currentY;
-                        }
-                        if (mPullStatus != PullStatus.INVOKING) {
-                            mPullStatus = PullStatus.START_PULL;
-                            mFirstIndicator.onPullStatusChange(PullStatus.START_PULL);
-                            if (mPullDirection == PullDirection.BOTH_TOP_BOTTOM) {
-                                mSecondIndicator.onPullStatusChange(PullStatus.START_PULL);
-                            }
+                            recordDownPosition((int) event.getX(), (int) event.getY(), (int) event.getX(), (int) (event.getY() + 1), (int) event.getX(), (int) (event.getY() + 2), false, true);
                         }
                         return true;
                     }
                 } else if (mPullDirection == PullDirection.LEFT_TO_RIGHT || mPullDirection == PullDirection.RIGHT_TO_LEFT || mPullDirection == PullDirection.BOTH_LEFT_RIGHT) {
                     if (disX >= mTouchSlop) {
                         if (isLeft2RightSlide) {
-                            mDownX = currentX - 1;
-                            mDownY = currentY;
-                            mLastX = currentX;
-                            mLastY = currentY;
+                            recordDownPosition((int) event.getX(), (int) event.getY(), (int) (event.getX() - 1), (int) event.getY(), (int) (event.getX() - 2), (int) event.getY(), false, true);
                         } else if (isRight2LeftSlide) {
-                            mDownX = currentX + 1;
-                            mDownY = currentY;
-                            mLastX = currentX;
-                            mLastY = currentY;
-                        }
-                        if (mPullStatus != PullStatus.INVOKING) {
-                            mPullStatus = PullStatus.START_PULL;
-                            mFirstIndicator.onPullStatusChange(PullStatus.START_PULL);
-                            if (mPullDirection == PullDirection.BOTH_TOP_BOTTOM) {
-                                mSecondIndicator.onPullStatusChange(PullStatus.START_PULL);
-                            }
+                            recordDownPosition((int) event.getX(), (int) event.getY(), (int) (event.getX() + 1), (int) event.getY(), (int) (event.getX() + 2), (int) event.getY(), false, true);
                         }
                         return true;
                     }
@@ -297,22 +275,7 @@ public class PullLayout extends ViewGroup implements IPullable {
     public boolean onTouchEvent(MotionEvent event) {
         int actionMasked = event.getActionMasked();
         if (actionMasked == MotionEvent.ACTION_DOWN) {
-            mDownX = (int) event.getX();
-            mDownY = (int) event.getY();
-            mLastX = mDownX;
-            mLastY = mDownY;
-            mPreviewX = mDownX;
-            mPreviewY = mDownY;
-            if (mPullStatus == PullStatus.IDLE) {
-                mPullStatus = PullStatus.START_PULL;
-                mFirstIndicator.onPullStatusChange(PullStatus.START_PULL);
-                if (mPullDirection == PullDirection.BOTH_LEFT_RIGHT || mPullDirection == PullDirection.BOTH_TOP_BOTTOM) {
-                    mSecondIndicator.onPullStatusChange(PullStatus.START_PULL);
-                }
-            }
-            if (mScroller.computeScrollOffset()) {
-                mScroller.abortAnimation();
-            }
+            recordDownPosition((int) event.getX(), (int) event.getY(), (int) event.getX(), (int) event.getY(), (int) event.getX(), (int) event.getY(), true, true);
         } else if (actionMasked == MotionEvent.ACTION_MOVE) {
             int currentX = (int) event.getX();
             int currentY = (int) event.getY();
@@ -331,22 +294,11 @@ public class PullLayout extends ViewGroup implements IPullable {
             switch (mPullDirection) {
                 case TOP_TO_BOTTOM:
                     if (isTop2BottomSlide) {
-                        if (!mCanScrollOverstepIndicator && scrollY <= -mFirstIndicator.getIndicatorView().getHeight()) {
+                        boolean isScrollOverStepIndicator = isScrollOverStepIndicator(isTop2BottomSlide, isBottom2TopSlide, isLeft2RightSlide, isRight2LeftSlide, scrollX, scrollY);
+                        if (isScrollOverStepIndicator) {
                             break;
                         }
-
-                        if (dstScrollY < 0 && dstScrollY > -mFirstIndicator.getIndicatorView().getHeight() * mInvokeDemarcationPercent) {
-                            if (mPullStatus == PullStatus.START_PULL || mPullStatus == PullStatus.RELEASE_TO_INVOKE) {
-                                mPullStatus = PullStatus.TOP_PULLING;
-                                mFirstIndicator.onPullStatusChange(PullStatus.TOP_PULLING);
-                            }
-                        } else if (dstScrollY < 0 && dstScrollY <= -mFirstIndicator.getIndicatorView().getHeight() * mInvokeDemarcationPercent) {
-                            if (mPullStatus == PullStatus.START_PULL || mPullStatus == PullStatus.TOP_PULLING) {
-                                mPullStatus = PullStatus.RELEASE_TO_INVOKE;
-                                mFirstIndicator.onPullStatusChange(PullStatus.RELEASE_TO_INVOKE);
-                            }
-                        }
-
+                        checkPullingAndReleaseToInvokeStatus(disX, disY, dstScrollX, dstScrollY, isTop2BottomSlide, isBottom2TopSlide, isLeft2RightSlide, isRight2LeftSlide);
                         mFirstIndicator.onDistanceChange(0, offsetY);
                         scrollBy(0, -offsetY);
                     } else if (isBottom2TopSlide) {
@@ -356,14 +308,7 @@ public class PullLayout extends ViewGroup implements IPullable {
                             if (dstScrollY >= 0) {
                                 dstScrollY = 0;
                             }
-
-                            if (dstScrollY < 0 && dstScrollY > -(mFirstIndicator.getIndicatorView().getHeight() * mInvokeDemarcationPercent)) {
-                                if (mPullStatus == PullStatus.RELEASE_TO_INVOKE) {
-                                    mPullStatus = PullStatus.TOP_PULLING;
-                                    mFirstIndicator.onPullStatusChange(PullStatus.TOP_PULLING);
-                                }
-                            }
-
+                            checkPullingAndReleaseToInvokeStatus(disX, disY, dstScrollX, dstScrollY, isTop2BottomSlide, isBottom2TopSlide, isLeft2RightSlide, isRight2LeftSlide);
                             mFirstIndicator.onDistanceChange(0, offsetY);
                             scrollTo(0, dstScrollY);
                         }
@@ -372,22 +317,11 @@ public class PullLayout extends ViewGroup implements IPullable {
 
                 case BOTTOM_TO_TOP:
                     if (isBottom2TopSlide) {
-                        if (!mCanScrollOverstepIndicator && scrollY >= mFirstIndicator.getIndicatorView().getHeight()) {
+                        boolean isScrollOverStepIndicator = isScrollOverStepIndicator(isTop2BottomSlide, isBottom2TopSlide, isLeft2RightSlide, isRight2LeftSlide, scrollX, scrollY);
+                        if (isScrollOverStepIndicator) {
                             break;
                         }
-
-                        if (dstScrollY > 0 && dstScrollY < mFirstIndicator.getIndicatorView().getHeight()) {
-                            if (mPullStatus == PullStatus.START_PULL || mPullStatus == PullStatus.RELEASE_TO_INVOKE) {
-                                mPullStatus = PullStatus.BOTTOM_PULLING;
-                                mFirstIndicator.onPullStatusChange(PullStatus.BOTTOM_PULLING);
-                            }
-                        } else if (dstScrollY > 0 && dstScrollY >= mFirstIndicator.getIndicatorView().getHeight()) {
-                            if (mPullStatus == PullStatus.START_PULL || mPullStatus == PullStatus.BOTTOM_PULLING) {
-                                mPullStatus = PullStatus.RELEASE_TO_INVOKE;
-                                mFirstIndicator.onPullStatusChange(PullStatus.RELEASE_TO_INVOKE);
-                            }
-                        }
-
+                        checkPullingAndReleaseToInvokeStatus(disX, disY, dstScrollX, dstScrollY, isTop2BottomSlide, isBottom2TopSlide, isLeft2RightSlide, isRight2LeftSlide);
                         mFirstIndicator.onDistanceChange(0, offsetY);
                         scrollBy(0, -offsetY);
                     } else if (isTop2BottomSlide) {
@@ -397,14 +331,7 @@ public class PullLayout extends ViewGroup implements IPullable {
                             if (dstScrollY <= 0) {
                                 dstScrollY = 0;
                             }
-
-                            if (dstScrollY > 0 && dstScrollY < mFirstIndicator.getIndicatorView().getHeight() * mInvokeDemarcationPercent) {
-                                if (mPullStatus == PullStatus.START_PULL || mPullStatus == PullStatus.RELEASE_TO_INVOKE) {
-                                    mPullStatus = PullStatus.BOTTOM_PULLING;
-                                    mFirstIndicator.onPullStatusChange(PullStatus.BOTTOM_PULLING);
-                                }
-                            }
-
+                            checkPullingAndReleaseToInvokeStatus(disX, disY, dstScrollX, dstScrollY, isTop2BottomSlide, isBottom2TopSlide, isLeft2RightSlide, isRight2LeftSlide);
                             mFirstIndicator.onDistanceChange(0, offsetY);
                             scrollTo(0, dstScrollY);
                         }
@@ -414,7 +341,8 @@ public class PullLayout extends ViewGroup implements IPullable {
                 case BOTH_TOP_BOTTOM:
                     if (disY >= 0) {
                         if (isTop2BottomSlide) {
-                            if (mPullStatus == PullStatus.INVOKING && mIsInvokingFromBottom) {
+                            boolean isContrarySideInvoking = isContrarySideInvoking(dstScrollX, dstScrollY, isTop2BottomSlide, isBottom2TopSlide, isLeft2RightSlide, isRight2LeftSlide);
+                            if (isContrarySideInvoking) {
                                 if (dstScrollY <= 0) {
                                     scrollTo(0, 0);
                                 } else {
@@ -422,23 +350,11 @@ public class PullLayout extends ViewGroup implements IPullable {
                                 }
                                 break;
                             }
-
-                            if (!mCanScrollOverstepIndicator && scrollY <= -mFirstIndicator.getIndicatorView().getHeight()) {
+                            boolean isScrollOverStepIndicator = isScrollOverStepIndicator(isTop2BottomSlide, isBottom2TopSlide, isLeft2RightSlide, isRight2LeftSlide, scrollX, scrollY);
+                            if (isScrollOverStepIndicator) {
                                 break;
                             }
-
-                            if (dstScrollY < 0 && dstScrollY > -mFirstIndicator.getIndicatorView().getHeight() * mInvokeDemarcationPercent) {
-                                if (mPullStatus == PullStatus.START_PULL || mPullStatus == PullStatus.RELEASE_TO_INVOKE) {
-                                    mPullStatus = PullStatus.TOP_PULLING;
-                                    mFirstIndicator.onPullStatusChange(PullStatus.TOP_PULLING);
-                                }
-                            } else if (dstScrollY < 0 && dstScrollY <= -mFirstIndicator.getIndicatorView().getHeight() * mInvokeDemarcationPercent) {
-                                if (mPullStatus == PullStatus.START_PULL || mPullStatus == PullStatus.TOP_PULLING) {
-                                    mPullStatus = PullStatus.RELEASE_TO_INVOKE;
-                                    mFirstIndicator.onPullStatusChange(PullStatus.RELEASE_TO_INVOKE);
-                                }
-                            }
-
+                            checkPullingAndReleaseToInvokeStatus(disX, disY, dstScrollX, dstScrollY, isTop2BottomSlide, isBottom2TopSlide, isLeft2RightSlide, isRight2LeftSlide);
                             mFirstIndicator.onDistanceChange(0, offsetY);
                             scrollBy(0, -offsetY);
                         } else if (isBottom2TopSlide) {
@@ -448,21 +364,15 @@ public class PullLayout extends ViewGroup implements IPullable {
                                 if (dstScrollY >= 0) {
                                     dstScrollY = 0;
                                 }
-
-                                if (dstScrollY < 0 && dstScrollY > -(mFirstIndicator.getIndicatorView().getHeight() * mInvokeDemarcationPercent)) {
-                                    if (mPullStatus == PullStatus.RELEASE_TO_INVOKE) {
-                                        mPullStatus = PullStatus.TOP_PULLING;
-                                        mFirstIndicator.onPullStatusChange(PullStatus.TOP_PULLING);
-                                    }
-                                }
-
+                                checkPullingAndReleaseToInvokeStatus(disX, disY, dstScrollX, dstScrollY, isTop2BottomSlide, isBottom2TopSlide, isLeft2RightSlide, isRight2LeftSlide);
                                 mFirstIndicator.onDistanceChange(0, offsetY);
                                 scrollTo(0, dstScrollY);
                             }
                         }
                     } else {
                         if (isBottom2TopSlide) {
-                            if (mPullStatus == PullStatus.INVOKING && mIsInvokingFromTop) {
+                            boolean isContrarySideInvoking = isContrarySideInvoking(disX, disY, isTop2BottomSlide, isBottom2TopSlide, isLeft2RightSlide, isRight2LeftSlide);
+                            if (isContrarySideInvoking) {
                                 if (dstScrollY >= 0) {
                                     dstScrollY = 0;
                                     scrollTo(0, dstScrollY);
@@ -471,23 +381,11 @@ public class PullLayout extends ViewGroup implements IPullable {
                                 }
                                 break;
                             }
-
-                            if (!mCanScrollOverstepIndicator && scrollY >= mSecondIndicator.getIndicatorView().getHeight()) {
+                            boolean isScrollOverStepIndicator = isScrollOverStepIndicator(isTop2BottomSlide, isBottom2TopSlide, isLeft2RightSlide, isRight2LeftSlide, scrollX, scrollY);
+                            if (isScrollOverStepIndicator) {
                                 break;
                             }
-
-                            if (dstScrollY > 0 && dstScrollY < mSecondIndicator.getIndicatorView().getHeight()) {
-                                if (mPullStatus == PullStatus.START_PULL || mPullStatus == PullStatus.RELEASE_TO_INVOKE) {
-                                    mPullStatus = PullStatus.BOTTOM_PULLING;
-                                    mSecondIndicator.onPullStatusChange(PullStatus.BOTTOM_PULLING);
-                                }
-                            } else if (dstScrollY > 0 && dstScrollY >= mSecondIndicator.getIndicatorView().getHeight()) {
-                                if (mPullStatus == PullStatus.START_PULL || mPullStatus == PullStatus.BOTTOM_PULLING) {
-                                    mPullStatus = PullStatus.RELEASE_TO_INVOKE;
-                                    mSecondIndicator.onPullStatusChange(PullStatus.RELEASE_TO_INVOKE);
-                                }
-                            }
-
+                            checkPullingAndReleaseToInvokeStatus(disX, disY, dstScrollX, dstScrollY, isTop2BottomSlide, isBottom2TopSlide, isLeft2RightSlide, isRight2LeftSlide);
                             mSecondIndicator.onDistanceChange(0, offsetY);
                             scrollBy(0, -offsetY);
                         } else if (isTop2BottomSlide) {
@@ -497,14 +395,7 @@ public class PullLayout extends ViewGroup implements IPullable {
                                 if (dstScrollY <= 0) {
                                     dstScrollY = 0;
                                 }
-
-                                if (dstScrollY > 0 && dstScrollY < mSecondIndicator.getIndicatorView().getHeight() * mInvokeDemarcationPercent) {
-                                    if (mPullStatus == PullStatus.START_PULL || mPullStatus == PullStatus.RELEASE_TO_INVOKE) {
-                                        mPullStatus = PullStatus.BOTTOM_PULLING;
-                                        mSecondIndicator.onPullStatusChange(PullStatus.BOTTOM_PULLING);
-                                    }
-                                }
-
+                                checkPullingAndReleaseToInvokeStatus(disX, disY, dstScrollX, dstScrollY, isTop2BottomSlide, isBottom2TopSlide, isLeft2RightSlide, isRight2LeftSlide);
                                 mSecondIndicator.onDistanceChange(0, offsetY);
                                 scrollTo(0, dstScrollY);
                             }
@@ -514,22 +405,11 @@ public class PullLayout extends ViewGroup implements IPullable {
 
                 case LEFT_TO_RIGHT:
                     if (isLeft2RightSlide) {
-                        if (!mCanScrollOverstepIndicator && scrollX <= -mFirstIndicator.getIndicatorView().getWidth()) {
+                        boolean isScrollOverStepIndicator = isScrollOverStepIndicator(isTop2BottomSlide, isBottom2TopSlide, isLeft2RightSlide, isRight2LeftSlide, scrollX, scrollY);
+                        if (isScrollOverStepIndicator) {
                             break;
                         }
-
-                        if (scrollX < 0 && scrollX > -mFirstIndicator.getIndicatorView().getWidth() * mInvokeDemarcationPercent) {
-                            if (mPullStatus == PullStatus.START_PULL || mPullStatus == PullStatus.RELEASE_TO_INVOKE) {
-                                mPullStatus = PullStatus.LEFT_PULLING;
-                                mFirstIndicator.onPullStatusChange(PullStatus.LEFT_PULLING);
-                            }
-                        } else if (scrollX < 0 && scrollX <= -mFirstIndicator.getIndicatorView().getWidth() * mInvokeDemarcationPercent) {
-                            if (mPullStatus == PullStatus.START_PULL || mPullStatus == PullStatus.LEFT_PULLING) {
-                                mPullStatus = PullStatus.RELEASE_TO_INVOKE;
-                                mFirstIndicator.onPullStatusChange(PullStatus.RELEASE_TO_INVOKE);
-                            }
-                        }
-
+                        checkPullingAndReleaseToInvokeStatus(disX, disY, dstScrollX, dstScrollY, isTop2BottomSlide, isBottom2TopSlide, isLeft2RightSlide, isRight2LeftSlide);
                         mFirstIndicator.onDistanceChange(offsetX, 0);
                         scrollBy(-offsetX, 0);
                     } else {
@@ -539,6 +419,7 @@ public class PullLayout extends ViewGroup implements IPullable {
                             if (dstScrollX >= 0) {
                                 dstScrollX = 0;
                             }
+                            checkPullingAndReleaseToInvokeStatus(disX, disY, dstScrollX, dstScrollY, isTop2BottomSlide, isBottom2TopSlide, isLeft2RightSlide, isRight2LeftSlide);
                             mFirstIndicator.onDistanceChange(offsetX, 0);
                             scrollTo(dstScrollX, 0);
                         }
@@ -547,22 +428,11 @@ public class PullLayout extends ViewGroup implements IPullable {
 
                 case RIGHT_TO_LEFT:
                     if (isRight2LeftSlide) {
-                        if (!mCanScrollOverstepIndicator && scrollX >= mFirstIndicator.getIndicatorView().getWidth()) {
+                        boolean isScrollOverStepIndicator = isScrollOverStepIndicator(isTop2BottomSlide, isBottom2TopSlide, isLeft2RightSlide, isRight2LeftSlide, scrollX, scrollY);
+                        if (isScrollOverStepIndicator) {
                             break;
                         }
-
-                        if (scrollX > 0 && scrollX < mFirstIndicator.getIndicatorView().getWidth() * mInvokeDemarcationPercent) {
-                            if (mPullStatus == PullStatus.START_PULL || mPullStatus == PullStatus.RELEASE_TO_INVOKE) {
-                                mPullStatus = PullStatus.RIGHT_PULLING;
-                                mFirstIndicator.onPullStatusChange(PullStatus.RIGHT_PULLING);
-                            }
-                        } else if (scrollX > 0 && scrollX >= mFirstIndicator.getIndicatorView().getWidth()) {
-                            if (mPullStatus == PullStatus.START_PULL || mPullStatus == PullStatus.RIGHT_PULLING) {
-                                mPullStatus = PullStatus.RELEASE_TO_INVOKE;
-                                mFirstIndicator.onPullStatusChange(PullStatus.RELEASE_TO_INVOKE);
-                            }
-                        }
-
+                        checkPullingAndReleaseToInvokeStatus(disX, disY, dstScrollX, dstScrollY, isTop2BottomSlide, isBottom2TopSlide, isLeft2RightSlide, isRight2LeftSlide);
                         mFirstIndicator.onDistanceChange(offsetX, 0);
                         scrollBy(-offsetX, 0);
                     } else {
@@ -572,6 +442,7 @@ public class PullLayout extends ViewGroup implements IPullable {
                             if (dstScrollX <= 0) {
                                 dstScrollX = 0;
                             }
+                            checkPullingAndReleaseToInvokeStatus(disX, disY, dstScrollX, dstScrollY, isTop2BottomSlide, isBottom2TopSlide, isLeft2RightSlide, isRight2LeftSlide);
                             mFirstIndicator.onDistanceChange(offsetX, 0);
                             scrollTo(dstScrollX, 0);
                         }
@@ -581,31 +452,11 @@ public class PullLayout extends ViewGroup implements IPullable {
                 case BOTH_LEFT_RIGHT:
                     if (disX >= 0) {
                         if (isLeft2RightSlide) {
-                            if (mPullStatus == PullStatus.INVOKING && mIsInvokingFromRight) {
-                                if (dstScrollX <= 0) {
-                                    scrollTo(0, 0);
-                                } else {
-                                    scrollBy(-offsetX, 0);
-                                }
+                            boolean isScrollOverStepIndicator = isScrollOverStepIndicator(isTop2BottomSlide, isBottom2TopSlide, isLeft2RightSlide, isRight2LeftSlide, scrollX, scrollY);
+                            if (isScrollOverStepIndicator) {
                                 break;
                             }
-
-                            if (!mCanScrollOverstepIndicator && scrollX <= -mFirstIndicator.getIndicatorView().getWidth()) {
-                                break;
-                            }
-
-                            if (scrollX < 0 && scrollX > -mFirstIndicator.getIndicatorView().getWidth() * mInvokeDemarcationPercent) {
-                                if (mPullStatus == PullStatus.START_PULL || mPullStatus == PullStatus.RELEASE_TO_INVOKE) {
-                                    mPullStatus = PullStatus.LEFT_PULLING;
-                                    mFirstIndicator.onPullStatusChange(PullStatus.LEFT_PULLING);
-                                }
-                            } else if (scrollX < 0 && scrollX <= -mFirstIndicator.getIndicatorView().getWidth() * mInvokeDemarcationPercent) {
-                                if (mPullStatus == PullStatus.START_PULL || mPullStatus == PullStatus.LEFT_PULLING) {
-                                    mPullStatus = PullStatus.RELEASE_TO_INVOKE;
-                                    mFirstIndicator.onPullStatusChange(PullStatus.RELEASE_TO_INVOKE);
-                                }
-                            }
-
+                            checkPullingAndReleaseToInvokeStatus(disX, disY, dstScrollX, dstScrollY, isTop2BottomSlide, isBottom2TopSlide, isLeft2RightSlide, isRight2LeftSlide);
                             mFirstIndicator.onDistanceChange(offsetX, 0);
                             scrollBy(-offsetX, 0);
                         } else {
@@ -615,37 +466,18 @@ public class PullLayout extends ViewGroup implements IPullable {
                                 if (dstScrollX >= 0) {
                                     dstScrollX = 0;
                                 }
+                                checkPullingAndReleaseToInvokeStatus(disX, disY, dstScrollX, dstScrollY, isTop2BottomSlide, isBottom2TopSlide, isLeft2RightSlide, isRight2LeftSlide);
                                 mFirstIndicator.onDistanceChange(offsetX, 0);
                                 scrollTo(dstScrollX, 0);
                             }
                         }
                     } else {
                         if (isRight2LeftSlide) {
-                            if (mPullStatus == PullStatus.INVOKING && mIsInvokingFromLeft) {
-                                if (dstScrollX >= 0) {
-                                    scrollTo(0, 0);
-                                } else {
-                                    scrollBy(-offsetX, 0);
-                                }
+                            boolean isScrollOverStepIndicator = isScrollOverStepIndicator(isTop2BottomSlide, isBottom2TopSlide, isLeft2RightSlide, isRight2LeftSlide, scrollX, scrollY);
+                            if (isScrollOverStepIndicator) {
                                 break;
                             }
-
-                            if (!mCanScrollOverstepIndicator && scrollX >= mFirstIndicator.getIndicatorView().getWidth()) {
-                                break;
-                            }
-
-                            if (scrollX > 0 && scrollX < mFirstIndicator.getIndicatorView().getWidth() * mInvokeDemarcationPercent) {
-                                if (mPullStatus == PullStatus.START_PULL || mPullStatus == PullStatus.RELEASE_TO_INVOKE) {
-                                    mPullStatus = PullStatus.RIGHT_PULLING;
-                                    mFirstIndicator.onPullStatusChange(PullStatus.RIGHT_PULLING);
-                                }
-                            } else if (scrollX > 0 && scrollX >= mFirstIndicator.getIndicatorView().getWidth()) {
-                                if (mPullStatus == PullStatus.START_PULL || mPullStatus == PullStatus.RIGHT_PULLING) {
-                                    mPullStatus = PullStatus.RELEASE_TO_INVOKE;
-                                    mFirstIndicator.onPullStatusChange(PullStatus.RELEASE_TO_INVOKE);
-                                }
-                            }
-
+                            checkPullingAndReleaseToInvokeStatus(disX, disY, dstScrollX, dstScrollY, isTop2BottomSlide, isBottom2TopSlide, isLeft2RightSlide, isRight2LeftSlide);
                             mFirstIndicator.onDistanceChange(offsetX, 0);
                             scrollBy(-offsetX, 0);
                         } else {
@@ -655,6 +487,7 @@ public class PullLayout extends ViewGroup implements IPullable {
                                 if (dstScrollX <= 0) {
                                     dstScrollX = 0;
                                 }
+                                checkPullingAndReleaseToInvokeStatus(disX, disY, dstScrollX, dstScrollY, isTop2BottomSlide, isBottom2TopSlide, isLeft2RightSlide, isRight2LeftSlide);
                                 mFirstIndicator.onDistanceChange(offsetX, 0);
                                 scrollTo(dstScrollX, 0);
                             }
@@ -677,9 +510,7 @@ public class PullLayout extends ViewGroup implements IPullable {
                             mScroller.startScroll(0, 0, 0, -mFirstIndicator.getIndicatorView().getHeight(), 800);
                             invalidate();
                             break;
-                        }
-
-                        if (mPullStatus == PullStatus.START_PULL) {
+                        } else if (mPullStatus == PullStatus.START_PULL) {
                             mPullStatus = PullStatus.IDLE;
                             mFirstIndicator.onPullStatusChange(PullStatus.IDLE);
                             break;
@@ -698,6 +529,10 @@ public class PullLayout extends ViewGroup implements IPullable {
                         if (scrollY <= -(mFirstIndicator.getIndicatorView().getHeight() * mInvokeDemarcationPercent)) {
                             mPullStatus = PullStatus.INVOKING;
                             mFirstIndicator.onPullStatusChange(PullStatus.INVOKING);
+                            mIsInvokingFromTop = true;
+                            if (null != mPullListener) {
+                                mPullListener.onInvoke(mIsInvokingFromTop, mIsInvokingFromBottom, mIsInvokingFromLeft, mIsInvokingFromRight);
+                            }
                             int dy = Math.abs(scrollY) - Math.abs(mFirstIndicator.getIndicatorView().getHeight());
                             mScroller.startScroll(0, scrollY, 0, dy, 800);
                             invalidate();
@@ -735,6 +570,10 @@ public class PullLayout extends ViewGroup implements IPullable {
                         if (scrollY >= mFirstIndicator.getIndicatorView().getHeight() * mInvokeDemarcationPercent) {
                             mPullStatus = PullStatus.INVOKING;
                             mFirstIndicator.onPullStatusChange(PullStatus.INVOKING);
+                            mIsInvokingFromBottom = true;
+                            if (null != mPullListener) {
+                                mPullListener.onInvoke(mIsInvokingFromTop, mIsInvokingFromBottom, mIsInvokingFromLeft, mIsInvokingFromRight);
+                            }
                             mScroller.startScroll(0, scrollY, 0, mFirstIndicator.getIndicatorView().getHeight() - scrollY, 800);
                             invalidate();
                             break;
@@ -777,6 +616,9 @@ public class PullLayout extends ViewGroup implements IPullable {
                             mPullStatus = PullStatus.INVOKING;
                             mFirstIndicator.onPullStatusChange(PullStatus.INVOKING);
                             mIsInvokingFromTop = true;
+                            if (null != mPullListener) {
+                                mPullListener.onInvoke(mIsInvokingFromTop, mIsInvokingFromBottom, mIsInvokingFromLeft, mIsInvokingFromRight);
+                            }
                             int dy = Math.abs(scrollY) - Math.abs(mFirstIndicator.getIndicatorView().getHeight());
                             mScroller.startScroll(0, scrollY, 0, dy, 800);
                             invalidate();
@@ -799,6 +641,9 @@ public class PullLayout extends ViewGroup implements IPullable {
                             mPullStatus = PullStatus.INVOKING;
                             mFirstIndicator.onPullStatusChange(PullStatus.INVOKING);
                             mIsInvokingFromBottom = true;
+                            if (null != mPullListener) {
+                                mPullListener.onInvoke(mIsInvokingFromTop, mIsInvokingFromBottom, mIsInvokingFromLeft, mIsInvokingFromRight);
+                            }
                             mScroller.startScroll(0, scrollY, 0, mFirstIndicator.getIndicatorView().getHeight() - scrollY, 800);
                             invalidate();
                             break;
@@ -834,6 +679,10 @@ public class PullLayout extends ViewGroup implements IPullable {
                         if (scrollX <= -((mFirstIndicator.getIndicatorView().getWidth()) * mInvokeDemarcationPercent)) {
                             mPullStatus = PullStatus.INVOKING;
                             mFirstIndicator.onPullStatusChange(PullStatus.INVOKING);
+                            mIsInvokingFromLeft = true;
+                            if (null != mPullListener) {
+                                mPullListener.onInvoke(mIsInvokingFromTop, mIsInvokingFromBottom, mIsInvokingFromLeft, mIsInvokingFromRight);
+                            }
                             mScroller.startScroll(scrollX, 0, -(Math.abs(mFirstIndicator.getIndicatorView().getWidth()) - Math.abs(scrollX)), 0, 800);
                             invalidate();
                             break;
@@ -867,6 +716,10 @@ public class PullLayout extends ViewGroup implements IPullable {
                         if (scrollX >= mFirstIndicator.getIndicatorView().getWidth() * mInvokeDemarcationPercent) {
                             mPullStatus = PullStatus.INVOKING;
                             mFirstIndicator.onPullStatusChange(PullStatus.INVOKING);
+                            mIsInvokingFromRight = true;
+                            if (null != mPullListener) {
+                                mPullListener.onInvoke(mIsInvokingFromTop, mIsInvokingFromBottom, mIsInvokingFromLeft, mIsInvokingFromRight);
+                            }
                             mScroller.startScroll(scrollX, 0, mFirstIndicator.getIndicatorView().getWidth() - scrollX, 0, 800);
                             invalidate();
                             break;
@@ -907,6 +760,9 @@ public class PullLayout extends ViewGroup implements IPullable {
                             mPullStatus = PullStatus.INVOKING;
                             mFirstIndicator.onPullStatusChange(PullStatus.INVOKING);
                             mIsInvokingFromLeft = true;
+                            if (null != mPullListener) {
+                                mPullListener.onInvoke(mIsInvokingFromTop, mIsInvokingFromBottom, mIsInvokingFromLeft, mIsInvokingFromRight);
+                            }
                             mScroller.startScroll(scrollX, 0, -(Math.abs(mFirstIndicator.getIndicatorView().getWidth()) - Math.abs(scrollX)), 0, 800);
                             invalidate();
                             break;
@@ -927,6 +783,9 @@ public class PullLayout extends ViewGroup implements IPullable {
                             mPullStatus = PullStatus.INVOKING;
                             mFirstIndicator.onPullStatusChange(PullStatus.INVOKING);
                             mIsInvokingFromRight = true;
+                            if (null != mPullListener) {
+                                mPullListener.onInvoke(mIsInvokingFromTop, mIsInvokingFromBottom, mIsInvokingFromLeft, mIsInvokingFromRight);
+                            }
                             mScroller.startScroll(scrollX, 0, mFirstIndicator.getIndicatorView().getWidth() - scrollX, 0, 800);
                             invalidate();
                             break;
@@ -948,6 +807,273 @@ public class PullLayout extends ViewGroup implements IPullable {
             mPreviewY = 0;
         }
         return true;
+    }
+
+    private boolean isContrarySideInvoking(int disX, int disY, boolean isTop2BottomSlide, boolean isBottom2TopSlide, boolean isLeft2RightSlide, boolean isRight2LeftSlide) {
+        if (disY >= 0) {
+            if (isTop2BottomSlide) {
+                return mPullStatus == PullStatus.INVOKING && mIsInvokingFromBottom;
+            }
+        } else if (disY < 0) {
+            if (isBottom2TopSlide) {
+                return mPullStatus == PullStatus.INVOKING && mIsInvokingFromTop;
+            }
+        } else if (disX >= 0) {
+            if (isLeft2RightSlide) {
+                return mPullStatus == PullStatus.INVOKING && mIsInvokingFromRight;
+            }
+        } else if (disX < 0) {
+            if (isRight2LeftSlide) {
+                return mPullStatus == PullStatus.INVOKING && mIsInvokingFromLeft;
+            }
+        }
+        return false;
+    }
+
+    private void checkPullingAndReleaseToInvokeStatus(int disX, int disY, int dstScrollX, int dstScrollY, boolean isTop2BottomSlide, boolean isBottom2TopSlide, boolean isLeft2RightSlide, boolean isRight2LeftSlide) {
+        switch (mPullDirection) {
+            case TOP_TO_BOTTOM:
+                if (isTop2BottomSlide) {
+                    if (dstScrollY < 0 && dstScrollY > -mFirstIndicator.getIndicatorView().getHeight() * mInvokeDemarcationPercent) {
+                        if (mPullStatus == PullStatus.START_PULL || mPullStatus == PullStatus.RELEASE_TO_INVOKE) {
+                            mPullStatus = PullStatus.TOP_PULLING;
+                            mFirstIndicator.onPullStatusChange(PullStatus.TOP_PULLING);
+                        }
+                    } else if (dstScrollY < 0 && dstScrollY <= -mFirstIndicator.getIndicatorView().getHeight() * mInvokeDemarcationPercent) {
+                        if (mPullStatus == PullStatus.START_PULL || mPullStatus == PullStatus.TOP_PULLING) {
+                            mPullStatus = PullStatus.RELEASE_TO_INVOKE;
+                            mFirstIndicator.onPullStatusChange(PullStatus.RELEASE_TO_INVOKE);
+                        }
+                    }
+                } else if (isBottom2TopSlide) {
+                    if (dstScrollY < 0 && dstScrollY > -(mFirstIndicator.getIndicatorView().getHeight() * mInvokeDemarcationPercent)) {
+                        if (mPullStatus == PullStatus.RELEASE_TO_INVOKE) {
+                            mPullStatus = PullStatus.TOP_PULLING;
+                            mFirstIndicator.onPullStatusChange(PullStatus.TOP_PULLING);
+                        }
+                    }
+                }
+
+                break;
+
+            case BOTTOM_TO_TOP:
+                if (isBottom2TopSlide) {
+                    if (dstScrollY > 0 && dstScrollY < mFirstIndicator.getIndicatorView().getHeight()) {
+                        if (mPullStatus == PullStatus.START_PULL || mPullStatus == PullStatus.RELEASE_TO_INVOKE) {
+                            mPullStatus = PullStatus.BOTTOM_PULLING;
+                            mFirstIndicator.onPullStatusChange(PullStatus.BOTTOM_PULLING);
+                        }
+                    } else if (dstScrollY > 0 && dstScrollY >= mFirstIndicator.getIndicatorView().getHeight()) {
+                        if (mPullStatus == PullStatus.START_PULL || mPullStatus == PullStatus.BOTTOM_PULLING) {
+                            mPullStatus = PullStatus.RELEASE_TO_INVOKE;
+                            mFirstIndicator.onPullStatusChange(PullStatus.RELEASE_TO_INVOKE);
+                        }
+                    }
+                } else if (isTop2BottomSlide) {
+                    if (dstScrollY > 0 && dstScrollY < mFirstIndicator.getIndicatorView().getHeight() * mInvokeDemarcationPercent) {
+                        if (mPullStatus == PullStatus.RELEASE_TO_INVOKE) {
+                            mPullStatus = PullStatus.BOTTOM_PULLING;
+                            mFirstIndicator.onPullStatusChange(PullStatus.BOTTOM_PULLING);
+                        }
+                    }
+                }
+                break;
+
+            case BOTH_TOP_BOTTOM:
+                if (disX >= 0) {
+                    if (isTop2BottomSlide) {
+                        if (dstScrollY < 0 && dstScrollY > -mFirstIndicator.getIndicatorView().getHeight() * mInvokeDemarcationPercent) {
+                            if (mPullStatus == PullStatus.START_PULL || mPullStatus == PullStatus.RELEASE_TO_INVOKE) {
+                                mPullStatus = PullStatus.TOP_PULLING;
+                                mFirstIndicator.onPullStatusChange(PullStatus.TOP_PULLING);
+                            }
+                        } else if (dstScrollY < 0 && dstScrollY <= -mFirstIndicator.getIndicatorView().getHeight() * mInvokeDemarcationPercent) {
+                            if (mPullStatus == PullStatus.START_PULL || mPullStatus == PullStatus.TOP_PULLING) {
+                                mPullStatus = PullStatus.RELEASE_TO_INVOKE;
+                                mFirstIndicator.onPullStatusChange(PullStatus.RELEASE_TO_INVOKE);
+                            }
+                        }
+                    } else if (isBottom2TopSlide) {
+                        if (dstScrollY < 0 && dstScrollY > -(mFirstIndicator.getIndicatorView().getHeight() * mInvokeDemarcationPercent)) {
+                            if (mPullStatus == PullStatus.RELEASE_TO_INVOKE) {
+                                mPullStatus = PullStatus.TOP_PULLING;
+                                mFirstIndicator.onPullStatusChange(PullStatus.TOP_PULLING);
+                            }
+                        }
+                    }
+                } else {
+                    if (isBottom2TopSlide) {
+                        if (dstScrollY > 0 && dstScrollY < mFirstIndicator.getIndicatorView().getHeight()) {
+                            if (mPullStatus == PullStatus.START_PULL || mPullStatus == PullStatus.RELEASE_TO_INVOKE) {
+                                mPullStatus = PullStatus.BOTTOM_PULLING;
+                                mFirstIndicator.onPullStatusChange(PullStatus.BOTTOM_PULLING);
+                            }
+                        } else if (dstScrollY > 0 && dstScrollY >= mFirstIndicator.getIndicatorView().getHeight()) {
+                            if (mPullStatus == PullStatus.START_PULL || mPullStatus == PullStatus.BOTTOM_PULLING) {
+                                mPullStatus = PullStatus.RELEASE_TO_INVOKE;
+                                mFirstIndicator.onPullStatusChange(PullStatus.RELEASE_TO_INVOKE);
+                            }
+                        }
+                    } else if (isTop2BottomSlide) {
+                        if (dstScrollY > 0 && dstScrollY < mFirstIndicator.getIndicatorView().getHeight() * mInvokeDemarcationPercent) {
+                            if (mPullStatus == PullStatus.RELEASE_TO_INVOKE) {
+                                mPullStatus = PullStatus.BOTTOM_PULLING;
+                                mFirstIndicator.onPullStatusChange(PullStatus.BOTTOM_PULLING);
+                            }
+                        }
+                    }
+                }
+                break;
+
+            case LEFT_TO_RIGHT:
+                if (isLeft2RightSlide) {
+                    if (dstScrollX < 0 && dstScrollX > -mFirstIndicator.getIndicatorView().getWidth() * mInvokeDemarcationPercent) {
+                        if (mPullStatus == PullStatus.START_PULL || mPullStatus == PullStatus.RELEASE_TO_INVOKE) {
+                            mPullStatus = PullStatus.LEFT_PULLING;
+                            mFirstIndicator.onPullStatusChange(PullStatus.LEFT_PULLING);
+                        }
+                    } else if (dstScrollX < 0 && dstScrollX <= -mFirstIndicator.getIndicatorView().getWidth() * mInvokeDemarcationPercent) {
+                        if (mPullStatus == PullStatus.START_PULL || mPullStatus == PullStatus.LEFT_PULLING) {
+                            mPullStatus = PullStatus.RELEASE_TO_INVOKE;
+                            mFirstIndicator.onPullStatusChange(PullStatus.RELEASE_TO_INVOKE);
+                        }
+                    }
+                } else {
+                    if (dstScrollX < 0 && dstScrollX > -mFirstIndicator.getIndicatorView().getWidth() * mInvokeDemarcationPercent) {
+                        if (mPullStatus == PullStatus.RELEASE_TO_INVOKE) {
+                            mPullStatus = PullStatus.LEFT_PULLING;
+                            mFirstIndicator.onPullStatusChange(PullStatus.LEFT_PULLING);
+                        }
+                    }
+                }
+                break;
+
+            case RIGHT_TO_LEFT:
+                if (isRight2LeftSlide) {
+                    if (dstScrollX > 0 && dstScrollX < mFirstIndicator.getIndicatorView().getWidth() * mInvokeDemarcationPercent) {
+                        if (mPullStatus == PullStatus.START_PULL || mPullStatus == PullStatus.RELEASE_TO_INVOKE) {
+                            mPullStatus = PullStatus.RIGHT_PULLING;
+                            mFirstIndicator.onPullStatusChange(PullStatus.RIGHT_PULLING);
+                        }
+                    } else if (dstScrollX > 0 && dstScrollX >= mFirstIndicator.getIndicatorView().getWidth()) {
+                        if (mPullStatus == PullStatus.START_PULL || mPullStatus == PullStatus.RIGHT_PULLING) {
+                            mPullStatus = PullStatus.RELEASE_TO_INVOKE;
+                            mFirstIndicator.onPullStatusChange(PullStatus.RELEASE_TO_INVOKE);
+                        }
+                    }
+                } else if (isLeft2RightSlide) {
+                    if (dstScrollX > 0 && dstScrollX < mFirstIndicator.getIndicatorView().getWidth() * mInvokeDemarcationPercent) {
+                        if (mPullStatus == PullStatus.RELEASE_TO_INVOKE) {
+                            mPullStatus = PullStatus.RIGHT_PULLING;
+                            mFirstIndicator.onPullStatusChange(PullStatus.RIGHT_PULLING);
+                        }
+                    }
+                }
+                break;
+
+            case BOTH_LEFT_RIGHT:
+                if (disX >= 0) {
+                    if (isLeft2RightSlide) {
+                        if (dstScrollX < 0 && dstScrollX > -mFirstIndicator.getIndicatorView().getWidth() * mInvokeDemarcationPercent) {
+                            if (mPullStatus == PullStatus.START_PULL || mPullStatus == PullStatus.RELEASE_TO_INVOKE) {
+                                mPullStatus = PullStatus.LEFT_PULLING;
+                                mFirstIndicator.onPullStatusChange(PullStatus.LEFT_PULLING);
+                            }
+                        } else if (dstScrollX < 0 && dstScrollX <= -mFirstIndicator.getIndicatorView().getWidth() * mInvokeDemarcationPercent) {
+                            if (mPullStatus == PullStatus.START_PULL || mPullStatus == PullStatus.LEFT_PULLING) {
+                                mPullStatus = PullStatus.RELEASE_TO_INVOKE;
+                                mFirstIndicator.onPullStatusChange(PullStatus.RELEASE_TO_INVOKE);
+                            }
+                        }
+                    } else {
+                        if (dstScrollX < 0 && dstScrollX > -mFirstIndicator.getIndicatorView().getWidth() * mInvokeDemarcationPercent) {
+                            if (mPullStatus == PullStatus.RELEASE_TO_INVOKE) {
+                                mPullStatus = PullStatus.LEFT_PULLING;
+                                mFirstIndicator.onPullStatusChange(PullStatus.LEFT_PULLING);
+                            }
+                        }
+                    }
+                } else {
+                    if (isRight2LeftSlide) {
+                        if (dstScrollX > 0 && dstScrollX < mFirstIndicator.getIndicatorView().getWidth() * mInvokeDemarcationPercent) {
+                            if (mPullStatus == PullStatus.START_PULL || mPullStatus == PullStatus.RELEASE_TO_INVOKE) {
+                                mPullStatus = PullStatus.RIGHT_PULLING;
+                                mFirstIndicator.onPullStatusChange(PullStatus.RIGHT_PULLING);
+                            }
+                        } else if (dstScrollX > 0 && dstScrollX >= mFirstIndicator.getIndicatorView().getWidth()) {
+                            if (mPullStatus == PullStatus.START_PULL || mPullStatus == PullStatus.RIGHT_PULLING) {
+                                mPullStatus = PullStatus.RELEASE_TO_INVOKE;
+                                mFirstIndicator.onPullStatusChange(PullStatus.RELEASE_TO_INVOKE);
+                            }
+                        }
+                    } else if (isLeft2RightSlide) {
+                        if (dstScrollX > 0 && dstScrollX < mFirstIndicator.getIndicatorView().getWidth() * mInvokeDemarcationPercent) {
+                            if (mPullStatus == PullStatus.RELEASE_TO_INVOKE) {
+                                mPullStatus = PullStatus.RIGHT_PULLING;
+                                mFirstIndicator.onPullStatusChange(PullStatus.RIGHT_PULLING);
+                            }
+                        }
+                    }
+                }
+                break;
+        }
+    }
+
+    private boolean isScrollOverStepIndicator(boolean isTop2BottomSlide, boolean isBottom2TopSlide, boolean isLeft2RightSlide, boolean isRight2LeftSlide, int scrollX, int scrollY) {
+        if (mCanScrollOverstepIndicator) {
+            return false;
+        }
+
+        if (mPullDirection == PullDirection.TOP_TO_BOTTOM) {
+            return scrollY <= -mFirstIndicator.getIndicatorView().getHeight();
+        } else if (mPullDirection == PullDirection.BOTTOM_TO_TOP) {
+            return scrollY >= mFirstIndicator.getIndicatorView().getHeight();
+        } else if (mPullDirection == PullDirection.BOTH_TOP_BOTTOM) {
+            if (isTop2BottomSlide) {
+                return scrollY <= -mFirstIndicator.getIndicatorView().getHeight();
+            } else if (isBottom2TopSlide) {
+                return scrollY >= mSecondIndicator.getIndicatorView().getHeight();
+            }
+        } else if (mPullDirection == PullDirection.LEFT_TO_RIGHT) {
+            return scrollX <= -mFirstIndicator.getIndicatorView().getWidth();
+        } else if (mPullDirection == PullDirection.RIGHT_TO_LEFT) {
+            return scrollX >= mFirstIndicator.getIndicatorView().getWidth();
+        } else if (mPullDirection == PullDirection.BOTH_LEFT_RIGHT) {
+            if (isLeft2RightSlide) {
+                return scrollX <= -mFirstIndicator.getIndicatorView().getWidth();
+            } else if (isRight2LeftSlide) {
+                return scrollX >= mSecondIndicator.getIndicatorView().getWidth();
+            }
+        }
+        return false;
+    }
+
+    private void recordDownPosition(int downX, int downY, int lastX, int lastY, int previewX, int previewY, boolean isAbortScroller, boolean isNotifyPullStatus) {
+        mDownX = downX;
+        mDownY = downY;
+        mLastX = lastX;
+        mLastY = lastY;
+        mPreviewX = previewX;
+        mPreviewY = previewY;
+
+        if (isAbortScroller) {
+            if (mScroller.computeScrollOffset()) {
+                mScroller.abortAnimation();
+            }
+        }
+
+        if (isNotifyPullStatus) {
+            if (mPullStatus == PullStatus.IDLE) {
+                mPullStatus = PullStatus.START_PULL;
+                mFirstIndicator.onPullStatusChange(PullStatus.START_PULL);
+                if (mPullDirection == PullDirection.BOTH_LEFT_RIGHT || mPullDirection == PullDirection.BOTH_TOP_BOTTOM) {
+                    mSecondIndicator.onPullStatusChange(PullStatus.START_PULL);
+                }
+                if (null != mPullListener) {
+                    mPullListener.onStartPull();
+                }
+            }
+        }
     }
 
     @Override

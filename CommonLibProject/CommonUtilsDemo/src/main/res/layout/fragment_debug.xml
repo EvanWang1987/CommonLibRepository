@@ -37,4 +37,5 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent" />
 
+
 </com.github.evan.common_utils.ui.view.pullable_view.PullLayout>
