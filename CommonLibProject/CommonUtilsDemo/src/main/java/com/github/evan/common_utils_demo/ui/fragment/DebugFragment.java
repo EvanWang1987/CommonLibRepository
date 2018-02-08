@@ -41,13 +41,7 @@ public class DebugFragment extends BaseFragment implements PullChecker, PullList
 
     @OnClick(R.id.btn_invoking_complete)
     void onClick(View view) {
-        //为了测试子线程调用
-        new Thread() {
-            @Override
-            public void run() {
-                mPullLayout.invokeComplete();
-            }
-        }.start();
+        mPullLayout.invokeComplete();
     }
 
     @Override
