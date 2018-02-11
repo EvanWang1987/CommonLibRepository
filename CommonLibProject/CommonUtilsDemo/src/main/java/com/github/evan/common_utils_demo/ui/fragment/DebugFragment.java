@@ -39,9 +39,18 @@ public class DebugFragment extends BaseFragment implements PullChecker, PullList
 
     }
 
-    @OnClick(R.id.btn_invoking_complete)
+    @OnClick({R.id.btn_invoke, R.id.btn_invoking_complete})
     void onClick(View view) {
-        mPullLayout.invokeComplete();
+        switch (view.getId()){
+            case R.id.btn_invoke:
+                mPullLayout.autoInvoke(false);
+                break;
+
+            case R.id.btn_invoking_complete:
+                mPullLayout.invokeComplete();
+                break;
+        }
+
     }
 
     @Override

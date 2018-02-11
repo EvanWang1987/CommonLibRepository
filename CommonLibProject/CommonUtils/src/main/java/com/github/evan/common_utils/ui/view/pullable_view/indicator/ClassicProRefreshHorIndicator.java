@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 import com.github.evan.common_utils.R;
 import com.github.evan.common_utils.ui.view.pullable_view.PullStatus;
+import com.github.evan.common_utils.utils.Logger;
 
 /**
  * Created by Evan on 2018/2/8.
@@ -91,15 +92,34 @@ public class ClassicProRefreshHorIndicator extends LinearLayout implements IIndi
 
     @Override
     public void onDistanceChange(int x, int y) {
-        boolean isLeft2RightSlide = x >= 0;
-        if(!isLeft2RightSlide){
-            x = -x;
+        if (x == 0) {
+            return;
         }
-        float rotationAngel = mProgressDirection == PROGRESS_ROTATION_DIRECTION_RIGHT ? mIcProgress.getRotation() + -x : mIcProgress.getRotation() + x;
+
+        Logger.d("x: " + x);
+        boolean isLeft2RightSlide = x > 0;
+        Logger.d("isLeft2RightSlide: " + isLeft2RightSlide);
+        float currRotation = mIcProgress.getRotation();
+        float rotationAngel = 0;
+        int id = getId();
+        if (id == R.id.id_right_indicator) {
+            if(mProgressDirection == PROGRESS_ROTATION_DIRECTION_RIGHT){
+                rotationAngel = !isLeft2RightSlide ? currRotation + x : currRotation + x;
+            }else{
+                rotationAngel = !isLeft2RightSlide ? currRotation + -x : currRotation - x;
+            }
+        } else {
+            if(mProgressDirection == PROGRESS_ROTATION_DIRECTION_RIGHT){
+                rotationAngel = isLeft2RightSlide ? currRotation - x : currRotation + -x;
+            }else{
+                rotationAngel = isLeft2RightSlide ? currRotation + x : currRotation - -x;
+            }
+        }
+
         mIcProgress.setRotation(rotationAngel);
     }
 
-    private void init(AttributeSet attrs, int defStyleAttr){
+    private void init(AttributeSet attrs, int defStyleAttr) {
         Context context = getContext();
         LayoutInflater.from(context).inflate(R.layout.indicator_classic_pro_hor, this, true);
         mIcProgress = findViewById(R.id.ic_progress_indicator_classic_pro);

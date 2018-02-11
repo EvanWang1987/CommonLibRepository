@@ -26,7 +26,6 @@ import java.util.Locale;
 /**
  * Created by Evan on 2018/2/8.
  */
-
 public class ClassicRefreshIndicator extends LinearLayout implements IIndicator {
     private PullStatus mLastPullStatus = PullStatus.IDLE;
     public static final int PROGRESS_ROTATION_DIRECTION_LEFT = 1;
@@ -34,7 +33,6 @@ public class ClassicRefreshIndicator extends LinearLayout implements IIndicator 
     private ImageView mIcArrow, mIcProgress;
     private TextView mTxtTitle, mTxtDesc;
     private TimeFlagUpdater mTimeUpdater;
-    private SpUtil mSpUtils;
     private Drawable mProgressDrawable;
     private Drawable mArrowDrawable;
     private int mProgressRotationDirection = PROGRESS_ROTATION_DIRECTION_RIGHT;
@@ -136,7 +134,6 @@ public class ClassicRefreshIndicator extends LinearLayout implements IIndicator 
         mIcProgress = findViewById(R.id.ic_progress_indicator_classic);
         mTxtTitle = findViewById(R.id.txt_title_indicator_classic);
         mTxtDesc = findViewById(R.id.txt_desc_indicator_classic);
-        mSpUtils = SpUtil.getIns();
         String timeFlag = "";
         Drawable progressDrawable = null;
         Drawable arrowDrawable = null;

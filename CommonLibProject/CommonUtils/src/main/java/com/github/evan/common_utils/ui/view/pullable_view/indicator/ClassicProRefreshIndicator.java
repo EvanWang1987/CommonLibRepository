@@ -12,9 +12,11 @@ import android.view.animation.LinearInterpolator;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
 import com.github.evan.common_utils.R;
 import com.github.evan.common_utils.ui.view.pullable_view.PullStatus;
 import com.github.evan.common_utils.utils.DateUtil;
+import com.github.evan.common_utils.utils.Logger;
 
 import java.util.Locale;
 
@@ -93,15 +95,31 @@ public class ClassicProRefreshIndicator extends LinearLayout implements IIndicat
 
     @Override
     public void onDistanceChange(int x, int y) {
-        boolean isTop2BottomSlide = y >= 0;
-        if(!isTop2BottomSlide){
-            y = -y;
+        if (y == 0) {
+            return;
         }
-        float rotationAngel = mProgressDirection == PROGRESS_ROTATION_DIRECTION_RIGHT ? mIcProgress.getRotation() + -y : mIcProgress.getRotation() + y;
+        Logger.d("dy: " + y);
+        boolean isTop2BottomSlide = y > 0;
+        float rotationAngel = 0;
+        float currRotation = mIcProgress.getRotation();
+        int id = getId();
+        if (id == R.id.id_bottom_indicator) {
+            if(mProgressDirection == PROGRESS_ROTATION_DIRECTION_RIGHT){
+                rotationAngel = !isTop2BottomSlide ? currRotation + y : currRotation + y;
+            }else{
+                rotationAngel = !isTop2BottomSlide ? currRotation + -y : currRotation - y;
+            }
+        } else {
+            if(mProgressDirection == PROGRESS_ROTATION_DIRECTION_RIGHT){
+                rotationAngel = isTop2BottomSlide ? currRotation - y : currRotation + -y;
+            }else{
+                rotationAngel = isTop2BottomSlide ? currRotation + y : currRotation - -y;
+            }
+        }
         mIcProgress.setRotation(rotationAngel);
     }
 
-    private void init(AttributeSet attrs, int defStyleAttr){
+    private void init(AttributeSet attrs, int defStyleAttr) {
         Context context = getContext();
         LayoutInflater.from(context).inflate(R.layout.indicator_classic_pro, this, true);
         mIcProgress = findViewById(R.id.ic_progress_indicator_classic_pro);

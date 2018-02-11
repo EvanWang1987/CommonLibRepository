@@ -15,15 +15,32 @@
         android:layout_margin="5dp"
         android:background="@color/Red">
 
-
-        <android.support.design.widget.FloatingActionButton
-            android:id="@+id/btn_invoking_complete"
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:src="@drawable/selector_ptr_white"
-            app:elevation="5dp"
-            app:useCompatPadding="true" />
+            android:orientation="horizontal">
+
+            <android.support.design.widget.FloatingActionButton
+                android:id="@+id/btn_invoke"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:src="@drawable/selector_ptr_white"
+                app:elevation="5dp"
+                app:useCompatPadding="true" />
+
+            <android.support.design.widget.FloatingActionButton
+                android:id="@+id/btn_invoking_complete"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:src="@drawable/selector_done_white"
+                app:elevation="5dp"
+                app:useCompatPadding="true" />
+
+        </LinearLayout>
+
 
     </FrameLayout>
 
