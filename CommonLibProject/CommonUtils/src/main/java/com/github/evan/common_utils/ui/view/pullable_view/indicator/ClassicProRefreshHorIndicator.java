@@ -55,6 +55,7 @@ public class ClassicProRefreshHorIndicator extends LinearLayout implements IIndi
     @Override
     public void onPullStatusChange(PullStatus status) {
         mPullStatus = status;
+        Logger.d("PullStatus: " + status);
         switch (status) {
             case IDLE:
                 mRotationAnim.cancel();
@@ -96,9 +97,7 @@ public class ClassicProRefreshHorIndicator extends LinearLayout implements IIndi
             return;
         }
 
-        Logger.d("x: " + x);
         boolean isLeft2RightSlide = x > 0;
-        Logger.d("isLeft2RightSlide: " + isLeft2RightSlide);
         float currRotation = mIcProgress.getRotation();
         float rotationAngel = 0;
         int id = getId();

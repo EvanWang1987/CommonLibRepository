@@ -57,6 +57,7 @@ public class ClassicProRefreshIndicator extends LinearLayout implements IIndicat
 
     @Override
     public void onPullStatusChange(PullStatus status) {
+        Logger.d("PullStatus: " + status);
         mPullStatus = status;
         switch (status) {
             case IDLE:
@@ -98,7 +99,6 @@ public class ClassicProRefreshIndicator extends LinearLayout implements IIndicat
         if (y == 0) {
             return;
         }
-        Logger.d("dy: " + y);
         boolean isTop2BottomSlide = y > 0;
         float rotationAngel = 0;
         float currRotation = mIcProgress.getRotation();

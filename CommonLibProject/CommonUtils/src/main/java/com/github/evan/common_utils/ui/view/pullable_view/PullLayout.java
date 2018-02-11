@@ -13,6 +13,7 @@ import android.widget.OverScroller;
 import com.github.evan.common_utils.R;
 import com.github.evan.common_utils.ui.view.pullable_view.indicator.IIndicator;
 import com.github.evan.common_utils.utils.DensityUtil;
+import com.github.evan.common_utils.utils.Logger;
 
 /**
  * Created by Evan on 2018/2/5.
@@ -35,7 +36,7 @@ public class PullLayout extends ViewGroup implements IPullable {
     float mInvokeDemarcationPercent = 1f;
     private
     @FloatRange(from = 0.6f, to = 1.2f)
-    float mDamping = 0.8f;
+    float mDamping = 1f;
 
     private boolean mCanScrollOverstepIndicator = true;
     private boolean mIsInvokingFromTop = false;
@@ -441,6 +442,7 @@ public class PullLayout extends ViewGroup implements IPullable {
 
                 case BOTH_TOP_BOTTOM:
                     if (disY >= 0) {
+                        //从上向下拉动
                         if (isTop2BottomSlide) {
                             boolean isContrarySideInvoking = isContrarySideInvoking(dstScrollX, dstScrollY, isTop2BottomSlide, isBottom2TopSlide, isLeft2RightSlide, isRight2LeftSlide);
                             if (isContrarySideInvoking) {
@@ -471,6 +473,7 @@ public class PullLayout extends ViewGroup implements IPullable {
                             }
                         }
                     } else {
+                        //从下向上拉动
                         if (isBottom2TopSlide) {
                             boolean isContrarySideInvoking = isContrarySideInvoking(disX, disY, isTop2BottomSlide, isBottom2TopSlide, isLeft2RightSlide, isRight2LeftSlide);
                             if (isContrarySideInvoking) {
@@ -877,6 +880,7 @@ public class PullLayout extends ViewGroup implements IPullable {
                         if (mPullStatus == PullStatus.INVOKING) {
                             mScroller.startScroll(scrollX, 0, Math.abs(scrollX) - Math.abs(mFirstIndicator.getIndicatorView().getWidth()), 0, 800);
                             invalidate();
+                            break;
                         }
 
 
@@ -911,22 +915,44 @@ public class PullLayout extends ViewGroup implements IPullable {
     }
 
     private boolean isContrarySideInvoking(int disX, int disY, boolean isTop2BottomSlide, boolean isBottom2TopSlide, boolean isLeft2RightSlide, boolean isRight2LeftSlide) {
-        if (disY >= 0) {
-            if (isTop2BottomSlide) {
-                return mPullStatus == PullStatus.INVOKING && mIsInvokingFromBottom;
-            }
-        } else if (disY < 0) {
-            if (isBottom2TopSlide) {
-                return mPullStatus == PullStatus.INVOKING && mIsInvokingFromTop;
-            }
-        } else if (disX >= 0) {
-            if (isLeft2RightSlide) {
-                return mPullStatus == PullStatus.INVOKING && mIsInvokingFromRight;
-            }
-        } else if (disX < 0) {
-            if (isRight2LeftSlide) {
-                return mPullStatus == PullStatus.INVOKING && mIsInvokingFromLeft;
-            }
+        switch (mPullDirection){
+            case TOP_TO_BOTTOM:
+                if(isBottom2TopSlide){
+                    return mPullStatus == PullStatus.INVOKING && mIsInvokingFromBottom;
+                }
+                break;
+
+            case BOTTOM_TO_TOP:
+                if(isTop2BottomSlide){
+                    return mPullStatus == PullStatus.INVOKING && mIsInvokingFromTop;
+                }
+                break;
+
+            case BOTH_TOP_BOTTOM:
+                if(isTop2BottomSlide){
+                    return mPullStatus == PullStatus.INVOKING && mIsInvokingFromBottom;
+                }else{
+                    return mPullStatus == PullStatus.INVOKING && mIsInvokingFromTop;
+                }
+
+            case LEFT_TO_RIGHT:
+                if(isRight2LeftSlide){
+                    return mPullStatus == PullStatus.INVOKING && mIsInvokingFromRight;
+                }
+                break;
+
+            case RIGHT_TO_LEFT:
+                if(isLeft2RightSlide){
+                    return mPullStatus == PullStatus.INVOKING && mIsInvokingFromLeft;
+                }
+                break;
+
+            case BOTH_LEFT_RIGHT:
+                if(isLeft2RightSlide){
+                    return mPullStatus == PullStatus.INVOKING && mIsInvokingFromRight;
+                }else{
+                    return mPullStatus == PullStatus.INVOKING && mIsInvokingFromLeft;
+                }
         }
         return false;
     }
