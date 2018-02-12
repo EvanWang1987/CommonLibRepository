@@ -67,10 +67,10 @@ public class ClassicProRefreshIndicator extends LinearLayout implements IIndicat
                 break;
 
             case START_PULL:
-                mTxtTitle.setText(getResources().getString(R.string.pulling));
                 break;
 
             case TOP_PULLING:
+                mTxtTitle.setText(getResources().getString(R.string.pulling));
                 break;
 
             case BOTTOM_PULLING:

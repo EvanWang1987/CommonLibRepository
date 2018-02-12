@@ -43,7 +43,7 @@ public class DebugFragment extends BaseFragment implements PullChecker, PullList
     void onClick(View view) {
         switch (view.getId()){
             case R.id.btn_invoke:
-                mPullLayout.autoInvoke(false);
+                mPullLayout.autoInvoke(false, 500);
                 break;
 
             case R.id.btn_invoking_complete:

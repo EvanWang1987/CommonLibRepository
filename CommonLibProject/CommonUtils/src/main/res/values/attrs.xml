@@ -33,6 +33,7 @@
     </declare-styleable>
 
     <declare-styleable name="PullLayout">
+        <!-- 拉动方向 -->
         <attr name="pull_direction" format="enum">
             <enum name="unknown" value="-1"/>
             <enum name="top_to_bottom" value="1"/>
@@ -47,6 +48,14 @@
             <enum name="scroll_with_content" value="1"/>
             <enum name="under_content" value="2"/>
         </attr>
+        <!-- 运行触发线，相对于Indicator的百分比 -->
+        <attr name="invoke_demarcation_relative_indicator" format="float"/>
+        <!-- 阻尼 -->
+        <attr name="damping" format="float"/>
+        <!-- Indicator拖出后，是否能继续拖动 -->
+        <attr name="can_scroll_overstep_indicator" format="boolean"/>
+        <!-- 运行完毕后回滚动画时长 -->
+        <attr name="invoke_complete_animation_duration" format="integer"/>
     </declare-styleable>
 
     <declare-styleable name="SlideExitLayout">

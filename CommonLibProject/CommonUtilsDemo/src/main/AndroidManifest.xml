@@ -15,6 +15,7 @@
 
         <activity android:name=".ui.activity.TestActivity"/>
         <activity android:name=".ui.activity.AboutActivity"/>
+        <activity android:name=".ui.activity.pullLayoutActivity.PullWithTextViewActivity"/>
         <activity android:name=".ui.activity.collectionActivity.ArrayListActivity" android:theme="@style/AppCompatLightNoActionBarTransparentActivity"/>
         <activity android:name=".ui.activity.collectionActivity.LinkedListActivity" android:theme="@style/AppCompatLightNoActionBarTransparentActivity"/>
         <activity android:name=".ui.activity.collectionActivity.HashSetActivity" android:theme="@style/AppCompatLightNoActionBarTransparentActivity"/>

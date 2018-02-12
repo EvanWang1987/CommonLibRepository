@@ -16,6 +16,7 @@
         <item android:id="@+id/functionHorNestVerScrollView" android:title="@string/hor_nest_ver_scroll_view" android:icon="@drawable/selector_nesting_touch_black" />
         <item android:id="@+id/functionViewPager" android:title="@string/view_pager" android:icon="@drawable/selector_button_view_pager_black_72dp" />
         <item android:id="@+id/functionViewPagerNestMultiHorizontalScroll" android:title="@string/view_pager_nest_multi_horizontal_scroll" android:icon="@drawable/selector_button_view_pager_black_72dp" />
+        <item android:id="@+id/functionPullLayout" android:title="@string/pull_layout" android:icon="@drawable/selector_ptr_black" />
         <item android:id="@+id/functionSlideExitActivity" android:title="@string/slide_exit_activity" android:icon="@drawable/selector_slide_exit_black" />
         <item android:id="@+id/functionQRCode" android:title="@string/about_qr_code" android:icon="@drawable/selector_scan_black" />
         <item android:id="@+id/functionCustomEditText" android:title="@string/edit_text" android:icon="@drawable/selector_action_button_edit_dark" />

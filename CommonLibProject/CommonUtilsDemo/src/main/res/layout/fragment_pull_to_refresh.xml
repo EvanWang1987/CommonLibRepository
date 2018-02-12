@@ -31,7 +31,7 @@
                 android:clickable="false"
                 android:gravity="center"
                 android:minLines="3"
-                android:text="@string/with_view"
+                android:text="@string/with_text_view"
                 android:textColor="@color/Black"
                 android:textSize="16sp" />
 

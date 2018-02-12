@@ -9,34 +9,27 @@ import android.view.View;
 import android.view.ViewConfiguration;
 import android.view.ViewGroup;
 import android.widget.OverScroller;
-
 import com.github.evan.common_utils.R;
 import com.github.evan.common_utils.ui.view.pullable_view.indicator.IIndicator;
 import com.github.evan.common_utils.utils.DensityUtil;
-import com.github.evan.common_utils.utils.Logger;
 
 /**
  * Created by Evan on 2018/2/5.
  */
 public class PullLayout extends ViewGroup implements IPullable {
-    private IIndicator mFirstIndicator, mSecondIndicator;
-    private View mContentView;
-    private OverScroller mScroller = new OverScroller(getContext());
-
     private PullStatus mPullStatus = PullStatus.IDLE;
     private PullDirection mPullDirection = PullDirection.TOP_TO_BOTTOM;
-
+    private IIndicator mFirstIndicator, mSecondIndicator;
+    private View mContentView;
+    private int mScrollBackDuration = 800;
+    private OverScroller mScroller = new OverScroller(getContext());
     private IndicatorDisplayMode mIndicatorDisplayMode = IndicatorDisplayMode.SCROLL_WITH_CONTENT;
     private PullChecker mPullChecker;
     private PullListener mPullListener;
     private int mDownX, mDownY, mLastX, mLastY, mPreviewX, mPreviewY;
     private int mTouchSlop;
-    private
-    @FloatRange(from = 0.2f, to = 1.2f)
-    float mInvokeDemarcationPercent = 1f;
-    private
-    @FloatRange(from = 0.6f, to = 1.2f)
-    float mDamping = 1f;
+    private @FloatRange(from = 0.2f, to = 1.2f) float mInvokeDemarcationRelativePercent = 1f;
+    private @FloatRange(from = 0.6f, to = 1.2f) float mDamping = 1f;
 
     private boolean mCanScrollOverstepIndicator = true;
     private boolean mIsInvokingFromTop = false;
@@ -61,13 +54,25 @@ public class PullLayout extends ViewGroup implements IPullable {
 
     private void init(AttributeSet attrs, int defStyleAttr) {
         mTouchSlop = ViewConfiguration.get(getContext().getApplicationContext()).getScaledTouchSlop();
+
         if (null != attrs) {
             TypedArray typedArray = getContext().obtainStyledAttributes(attrs, R.styleable.PullLayout);
             int anInt = typedArray.getInt(R.styleable.PullLayout_pull_direction, PullDirection.TOP_TO_BOTTOM.value);
             mPullDirection = PullDirection.valueOf(anInt);
             int anotherInt = typedArray.getInt(R.styleable.PullLayout_indicator_display_mode, IndicatorDisplayMode.SCROLL_WITH_CONTENT.value);
             mIndicatorDisplayMode = IndicatorDisplayMode.valueOf(anotherInt);
+            mCanScrollOverstepIndicator = typedArray.getBoolean(R.styleable.PullLayout_can_scroll_overstep_indicator, mCanScrollOverstepIndicator);
+            mScrollBackDuration = typedArray.getInt(R.styleable.PullLayout_invoke_complete_animation_duration, mScrollBackDuration);
+            mDamping = typedArray.getFloat(R.styleable.PullLayout_damping, mDamping);
+            mInvokeDemarcationRelativePercent = typedArray.getFloat(R.styleable.PullLayout_invoke_demarcation_relative_indicator, mInvokeDemarcationRelativePercent);
             typedArray.recycle();
+        }
+        if(mDamping < 0.6f || mDamping > 1.2f){
+            throw new IllegalArgumentException("Damping must be between 0.6f and 1.2f");
+        }
+
+        if(mInvokeDemarcationRelativePercent < 0.2f || mInvokeDemarcationRelativePercent > 1.2f){
+            throw new IllegalArgumentException("invoke_demarcation_relative_indicator must be between 0.2f and 1.2f");
         }
     }
 
@@ -88,11 +93,11 @@ public class PullLayout extends ViewGroup implements IPullable {
     }
 
     public float getInvokeDemarcationPercent() {
-        return mInvokeDemarcationPercent;
+        return mInvokeDemarcationRelativePercent;
     }
 
     public void setInvokeDemarcationPercent(@FloatRange(from = 0.2f, to = 1.2f) float invokeDemarcationPercent) {
-        this.mInvokeDemarcationPercent = invokeDemarcationPercent;
+        this.mInvokeDemarcationRelativePercent = invokeDemarcationPercent;
     }
 
     public PullDirection getPullDirection() {
@@ -138,8 +143,11 @@ public class PullLayout extends ViewGroup implements IPullable {
         return mPullStatus;
     }
 
-    public void autoInvoke(boolean isInvokeSecondIndicator) {
+    public void autoInvoke(boolean isInvokeSecondIndicator, int scrollAnimationDuration) {
         if (mPullStatus == PullStatus.IDLE) {
+            if(scrollAnimationDuration <= 0){
+                scrollAnimationDuration = mScrollBackDuration;
+            }
             int startX = 0, startY = 0;
             int dx = 0, dy = 0;
             switch (mPullDirection) {
@@ -151,7 +159,7 @@ public class PullLayout extends ViewGroup implements IPullable {
                     break;
 
                 case BOTTOM_TO_TOP:
-                    dy = (int) (mFirstIndicator.getIndicatorView().getHeight() * mInvokeDemarcationPercent);
+                    dy = (int) (mFirstIndicator.getIndicatorView().getHeight() * mInvokeDemarcationRelativePercent);
                     mIsInvokingFromBottom = true;
                     mPullStatus = PullStatus.INVOKING;
                     mFirstIndicator.onPullStatusChange(PullStatus.INVOKING);
@@ -159,12 +167,12 @@ public class PullLayout extends ViewGroup implements IPullable {
 
                 case BOTH_TOP_BOTTOM:
                     if (isInvokeSecondIndicator) {
-                        dy = (int) (mSecondIndicator.getIndicatorView().getHeight() * mInvokeDemarcationPercent);
+                        dy = (int) (mSecondIndicator.getIndicatorView().getHeight() * mInvokeDemarcationRelativePercent);
                         mIsInvokingFromBottom = true;
                         mPullStatus = PullStatus.INVOKING;
                         mSecondIndicator.onPullStatusChange(PullStatus.INVOKING);
                     } else {
-                        dy = -(int) (mFirstIndicator.getIndicatorView().getHeight() * mInvokeDemarcationPercent);
+                        dy = -(int) (mFirstIndicator.getIndicatorView().getHeight() * mInvokeDemarcationRelativePercent);
                         mIsInvokingFromTop = true;
                         mPullStatus = PullStatus.INVOKING;
                         mFirstIndicator.onPullStatusChange(PullStatus.INVOKING);
@@ -172,14 +180,14 @@ public class PullLayout extends ViewGroup implements IPullable {
                     break;
 
                 case LEFT_TO_RIGHT:
-                    dx = -(int) (mFirstIndicator.getIndicatorView().getWidth() * mInvokeDemarcationPercent);
+                    dx = -(int) (mFirstIndicator.getIndicatorView().getWidth() * mInvokeDemarcationRelativePercent);
                     mIsInvokingFromLeft = true;
                     mPullStatus = PullStatus.INVOKING;
                     mFirstIndicator.onPullStatusChange(PullStatus.INVOKING);
                     break;
 
                 case RIGHT_TO_LEFT:
-                    dx = (int) (mFirstIndicator.getIndicatorView().getWidth() * mInvokeDemarcationPercent);
+                    dx = (int) (mFirstIndicator.getIndicatorView().getWidth() * mInvokeDemarcationRelativePercent);
                     mIsInvokingFromRight = true;
                     mPullStatus = PullStatus.INVOKING;
                     mFirstIndicator.onPullStatusChange(PullStatus.INVOKING);
@@ -187,12 +195,12 @@ public class PullLayout extends ViewGroup implements IPullable {
 
                 case BOTH_LEFT_RIGHT:
                     if (isInvokeSecondIndicator) {
-                        dx = (int) (mSecondIndicator.getIndicatorView().getWidth() * mInvokeDemarcationPercent);
+                        dx = (int) (mSecondIndicator.getIndicatorView().getWidth() * mInvokeDemarcationRelativePercent);
                         mIsInvokingFromRight = true;
                         mPullStatus = PullStatus.INVOKING;
                         mSecondIndicator.onPullStatusChange(PullStatus.INVOKING);
                     } else {
-                        dx = -(int) (mFirstIndicator.getIndicatorView().getWidth() * mInvokeDemarcationPercent);
+                        dx = -(int) (mFirstIndicator.getIndicatorView().getWidth() * mInvokeDemarcationRelativePercent);
                         mIsInvokingFromLeft = true;
                         mPullStatus = PullStatus.INVOKING;
                         mFirstIndicator.onPullStatusChange(PullStatus.INVOKING);
@@ -200,7 +208,7 @@ public class PullLayout extends ViewGroup implements IPullable {
                     break;
             }
 
-            mScroller.startScroll(startX, startY, dx, dy, 800);
+            mScroller.startScroll(startX, startY, dx, dy, scrollAnimationDuration);
             postInvalidate();
         }
     }
@@ -223,7 +231,7 @@ public class PullLayout extends ViewGroup implements IPullable {
                     dy = Math.abs(scrollY);
                     mPullStatus = PullStatus.INVOKING_COMPLETE;
                     mFirstIndicator.onPullStatusChange(PullStatus.INVOKING_COMPLETE);
-                    mScroller.startScroll(0, startY, 0, dy, 800);
+                    mScroller.startScroll(0, startY, 0, dy, mScrollBackDuration);
                     postInvalidate();
                     break;
 
@@ -236,7 +244,7 @@ public class PullLayout extends ViewGroup implements IPullable {
                     dy = -scrollY;
                     mPullStatus = PullStatus.INVOKING_COMPLETE;
                     mFirstIndicator.onPullStatusChange(PullStatus.INVOKING_COMPLETE);
-                    mScroller.startScroll(0, startY, 0, dy, 800);
+                    mScroller.startScroll(0, startY, 0, dy, mScrollBackDuration);
                     postInvalidate();
                     break;
 
@@ -250,14 +258,14 @@ public class PullLayout extends ViewGroup implements IPullable {
                         dy = Math.abs(scrollY);
                         mPullStatus = PullStatus.INVOKING_COMPLETE;
                         mFirstIndicator.onPullStatusChange(PullStatus.INVOKING_COMPLETE);
-                        mScroller.startScroll(0, startY, 0, dy, 800);
+                        mScroller.startScroll(0, startY, 0, dy, mScrollBackDuration);
                         postInvalidate();
                     } else if (mIsInvokingFromBottom) {
                         startY = scrollY;
                         dy = -scrollY;
                         mPullStatus = PullStatus.INVOKING_COMPLETE;
                         mSecondIndicator.onPullStatusChange(PullStatus.INVOKING_COMPLETE);
-                        mScroller.startScroll(0, startY, 0, dy, 800);
+                        mScroller.startScroll(0, startY, 0, dy, mScrollBackDuration);
                         postInvalidate();
                     }
                     break;
@@ -271,7 +279,7 @@ public class PullLayout extends ViewGroup implements IPullable {
                     dx = Math.abs(scrollX);
                     mPullStatus = PullStatus.INVOKING_COMPLETE;
                     mFirstIndicator.onPullStatusChange(PullStatus.INVOKING_COMPLETE);
-                    mScroller.startScroll(startX, 0, dx, 0, 800);
+                    mScroller.startScroll(startX, 0, dx, 0, mScrollBackDuration);
                     postInvalidate();
                     break;
 
@@ -284,7 +292,7 @@ public class PullLayout extends ViewGroup implements IPullable {
                     dx = -scrollX;
                     mPullStatus = PullStatus.INVOKING_COMPLETE;
                     mFirstIndicator.onPullStatusChange(PullStatus.INVOKING_COMPLETE);
-                    mScroller.startScroll(startX, 0, dx, 0, 800);
+                    mScroller.startScroll(startX, 0, dx, 0, mScrollBackDuration);
                     postInvalidate();
                     break;
 
@@ -298,14 +306,14 @@ public class PullLayout extends ViewGroup implements IPullable {
                         dx = Math.abs(scrollX);
                         mPullStatus = PullStatus.INVOKING_COMPLETE;
                         mFirstIndicator.onPullStatusChange(PullStatus.INVOKING_COMPLETE);
-                        mScroller.startScroll(startX, 0, dx, 0, 800);
+                        mScroller.startScroll(startX, 0, dx, 0, mScrollBackDuration);
                         postInvalidate();
                     } else if (mIsInvokingFromRight) {
                         startX = scrollX;
                         dx = -scrollX;
                         mPullStatus = PullStatus.INVOKING_COMPLETE;
                         mSecondIndicator.onPullStatusChange(PullStatus.INVOKING_COMPLETE);
-                        mScroller.startScroll(startX, 0, dx, 0, 800);
+                        mScroller.startScroll(startX, 0, dx, 0, mScrollBackDuration);
                         postInvalidate();
                     }
                     break;
@@ -632,7 +640,7 @@ public class PullLayout extends ViewGroup implements IPullable {
                 case TOP_TO_BOTTOM:
                     if (scrollY == 0) {
                         if (mPullStatus == PullStatus.INVOKING) {
-                            mScroller.startScroll(0, 0, 0, -mFirstIndicator.getIndicatorView().getHeight(), 800);
+                            mScroller.startScroll(0, 0, 0, -mFirstIndicator.getIndicatorView().getHeight(), 500);
                             invalidate();
                             break;
                         } else if (mPullStatus == PullStatus.START_PULL) {
@@ -645,13 +653,13 @@ public class PullLayout extends ViewGroup implements IPullable {
                     if (scrollY < 0) {
                         if (mPullStatus == PullStatus.INVOKING) {
                             int dy = Math.abs(scrollY) - Math.abs(mFirstIndicator.getIndicatorView().getHeight());
-                            mScroller.startScroll(0, scrollY, 0, dy, 800);
+                            mScroller.startScroll(0, scrollY, 0, dy, 500);
                             invalidate();
                             break;
                         }
 
 
-                        if (scrollY <= -(mFirstIndicator.getIndicatorView().getHeight() * mInvokeDemarcationPercent)) {
+                        if (scrollY <= -(mFirstIndicator.getIndicatorView().getHeight() * mInvokeDemarcationRelativePercent)) {
                             mPullStatus = PullStatus.INVOKING;
                             mFirstIndicator.onPullStatusChange(PullStatus.INVOKING);
                             mIsInvokingFromTop = true;
@@ -659,12 +667,12 @@ public class PullLayout extends ViewGroup implements IPullable {
                                 mPullListener.onInvoke(mIsInvokingFromTop, mIsInvokingFromBottom, mIsInvokingFromLeft, mIsInvokingFromRight);
                             }
                             int dy = Math.abs(scrollY) - Math.abs(mFirstIndicator.getIndicatorView().getHeight());
-                            mScroller.startScroll(0, scrollY, 0, dy, 800);
+                            mScroller.startScroll(0, scrollY, 0, dy, 500);
                             invalidate();
                             break;
                         }
 
-                        mScroller.startScroll(0, scrollY, 0, Math.abs(scrollY), 800);
+                        mScroller.startScroll(0, scrollY, 0, Math.abs(scrollY), 500);
                         mPullStatus = PullStatus.IDLE;
                         mFirstIndicator.onPullStatusChange(PullStatus.IDLE);
                         invalidate();
@@ -673,7 +681,7 @@ public class PullLayout extends ViewGroup implements IPullable {
                 case BOTTOM_TO_TOP:
                     if (scrollY == 0) {
                         if (mPullStatus == PullStatus.INVOKING) {
-                            mScroller.startScroll(0, 0, 0, mFirstIndicator.getIndicatorView().getHeight(), 800);
+                            mScroller.startScroll(0, 0, 0, mFirstIndicator.getIndicatorView().getHeight(), 500);
                             invalidate();
                             break;
                         }
@@ -686,25 +694,25 @@ public class PullLayout extends ViewGroup implements IPullable {
                     if (scrollY > 0) {
                         if (mPullStatus == PullStatus.INVOKING) {
                             int dy = mFirstIndicator.getIndicatorView().getHeight() - scrollY;
-                            mScroller.startScroll(0, scrollY, 0, dy, 800);
+                            mScroller.startScroll(0, scrollY, 0, dy, 500);
                             invalidate();
                             break;
                         }
 
 
-                        if (scrollY >= mFirstIndicator.getIndicatorView().getHeight() * mInvokeDemarcationPercent) {
+                        if (scrollY >= mFirstIndicator.getIndicatorView().getHeight() * mInvokeDemarcationRelativePercent) {
                             mPullStatus = PullStatus.INVOKING;
                             mFirstIndicator.onPullStatusChange(PullStatus.INVOKING);
                             mIsInvokingFromBottom = true;
                             if (null != mPullListener) {
                                 mPullListener.onInvoke(mIsInvokingFromTop, mIsInvokingFromBottom, mIsInvokingFromLeft, mIsInvokingFromRight);
                             }
-                            mScroller.startScroll(0, scrollY, 0, mFirstIndicator.getIndicatorView().getHeight() - scrollY, 800);
+                            mScroller.startScroll(0, scrollY, 0, mFirstIndicator.getIndicatorView().getHeight() - scrollY, 500);
                             invalidate();
                             break;
                         }
 
-                        mScroller.startScroll(0, scrollY, 0, -scrollY, 800);
+                        mScroller.startScroll(0, scrollY, 0, -scrollY, 500);
                         mPullStatus = PullStatus.IDLE;
                         mFirstIndicator.onPullStatusChange(PullStatus.IDLE);
                         invalidate();
@@ -718,10 +726,10 @@ public class PullLayout extends ViewGroup implements IPullable {
                             mSecondIndicator.onPullStatusChange(PullStatus.IDLE);
                         } else if (mPullStatus == PullStatus.INVOKING) {
                             if (mIsInvokingFromTop) {
-                                mScroller.startScroll(0, 0, 0, -mFirstIndicator.getIndicatorView().getHeight(), 800);
+                                mScroller.startScroll(0, 0, 0, -mFirstIndicator.getIndicatorView().getHeight(), 500);
                                 invalidate();
                             } else if (mIsInvokingFromBottom) {
-                                mScroller.startScroll(0, 0, 0, mFirstIndicator.getIndicatorView().getHeight(), 800);
+                                mScroller.startScroll(0, 0, 0, mFirstIndicator.getIndicatorView().getHeight(), 500);
                                 invalidate();
                             }
                         }
@@ -738,13 +746,13 @@ public class PullLayout extends ViewGroup implements IPullable {
                             }else{
                                 dy = Math.abs(scrollY) + secondIndicatorHeight;
                             }
-                            mScroller.startScroll(0, scrollY, 0, dy, 800);
+                            mScroller.startScroll(0, scrollY, 0, dy, 500);
                             invalidate();
                             break;
                         }
 
 
-                        if (scrollY <= -(mFirstIndicator.getIndicatorView().getHeight() * mInvokeDemarcationPercent)) {
+                        if (scrollY <= -(mFirstIndicator.getIndicatorView().getHeight() * mInvokeDemarcationRelativePercent)) {
                             mPullStatus = PullStatus.INVOKING;
                             mFirstIndicator.onPullStatusChange(PullStatus.INVOKING);
                             mIsInvokingFromTop = true;
@@ -752,12 +760,12 @@ public class PullLayout extends ViewGroup implements IPullable {
                                 mPullListener.onInvoke(mIsInvokingFromTop, mIsInvokingFromBottom, mIsInvokingFromLeft, mIsInvokingFromRight);
                             }
                             int dy = Math.abs(scrollY) - Math.abs(mFirstIndicator.getIndicatorView().getHeight());
-                            mScroller.startScroll(0, scrollY, 0, dy, 800);
+                            mScroller.startScroll(0, scrollY, 0, dy, 500);
                             invalidate();
                             break;
                         }
 
-                        mScroller.startScroll(0, scrollY, 0, Math.abs(scrollY), 800);
+                        mScroller.startScroll(0, scrollY, 0, Math.abs(scrollY), 500);
                         mPullStatus = PullStatus.IDLE;
                         mFirstIndicator.onPullStatusChange(PullStatus.IDLE);
                         invalidate();
@@ -771,24 +779,24 @@ public class PullLayout extends ViewGroup implements IPullable {
                             }else{
                                 dy = scrollY <= secondIndicatorHeight ? secondIndicatorHeight - scrollY : -(scrollY - secondIndicatorHeight);
                             }
-                            mScroller.startScroll(0, scrollY, 0, dy, 800);
+                            mScroller.startScroll(0, scrollY, 0, dy, 500);
                             invalidate();
                             break;
                         }
 
-                        if (scrollY >= mSecondIndicator.getIndicatorView().getHeight() * mInvokeDemarcationPercent) {
+                        if (scrollY >= mSecondIndicator.getIndicatorView().getHeight() * mInvokeDemarcationRelativePercent) {
                             mPullStatus = PullStatus.INVOKING;
                             mSecondIndicator.onPullStatusChange(PullStatus.INVOKING);
                             mIsInvokingFromBottom = true;
                             if (null != mPullListener) {
                                 mPullListener.onInvoke(mIsInvokingFromTop, mIsInvokingFromBottom, mIsInvokingFromLeft, mIsInvokingFromRight);
                             }
-                            mScroller.startScroll(0, scrollY, 0, mSecondIndicator.getIndicatorView().getHeight() - scrollY, 800);
+                            mScroller.startScroll(0, scrollY, 0, mSecondIndicator.getIndicatorView().getHeight() - scrollY, 500);
                             invalidate();
                             break;
                         }
 
-                        mScroller.startScroll(0, scrollY, 0, -scrollY, 800);
+                        mScroller.startScroll(0, scrollY, 0, -scrollY, 500);
                         mPullStatus = PullStatus.IDLE;
                         mSecondIndicator.onPullStatusChange(PullStatus.IDLE);
                         invalidate();
@@ -799,7 +807,7 @@ public class PullLayout extends ViewGroup implements IPullable {
                 case LEFT_TO_RIGHT:
                     if (scrollX == 0) {
                         if (mPullStatus == PullStatus.INVOKING) {
-                            mScroller.startScroll(scrollX, 0, -mFirstIndicator.getIndicatorView().getWidth(), 0, 800);
+                            mScroller.startScroll(scrollX, 0, -mFirstIndicator.getIndicatorView().getWidth(), 0, 500);
                             invalidate();
                         } else if (mPullStatus == PullStatus.START_PULL) {
                             mPullStatus = PullStatus.IDLE;
@@ -810,24 +818,24 @@ public class PullLayout extends ViewGroup implements IPullable {
 
                     if (scrollX < 0) {
                         if (mPullStatus == PullStatus.INVOKING) {
-                            mScroller.startScroll(scrollX, 0, -(Math.abs(mFirstIndicator.getIndicatorView().getWidth()) - Math.abs(scrollX)), 0, 800);
+                            mScroller.startScroll(scrollX, 0, -(Math.abs(mFirstIndicator.getIndicatorView().getWidth()) - Math.abs(scrollX)), 0, 500);
                             invalidate();
                             break;
                         }
 
-                        if (scrollX <= -((mFirstIndicator.getIndicatorView().getWidth()) * mInvokeDemarcationPercent)) {
+                        if (scrollX <= -((mFirstIndicator.getIndicatorView().getWidth()) * mInvokeDemarcationRelativePercent)) {
                             mPullStatus = PullStatus.INVOKING;
                             mFirstIndicator.onPullStatusChange(PullStatus.INVOKING);
                             mIsInvokingFromLeft = true;
                             if (null != mPullListener) {
                                 mPullListener.onInvoke(mIsInvokingFromTop, mIsInvokingFromBottom, mIsInvokingFromLeft, mIsInvokingFromRight);
                             }
-                            mScroller.startScroll(scrollX, 0, -(Math.abs(mFirstIndicator.getIndicatorView().getWidth()) - Math.abs(scrollX)), 0, 800);
+                            mScroller.startScroll(scrollX, 0, -(Math.abs(mFirstIndicator.getIndicatorView().getWidth()) - Math.abs(scrollX)), 0, 500);
                             invalidate();
                             break;
                         }
 
-                        mScroller.startScroll(scrollX, 0, Math.abs(scrollX), 0, 800);
+                        mScroller.startScroll(scrollX, 0, Math.abs(scrollX), 0, 500);
                         mPullStatus = PullStatus.IDLE;
                         mFirstIndicator.onPullStatusChange(PullStatus.IDLE);
                         invalidate();
@@ -836,7 +844,7 @@ public class PullLayout extends ViewGroup implements IPullable {
                 case RIGHT_TO_LEFT:
                     if (scrollX == 0) {
                         if (mPullStatus == PullStatus.INVOKING) {
-                            mScroller.startScroll(0, 0, mFirstIndicator.getIndicatorView().getWidth(), 0, 800);
+                            mScroller.startScroll(0, 0, mFirstIndicator.getIndicatorView().getWidth(), 0, 500);
                             invalidate();
                         } else if (mPullStatus == PullStatus.START_PULL) {
                             mPullStatus = PullStatus.IDLE;
@@ -847,24 +855,24 @@ public class PullLayout extends ViewGroup implements IPullable {
 
                     if (scrollX > 0) {
                         if (mPullStatus == PullStatus.INVOKING) {
-                            mScroller.startScroll(scrollX, 0, Math.abs(scrollX) - Math.abs(mFirstIndicator.getIndicatorView().getWidth()), 0, 800);
+                            mScroller.startScroll(scrollX, 0, Math.abs(scrollX) - Math.abs(mFirstIndicator.getIndicatorView().getWidth()), 0, 500);
                             invalidate();
                         }
 
 
-                        if (scrollX >= mFirstIndicator.getIndicatorView().getWidth() * mInvokeDemarcationPercent) {
+                        if (scrollX >= mFirstIndicator.getIndicatorView().getWidth() * mInvokeDemarcationRelativePercent) {
                             mPullStatus = PullStatus.INVOKING;
                             mFirstIndicator.onPullStatusChange(PullStatus.INVOKING);
                             mIsInvokingFromRight = true;
                             if (null != mPullListener) {
                                 mPullListener.onInvoke(mIsInvokingFromTop, mIsInvokingFromBottom, mIsInvokingFromLeft, mIsInvokingFromRight);
                             }
-                            mScroller.startScroll(scrollX, 0, mFirstIndicator.getIndicatorView().getWidth() - scrollX, 0, 800);
+                            mScroller.startScroll(scrollX, 0, mFirstIndicator.getIndicatorView().getWidth() - scrollX, 0, 500);
                             invalidate();
                             break;
                         }
 
-                        mScroller.startScroll(scrollX, 0, -scrollX, 0, 800);
+                        mScroller.startScroll(scrollX, 0, -scrollX, 0, 500);
                         mPullStatus = PullStatus.IDLE;
                         mFirstIndicator.onPullStatusChange(PullStatus.IDLE);
                         invalidate();
@@ -878,10 +886,10 @@ public class PullLayout extends ViewGroup implements IPullable {
                             mSecondIndicator.onPullStatusChange(PullStatus.IDLE);
                         } else if (mPullStatus == PullStatus.INVOKING) {
                             if (mIsInvokingFromLeft) {
-                                mScroller.startScroll(scrollX, 0, -mFirstIndicator.getIndicatorView().getWidth(), 0, 800);
+                                mScroller.startScroll(scrollX, 0, -mFirstIndicator.getIndicatorView().getWidth(), 0, 500);
                                 invalidate();
                             } else if (mIsInvokingFromRight) {
-                                mScroller.startScroll(scrollX, 0, mSecondIndicator.getIndicatorView().getWidth(), 0, 800);
+                                mScroller.startScroll(scrollX, 0, mSecondIndicator.getIndicatorView().getWidth(), 0, 500);
                                 invalidate();
                             }
                         }
@@ -898,24 +906,24 @@ public class PullLayout extends ViewGroup implements IPullable {
                             }else{
                                 dy = Math.abs(scrollX) + secondIndicatorWidth;
                             }
-                            mScroller.startScroll(scrollX, 0, dy, 0, 800);
+                            mScroller.startScroll(scrollX, 0, dy, 0, 500);
                             invalidate();
                             break;
                         }
 
-                        if (scrollX <= -((mFirstIndicator.getIndicatorView().getWidth()) * mInvokeDemarcationPercent)) {
+                        if (scrollX <= -((mFirstIndicator.getIndicatorView().getWidth()) * mInvokeDemarcationRelativePercent)) {
                             mPullStatus = PullStatus.INVOKING;
                             mFirstIndicator.onPullStatusChange(PullStatus.INVOKING);
                             mIsInvokingFromLeft = true;
                             if (null != mPullListener) {
                                 mPullListener.onInvoke(mIsInvokingFromTop, mIsInvokingFromBottom, mIsInvokingFromLeft, mIsInvokingFromRight);
                             }
-                            mScroller.startScroll(scrollX, 0, -(Math.abs(mFirstIndicator.getIndicatorView().getWidth()) - Math.abs(scrollX)), 0, 800);
+                            mScroller.startScroll(scrollX, 0, -(Math.abs(mFirstIndicator.getIndicatorView().getWidth()) - Math.abs(scrollX)), 0, 500);
                             invalidate();
                             break;
                         }
 
-                        mScroller.startScroll(scrollX, 0, Math.abs(scrollX), 0, 800);
+                        mScroller.startScroll(scrollX, 0, Math.abs(scrollX), 0, 500);
                         mPullStatus = PullStatus.IDLE;
                         mFirstIndicator.onPullStatusChange(PullStatus.IDLE);
                         invalidate();
@@ -929,25 +937,25 @@ public class PullLayout extends ViewGroup implements IPullable {
                             }else{
                                 dy = scrollX >= secondIndicatorWidth ? -(scrollX - secondIndicatorWidth) : -(secondIndicatorWidth - scrollX);
                             }
-                            mScroller.startScroll(scrollX, 0, dy, 0, 800);
+                            mScroller.startScroll(scrollX, 0, dy, 0, 500);
                             invalidate();
                             break;
                         }
 
 
-                        if (scrollX >= mSecondIndicator.getIndicatorView().getWidth() * mInvokeDemarcationPercent) {
+                        if (scrollX >= mSecondIndicator.getIndicatorView().getWidth() * mInvokeDemarcationRelativePercent) {
                             mPullStatus = PullStatus.INVOKING;
                             mSecondIndicator.onPullStatusChange(PullStatus.INVOKING);
                             mIsInvokingFromRight = true;
                             if (null != mPullListener) {
                                 mPullListener.onInvoke(mIsInvokingFromTop, mIsInvokingFromBottom, mIsInvokingFromLeft, mIsInvokingFromRight);
                             }
-                            mScroller.startScroll(scrollX, 0, mSecondIndicator.getIndicatorView().getWidth() - scrollX, 0, 800);
+                            mScroller.startScroll(scrollX, 0, mSecondIndicator.getIndicatorView().getWidth() - scrollX, 0, 500);
                             invalidate();
                             break;
                         }
 
-                        mScroller.startScroll(scrollX, 0, -scrollX, 0, 800);
+                        mScroller.startScroll(scrollX, 0, -scrollX, 0, 500);
                         mPullStatus = PullStatus.IDLE;
                         mSecondIndicator.onPullStatusChange(PullStatus.IDLE);
                         invalidate();
@@ -1012,19 +1020,19 @@ public class PullLayout extends ViewGroup implements IPullable {
         switch (mPullDirection) {
             case TOP_TO_BOTTOM:
                 if (isTop2BottomSlide) {
-                    if (dstScrollY < 0 && dstScrollY > -mFirstIndicator.getIndicatorView().getHeight() * mInvokeDemarcationPercent) {
+                    if (dstScrollY < 0 && dstScrollY > -mFirstIndicator.getIndicatorView().getHeight() * mInvokeDemarcationRelativePercent) {
                         if (mPullStatus == PullStatus.START_PULL || mPullStatus == PullStatus.RELEASE_TO_INVOKE) {
                             mPullStatus = PullStatus.TOP_PULLING;
                             mFirstIndicator.onPullStatusChange(PullStatus.TOP_PULLING);
                         }
-                    } else if (dstScrollY < 0 && dstScrollY <= -mFirstIndicator.getIndicatorView().getHeight() * mInvokeDemarcationPercent) {
+                    } else if (dstScrollY < 0 && dstScrollY <= -mFirstIndicator.getIndicatorView().getHeight() * mInvokeDemarcationRelativePercent) {
                         if (mPullStatus == PullStatus.START_PULL || mPullStatus == PullStatus.TOP_PULLING) {
                             mPullStatus = PullStatus.RELEASE_TO_INVOKE;
                             mFirstIndicator.onPullStatusChange(PullStatus.RELEASE_TO_INVOKE);
                         }
                     }
                 } else if (isBottom2TopSlide) {
-                    if (dstScrollY < 0 && dstScrollY > -(mFirstIndicator.getIndicatorView().getHeight() * mInvokeDemarcationPercent)) {
+                    if (dstScrollY < 0 && dstScrollY > -(mFirstIndicator.getIndicatorView().getHeight() * mInvokeDemarcationRelativePercent)) {
                         if (mPullStatus == PullStatus.RELEASE_TO_INVOKE) {
                             mPullStatus = PullStatus.TOP_PULLING;
                             mFirstIndicator.onPullStatusChange(PullStatus.TOP_PULLING);
@@ -1048,7 +1056,7 @@ public class PullLayout extends ViewGroup implements IPullable {
                         }
                     }
                 } else if (isTop2BottomSlide) {
-                    if (dstScrollY > 0 && dstScrollY < mFirstIndicator.getIndicatorView().getHeight() * mInvokeDemarcationPercent) {
+                    if (dstScrollY > 0 && dstScrollY < mFirstIndicator.getIndicatorView().getHeight() * mInvokeDemarcationRelativePercent) {
                         if (mPullStatus == PullStatus.RELEASE_TO_INVOKE) {
                             mPullStatus = PullStatus.BOTTOM_PULLING;
                             mFirstIndicator.onPullStatusChange(PullStatus.BOTTOM_PULLING);
@@ -1060,19 +1068,19 @@ public class PullLayout extends ViewGroup implements IPullable {
             case BOTH_TOP_BOTTOM:
                 if (disY >= 0) {
                     if (isTop2BottomSlide) {
-                        if (dstScrollY < 0 && dstScrollY > -mFirstIndicator.getIndicatorView().getHeight() * mInvokeDemarcationPercent) {
+                        if (dstScrollY < 0 && dstScrollY > -mFirstIndicator.getIndicatorView().getHeight() * mInvokeDemarcationRelativePercent) {
                             if (mPullStatus == PullStatus.START_PULL || mPullStatus == PullStatus.RELEASE_TO_INVOKE) {
                                 mPullStatus = PullStatus.TOP_PULLING;
                                 mFirstIndicator.onPullStatusChange(PullStatus.TOP_PULLING);
                             }
-                        } else if (dstScrollY < 0 && dstScrollY <= -mFirstIndicator.getIndicatorView().getHeight() * mInvokeDemarcationPercent) {
+                        } else if (dstScrollY < 0 && dstScrollY <= -mFirstIndicator.getIndicatorView().getHeight() * mInvokeDemarcationRelativePercent) {
                             if (mPullStatus == PullStatus.START_PULL || mPullStatus == PullStatus.TOP_PULLING) {
                                 mPullStatus = PullStatus.RELEASE_TO_INVOKE;
                                 mFirstIndicator.onPullStatusChange(PullStatus.RELEASE_TO_INVOKE);
                             }
                         }
                     } else if (isBottom2TopSlide) {
-                        if (dstScrollY < 0 && dstScrollY > -(mFirstIndicator.getIndicatorView().getHeight() * mInvokeDemarcationPercent)) {
+                        if (dstScrollY < 0 && dstScrollY > -(mFirstIndicator.getIndicatorView().getHeight() * mInvokeDemarcationRelativePercent)) {
                             if (mPullStatus == PullStatus.RELEASE_TO_INVOKE) {
                                 mPullStatus = PullStatus.TOP_PULLING;
                                 mFirstIndicator.onPullStatusChange(PullStatus.TOP_PULLING);
@@ -1093,7 +1101,7 @@ public class PullLayout extends ViewGroup implements IPullable {
                             }
                         }
                     } else if (isTop2BottomSlide) {
-                        if (dstScrollY > 0 && dstScrollY < mSecondIndicator.getIndicatorView().getHeight() * mInvokeDemarcationPercent) {
+                        if (dstScrollY > 0 && dstScrollY < mSecondIndicator.getIndicatorView().getHeight() * mInvokeDemarcationRelativePercent) {
                             if (mPullStatus == PullStatus.RELEASE_TO_INVOKE) {
                                 mPullStatus = PullStatus.BOTTOM_PULLING;
                                 mSecondIndicator.onPullStatusChange(PullStatus.BOTTOM_PULLING);
@@ -1105,19 +1113,19 @@ public class PullLayout extends ViewGroup implements IPullable {
 
             case LEFT_TO_RIGHT:
                 if (isLeft2RightSlide) {
-                    if (dstScrollX < 0 && dstScrollX > -mFirstIndicator.getIndicatorView().getWidth() * mInvokeDemarcationPercent) {
+                    if (dstScrollX < 0 && dstScrollX > -mFirstIndicator.getIndicatorView().getWidth() * mInvokeDemarcationRelativePercent) {
                         if (mPullStatus == PullStatus.START_PULL || mPullStatus == PullStatus.RELEASE_TO_INVOKE) {
                             mPullStatus = PullStatus.LEFT_PULLING;
                             mFirstIndicator.onPullStatusChange(PullStatus.LEFT_PULLING);
                         }
-                    } else if (dstScrollX < 0 && dstScrollX <= -mFirstIndicator.getIndicatorView().getWidth() * mInvokeDemarcationPercent) {
+                    } else if (dstScrollX < 0 && dstScrollX <= -mFirstIndicator.getIndicatorView().getWidth() * mInvokeDemarcationRelativePercent) {
                         if (mPullStatus == PullStatus.START_PULL || mPullStatus == PullStatus.LEFT_PULLING) {
                             mPullStatus = PullStatus.RELEASE_TO_INVOKE;
                             mFirstIndicator.onPullStatusChange(PullStatus.RELEASE_TO_INVOKE);
                         }
                     }
                 } else {
-                    if (dstScrollX < 0 && dstScrollX > -mFirstIndicator.getIndicatorView().getWidth() * mInvokeDemarcationPercent) {
+                    if (dstScrollX < 0 && dstScrollX > -mFirstIndicator.getIndicatorView().getWidth() * mInvokeDemarcationRelativePercent) {
                         if (mPullStatus == PullStatus.RELEASE_TO_INVOKE) {
                             mPullStatus = PullStatus.LEFT_PULLING;
                             mFirstIndicator.onPullStatusChange(PullStatus.LEFT_PULLING);
@@ -1128,7 +1136,7 @@ public class PullLayout extends ViewGroup implements IPullable {
 
             case RIGHT_TO_LEFT:
                 if (isRight2LeftSlide) {
-                    if (dstScrollX > 0 && dstScrollX < mFirstIndicator.getIndicatorView().getWidth() * mInvokeDemarcationPercent) {
+                    if (dstScrollX > 0 && dstScrollX < mFirstIndicator.getIndicatorView().getWidth() * mInvokeDemarcationRelativePercent) {
                         if (mPullStatus == PullStatus.START_PULL || mPullStatus == PullStatus.RELEASE_TO_INVOKE) {
                             mPullStatus = PullStatus.RIGHT_PULLING;
                             mFirstIndicator.onPullStatusChange(PullStatus.RIGHT_PULLING);
@@ -1140,7 +1148,7 @@ public class PullLayout extends ViewGroup implements IPullable {
                         }
                     }
                 } else if (isLeft2RightSlide) {
-                    if (dstScrollX > 0 && dstScrollX < mFirstIndicator.getIndicatorView().getWidth() * mInvokeDemarcationPercent) {
+                    if (dstScrollX > 0 && dstScrollX < mFirstIndicator.getIndicatorView().getWidth() * mInvokeDemarcationRelativePercent) {
                         if (mPullStatus == PullStatus.RELEASE_TO_INVOKE) {
                             mPullStatus = PullStatus.RIGHT_PULLING;
                             mFirstIndicator.onPullStatusChange(PullStatus.RIGHT_PULLING);
@@ -1152,19 +1160,19 @@ public class PullLayout extends ViewGroup implements IPullable {
             case BOTH_LEFT_RIGHT:
                 if (disX >= 0) {
                     if (isLeft2RightSlide) {
-                        if (dstScrollX < 0 && dstScrollX > -mFirstIndicator.getIndicatorView().getWidth() * mInvokeDemarcationPercent) {
+                        if (dstScrollX < 0 && dstScrollX > -mFirstIndicator.getIndicatorView().getWidth() * mInvokeDemarcationRelativePercent) {
                             if (mPullStatus == PullStatus.START_PULL || mPullStatus == PullStatus.RELEASE_TO_INVOKE) {
                                 mPullStatus = PullStatus.LEFT_PULLING;
                                 mFirstIndicator.onPullStatusChange(PullStatus.LEFT_PULLING);
                             }
-                        } else if (dstScrollX < 0 && dstScrollX <= -mFirstIndicator.getIndicatorView().getWidth() * mInvokeDemarcationPercent) {
+                        } else if (dstScrollX < 0 && dstScrollX <= -mFirstIndicator.getIndicatorView().getWidth() * mInvokeDemarcationRelativePercent) {
                             if (mPullStatus == PullStatus.START_PULL || mPullStatus == PullStatus.LEFT_PULLING) {
                                 mPullStatus = PullStatus.RELEASE_TO_INVOKE;
                                 mFirstIndicator.onPullStatusChange(PullStatus.RELEASE_TO_INVOKE);
                             }
                         }
                     } else {
-                        if (dstScrollX < 0 && dstScrollX > -mFirstIndicator.getIndicatorView().getWidth() * mInvokeDemarcationPercent) {
+                        if (dstScrollX < 0 && dstScrollX > -mFirstIndicator.getIndicatorView().getWidth() * mInvokeDemarcationRelativePercent) {
                             if (mPullStatus == PullStatus.RELEASE_TO_INVOKE) {
                                 mPullStatus = PullStatus.LEFT_PULLING;
                                 mFirstIndicator.onPullStatusChange(PullStatus.LEFT_PULLING);
@@ -1173,7 +1181,7 @@ public class PullLayout extends ViewGroup implements IPullable {
                     }
                 } else {
                     if (isRight2LeftSlide) {
-                        if (dstScrollX > 0 && dstScrollX < mSecondIndicator.getIndicatorView().getWidth() * mInvokeDemarcationPercent) {
+                        if (dstScrollX > 0 && dstScrollX < mSecondIndicator.getIndicatorView().getWidth() * mInvokeDemarcationRelativePercent) {
                             if (mPullStatus == PullStatus.START_PULL || mPullStatus == PullStatus.RELEASE_TO_INVOKE) {
                                 mPullStatus = PullStatus.RIGHT_PULLING;
                                 mSecondIndicator.onPullStatusChange(PullStatus.RIGHT_PULLING);
@@ -1185,7 +1193,7 @@ public class PullLayout extends ViewGroup implements IPullable {
                             }
                         }
                     } else if (isLeft2RightSlide) {
-                        if (dstScrollX > 0 && dstScrollX < mSecondIndicator.getIndicatorView().getWidth() * mInvokeDemarcationPercent) {
+                        if (dstScrollX > 0 && dstScrollX < mSecondIndicator.getIndicatorView().getWidth() * mInvokeDemarcationRelativePercent) {
                             if (mPullStatus == PullStatus.RELEASE_TO_INVOKE) {
                                 mPullStatus = PullStatus.RIGHT_PULLING;
                                 mSecondIndicator.onPullStatusChange(PullStatus.RIGHT_PULLING);

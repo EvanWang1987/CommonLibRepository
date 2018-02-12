@@ -262,8 +262,8 @@
     <!-- ViewPager嵌套多重横向布局相关 -->
 
     <!-- 下拉刷新相关 -->
-    <string name="pull_to_refresh">下拉刷新</string>
-    <string name="with_view">Ptr with View</string>
+    <string name="pull_layout">拉动刷新</string>
+    <string name="with_text_view">Ptr with TextView</string>
     <string name="with_view_group">Ptr with ViewGroup</string>
     <string name="with_list_view">Ptr with ListView</string>
     <string name="with_grid_view">Ptr with GridView</string>
