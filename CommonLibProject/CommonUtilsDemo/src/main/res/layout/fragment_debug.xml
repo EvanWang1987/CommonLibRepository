@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:indicator_display_mode="scroll_with_content"
-    app:pull_direction="both_left_right">
+    app:pull_direction="both_top_bottom">
 
 
     <FrameLayout
@@ -44,18 +44,18 @@
 
     </FrameLayout>
 
-    <com.github.evan.common_utils.ui.view.pullable_view.indicator.ClassicProRefreshHorIndicator
-        android:id="@id/id_left_indicator"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
+    <com.github.evan.common_utils.ui.view.pullable_view.indicator.ClassicProRefreshIndicator
+        android:id="@id/id_top_indicator"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         app:pro_indicator_progress_drawable="@mipmap/icon_loading_small"
         app:pro_indicator_progress_rotation_direction="right"
         app:pro_indicator_progress_rotation_duration="1000" />
 
-    <com.github.evan.common_utils.ui.view.pullable_view.indicator.ClassicProRefreshHorIndicator
-        android:id="@id/id_right_indicator"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
+    <com.github.evan.common_utils.ui.view.pullable_view.indicator.ClassicProRefreshIndicator
+        android:id="@id/id_bottom_indicator"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         app:pro_indicator_progress_drawable="@mipmap/icon_loading_small"
         app:pro_indicator_progress_rotation_direction="right"
         app:pro_indicator_progress_rotation_duration="1000" />

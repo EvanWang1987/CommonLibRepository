@@ -556,6 +556,17 @@ public class PullLayout extends ViewGroup implements IPullable {
                 case BOTH_LEFT_RIGHT:
                     if (disX >= 0) {
                         if (isLeft2RightSlide) {
+                            boolean isContrarySideInvoking = isContrarySideInvoking(disX, disY, isTop2BottomSlide, isBottom2TopSlide, isLeft2RightSlide, isRight2LeftSlide);
+                            if(isContrarySideInvoking){
+                                if(dstScrollX <= 0){
+                                    scrollTo(0, 0);
+                                }else{
+                                    scrollBy((int) -(offsetX * mDamping), 0);
+                                }
+                                break;
+                            }
+
+
                             boolean isScrollOverStepIndicator = isScrollOverStepIndicator(isTop2BottomSlide, isBottom2TopSlide, isLeft2RightSlide, isRight2LeftSlide, scrollX, scrollY);
                             if (isScrollOverStepIndicator) {
                                 break;
@@ -577,6 +588,16 @@ public class PullLayout extends ViewGroup implements IPullable {
                         }
                     } else {
                         if (isRight2LeftSlide) {
+                            boolean isContrarySideInvoking = isContrarySideInvoking(disX, disY, isTop2BottomSlide, isBottom2TopSlide, isLeft2RightSlide, isRight2LeftSlide);
+                            if(isContrarySideInvoking){
+                                if(dstScrollX >= 0){
+                                    scrollTo(0, 0);
+                                }else{
+                                    scrollBy(-(int)(offsetX * mDamping), 0);
+                                }
+                                break;
+                            }
+
                             boolean isScrollOverStepIndicator = isScrollOverStepIndicator(isTop2BottomSlide, isBottom2TopSlide, isLeft2RightSlide, isRight2LeftSlide, scrollX, scrollY);
                             if (isScrollOverStepIndicator) {
                                 break;
@@ -709,7 +730,14 @@ public class PullLayout extends ViewGroup implements IPullable {
 
                     if (scrollY < 0) {
                         if (mPullStatus == PullStatus.INVOKING) {
-                            int dy = Math.abs(scrollY) - Math.abs(mFirstIndicator.getIndicatorView().getHeight());
+                            int dy = 0;
+                            int firstIndicatorHeight = mFirstIndicator.getIndicatorView().getHeight();
+                            int secondIndicatorHeight = mSecondIndicator.getIndicatorView().getHeight();
+                            if(mIsInvokingFromTop){
+                                dy = scrollY <= -firstIndicatorHeight ? Math.abs(scrollY) - firstIndicatorHeight : -(firstIndicatorHeight - Math.abs(scrollY));
+                            }else{
+                                dy = Math.abs(scrollY) + secondIndicatorHeight;
+                            }
                             mScroller.startScroll(0, scrollY, 0, dy, 800);
                             invalidate();
                             break;
@@ -735,7 +763,14 @@ public class PullLayout extends ViewGroup implements IPullable {
                         invalidate();
                     } else if (scrollY > 0) {
                         if (mPullStatus == PullStatus.INVOKING) {
-                            int dy = mSecondIndicator.getIndicatorView().getHeight() - scrollY;
+                            int dy = 0;
+                            int firstIndicatorHeight = mFirstIndicator.getIndicatorView().getHeight();
+                            int secondIndicatorHeight = mSecondIndicator.getIndicatorView().getHeight();
+                            if(mIsInvokingFromTop){
+                                dy = -(scrollY + firstIndicatorHeight);
+                            }else{
+                                dy = scrollY <= secondIndicatorHeight ? secondIndicatorHeight - scrollY : -(scrollY - secondIndicatorHeight);
+                            }
                             mScroller.startScroll(0, scrollY, 0, dy, 800);
                             invalidate();
                             break;
@@ -855,7 +890,15 @@ public class PullLayout extends ViewGroup implements IPullable {
 
                     if (scrollX < 0) {
                         if (mPullStatus == PullStatus.INVOKING) {
-                            mScroller.startScroll(scrollX, 0, -(Math.abs(mFirstIndicator.getIndicatorView().getWidth()) - Math.abs(scrollX)), 0, 800);
+                            int dy = 0;
+                            int firstIndicatorWidth = mFirstIndicator.getIndicatorView().getWidth();
+                            int secondIndicatorWidth = mSecondIndicator.getIndicatorView().getWidth();
+                            if(mIsInvokingFromLeft){
+                                dy = scrollX <= -firstIndicatorWidth ? Math.abs(scrollX) - firstIndicatorWidth : -(firstIndicatorWidth - Math.abs(scrollX));
+                            }else{
+                                dy = Math.abs(scrollX) + secondIndicatorWidth;
+                            }
+                            mScroller.startScroll(scrollX, 0, dy, 0, 800);
                             invalidate();
                             break;
                         }
@@ -878,7 +921,15 @@ public class PullLayout extends ViewGroup implements IPullable {
                         invalidate();
                     } else if (scrollX > 0) {
                         if (mPullStatus == PullStatus.INVOKING) {
-                            mScroller.startScroll(scrollX, 0, Math.abs(scrollX) - Math.abs(mFirstIndicator.getIndicatorView().getWidth()), 0, 800);
+                            int dy = 0;
+                            int firstIndicatorWidth = mFirstIndicator.getIndicatorView().getWidth();
+                            int secondIndicatorWidth = mSecondIndicator.getIndicatorView().getWidth();
+                            if(mIsInvokingFromLeft){
+                                dy = -(scrollX + firstIndicatorWidth);
+                            }else{
+                                dy = scrollX >= secondIndicatorWidth ? -(scrollX - secondIndicatorWidth) : -(secondIndicatorWidth - scrollX);
+                            }
+                            mScroller.startScroll(scrollX, 0, dy, 0, 800);
                             invalidate();
                             break;
                         }
