@@ -3,4 +3,20 @@
     <array name="function_title_array">
         <item>Custom EditText</item>
     </array>
+    <array name="pull_layout_direction">
+        <item>从上向下</item>
+        <item>从下向上</item>
+        <item>上下双方向</item>
+        <item>从左向右</item>
+        <item>从右向左</item>
+        <item>左右双方向</item>
+    </array>
+    <array name="pull_layout_indicator_style">
+        <item>经典样式</item>
+        <item>经典加强样式</item>
+    </array>
+    <array name="can_scroll_overstep_indicator">
+        <item>可以</item>
+        <item>禁止</item>
+    </array>
 </resources>

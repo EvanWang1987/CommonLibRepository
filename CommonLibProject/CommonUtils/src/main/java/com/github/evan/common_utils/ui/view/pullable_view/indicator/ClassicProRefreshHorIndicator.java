@@ -60,6 +60,7 @@ public class ClassicProRefreshHorIndicator extends LinearLayout implements IIndi
             case IDLE:
                 mRotationAnim.cancel();
                 mIcProgress.setRotation(0f);
+                mTxtTitle.setText(getResources().getString(R.string.pulling));
                 mLastPullStatus = PullStatus.IDLE;
                 break;
 

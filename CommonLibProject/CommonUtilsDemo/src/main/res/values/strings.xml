@@ -263,6 +263,10 @@
 
     <!-- 下拉刷新相关 -->
     <string name="pull_layout">拉动刷新</string>
+    <string name="choice_pull_direction">选择拉动方向</string>
+    <string name="choice_pull_indicator">选择指示器样式</string>
+    <string name="choice_can_scroll_overstep_indicator">指示器完全显示后能否继续拉动</string>
+    <string name="choice_damping">选择阻尼系数</string>
     <string name="with_text_view">Ptr with TextView</string>
     <string name="with_view_group">Ptr with ViewGroup</string>
     <string name="with_list_view">Ptr with ListView</string>

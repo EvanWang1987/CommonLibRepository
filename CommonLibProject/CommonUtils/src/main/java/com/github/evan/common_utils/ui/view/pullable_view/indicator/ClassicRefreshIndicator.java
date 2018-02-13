@@ -71,6 +71,7 @@ public class ClassicRefreshIndicator extends LinearLayout implements IIndicator 
                 mIcArrow.setRotation(0f);
                 mIcProgress.setVisibility(INVISIBLE);
                 mIcArrow.setVisibility(VISIBLE);
+                mTxtTitle.setText(getResources().getString(R.string.pulling));
                 mLastPullStatus = PullStatus.IDLE;
                 break;
 

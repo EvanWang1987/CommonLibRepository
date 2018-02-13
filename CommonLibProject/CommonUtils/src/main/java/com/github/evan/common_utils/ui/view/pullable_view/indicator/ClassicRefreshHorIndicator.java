@@ -73,6 +73,7 @@ public class ClassicRefreshHorIndicator extends LinearLayout implements IIndicat
                 mIcArrow.setRotation(0f);
                 mIcProgress.setVisibility(INVISIBLE);
                 mIcArrow.setVisibility(VISIBLE);
+                mTxtTitle.setText(getResources().getString(R.string.pulling));
                 mLastPullStatus = PullStatus.IDLE;
                 break;
 

@@ -63,6 +63,7 @@ public class ClassicProRefreshIndicator extends LinearLayout implements IIndicat
             case IDLE:
                 mRotationAnim.cancel();
                 mIcProgress.setRotation(0f);
+                mTxtTitle.setText(getResources().getString(R.string.pulling));
                 mLastPullStatus = PullStatus.IDLE;
                 break;
 
