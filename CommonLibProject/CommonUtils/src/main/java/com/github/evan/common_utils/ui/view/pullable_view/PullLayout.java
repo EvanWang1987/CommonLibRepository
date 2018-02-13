@@ -158,10 +158,10 @@ public class PullLayout extends ViewGroup implements IPullable {
         mContentView = content;
         if (autoRequestLayout) {
             super.addView(content, -1, generateDefaultLayoutParams());
+            return true;
         } else {
-            UiUtil.addViewInner(this, content, -1, false);
+            return UiUtil.addViewInner(this, content, -1, false);
         }
-        return false;
     }
 
     public void setPullListener(PullListener pullListener) {
