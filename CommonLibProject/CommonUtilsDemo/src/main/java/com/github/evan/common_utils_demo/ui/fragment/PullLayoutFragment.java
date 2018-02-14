@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 
 import com.github.evan.common_utils.ui.fragment.BaseFragment;
 import com.github.evan.common_utils_demo.R;
+import com.github.evan.common_utils_demo.ui.activity.pullLayoutActivity.PullWithListViewActivity;
 import com.github.evan.common_utils_demo.ui.activity.pullLayoutActivity.PullWithTextViewActivity;
 import com.github.evan.common_utils_demo.ui.activity.pullLayoutActivity.PullWithViewGroupActivity;
 
@@ -45,7 +46,7 @@ public class PullLayoutFragment extends BaseFragment {
                 break;
 
             case R.id.card_pull_layout_with_list_view:
-
+                loadActivity(PullWithListViewActivity.class);
                 break;
 
             case R.id.card_pull_layout_with_grid_view:

@@ -14,11 +14,11 @@ import com.github.evan.common_utils_demo.R;
 /**
  * Created by Evan on 2018/2/12.
  */
-public class PullWithTextViewActivity extends BasePullLayoutActivity implements PullChecker {
+public class PullWithTextViewActivity extends BasePullLayoutActivity {
 
     @Override
     public boolean checkCanPull(boolean isTop2BottomSlide, boolean isBottom2TopSlide, boolean isLeft2RightSlide, boolean isRight2LeftSlide) {
-        return false;
+        return true;
     }
 
     @Override

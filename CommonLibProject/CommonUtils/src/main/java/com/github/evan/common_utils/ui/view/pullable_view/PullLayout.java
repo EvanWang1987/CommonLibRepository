@@ -1592,10 +1592,10 @@ public class PullLayout extends ViewGroup implements IPullable {
             case BOTH_LEFT_RIGHT:
                 if (mIndicatorDisplayMode == IndicatorDisplayMode.SCROLL_WITH_CONTENT) {
                     firstIndicatorView.layout(l - firstIndicatorParams.rightMargin - firstIndicatorView.getMeasuredWidth(), t + firstIndicatorParams.topMargin, l - firstIndicatorParams.rightMargin, b - firstIndicatorParams.bottomMargin);
-                    secondIndicatorView.layout(r + firstIndicatorParams.leftMargin, t + firstIndicatorParams.topMargin, r + firstIndicatorParams.leftMargin + firstIndicatorView.getMeasuredWidth(), b - firstIndicatorParams.bottomMargin);
+                    secondIndicatorView.layout(r + secondIndicatorParams.leftMargin, t + secondIndicatorParams.topMargin, r + secondIndicatorParams.leftMargin + secondIndicatorView.getMeasuredWidth(), b - secondIndicatorParams.bottomMargin);
                 } else {
                     firstIndicatorView.layout(l + firstIndicatorParams.leftMargin, t + firstIndicatorParams.topMargin, l + (firstIndicatorView.getMeasuredWidth() + firstIndicatorParams.leftMargin + firstIndicatorParams.rightMargin), b - firstIndicatorParams.bottomMargin);
-                    secondIndicatorView.layout(r - (firstIndicatorView.getMeasuredWidth() + firstIndicatorParams.rightMargin), t - firstIndicatorParams.topMargin, r - firstIndicatorParams.rightMargin, b - firstIndicatorParams.bottomMargin);
+                    secondIndicatorView.layout(r - (secondIndicatorView.getMeasuredWidth() + secondIndicatorParams.rightMargin), t - secondIndicatorParams.topMargin, r - secondIndicatorParams.rightMargin, b - secondIndicatorParams.bottomMargin);
                 }
                 break;
         }

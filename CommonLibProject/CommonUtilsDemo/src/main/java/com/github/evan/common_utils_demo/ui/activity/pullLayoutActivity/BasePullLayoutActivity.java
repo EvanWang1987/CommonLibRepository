@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import com.github.evan.common_utils.ui.activity.BaseActivity;
 import com.github.evan.common_utils.ui.activity.BaseActivityConfig;
+import com.github.evan.common_utils.ui.view.pullable_view.PullChecker;
 import com.github.evan.common_utils.ui.view.pullable_view.PullDirection;
 import com.github.evan.common_utils.ui.view.pullable_view.PullLayout;
 import com.github.evan.common_utils.ui.view.pullable_view.indicator.ClassicProRefreshHorIndicator;
@@ -25,7 +26,7 @@ import butterknife.ButterKnife;
 /**
  * Created by Evan on 2018/2/13.
  */
-public abstract class BasePullLayoutActivity extends BaseActivity implements DialogInterface.OnClickListener, View.OnClickListener {
+public abstract class BasePullLayoutActivity extends BaseActivity implements DialogInterface.OnClickListener, View.OnClickListener, PullChecker {
     public abstract View onCreateView(LayoutInflater inflater);
     public abstract void onAutoInvokeButtonClick(View view);
     public abstract void onAutoInvokeSecondIndicatorButtonClick(View view);
@@ -68,6 +69,7 @@ public abstract class BasePullLayoutActivity extends BaseActivity implements Dia
         mChoiceIndicatorDialog.setCanceledOnTouchOutside(false);
         mCanScrollOverstepIndicatorDialog.setCanceledOnTouchOutside(false);
         mPullLayout = new PullLayout(this);
+        mPullLayout.setPullChecker(this);
         mChoiceDirectionDialog.show();
     }
 
@@ -267,4 +269,5 @@ public abstract class BasePullLayoutActivity extends BaseActivity implements Dia
         }
         return indicators;
     }
+
 }

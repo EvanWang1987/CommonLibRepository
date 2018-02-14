@@ -24,10 +24,11 @@ public abstract class BaseActivity extends AppCompatActivity implements SoftHand
     protected static final int IDLE = 0;
     protected static final int UNKNOW_ERROR = -1;
     protected static final int LOAD_COMPLETE = 1;
-    protected static final int NET_UNAVAILABLE = 2;
-    protected static final int NET_TIME_OUT = 3;
-    protected static final int LOAD_EMPTY = 4;
-    protected static final int LOAD_ERROR = 5;
+    protected static final int LOAD_MORE_COMPLETE = 2;
+    protected static final int NET_UNAVAILABLE = 3;
+    protected static final int NET_TIME_OUT = 4;
+    protected static final int LOAD_EMPTY = 5;
+    protected static final int LOAD_ERROR = 6;
 
     public abstract @LayoutRes int getLayoutResId();
     public abstract BaseActivityConfig onCreateActivityConfig();

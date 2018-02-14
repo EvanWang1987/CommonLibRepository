@@ -32,4 +32,8 @@ public class PullWithViewGroupActivity extends BasePullLayoutActivity {
         mPullLayout.invokeComplete();
     }
 
+    @Override
+    public boolean checkCanPull(boolean isTop2BottomSlide, boolean isBottom2TopSlide, boolean isLeft2RightSlide, boolean isRight2LeftSlide) {
+        return true;
+    }
 }
