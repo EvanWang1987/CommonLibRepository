@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <declare-styleable name="ClassicFloatingRefreshHorIndicator">
+        <attr name="floating_classic_indicator_hor_progress_drawable" format="reference"/>
+        <attr name="floating_classic_indicator_hor_arrow_drawable" format="reference"/>
+        <attr name="floating_classic_indicator_hor_time_flag" format="string"/>
+    </declare-styleable>
+
+    <declare-styleable name="ClassicFloatingRefreshIndicator">
+        <attr name="floating_classic_indicator_progress_drawable" format="reference"/>
+        <attr name="floating_classic_indicator_arrow_drawable" format="reference"/>
+        <attr name="floating_classic_indicator_time_flag" format="string"/>
+    </declare-styleable>
+
     <declare-styleable name="ClassicProRefreshIndicator">
         <attr name="pro_indicator_progress_drawable" format="reference"/>
         <attr name="pro_indicator_progress_rotation_duration" format="integer"/>
@@ -56,6 +68,36 @@
         <attr name="can_scroll_overstep_indicator" format="boolean"/>
         <!-- 运行完毕后回滚动画时长 -->
         <attr name="invoke_complete_animation_duration" format="integer"/>
+        <!-- 是否阻止横向滑动拦截到下拉刷新布局 -->
+        <attr name="is_prevent_horizontal_slide" format="boolean"/>
+        <!-- 是否阻止竖向滑动拦截到下拉刷新布局 -->
+        <attr name="is_prevent_vertical_slide" format="boolean"/>
+    </declare-styleable>
+
+    <declare-styleable name="FloatingPullLayout">
+        <!-- 拉动方向 -->
+        <attr name="floating_pull_direction" format="enum">
+            <enum name="unknown" value="-1"/>
+            <enum name="top_to_bottom" value="1"/>
+            <enum name="bottom_to_top" value="2"/>
+            <enum name="left_to_right" value="3"/>
+            <enum name="right_to_left" value="4"/>
+            <enum name="both_top_bottom" value="5"/>
+            <enum name="both_left_right" value="6"/>
+        </attr>
+
+        <!-- 运行触发线，相对于Indicator的百分比 -->
+        <attr name="floating_invoke_demarcation_relative_indicator" format="float"/>
+        <!-- 阻尼 -->
+        <attr name="floating_damping" format="float"/>
+        <!-- Indicator拖出后，是否能继续拖动 -->
+        <attr name="floating_can_scroll_overstep_indicator" format="boolean"/>
+        <!-- 运行完毕后回滚动画时长 -->
+        <attr name="floating_invoke_complete_animation_duration" format="integer"/>
+        <!-- 是否阻止横向滑动拦截到下拉刷新布局 -->
+        <attr name="floating_is_prevent_horizontal_slide" format="boolean"/>
+        <!-- 是否阻止竖向滑动拦截到下拉刷新布局 -->
+        <attr name="floating_is_prevent_vertical_slide" format="boolean"/>
     </declare-styleable>
 
     <declare-styleable name="SlideExitLayout">

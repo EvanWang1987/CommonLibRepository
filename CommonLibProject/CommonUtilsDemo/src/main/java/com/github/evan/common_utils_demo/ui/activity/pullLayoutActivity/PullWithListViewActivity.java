@@ -9,6 +9,7 @@ import android.widget.ListView;
 import com.github.evan.common_utils.manager.threadManager.ThreadManager;
 import com.github.evan.common_utils.ui.view.pullable_view.PullListener;
 import com.github.evan.common_utils.utils.DensityUtil;
+import com.github.evan.common_utils_demo.R;
 import com.github.evan.common_utils_demo.ui.adapter.absListViewAdapter.DefaultAdapter;
 import java.util.ArrayList;
 import java.util.List;
@@ -59,6 +60,7 @@ public class PullWithListViewActivity extends BasePullLayoutActivity implements 
         mDefaultAdapter = new DefaultAdapter(this);
         mListView.setAdapter(mDefaultAdapter);
         mPullLayout.setPullListener(this);
+        mListView.setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.White)));
         return mListView;
     }
 

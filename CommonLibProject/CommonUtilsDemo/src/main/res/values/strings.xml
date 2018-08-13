@@ -263,6 +263,7 @@
 
     <!-- 下拉刷新相关 -->
     <string name="pull_layout">拉动刷新</string>
+    <string name="choice_is_pull_layout_floating">选择拉动布局是否悬浮</string>
     <string name="choice_pull_direction">选择拉动方向</string>
     <string name="choice_pull_indicator">选择指示器样式</string>
     <string name="choice_can_scroll_overstep_indicator">指示器完全显示后能否继续拉动</string>

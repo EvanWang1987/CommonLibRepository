@@ -124,7 +124,17 @@ public class ClassicRefreshIndicator extends LinearLayout implements IIndicator 
     }
 
     @Override
-    public void onDistanceChange(int x, int y) {
+    public void onDistanceChange(int x, int y, float dXPercentRelativeScreen, float dYPercentRelativeScreen) {
+
+    }
+
+    @Override
+    public void onSlideOverIndicator(boolean isSlideOverIndicator) {
+
+    }
+
+    @Override
+    public void onDistanceChangeWhenSlideOverIndicator(int x, int y, float dXPercentRelativeScreen, float dYPercentRelativeScreen) {
 
     }
 

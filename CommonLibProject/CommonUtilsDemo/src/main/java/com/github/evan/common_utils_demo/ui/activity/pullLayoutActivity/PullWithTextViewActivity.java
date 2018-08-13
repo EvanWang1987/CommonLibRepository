@@ -1,5 +1,6 @@
 package com.github.evan.common_utils_demo.ui.activity.pullLayoutActivity;
 
+import android.graphics.drawable.ColorDrawable;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -29,17 +30,26 @@ public class PullWithTextViewActivity extends BasePullLayoutActivity {
         textView.getPaint().setFakeBoldText(true);
         textView.setGravity(Gravity.CENTER);
         textView.setText(R.string.with_text_view);
+        textView.setBackgroundDrawable(new ColorDrawable(getResources().getColor(android.R.color.white)));
         return textView;
     }
 
     @Override
     public void onAutoInvokeButtonClick(View view) {
-        mPullLayout.autoInvoke(false, 800);
+        if(mIsFloatingPullLayout){
+            mFloatingPullLayout.autoInvoke(false, 800);
+        }else{
+            mPullLayout.autoInvoke(false, 800);
+        }
     }
 
     @Override
     public void onAutoInvokeSecondIndicatorButtonClick(View view) {
-        mPullLayout.autoInvoke(true, 800);
+        if(mIsFloatingPullLayout){
+            mFloatingPullLayout.autoInvoke(true, 800);
+        }else{
+            mPullLayout.autoInvoke(true, 800);
+        }
     }
 
     @Override

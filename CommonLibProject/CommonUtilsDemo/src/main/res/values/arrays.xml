@@ -3,6 +3,10 @@
     <array name="function_title_array">
         <item>Custom EditText</item>
     </array>
+    <array name="is_pull_layout_floating">
+        <item>悬浮</item>
+        <item>不悬浮</item>
+    </array>
     <array name="pull_layout_direction">
         <item>从上向下</item>
         <item>从下向上</item>
@@ -14,6 +18,7 @@
     <array name="pull_layout_indicator_style">
         <item>经典样式</item>
         <item>经典加强样式</item>
+        <item>IOS样式</item>
     </array>
     <array name="can_scroll_overstep_indicator">
         <item>可以</item>

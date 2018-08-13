@@ -93,7 +93,7 @@ public class ClassicProRefreshHorIndicator extends LinearLayout implements IIndi
     }
 
     @Override
-    public void onDistanceChange(int x, int y) {
+    public void onDistanceChange(int x, int y, float dXPercentRelativeScreen, float dYPercentRelativeScreen) {
         if (x == 0) {
             return;
         }
@@ -117,6 +117,16 @@ public class ClassicProRefreshHorIndicator extends LinearLayout implements IIndi
         }
 
         mIcProgress.setRotation(rotationAngel);
+    }
+
+    @Override
+    public void onSlideOverIndicator(boolean isSlideOverIndicator) {
+
+    }
+
+    @Override
+    public void onDistanceChangeWhenSlideOverIndicator(int x, int y, float dXPercentRelativeScreen, float dYPercentRelativeScreen) {
+
     }
 
     private void init(AttributeSet attrs, int defStyleAttr) {

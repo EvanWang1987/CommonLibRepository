@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="match_parent"
+    android:background="@color/background_dark_gray">
+
+    <LinearLayout
+        android:id="@+id/txt_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/txt_title_indicator_classic"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="1"
+            android:text="@string/pulling"
+            android:textColor="@color/text_color_gray"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/txt_desc_indicator_classic"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:gravity="center_horizontal"
+            android:maxEms="5"
+            android:text="@string/last_refresh_time"
+            android:textColor="@color/text_color_gray"
+            android:textSize="12sp" />
+
+    </LinearLayout>
+
+
+    <ImageView
+        android:id="@+id/ic_arrow_classic_floating"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/txt_layout"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="30dp"
+        android:src="@mipmap/ic_ios_refresh_arrow_left" />
+
+
+    <ImageView
+        android:id="@+id/ic_floating_progress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/txt_layout"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:layout_marginBottom="30dp"
+        android:src="@drawable/animation_loading_frame" />
+
+</RelativeLayout>

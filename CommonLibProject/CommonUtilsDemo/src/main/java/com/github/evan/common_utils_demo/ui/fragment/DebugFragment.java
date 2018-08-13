@@ -5,14 +5,13 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
 import com.github.evan.common_utils.ui.fragment.BaseFragment;
+import com.github.evan.common_utils.ui.view.pullable_view.FloatingPullLayout;
 import com.github.evan.common_utils.ui.view.pullable_view.PullChecker;
 import com.github.evan.common_utils.ui.view.pullable_view.PullLayout;
 import com.github.evan.common_utils.ui.view.pullable_view.PullListener;
 import com.github.evan.common_utils.utils.ToastUtil;
 import com.github.evan.common_utils_demo.R;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;

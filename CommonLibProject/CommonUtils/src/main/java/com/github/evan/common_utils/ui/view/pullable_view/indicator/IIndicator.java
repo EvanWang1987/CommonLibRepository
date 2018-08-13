@@ -13,6 +13,10 @@ public interface IIndicator {
 
     void onPullStatusChange(PullStatus status);
 
-    void onDistanceChange(int x, int y);
+    void onDistanceChange(int dX, int dY, float dXPercentRelativeParent, float dYPercentRelativeParent);
+
+    void onSlideOverIndicator(boolean isSlideOverIndicator);
+
+    void onDistanceChangeWhenSlideOverIndicator(int dX, int dY, float dXPercentRelativeParent, float dYPercentRelativeParent);
 
 }

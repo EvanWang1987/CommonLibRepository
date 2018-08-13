@@ -19,11 +19,23 @@ public class UiUtil {
         }
 
         try {
-            Class<?> superclass = parent.getClass().getSuperclass();
-            Method addViewInnerMethod = superclass.getDeclaredMethod("addViewInner", View.class, int.class, ViewGroup.LayoutParams.class, boolean.class);
-            addViewInnerMethod.setAccessible(true);
-            addViewInnerMethod.invoke(parent, child, index, child.getLayoutParams(), preventRequestLayout);
-            return true;
+            Class<? extends ViewGroup> aClass = parent.getClass();
+            if(aClass.isAssignableFrom(ViewGroup.class)){
+                Class<?> superclass = parent.getClass().getSuperclass();
+                Method addViewInnerMethod = superclass.getDeclaredMethod("addViewInner", View.class, int.class, ViewGroup.LayoutParams.class, boolean.class);
+                addViewInnerMethod.setAccessible(true);
+                addViewInnerMethod.invoke(parent, child, index, child.getLayoutParams(), preventRequestLayout);
+                return true;
+            }else{
+                Class<?> superclass = aClass.getSuperclass();
+                while (!superclass.isAssignableFrom(ViewGroup.class)){
+                    superclass = superclass.getSuperclass();
+                }
+                Method addViewInnerMethod = superclass.getDeclaredMethod("addViewInner", View.class, int.class, ViewGroup.LayoutParams.class, boolean.class);
+                addViewInnerMethod.setAccessible(true);
+                addViewInnerMethod.invoke(parent, child, index, child.getLayoutParams(), preventRequestLayout);
+                return true;
+            }
         } catch (NoSuchMethodException e) {
             e.printStackTrace();
         } catch (InvocationTargetException e) {
