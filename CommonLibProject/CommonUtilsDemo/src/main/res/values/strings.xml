@@ -195,6 +195,15 @@
     <string name="stop_demo">停止演示</string>
     <!-- 线程相关 -->
 
+    <!-- Activity相关 -->
+    <string name="activity">Activity</string>
+    <string name="life_cycle">生命周期</string>
+    <string name="task_stack">任务栈</string>
+    <string name="activity_a">Activity A</string>
+    <string name="activity_b">Activity B</string>
+    <string name="finish">关闭</string>
+    <!-- Activity相关 -->
+
     <!-- Fragment相关 -->
     <string name="fragment">Fragment</string>
     <string name="jump">跳转</string>
