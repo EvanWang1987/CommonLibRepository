@@ -37,6 +37,11 @@
         <activity android:name=".ui.activity.aboutActivity.LifeCycleActivity"/>
         <activity android:name=".ui.activity.aboutActivity.ActivityA"/>
         <activity android:name=".ui.activity.aboutActivity.ActivityB"/>
+        <activity android:name=".ui.activity.aboutActivity.TaskStackActivity"/>
+        <activity android:name=".ui.activity.aboutActivity.ExtrasInformationActivity"/>
+        <activity android:name=".ui.activity.aboutActivity.ExtrasInformationSingleTopActivity" android:launchMode="singleTop"/>
+        <activity android:name=".ui.activity.aboutActivity.ExtrasInformationSingleInstanceActivity" android:launchMode="singleInstance"/>
+        <activity android:name=".ui.activity.aboutActivity.ExtrasInformationSingleTaskActivity" android:launchMode="singleTask"/>
     </application>
 
 </manifest>

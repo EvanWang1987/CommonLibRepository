@@ -201,6 +201,12 @@
     <string name="task_stack">任务栈</string>
     <string name="activity_a">Activity A</string>
     <string name="activity_b">Activity B</string>
+    <string name="standard_mode">Standard Mode</string>
+    <string name="single_top_mode">SingleTop Mode</string>
+    <string name="single_task_mode">SingleTask Mode</string>
+    <string name="single_instance_mode">SingleInstance Mode</string>
+    <string name="start_activity">开启Activity</string>
+    <string name="choice_task_stack_mode">选择启动模式</string>
     <string name="finish">关闭</string>
     <!-- Activity相关 -->
 
