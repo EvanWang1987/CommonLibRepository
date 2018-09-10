@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Looper;
 import android.os.Message;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 
 import com.github.evan.common_utils.handler.SoftHandler;
@@ -15,7 +16,7 @@ import com.github.evan.common_utils.handler.SoftHandlerReceiver;
 /**
  * Created by Evan on 2017/11/4.
  */
-public abstract class BaseFragment extends android.support.v4.app.Fragment implements SoftHandlerReceiver {
+public abstract class BaseFragment extends android.support.v4.app.Fragment implements SoftHandlerReceiver, FragmentProvider {
     protected abstract void loadData();
 
     protected static final int IDLE = 0;
@@ -29,6 +30,11 @@ public abstract class BaseFragment extends android.support.v4.app.Fragment imple
     private SoftHandler<BaseFragment> mHandler = new SoftHandler<>(Looper.getMainLooper());
     private LayoutInflater mLayoutInflater;
     private boolean mIsLoadedDataAtFirstHiddenChange = false;
+
+    @Override
+    public BaseFragment getFragment() {
+        return this;
+    }
 
     @Override
     public void onAttach(Context context) {

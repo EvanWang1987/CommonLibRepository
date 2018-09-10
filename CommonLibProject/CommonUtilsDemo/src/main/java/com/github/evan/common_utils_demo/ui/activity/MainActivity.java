@@ -26,6 +26,7 @@ import android.view.MenuItem;
 import android.view.View;
 import com.github.evan.common_utils.ui.activity.BaseActivity;
 import com.github.evan.common_utils.ui.activity.BaseActivityConfig;
+import com.github.evan.common_utils.ui.activity.BaseFragmentActivity;
 import com.github.evan.common_utils.ui.deskIcon.DeskIconManager;
 import com.github.evan.common_utils.utils.FragmentUtil;
 import com.github.evan.common_utils.utils.PackageUtil;
@@ -56,6 +57,7 @@ import com.github.evan.common_utils_demo.ui.fragment.ViewPagerFragment;
 import com.github.evan.common_utils_demo.ui.fragment.ViewPagerNestListViewFragment;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import butterknife.BindView;
@@ -65,7 +67,7 @@ import butterknife.OnClick;
 /**
  * Created by Evan on 2017/11/9.
  */
-public class MainActivity extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends BaseFragmentActivity implements NavigationView.OnNavigationItemSelectedListener {
     private static final int PERMISSION_REQUEST_CODE = 101;
     private static final String[] fragmentNames = {HomeFragment.class.getName(), DeviceInformationFragment.class.getName(), CalculatorFragment.class.getName(), ArithmeticFragment.class.getName(), CollectionFragment.class.getName(), ThreadFragment.class.getName(), NetworkManagerFragment.class.getName(), AboutFragmentFragment.class.getName(), HandlerFragment.class.getName(), ListGridViewFragment.class.getName(), RecyclerViewFragment.class.getName(), VerNestHorScrollViewFragment.class.getName(), HorNestVerScrollViewFragment.class.getName(), ViewPagerFragment.class.getName(), ViewPagerNestListViewFragment.class.getName(), PullLayoutFragment.class.getName(), SlideExitActivityFragment.class.getName(), QRCodeFragment.class.getName(), CustomEditTextFragment.class.getName(), FlagViewFragment.class.getName(), TintFragment.class.getName(), DebugFragment.class.getName()};
 
@@ -88,6 +90,22 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 
 
     @Override
+    protected List<String> getFragmentName() {
+        List<String> strings = Arrays.asList(fragmentNames);
+        return strings;
+    }
+
+    @Override
+    protected String showWhichFragmentWhenInitialized() {
+        return HomeFragment.class.getName();
+    }
+
+    @Override
+    protected int getFragmentContainerId() {
+        return R.id.fragmentContainer;
+    }
+
+    @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ButterKnife.bind(this);
@@ -102,7 +120,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
             }
         });
         mNavigationView.setNavigationItemSelectedListener(this);
-        FragmentUtil.addAllFragmentAndShowSomeOne(this, getSupportFragmentManager(), R.id.fragmentContainer, fragmentNames, true, null, HomeFragment.class.getName());
+//        FragmentUtil.addAllFragmentAndShowSomeOne(this, getSupportFragmentManager(), R.id.fragmentContainer, fragmentNames, true, null, HomeFragment.class.getName());
         mNavigationView.setCheckedItem(R.id.functionHome);
         List<String> unRequestedPermission = PackageUtil.checkPermission(Manifest.permission.VIBRATE, Manifest.permission.CAMERA, Manifest.permission.INTERNET, Manifest.permission.ACCESS_WIFI_STATE, Manifest.permission.ACCESS_NETWORK_STATE, Manifest.permission.CHANGE_WIFI_STATE, Manifest.permission.CHANGE_NETWORK_STATE, Manifest.permission.CHANGE_WIFI_MULTICAST_STATE, Manifest.permission.WRITE_EXTERNAL_STORAGE, Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN ? Manifest.permission.READ_EXTERNAL_STORAGE : null);
         if (!unRequestedPermission.isEmpty()) {
