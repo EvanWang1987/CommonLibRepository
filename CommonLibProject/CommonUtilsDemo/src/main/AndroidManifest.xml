@@ -33,6 +33,7 @@
         <activity android:name=".ui.activity.mediaControllerActivity.CommonMediaControllerActivity"/>
         <activity android:name=".ui.activity.slideExitActivity.SlideExitDemoActivity" android:theme="@style/AppCompatLightNoActionBarTransparentActivity"/>
         <activity android:name=".ui.activity.slideExitActivity.MultiNestingDemoActivity" android:theme="@style/AppCompatLightNoActionBarTransparentActivity"/>
+        <activity android:name=".ui.activity.SwitchFragmentActivity"/>
     </application>
 
 </manifest>

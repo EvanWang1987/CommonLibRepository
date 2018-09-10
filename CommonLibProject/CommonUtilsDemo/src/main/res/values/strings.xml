@@ -202,6 +202,9 @@
     <string name="with_extras">携带数据</string>
     <string name="print_stack">打印栈</string>
     <string name="fragment_back_stack">Fragment回退栈</string>
+    <string name="fragment_switch">Fragment切换</string>
+    <string name="fragment_switch_next">切换下一个</string>
+    <string name="fragment_switch_previews">切换上一个</string>
     <string name="fragment_a">Fragment A</string>
     <string name="jump_fragment_b_with_extra">携带数据跳转到Fragment B</string>
     <string name="fragment_b">Fragment B</string>

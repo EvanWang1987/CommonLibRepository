@@ -58,7 +58,6 @@ public class FragmentUtil {
         }
 
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        List<Fragment> fragments = new ArrayList<>();
         for (int i = 0, length = tags.size(); i < length; i++) {
             String tag = tags.get(i);
             Fragment fragment = fragmentManager.findFragmentByTag(tag);

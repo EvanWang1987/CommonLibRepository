@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import com.github.evan.common_utils.ui.activity.SinglePhotoActivity;
 import com.github.evan.common_utils.ui.fragment.BaseFragment;
 import com.github.evan.common_utils_demo.R;
+import com.github.evan.common_utils_demo.ui.activity.SwitchFragmentActivity;
 import com.github.evan.common_utils_demo.ui.activity.aboutFragment.FragmentBackStackActivity;
 
 import butterknife.ButterKnife;
@@ -32,7 +33,7 @@ public class AboutFragmentFragment extends BaseFragment {
 
     }
 
-    @OnClick({R.id.card_fragment_life, R.id.card_fragment_back_stack})
+    @OnClick({R.id.card_fragment_life, R.id.card_fragment_back_stack, R.id.card_switch_fragment})
     void onClick(View view) {
         switch (view.getId()) {
             case R.id.card_fragment_life:
@@ -43,6 +44,10 @@ public class AboutFragmentFragment extends BaseFragment {
 
             case R.id.card_fragment_back_stack:
                 loadActivity(FragmentBackStackActivity.class);
+                break;
+
+            case R.id.card_switch_fragment:
+                loadActivity(SwitchFragmentActivity.class);
                 break;
         }
     }

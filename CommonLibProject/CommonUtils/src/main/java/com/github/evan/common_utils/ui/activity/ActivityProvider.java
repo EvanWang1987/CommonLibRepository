@@ -21,5 +21,7 @@ public interface ActivityProvider {
 
     BaseFragmentActivity getHostActivity();
 
+    void switchFragment(String tag);
+
 
 }

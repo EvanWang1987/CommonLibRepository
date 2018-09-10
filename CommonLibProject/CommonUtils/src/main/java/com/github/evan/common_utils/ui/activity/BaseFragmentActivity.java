@@ -43,7 +43,9 @@ public abstract class BaseFragmentActivity extends BaseActivity implements Activ
             String fragmentName = fragmentNames.get(i);
             Fragment fragment = Fragment.instantiate(this, fragmentName);
             if(fragment instanceof FragmentProvider){
-                mFragments.put(fragmentName, (FragmentProvider) fragment);
+                FragmentProvider fragmentProvider = (FragmentProvider) fragment;
+                fragmentProvider.setActivityProvider(this);
+                mFragments.put(fragmentName, fragmentProvider);
                 fragmentTransaction.add(fragmentContainerId, fragment, fragmentName);
                 if(!fragmentName.equals(whichWillBeShowing)){
                     fragmentTransaction.hide(fragment);
@@ -60,6 +62,7 @@ public abstract class BaseFragmentActivity extends BaseActivity implements Activ
         mFragmentTags.addAll(fragmentNames);
     }
 
+    @Override
     public void switchFragment(String tagWhichBeShowing){
         FragmentUtil.switchFragment(mFragmentManager, mFragmentTags, tagWhichBeShowing);
         mShowingFragmentTag = tagWhichBeShowing;

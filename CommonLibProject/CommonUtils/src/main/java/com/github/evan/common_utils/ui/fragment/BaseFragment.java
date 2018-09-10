@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 
 import com.github.evan.common_utils.handler.SoftHandler;
 import com.github.evan.common_utils.handler.SoftHandlerReceiver;
+import com.github.evan.common_utils.ui.activity.ActivityProvider;
 
 /**
  * Created by Evan on 2017/11/4.
@@ -30,6 +31,17 @@ public abstract class BaseFragment extends android.support.v4.app.Fragment imple
     private SoftHandler<BaseFragment> mHandler = new SoftHandler<>(Looper.getMainLooper());
     private LayoutInflater mLayoutInflater;
     private boolean mIsLoadedDataAtFirstHiddenChange = false;
+    private ActivityProvider mActivityProvider;
+
+    @Override
+    public void setActivityProvider(ActivityProvider activityProvider) {
+        mActivityProvider = activityProvider;
+    }
+
+    @Override
+    public ActivityProvider getActivityProvider() {
+        return mActivityProvider;
+    }
 
     @Override
     public BaseFragment getFragment() {
@@ -42,10 +54,15 @@ public abstract class BaseFragment extends android.support.v4.app.Fragment imple
         mLayoutInflater = LayoutInflater.from(context);
     }
 
+    public LayoutInflater getLayoutInflater() {
+        return mLayoutInflater;
+    }
+
     @Override
     public void onDestroyView() {
         mHandler.clearReceiver();
         mHandler.removeCallbacksAndMessages(null);
+        mActivityProvider = null;
         super.onDestroyView();
     }
 
