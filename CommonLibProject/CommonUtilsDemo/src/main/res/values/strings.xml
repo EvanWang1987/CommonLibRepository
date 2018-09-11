@@ -1,5 +1,8 @@
 <resources>
     <string name="app_name">CommonUtilsDemo</string>
+    <string name="redirect_ui_action">com.github.evan.redirect_ui</string>
+
+
     <string name="warning">警告</string>
     <string name="exit">退出</string>
     <string name="you_do_not_give_the_permission">您没有基于以下权限,App无法正常运行,请重新打开App或者在系统设置中给予响应的权限. \n %1$s</string>
@@ -199,6 +202,7 @@
     <string name="activity">Activity</string>
     <string name="life_cycle">生命周期</string>
     <string name="task_stack">任务栈</string>
+    <string name="scheme_jump">Scheme跳转</string>
     <string name="activity_a">Activity A</string>
     <string name="activity_b">Activity B</string>
     <string name="standard_mode">Standard Mode</string>
@@ -208,6 +212,14 @@
     <string name="start_activity">开启Activity</string>
     <string name="choice_task_stack_mode">选择启动模式</string>
     <string name="finish">关闭</string>
+    <string name="input_jump_url">请输入跳转的URL</string>
+    <string name="jump_array_list_ui">跳转到ArrayList界面</string>
+    <string name="jump_linked_list_ui">跳转到LinkedList界面</string>
+    <string name="jump_hash_set_ui">跳转到HashSet界面</string>
+    <string name="jump_tree_set_ui">跳转到TreeSet界面</string>
+    <string name="jump_hash_map_ui">跳转到HashMap界面</string>
+    <string name="jump_tree_map_ui">跳转到TreeMap界面</string>
+    <string name="empty_jump_code">空的跳转码</string>
     <!-- Activity相关 -->
 
     <!-- Fragment相关 -->
