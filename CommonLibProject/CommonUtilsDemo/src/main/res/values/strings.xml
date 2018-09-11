@@ -222,6 +222,17 @@
     <string name="empty_jump_code">空的跳转码</string>
     <!-- Activity相关 -->
 
+    <!-- Service -->
+    <string name="service">Service</string>
+    <string name="service_start_mode">start开启模式</string>
+    <string name="service_bind_mode">bind开启模式</string>
+    <string name="start_service">start service A</string>
+    <string name="stop_service">stop service A</string>
+    <string name="bind_service">bind service A</string>
+    <string name="unbind_service">unbind service A</string>
+    <string name="invoke_binder">调用Binder函数</string>
+    <!-- Service -->
+
     <!-- Fragment相关 -->
     <string name="fragment">Fragment</string>
     <string name="jump">跳转</string>

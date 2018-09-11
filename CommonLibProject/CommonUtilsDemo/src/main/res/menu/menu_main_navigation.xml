@@ -9,6 +9,7 @@
         <item android:id="@+id/functionAboutThread" android:title="@string/about_thread" android:icon="@drawable/selector_thread_black" />
         <item android:id="@+id/functionAboutHandler" android:title="@string/about_handler" android:icon="@drawable/selector_handler_black" />
         <item android:id="@+id/functionAboutActivity" android:title="@string/activity" android:icon="@drawable/selector_activity_black" />
+        <item android:id="@+id/functionAboutService" android:title="@string/service" android:icon="@drawable/selector_service_black" />
         <item android:id="@+id/functionAboutFragment" android:title="@string/fragment" android:icon="@drawable/selector_fragment_black" />
         <item android:id="@+id/functionNetwork" android:title="@string/network_information" android:icon="@drawable/selector_wifi_black" />
         <item android:id="@+id/functionListView" android:title="@string/list_view_and_grid_view" android:icon="@drawable/selector_list_view_black" />

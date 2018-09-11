@@ -5,6 +5,8 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.github.evan.common_utils.ui.activity.SinglePhotoActivity;
 import com.github.evan.common_utils.ui.fragment.BaseFragment;
 import com.github.evan.common_utils_demo.R;
 import com.github.evan.common_utils_demo.ui.activity.aboutActivity.ExtrasInformationActivity;
@@ -32,17 +34,23 @@ public class AboutActivityFragment extends BaseFragment {
 
     }
 
-    @OnClick({R.id.card_activity_life_cycle, R.id.card_activity_task_stack, R.id.card_activity_scheme_jump})
+    @OnClick({R.id.card_activity_life, R.id.card_activity_life_cycle, R.id.card_activity_task_stack, R.id.card_activity_scheme_jump})
     void onClick(View view){
         switch (view.getId()){
+            case R.id.card_activity_life:
+                Bundle bundle = new Bundle();
+                bundle.putInt(SinglePhotoActivity.PHOTO_RES_ID, R.mipmap.img_activity_life_cycle);
+                loadActivity(SinglePhotoActivity.class, bundle, false, -1);
+                break;
+
             case R.id.card_activity_life_cycle:
                 loadActivity(LifeCycleActivity.class);
                 break;
 
             case R.id.card_activity_task_stack:
-                Bundle bundle = new Bundle();
-                bundle.putString(ExtrasInformationActivity.EXTRAS_KEY, "Standard Mode");
-                loadActivity(ExtrasInformationActivity.class, bundle, false, -1);
+                Bundle secondBundle = new Bundle();
+                secondBundle.putString(ExtrasInformationActivity.EXTRAS_KEY, "Standard Mode");
+                loadActivity(ExtrasInformationActivity.class, secondBundle, false, -1);
                 break;
 
             case R.id.card_activity_scheme_jump:
