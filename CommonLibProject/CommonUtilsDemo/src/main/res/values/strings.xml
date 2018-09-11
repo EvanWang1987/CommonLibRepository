@@ -231,6 +231,9 @@
     <string name="bind_service">bind service A</string>
     <string name="unbind_service">unbind service A</string>
     <string name="invoke_binder">调用Binder函数</string>
+    <string name="intent_service">IntentService</string>
+    <string name="start_intent_service">开启IntentService</string>
+    <string name="simulate_progress">模拟进度</string>
     <!-- Service -->
 
     <!-- Fragment相关 -->

@@ -1,5 +1,6 @@
 package com.github.evan.common_utils_demo.ui.fragment;
 
+import android.app.IntentService;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -9,6 +10,7 @@ import com.github.evan.common_utils.ui.activity.SinglePhotoActivity;
 import com.github.evan.common_utils.ui.fragment.BaseFragment;
 import com.github.evan.common_utils_demo.R;
 import com.github.evan.common_utils_demo.ui.activity.aboutService.BindServiceActivity;
+import com.github.evan.common_utils_demo.ui.activity.aboutService.IntentServiceActivity;
 import com.github.evan.common_utils_demo.ui.activity.aboutService.ServiceLifeCycleActivity;
 import com.github.evan.common_utils_demo.ui.activity.aboutService.StartServiceActivity;
 
@@ -36,7 +38,7 @@ public class AboutServiceFragment extends BaseFragment {
 
     }
 
-    @OnClick({R.id.card_service_life, R.id.card_service_life_cycle, R.id.card_service_start_mode, R.id.card_service_bind_mode})
+    @OnClick({R.id.card_service_life, R.id.card_service_life_cycle, R.id.card_service_start_mode, R.id.card_service_bind_mode, R.id.card_intent_service})
     void onClick(View view){
         switch (view.getId()){
             case R.id.card_service_life:
@@ -55,6 +57,10 @@ public class AboutServiceFragment extends BaseFragment {
 
             case R.id.card_service_bind_mode:
                 loadActivity(BindServiceActivity.class);
+                break;
+
+            case R.id.card_intent_service:
+                loadActivity(IntentServiceActivity.class);
                 break;
 
         }
