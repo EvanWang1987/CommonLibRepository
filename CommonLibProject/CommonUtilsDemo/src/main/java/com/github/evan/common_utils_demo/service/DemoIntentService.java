@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.os.IBinder;
 import android.os.SystemClock;
 import android.support.annotation.Nullable;
-
 import com.github.evan.common_utils_demo.event.IntentServiceAlertDialogEvent;
 import com.github.evan.common_utils_demo.event.IntentServiceDemoEvent;
 import com.github.evan.common_utils_demo.event.IntentServiceProgressEvent;
@@ -67,7 +66,7 @@ public class DemoIntentService extends IntentService {
 
     @Override
     protected void onHandleIntent(@Nullable Intent intent) {
-        IntentServiceDemoEvent event = new IntentServiceDemoEvent("DemoIntentService onHandleIntent current thread: " + Thread.currentThread().getName());
+        IntentServiceDemoEvent event = new IntentServiceDemoEvent("DemoIntentService onHandleIntent current thread ID: " + Thread.currentThread().getId());
         EventBus.getDefault().post(event);
         int max = 100;
         int i = 1;
