@@ -23,5 +23,9 @@ public interface ActivityProvider {
 
     void switchFragment(String tag);
 
+    void showDialog(FragmentProvider currentFragment, DialogMode dialogMode, CharSequence title, CharSequence message, int icon, CharSequence okMessage, CharSequence cancelMessage, CharSequence hint, int lines, int maxProgress, int progress, int progressStyle);
 
+    void dismissDialogsFromActivityProvider();
+
+    void updateProgressDialogFromActivityProvider(int progress);
 }

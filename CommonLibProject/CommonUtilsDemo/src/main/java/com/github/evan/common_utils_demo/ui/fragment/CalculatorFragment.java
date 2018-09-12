@@ -92,10 +92,17 @@ public class CalculatorFragment extends BaseFragment {
                 String s = b1.divide(b2, BigDecimal.ROUND_HALF_UP).doubleValue() + "";
                 for (int i = s.length() - 1; i >= 0; i--) {
                     char charAt = s.charAt(i);
-                    if(Character.isDigit(charAt)){
+                    try {
+                        int anInt = Integer.parseInt(charAt + "");
+                    } catch (NumberFormatException e) {
+                        e.printStackTrace();
                         s = s.substring(0, i);
                         break;
                     }
+//                    if(Character.isDigit(charAt)){
+//                        s = s.substring(0, i);
+//                        break;
+//                    }
                 }
                 result = Double.valueOf(s);
 //                result = b1.divide(b2).doubleValue();

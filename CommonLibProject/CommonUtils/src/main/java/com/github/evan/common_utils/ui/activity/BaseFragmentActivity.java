@@ -1,5 +1,6 @@
 package com.github.evan.common_utils.ui.activity;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
 import android.support.annotation.Nullable;
@@ -22,6 +23,7 @@ public abstract class BaseFragmentActivity extends BaseActivity implements Activ
     private List<String> mFragmentTags = new ArrayList<>();
     private String mShowingFragmentTag;
     private FragmentManager mFragmentManager;
+    private FragmentProvider mCurrentShowDialogFragment;
 
     protected abstract List<String> getFragmentName();
     protected abstract String showWhichFragmentWhenInitialized();
@@ -82,6 +84,59 @@ public abstract class BaseFragmentActivity extends BaseActivity implements Activ
 
     public FragmentManager getmFragmentManager() {
         return mFragmentManager;
+    }
+
+    @Override
+    public void showDialog(FragmentProvider currentFragment, DialogMode dialogMode, CharSequence title, CharSequence message, int icon, CharSequence okMessage, CharSequence cancelMessage, CharSequence hint, int lines, int maxProgress, int progress, int progressStyle) {
+        dismissDialogsFromActivityProvider();
+        mCurrentShowDialogFragment = currentFragment;
+        switch (dialogMode){
+            case INPUT_DIALOG:
+                showInputDialog(title, hint, lines, okMessage, cancelMessage);
+                break;
+
+            case MESSAGE_DIALOG:
+                showMessageDialog(title, message, okMessage, cancelMessage);
+                break;
+
+            case PROGRESS_DIALOG:
+                showProgressDialog(title, message, progressStyle, maxProgress, progress);
+                break;
+
+            default:
+                mCurrentShowDialogFragment = null;
+                break;
+        }
+    }
+
+    @Override
+    public void dismissDialogsFromActivityProvider() {
+        dismissAllDialog();
+    }
+
+    @Override
+    public void updateProgressDialogFromActivityProvider(int progress) {
+        updateProgressDialog(progress);
+    }
+
+    @Override
+    public void onDialogConfirmButtonClick(DialogInterface dialog, DialogMode mode) {
+        if(mCurrentShowDialogFragment != null){
+            mCurrentShowDialogFragment.onDialogConfirmButtonClick(dialog, mode);
+            mCurrentShowDialogFragment = null;
+            return;
+        }
+        super.onDialogConfirmButtonClick(dialog, mode);
+    }
+
+    @Override
+    public void onDialogCancelButtonClick(DialogInterface dialog, DialogMode mode) {
+        if(mCurrentShowDialogFragment != null){
+            mCurrentShowDialogFragment.onDialogCancelButtonClick(dialog, mode);
+            mCurrentShowDialogFragment = null;
+            return;
+        }
+        super.onDialogCancelButtonClick(dialog, mode);
     }
 
     @Override

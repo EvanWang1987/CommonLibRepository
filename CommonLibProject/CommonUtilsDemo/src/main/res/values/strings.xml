@@ -197,12 +197,17 @@
     <string name="dead_lock">死锁演示</string>
     <string name="stop_demo">停止演示</string>
     <string name="about_thread_pool">线程池相关</string>
+    <string name="about_async_task">Async相关</string>
     <string name="thread_pool_feature">线程池特性</string>
     <string name="test_cache_thread_pool">测试CacheThreadPool</string>
     <string name="test_fixed_thread_pool">测试FixedThreadPool</string>
     <string name="test_single_thread_pool">测试SingleThreadPool</string>
     <string name="test_scheduled_thread_pool">测试ScheduledThreadPool</string>
     <string name="stop_test">停止测试</string>
+    <string name="hint_input_async_start_result">请输入AsyncTask运行前字符串</string>
+    <string name="hint_input_async_end_result">请输入AsyncTask运行结果字符串</string>
+    <string name="initializing">初始化中</string>
+    <string name="updating_progress">更新进度 onUpdateProgress</string>
     <!-- 线程相关 -->
 
     <!-- Activity相关 -->

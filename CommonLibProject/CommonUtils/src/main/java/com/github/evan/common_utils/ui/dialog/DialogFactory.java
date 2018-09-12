@@ -1,16 +1,36 @@
 package com.github.evan.common_utils.ui.dialog;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.support.annotation.ArrayRes;
 import android.support.annotation.DrawableRes;
 import android.support.v7.app.AlertDialog;
+import android.widget.EditText;
 
 /**
  * Created by Evan on 2017/12/11.
  */
 
 public class DialogFactory {
+
+    public static ProgressDialog createProgressDialog(Context context, CharSequence title, CharSequence message, int progressStyle, int max, int progress){
+        ProgressDialog dialog = new ProgressDialog(context);
+        dialog.setTitle(title);
+        dialog.setMessage(message);
+        dialog.setProgressStyle(progressStyle);
+        dialog.setMax(max);
+        dialog.setProgress(progress);
+        return dialog;
+    }
+
+    public static InputDialog createMdInputDialog(Context context, CharSequence title, CharSequence hint, int inputLines){
+        InputDialog inputDialog = new InputDialog(context);
+        inputDialog.setTitle(title);
+        inputDialog.setHint(hint);
+        inputDialog.setEditLines(inputLines);
+        return inputDialog;
+    }
 
     public static android.support.v7.app.AlertDialog createDesignMessageDialog(Context context, @DrawableRes int icon, CharSequence title, CharSequence message) {
         AlertDialog.Builder builder = new AlertDialog.Builder(context);

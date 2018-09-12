@@ -20,6 +20,7 @@
     <string name="notice">提示</string>
     <string name="confirm">确定</string>
     <string name="cancel">取消</string>
+    <string name="input_message">请输入内容</string>
     <string name="press_twice_notify_text">两秒内再次按下退出</string>
     <string name="invalid_scheme_jump_code">无效的跳转码</string>
     <string name="invalid_scheme_jump_args">无效的跳转参数</string>

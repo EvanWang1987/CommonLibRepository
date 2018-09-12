@@ -3,6 +3,7 @@ package com.github.evan.common_utils.ui.fragment;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Looper;
@@ -13,6 +14,7 @@ import android.view.LayoutInflater;
 import com.github.evan.common_utils.handler.SoftHandler;
 import com.github.evan.common_utils.handler.SoftHandlerReceiver;
 import com.github.evan.common_utils.ui.activity.ActivityProvider;
+import com.github.evan.common_utils.ui.activity.DialogMode;
 
 /**
  * Created by Evan on 2017/11/4.
@@ -32,6 +34,16 @@ public abstract class BaseFragment extends android.support.v4.app.Fragment imple
     private LayoutInflater mLayoutInflater;
     private boolean mIsLoadedDataAtFirstHiddenChange = false;
     private ActivityProvider mActivityProvider;
+
+    @Override
+    public void onDialogConfirmButtonClick(DialogInterface dialog, DialogMode mode) {
+
+    }
+
+    @Override
+    public void onDialogCancelButtonClick(DialogInterface dialog, DialogMode mode) {
+
+    }
 
     @Override
     public void setActivityProvider(ActivityProvider activityProvider) {
