@@ -1,7 +1,6 @@
 package com.github.evan.common_utils_demo.ui.fragment;
 
 import android.os.Bundle;
-import android.os.SystemClock;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,12 +12,13 @@ import com.github.evan.common_utils.javaDemo.thread.deadLock.Observer;
 import com.github.evan.common_utils.javaDemo.thread.singleProducerConsumer.ConsumerRunnable;
 import com.github.evan.common_utils.javaDemo.thread.singleProducerConsumer.ProduceRunnable;
 import com.github.evan.common_utils.javaDemo.thread.singleProducerConsumer.Resource;
-import com.github.evan.common_utils.manager.threadManager.ThreadManager;
+import com.github.evan.common_utils.javaDemo.thread.threadPool.ThreadPoolUtil;
 import com.github.evan.common_utils.ui.deskIcon.DeskIconManager;
 import com.github.evan.common_utils.ui.fragment.BaseFragment;
 import com.github.evan.common_utils_demo.R;
+import com.github.evan.common_utils_demo.ui.activity.aboutThread.AboutThreadPoolActivity;
 
-import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.ExecutorService;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -64,7 +64,7 @@ public class ThreadFragment extends BaseFragment implements Observer, com.github
 
     }
 
-    @OnClick({R.id.card_single_producer_consumer, R.id.card_stop_single_producer_consumer, R.id.card_multi_producer_consumer, R.id.card_stop_multi_producer_consumer, R.id.card_dead_lock, R.id.card_stop_dead_lock})
+    @OnClick({R.id.card_single_producer_consumer, R.id.card_stop_single_producer_consumer, R.id.card_multi_producer_consumer, R.id.card_stop_multi_producer_consumer, R.id.card_dead_lock, R.id.card_stop_dead_lock, R.id.card_about_thread_pool})
     void onClick(View view) {
         switch (view.getId()) {
             case R.id.card_single_producer_consumer:
@@ -89,6 +89,10 @@ public class ThreadFragment extends BaseFragment implements Observer, com.github
 
             case R.id.card_stop_dead_lock:
                 stopDeadLock();
+                break;
+
+            case R.id.card_about_thread_pool:
+                loadActivity(AboutThreadPoolActivity.class);
                 break;
         }
     }
@@ -246,6 +250,7 @@ public class ThreadFragment extends BaseFragment implements Observer, com.github
             mDeadLockBRunnable = null;
         }
     }
+
 
     @Override
     public void onPrintDeadLockDemoLog(String log) {

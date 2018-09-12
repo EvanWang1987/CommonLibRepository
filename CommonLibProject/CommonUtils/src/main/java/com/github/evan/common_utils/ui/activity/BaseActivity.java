@@ -1,18 +1,22 @@
 package com.github.evan.common_utils.ui.activity;
 
 import android.app.Activity;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Looper;
 import android.os.Message;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 
 import com.github.evan.common_utils.handler.SoftHandler;
 import com.github.evan.common_utils.handler.SoftHandlerReceiver;
+import com.github.evan.common_utils.ui.dialog.DialogFactory;
 import com.github.evan.common_utils.ui.fragment.BaseFragment;
+import com.github.evan.common_utils.utils.StringUtil;
 import com.github.evan.common_utils.utils.ToastUtil;
 
 import java.util.LinkedList;
@@ -39,6 +43,7 @@ public abstract class BaseActivity extends AppCompatActivity implements SoftHand
     private static LinkedList<BaseActivity> mActivities = new LinkedList<>();
     private BaseActivityConfig mActivityConfig;
     private long mLastBackPressedTime = -1;
+    private AlertDialog mMessageDialog;
 
 
     @Override
@@ -46,6 +51,44 @@ public abstract class BaseActivity extends AppCompatActivity implements SoftHand
         super.onCreate(savedInstanceState);
         setContentView(getLayoutResId());
         init();
+    }
+
+    public void showMessageDialog(CharSequence title, CharSequence message, CharSequence okMessage, CharSequence cancelMessage){
+        if(!StringUtil.isEmpty(title)){
+            mMessageDialog.setTitle(title);
+        }
+
+        if(!StringUtil.isEmpty(message)){
+            mMessageDialog.setMessage(message);
+        }
+
+        if(!StringUtil.isEmpty(okMessage)){
+            mMessageDialog.setButton(AlertDialog.BUTTON_POSITIVE, okMessage, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.dismiss();
+                }
+            });
+        }
+
+        if(!StringUtil.isEmpty(cancelMessage)){
+            mMessageDialog.setButton(AlertDialog.BUTTON_NEGATIVE, cancelMessage, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.dismiss();
+                }
+            });
+        }
+
+        if(!mMessageDialog.isShowing()){
+            mMessageDialog.show();
+        }
+    }
+
+    public void dismissMessageDialog(){
+        if(mMessageDialog.isShowing()){
+            mMessageDialog.dismiss();
+        }
     }
 
     @Override
@@ -82,6 +125,7 @@ public abstract class BaseActivity extends AppCompatActivity implements SoftHand
         mHandler.setReceiver(this);
         mActivities.addFirst(this);
         mActivityConfig = onCreateActivityConfig();
+        mMessageDialog = DialogFactory.createDesignMessageDialog(this, -1, "", "");
     }
 
     public LayoutInflater getLayoutInflater() {

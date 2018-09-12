@@ -196,6 +196,13 @@
     <string name="multi_producer_consumer">多生产者多消费者演示</string>
     <string name="dead_lock">死锁演示</string>
     <string name="stop_demo">停止演示</string>
+    <string name="about_thread_pool">线程池相关</string>
+    <string name="thread_pool_feature">线程池特性</string>
+    <string name="test_cache_thread_pool">测试CacheThreadPool</string>
+    <string name="test_fixed_thread_pool">测试FixedThreadPool</string>
+    <string name="test_single_thread_pool">测试SingleThreadPool</string>
+    <string name="test_scheduled_thread_pool">测试ScheduledThreadPool</string>
+    <string name="stop_test">停止测试</string>
     <!-- 线程相关 -->
 
     <!-- Activity相关 -->
@@ -415,4 +422,30 @@
 菊花仙子
 
 　　	阿牛回到屋里仔细推敲菊花仙子的《种菊谣》，终于悟出了其中意思：种白菊要在三月移植，四月掐头，五月多浇水，六月勤施肥，七月八月护好根，这样九月就能开出绣球状的菊花。阿牛根据菊花仙子的指点去做了，后来菊花老根上果然爆出了不少枝条。他又剪下这些枝条去扦插，再按《种菊谣》说的去栽培，第二年九月初九重阳节便开出了一朵朵芬芳四溢的白菊花。后来阿牛将种菊的技能教给了村上的穷百姓，这一带种白菊花的人就越来越多了。因为阿牛是九月初九找到这株白菊花的，所以后来人们就将九月九称作菊花节，并形成了赏菊花、吃菊花茶、饮菊花酒等风俗。</string>
+
+    <string name="thread_pool">线程池构造函数中的参数意义： coreThreadCount: 线程核心数,线程池内维护的线程数。
+        maxThreadCount: 当线程池内的线程超过coreThreadCount,缓存队列也满了之后,再次提交Runnable,线程池会开启maxThreadCount - coreThreadPool个线程去执行Runnable。
+        keepAliveTime: 当额外开启的线程执行完毕后，这些线程的缓存时间。
+        TimeUtils: keepAliveTime的时间单位
+        workQueue: Runnable缓存队列
+        threadFactory: 线程工厂
+        RejectedExecutionHandler: workQueue队列满后的拒绝策略
+
+        workQueue:
+            ArrayBlockQueue: 内部基于数组,先进先出的阻塞式队列.
+            LinkedBlockQueue: 内部基于链表,先进先出的的阻塞式队列,内部大小为Integer.MAX_VALUE
+            SynchronizedQueue: 容量为1的队列
+
+        RejectedExecutionHandler:
+            AbortPolicy: 当线程池数量满了，缓存队列也满了之后，会拒绝接受Runnable，并抛出异常。
+            DiscardPolicy: 当线程池数量满了，缓存队列也满了之后，会拒绝接受Runnable。
+            DiscardOldestPolicy: 当线程池数量满了，缓存队列也满了之后，会抛弃最前面的Runnable。
+            CallerRunsPolicy: 当线程池满了，队列也满了，会尝试在当前线程执行Runnable。
+
+        CachedThreadPool: 缓存线程池，核心数为0， 最大数为Integer.MAX_VALUE, 缓存时间为1分钟，队列为LinkedBlockQueue, 拒绝策略为AbortPolicy。也就是说每提交一个Runnable,就会开启一个线程执行，执行完毕后缓存1分钟。
+        FixedThreadPool: 固定线程池, 核心为nThread，最大数为nThread，缓存时间为0，队列为LinkedBlockingQueue，拒绝策略为AbortPolicy。也就是说话固定n个线程，提交的Runnable满了之后，放入队列中一个一个执行。
+        SingleThreadPool: 单线程池，核心为1，最大为1，缓存时间为0，队列为LinkedBlockingQueue，拒绝策略为AbortPolicy。也就是说池内固定为1个线程，按顺序执行队列中的Runnable。
+        ScheduledThreadPool: 周期性线程池，核心为nThread，最大为nThread，缓存时间为0，队列为DelayedWorkQueue，拒绝策略为AbortPolicy。可以周期性的执行Runnable。
+    </string>
+
 </resources>

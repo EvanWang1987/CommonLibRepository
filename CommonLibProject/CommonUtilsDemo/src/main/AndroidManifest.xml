@@ -47,6 +47,7 @@
         <activity android:name=".ui.activity.aboutService.StartServiceActivity"/>
         <activity android:name=".ui.activity.aboutService.BindServiceActivity"/>
         <activity android:name=".ui.activity.aboutService.IntentServiceActivity"/>
+        <activity android:name=".ui.activity.aboutThread.AboutThreadPoolActivity"/>
         <activity android:name=".ui.activity.RedirectUiActivity">
             <intent-filter>
                 <action android:name="@string/redirect_ui_action"/>
