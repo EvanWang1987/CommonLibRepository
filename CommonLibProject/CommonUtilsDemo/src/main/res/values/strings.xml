@@ -280,6 +280,15 @@
     <string name="stop_observe_wifi_signal">停止wifi信号强度监听</string>
     <!-- 网络相关 -->
 
+    <!-- WebView相关 -->
+    <string name="web_view">WebView</string>
+    <string name="load_url">加载网页</string>
+    <string name="input_url">输入网页地址</string>
+    <string name="js_call_android">JS调用Android演示</string>
+    <string name="android_call_js">Android调用JS演示</string>
+    <string name="demo_link">https://www.baidu.com</string>
+    <!-- WebView相关 -->
+
     <!-- ListView & GridView相关 -->
     <string name="list_view_and_grid_view">List View &amp; Grid View</string>
     <string name="list_item_title">This is a title.</string>

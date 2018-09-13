@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@android:id/background">
+        <clip>
+        <shape android:shape="rectangle">
+            <solid android:color="@color/Gray"/>
+        </shape>
+        </clip>
+    </item>
+
+    <item android:id="@android:id/progress">
+        <clip>
+        <shape android:shape="rectangle">
+            <solid android:color="@color/Green_Material_Design_200_saturation"/>
+        </shape>
+        </clip>
+    </item>
+</layer-list>

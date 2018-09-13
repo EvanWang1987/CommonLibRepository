@@ -28,6 +28,10 @@ public class InputDialog extends AlertDialog {
         mEditText.setHint(hint);
     }
 
+    public void setText(CharSequence text){
+        mEditText.setText(text);
+    }
+
     public CharSequence getEditText(){
         return mEditText.getText().toString();
     }
