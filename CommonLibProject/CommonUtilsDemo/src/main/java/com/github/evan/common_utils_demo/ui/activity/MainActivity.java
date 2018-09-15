@@ -32,6 +32,7 @@ import com.github.evan.common_utils.utils.ResourceUtil;
 import com.github.evan.common_utils.utils.UiUtil;
 import com.github.evan.common_utils_demo.R;
 import com.github.evan.common_utils_demo.ui.fragment.AboutActivityFragment;
+import com.github.evan.common_utils_demo.ui.fragment.AboutDesignModeFragment;
 import com.github.evan.common_utils_demo.ui.fragment.AboutFragmentFragment;
 import com.github.evan.common_utils_demo.ui.fragment.AboutServiceFragment;
 import com.github.evan.common_utils_demo.ui.fragment.AboutWebViewFragment;
@@ -70,7 +71,7 @@ import butterknife.OnClick;
  */
 public class MainActivity extends BaseFragmentActivity implements NavigationView.OnNavigationItemSelectedListener {
     private static final int PERMISSION_REQUEST_CODE = 101;
-    private static final String[] fragmentNames = {HomeFragment.class.getName(), DeviceInformationFragment.class.getName(), CalculatorFragment.class.getName(), ArithmeticFragment.class.getName(), CollectionFragment.class.getName(), ThreadFragment.class.getName(), NetworkManagerFragment.class.getName(), AboutWebViewFragment.class.getName(), AboutActivityFragment.class.getName(), AboutServiceFragment.class.getName(), AboutFragmentFragment.class.getName(), HandlerFragment.class.getName(), ListGridViewFragment.class.getName(), RecyclerViewFragment.class.getName(), VerNestHorScrollViewFragment.class.getName(), HorNestVerScrollViewFragment.class.getName(), ViewPagerFragment.class.getName(), ViewPagerNestListViewFragment.class.getName(), PullLayoutFragment.class.getName(), SlideExitActivityFragment.class.getName(), QRCodeFragment.class.getName(), CustomEditTextFragment.class.getName(), FlagViewFragment.class.getName(), TintFragment.class.getName(), DebugFragment.class.getName()};
+    private static final String[] fragmentNames = {HomeFragment.class.getName(), DeviceInformationFragment.class.getName(), CalculatorFragment.class.getName(), ArithmeticFragment.class.getName(), CollectionFragment.class.getName(), ThreadFragment.class.getName(), NetworkManagerFragment.class.getName(), AboutWebViewFragment.class.getName(), AboutDesignModeFragment.class.getName(), AboutActivityFragment.class.getName(), AboutServiceFragment.class.getName(), AboutFragmentFragment.class.getName(), HandlerFragment.class.getName(), ListGridViewFragment.class.getName(), RecyclerViewFragment.class.getName(), VerNestHorScrollViewFragment.class.getName(), HorNestVerScrollViewFragment.class.getName(), ViewPagerFragment.class.getName(), ViewPagerNestListViewFragment.class.getName(), PullLayoutFragment.class.getName(), SlideExitActivityFragment.class.getName(), QRCodeFragment.class.getName(), CustomEditTextFragment.class.getName(), FlagViewFragment.class.getName(), TintFragment.class.getName(), DebugFragment.class.getName()};
 
     @BindView(R.id.mainActivity_appBar)
     public AppBarLayout mAppbarLayout;
@@ -283,6 +284,11 @@ public class MainActivity extends BaseFragmentActivity implements NavigationView
 
             case R.id.functionWebView:
                 visibleFragment = fragmentManager.findFragmentByTag(AboutWebViewFragment.class.getName());
+                isExpand = true;
+                break;
+
+            case R.id.functionDesignMode:
+                visibleFragment = fragmentManager.findFragmentByTag(AboutDesignModeFragment.class.getName());
                 isExpand = true;
                 break;
 

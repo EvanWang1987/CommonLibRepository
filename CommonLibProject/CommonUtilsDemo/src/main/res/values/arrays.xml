@@ -30,4 +30,9 @@
         <item>@string/single_instance_mode</item>
         <item>@string/single_task_mode</item>
     </array>
+    <array name="vehicle_factory_item">
+        <item>@string/benz</item>
+        <item>@string/bmw</item>
+        <item>@string/audi</item>
+    </array>
 </resources>
