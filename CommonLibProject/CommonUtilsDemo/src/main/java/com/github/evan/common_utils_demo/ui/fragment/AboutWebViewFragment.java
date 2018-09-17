@@ -38,7 +38,7 @@ public class AboutWebViewFragment extends BaseFragment{
     public void onDialogConfirmButtonClick(DialogInterface dialog, DialogMode mode) {
         if(mode == DialogMode.INPUT_DIALOG){
             InputDialog inputDialog = (InputDialog) dialog;
-            String url = inputDialog.getEditText().toString();
+            String url = inputDialog.getEditText(0).toString();
             Bundle bundle = new Bundle();
             bundle.putString(BrowserActivity.EXTRAS_LOAD_OF_URL, url);
             loadActivity(BrowserActivity.class, bundle, false, -1);
@@ -50,7 +50,7 @@ public class AboutWebViewFragment extends BaseFragment{
         Bundle bundle = null;
         switch (view.getId()){
             case R.id.card_load_url:
-                getActivityProvider().showDialog(this, DialogMode.INPUT_DIALOG, getString(R.string.notice), null, -1, getString(R.string.confirm), getString(R.string.cancel), getString(R.string.input_url), -1, -1, -1, -1);
+                getActivityProvider().showDialog(this, DialogMode.INPUT_DIALOG, getString(R.string.notice), null, -1, getString(R.string.confirm), getString(R.string.cancel), new String[]{getString(R.string.input_url)}, 1, new int[]{1}, -1, -1, -1);
                 break;
 
             case R.id.card_js_call_android:

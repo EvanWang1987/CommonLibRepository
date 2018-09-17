@@ -79,7 +79,7 @@ public class ThreadFragment extends BaseFragment implements Observer, com.github
     public void onDialogConfirmButtonClick(DialogInterface dialog, DialogMode mode) {
         if(mode == DialogMode.INPUT_DIALOG){
             InputDialog inputDialog = (InputDialog) dialog;
-            CharSequence inputText = inputDialog.getEditText();
+            CharSequence inputText = inputDialog.getEditText(0);
             mResultString = inputText.toString();
             testAsyncTask(mResultString);
             mResultString = null;
@@ -124,7 +124,7 @@ public class ThreadFragment extends BaseFragment implements Observer, com.github
                 break;
 
             case R.id.card_about_async_task:
-                getActivityProvider().showDialog(this, DialogMode.INPUT_DIALOG, getString(R.string.notice), null, -1, getString(R.string.confirm), getString(R.string.cancel), getString(R.string.hint_input_async_start_result), 10, -1, -1, -1);
+                getActivityProvider().showDialog(this, DialogMode.INPUT_DIALOG, getString(R.string.notice), null, -1, getString(R.string.confirm), getString(R.string.cancel), new String[]{getString(R.string.hint_input_async_start_result)}, 1, new int[]{1}, -1, -1, -1);
                 break;
         }
     }
@@ -137,7 +137,7 @@ public class ThreadFragment extends BaseFragment implements Observer, com.github
 
             @Override
             protected void onPreExecute() {
-                getActivityProvider().showDialog(ThreadFragment.this, DialogMode.PROGRESS_DIALOG, getString(R.string.warning), getString(R.string.initializing), -1, getString(R.string.confirm), getString(R.string.cancel), null, -1, 100, 1, ProgressDialog.STYLE_HORIZONTAL);
+                getActivityProvider().showDialog(ThreadFragment.this, DialogMode.PROGRESS_DIALOG, getString(R.string.warning), getString(R.string.initializing), -1, getString(R.string.confirm), getString(R.string.cancel), null, -1, null, 100, 1, ProgressDialog.STYLE_HORIZONTAL);
             }
 
             @Override
@@ -159,7 +159,7 @@ public class ThreadFragment extends BaseFragment implements Observer, com.github
             @Override
             protected void onPostExecute(String s) {
                 getActivityProvider().dismissDialogsFromActivityProvider();
-                getActivityProvider().showDialog(ThreadFragment.this, DialogMode.MESSAGE_DIALOG, getString(R.string.warning), s, -1, getString(R.string.confirm), getString(R.string.cancel), null, -1, -1, -1, -1);
+                getActivityProvider().showDialog(ThreadFragment.this, DialogMode.MESSAGE_DIALOG, getString(R.string.warning), s, -1, getString(R.string.confirm), getString(R.string.cancel), null, 1, null, -1, -1, -1);
             }
         };
 

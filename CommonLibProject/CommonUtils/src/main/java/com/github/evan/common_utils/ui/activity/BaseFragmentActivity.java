@@ -87,12 +87,12 @@ public abstract class BaseFragmentActivity extends BaseActivity implements Activ
     }
 
     @Override
-    public void showDialog(FragmentProvider currentFragment, DialogMode dialogMode, CharSequence title, CharSequence message, int icon, CharSequence okMessage, CharSequence cancelMessage, CharSequence hint, int lines, int maxProgress, int progress, int progressStyle) {
+    public void showDialog(FragmentProvider currentFragment, DialogMode dialogMode, CharSequence title, CharSequence message, int icon, CharSequence okMessage, CharSequence cancelMessage, CharSequence hint[], int editTextCount, int lines[], int maxProgress, int progress, int progressStyle) {
         dismissDialogsFromActivityProvider();
         mCurrentShowDialogFragment = currentFragment;
         switch (dialogMode){
             case INPUT_DIALOG:
-                showInputDialog(title, hint, lines, okMessage, cancelMessage);
+                showInputDialog(title, hint, editTextCount, lines, okMessage, cancelMessage);
                 break;
 
             case MESSAGE_DIALOG:

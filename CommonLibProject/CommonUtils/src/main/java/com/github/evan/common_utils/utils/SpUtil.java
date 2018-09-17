@@ -39,6 +39,15 @@ public class SpUtil {
         return getSharedPreference(isDefaultSp, spName) != null;
     }
 
+    public SharedPreferences getSharePreference(String spName, boolean autoCreatedIfNotExits){
+        if(mSps.containsKey(spName)){
+            return mSps.get(spName);
+        }
+
+        initSharedPreference(false, spName);
+        return mSps.get(spName);
+    }
+
     public boolean removeSharedPreferencesFileAndMemoryCash(boolean isDefaultSp, String spName) {
         String targetSpName = isDefaultSp ? FileUtil.DEFAULT_SHARED_PREFERENCE_FILE_NAME : spName;
         boolean isFileExists = FileUtil.isSharedPreferenceFileExistsOnDisk(isDefaultSp, spName);

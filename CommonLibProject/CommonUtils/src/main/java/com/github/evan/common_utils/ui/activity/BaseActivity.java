@@ -89,11 +89,17 @@ public abstract class BaseActivity extends AppCompatActivity implements SoftHand
         }
     }
 
-    public void showInputDialog(CharSequence title, CharSequence hint, int lines, CharSequence okMessage, CharSequence cancelMessage){
+    public void showInputDialog(CharSequence title, CharSequence hint[], int editTextCount, int[] lines, CharSequence okMessage, CharSequence cancelMessage){
+        if(hint.length != editTextCount){
+            return;
+        }
+
         mInputDialog.setTitle(title);
+        mInputDialog.setEditTextCount(editTextCount, hint, lines);
         mInputDialog.setButton(AlertDialog.BUTTON_POSITIVE, okMessage, this);
         mInputDialog.setButton(AlertDialog.BUTTON_NEGATIVE, cancelMessage, this);
-        mInputDialog.setHint(hint);
+
+
         dismissAllDialog();
         mInputDialog.show();
     }

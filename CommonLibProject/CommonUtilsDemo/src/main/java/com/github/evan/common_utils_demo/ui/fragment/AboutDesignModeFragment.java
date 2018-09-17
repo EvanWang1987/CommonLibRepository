@@ -36,7 +36,7 @@ public class AboutDesignModeFragment extends BaseFragment {
 
     }
 
-    @OnClick({R.id.card_design_mode_singleton, R.id.card_design_mode_observer, R.id.card_design_mode_builder})
+    @OnClick({R.id.card_design_mode_singleton, R.id.card_design_mode_observer, R.id.card_design_mode_factory})
     void onClick(View view){
         switch (view.getId()){
             case R.id.card_design_mode_singleton:
@@ -47,7 +47,7 @@ public class AboutDesignModeFragment extends BaseFragment {
                 loadActivity(ObserverActivity.class);
                 break;
 
-            case R.id.card_design_mode_builder:
+            case R.id.card_design_mode_factory:
                 loadActivity(AboutFactoryActivity.class);
                 break;
         }

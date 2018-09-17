@@ -290,7 +290,24 @@
     <string name="android_call_js">Android调用JS演示</string>
     <string name="demo_link">https://www.baidu.com</string>
     <!-- WebView相关 -->
-    
+
+    <!-- 数据持久化 -->
+    <string name="data_save">数据持久化</string>
+    <string name="shared_preference">Shared_Preference</string>
+    <string name="input_shared_preference_file_name">输入SharedPreference文件名</string>
+    <string name="create_sp">创建Shared_Preference文件</string>
+    <string name="commit_sp">同步提交Shared_Preference数据</string>
+    <string name="input_file_name">输入Shared_Preference文件名</string>
+    <string name="input_string_key">输入key</string>
+    <string name="input_string_value">输入value</string>
+    <string name="apply_sp">异步提交Shared_Preference数据</string>
+    <string name="get_sp">获取Shared_Preference数据</string>
+    <string name="view_sp_doc">查看Shared_Preference文档</string>
+    <string name="sqlite">SQLite</string>
+    <string name="content_provider">Content_Provider</string>
+    <string name="file">文件</string>
+    <!-- 数据持久化 -->
+
     <!-- 设计模式相关 -->
     <string name="design_mode">设计模式</string>
     <string name="singleton">单例模式</string>
