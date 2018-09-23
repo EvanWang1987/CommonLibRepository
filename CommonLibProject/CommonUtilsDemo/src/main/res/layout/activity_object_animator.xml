@@ -22,7 +22,7 @@
 
 
         <android.support.v7.widget.CardView
-            android:id="@+id/card_tween_animation_alpha"
+            android:id="@+id/card_object_animation_alpha"
             app:cardCornerRadius="5dp"
             app:cardElevation="5dp"
             app:cardPreventCornerOverlap="false"
@@ -69,7 +69,7 @@
 
 
         <android.support.v7.widget.CardView
-            android:id="@+id/card_frame_animation_transate"
+            android:id="@+id/card_object_animation_transate"
             app:cardCornerRadius="5dp"
             app:cardElevation="5dp"
             app:cardPreventCornerOverlap="false"
@@ -92,7 +92,7 @@
         </android.support.v7.widget.CardView>
 
         <android.support.v7.widget.CardView
-            android:id="@+id/card_frame_animation_scale"
+            android:id="@+id/card_object_animation_scale"
             app:cardCornerRadius="5dp"
             app:cardElevation="5dp"
             app:cardPreventCornerOverlap="false"

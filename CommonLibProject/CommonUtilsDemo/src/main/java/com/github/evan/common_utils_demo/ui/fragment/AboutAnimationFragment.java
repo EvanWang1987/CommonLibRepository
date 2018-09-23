@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 
 import com.github.evan.common_utils.ui.fragment.BaseFragment;
 import com.github.evan.common_utils_demo.R;
+import com.github.evan.common_utils_demo.ui.activity.aboutAnimation.FrameAnimationActivity;
 import com.github.evan.common_utils_demo.ui.activity.aboutAnimation.ObjectAnimatorActivity;
 import com.github.evan.common_utils_demo.ui.activity.aboutAnimation.TweenAnimationActivity;
 
@@ -45,7 +46,7 @@ public class AboutAnimationFragment extends BaseFragment {
                 break;
 
             case R.id.card_frame_animation:
-
+                loadActivity(FrameAnimationActivity.class);
                 break;
 
         }

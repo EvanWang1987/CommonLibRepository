@@ -58,6 +58,7 @@
         <activity android:name=".ui.activity.aboutDataSave.FileActivity"/>
         <activity android:name=".ui.activity.aboutAnimation.TweenAnimationActivity"/>
         <activity android:name=".ui.activity.aboutAnimation.ObjectAnimatorActivity"/>
+        <activity android:name=".ui.activity.aboutAnimation.FrameAnimationActivity"/>
         <activity android:name=".ui.activity.RedirectUiActivity">
             <intent-filter>
                 <action android:name="@string/redirect_ui_action"/>
