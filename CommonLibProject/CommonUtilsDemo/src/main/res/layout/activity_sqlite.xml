@@ -12,7 +12,7 @@
 
 
         <android.support.v7.widget.CardView
-            android:id="@+id/card_shared_preference"
+            android:id="@+id/card_sqlite_insert"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:foreground="?android:attr/selectableItemBackground"
@@ -28,14 +28,14 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:gravity="center"
-                android:text="@string/shared_preference"
+                android:text="@string/add"
                 android:textColor="@color/text_color_black"
                 android:textSize="16sp" />
 
         </android.support.v7.widget.CardView>
 
         <android.support.v7.widget.CardView
-            android:id="@+id/card_sqlite"
+            android:id="@+id/card_sqlite_remove"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:foreground="?android:attr/selectableItemBackground"
@@ -51,31 +51,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:gravity="center"
-                android:text="@string/sqlite"
-                android:textColor="@color/text_color_black"
-                android:textSize="16sp" />
-
-        </android.support.v7.widget.CardView>
-
-
-        <android.support.v7.widget.CardView
-            android:id="@+id/card_content_provider"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:foreground="?android:attr/selectableItemBackground"
-            android:minHeight="100dp"
-            app:cardCornerRadius="5dp"
-            app:cardElevation="5dp"
-            app:cardPreventCornerOverlap="false"
-            app:cardUseCompatPadding="true"
-            app:layout_columnWeight="1">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:gravity="center"
-                android:text="@string/content_provider"
+                android:text="@string/remove"
                 android:textColor="@color/text_color_black"
                 android:textSize="16sp" />
 
@@ -83,7 +59,7 @@
 
 
         <android.support.v7.widget.CardView
-            android:id="@+id/card_file"
+            android:id="@+id/card_sqlite_set"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:foreground="?android:attr/selectableItemBackground"
@@ -99,7 +75,79 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:gravity="center"
-                android:text="@string/file"
+                android:text="@string/set"
+                android:textColor="@color/text_color_black"
+                android:textSize="16sp" />
+
+        </android.support.v7.widget.CardView>
+
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/card_sqlite_get"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:minHeight="100dp"
+            app:cardCornerRadius="5dp"
+            app:cardElevation="5dp"
+            app:cardPreventCornerOverlap="false"
+            app:cardUseCompatPadding="true"
+            app:layout_columnWeight="1">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:text="@string/get"
+                android:textColor="@color/text_color_black"
+                android:textSize="16sp" />
+
+        </android.support.v7.widget.CardView>
+
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/card_sqlite_view"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:minHeight="100dp"
+            app:cardCornerRadius="5dp"
+            app:cardElevation="5dp"
+            app:cardPreventCornerOverlap="false"
+            app:cardUseCompatPadding="true"
+            app:layout_columnWeight="1">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:text="@string/view_database"
+                android:textColor="@color/text_color_black"
+                android:textSize="16sp" />
+
+        </android.support.v7.widget.CardView>
+
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/card_sqlite_update"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:minHeight="100dp"
+            app:cardCornerRadius="5dp"
+            app:cardElevation="5dp"
+            app:cardPreventCornerOverlap="false"
+            app:cardUseCompatPadding="true"
+            app:layout_columnWeight="1">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:text="@string/sqlite_update"
                 android:textColor="@color/text_color_black"
                 android:textSize="16sp" />
 

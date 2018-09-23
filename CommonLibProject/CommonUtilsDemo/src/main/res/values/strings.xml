@@ -306,6 +306,8 @@
     <string name="sqlite">SQLite</string>
     <string name="content_provider">Content_Provider</string>
     <string name="file">文件</string>
+    <string name="view_database">查看表内容</string>
+    <string name="sqlite_update">数据库升级,数据迁移</string>
     <!-- 数据持久化 -->
 
     <!-- 设计模式相关 -->

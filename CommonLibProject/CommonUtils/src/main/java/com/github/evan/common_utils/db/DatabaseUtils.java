@@ -203,6 +203,7 @@ public class DatabaseUtils {
             }
 
             db.execSQL(sql);
+            db.execSQL("drop table " + sourceTableName + "_temp");
         } else {
             List<Class<? extends DbUpgradable>> oldTable = new ArrayList<>();
             oldTable.add(sourceTable);
