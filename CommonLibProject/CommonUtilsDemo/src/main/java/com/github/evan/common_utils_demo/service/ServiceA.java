@@ -6,7 +6,8 @@ import android.os.Binder;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
 
-import com.github.evan.common_utils_demo.event.ServiceLifeCycleEvent;
+
+import com.github.evan.common_utils.event.ServiceLifeCycleEvent;
 
 import org.greenrobot.eventbus.EventBus;
 

@@ -1,13 +1,13 @@
-package com.github.evan.common_utils_demo.event;
+package com.github.evan.common_utils.event;
 
 /**
  * Created by Evan on 2018/9/15.
  */
 
-public class VehicleEvent {
+public class SingletonEvent {
     private String mMessage;
 
-    public VehicleEvent(String mMessage) {
+    public SingletonEvent(String mMessage) {
         this.mMessage = mMessage;
     }
 

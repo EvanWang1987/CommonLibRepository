@@ -4,7 +4,11 @@ import android.database.sqlite.SQLiteDatabase;
 import com.github.evan.common_utils.db.annotation.DatabaseField;
 import com.github.evan.common_utils.db.annotation.DatabaseTable;
 import com.github.evan.common_utils.db.upgradeInfomation.DbUpgradable;
+import com.github.evan.common_utils.event.SQLiteLogEvent;
 import com.github.evan.common_utils.utils.Logger;
+
+import org.greenrobot.eventbus.EventBus;
+
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
@@ -31,13 +35,13 @@ public class DatabaseUtils {
             return false;
         }
 
-
-//        List<Class<DbUpgradable>> firstVersionTableInformation = tables;
         if (null == firstVersionTableInformation || firstVersionTableInformation.size() == 0) {
             throw new RuntimeException("Null DbUpgradable!");
         }
-        StringBuilder sBuilder = new StringBuilder();
 
+
+        StringBuilder sBuilder = new StringBuilder();
+        EventBus.getDefault().post(new SQLiteLogEvent("onCreateTables"));
         for (int i = 0; i < firstVersionTableInformation.size(); i++) {
             sBuilder.delete(0, sBuilder.length());
             Class<DbUpgradable> dbUpgradable = (Class<DbUpgradable>) firstVersionTableInformation.get(i);
@@ -90,6 +94,7 @@ public class DatabaseUtils {
             sBuilder.append(")");
             String sql = sBuilder.toString();
             Logger.d(sql);
+            EventBus.getDefault().post(new SQLiteLogEvent("create table: " + sql));
             db.execSQL(sql);
         }
 
@@ -108,11 +113,13 @@ public class DatabaseUtils {
             return false;
         }
 
+        EventBus.getDefault().post(new SQLiteLogEvent("dropTables"));
         for (int i = 0; i < tables.size(); i++) {
             Class<DbUpgradable> dbUpgradableClass = (Class<DbUpgradable>) tables.get(i);
             DatabaseTable table = dbUpgradableClass.getAnnotation(DatabaseTable.class);
             String tableName = table.tableName();
             String sql = "drop table " + tableName;
+            EventBus.getDefault().post(new SQLiteLogEvent("drop table: " + sql));
             db.execSQL(sql);
         }
 
@@ -124,6 +131,7 @@ public class DatabaseUtils {
             return false;
         }
 
+        EventBus.getDefault().post(new SQLiteLogEvent("updateTables"));
         DatabaseTable databaseTable = sourceTable.getAnnotation(DatabaseTable.class);
         String sourceTableName = databaseTable.tableName();
         int oldVersion = databaseTable.sinceDbVersion();
@@ -163,7 +171,10 @@ public class DatabaseUtils {
         }
 
         if (saveLastVersionTableData) {
-            db.execSQL("alter table " + sourceTableName + " rename to " + sourceTableName + "_temp");
+            EventBus.getDefault().post(new SQLiteLogEvent("save last version table data."));
+            String renameSql = "alter table " + sourceTableName + " rename to " + sourceTableName + "_temp";
+            EventBus.getDefault().post(new SQLiteLogEvent("rename table: " + renameSql));
+            db.execSQL(renameSql);
             List<Class<? extends DbUpgradable>> createTable = new ArrayList<>();
             createTable.add(dstTable);
             createTables(db, createTable);
@@ -202,8 +213,11 @@ public class DatabaseUtils {
                 }
             }
 
+            EventBus.getDefault().post(new SQLiteLogEvent("copy column: " + sql));
             db.execSQL(sql);
-            db.execSQL("drop table " + sourceTableName + "_temp");
+            String dropTempTable = "drop table " + sourceTableName + "_temp";
+            EventBus.getDefault().post(new SQLiteLogEvent("drop temp table: " + dropTempTable));
+            db.execSQL(dropTempTable);
         } else {
             List<Class<? extends DbUpgradable>> oldTable = new ArrayList<>();
             oldTable.add(sourceTable);

@@ -5,9 +5,10 @@ import android.content.Intent;
 import android.os.IBinder;
 import android.os.SystemClock;
 import android.support.annotation.Nullable;
-import com.github.evan.common_utils_demo.event.IntentServiceAlertDialogEvent;
-import com.github.evan.common_utils_demo.event.IntentServiceDemoEvent;
-import com.github.evan.common_utils_demo.event.IntentServiceProgressEvent;
+
+import com.github.evan.common_utils.event.IntentServiceAlertDialogEvent;
+import com.github.evan.common_utils.event.IntentServiceDemoEvent;
+import com.github.evan.common_utils.event.IntentServiceProgressEvent;
 
 import org.greenrobot.eventbus.EventBus;
 

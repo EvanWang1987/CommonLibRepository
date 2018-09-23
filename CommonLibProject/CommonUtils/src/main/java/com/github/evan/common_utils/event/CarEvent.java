@@ -1,4 +1,4 @@
-package com.github.evan.common_utils_demo.event;
+package com.github.evan.common_utils.event;
 
 /**
  * Created by Evan on 2018/9/15.

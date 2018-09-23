@@ -4,12 +4,6 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import com.github.evan.common_utils.db.upgradeInfomation.DbUpgradable;
-import com.github.evan.common_utils.db.upgradeInfomation.StudentTableVersionOne;
-import com.github.evan.common_utils.db.upgradeInfomation.StudentTableVersionTwo;
-
-import java.util.List;
-
 /**
  * Created by Evan on 2018/9/18.
  */

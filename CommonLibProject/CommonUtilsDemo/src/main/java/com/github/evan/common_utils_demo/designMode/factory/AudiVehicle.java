@@ -1,6 +1,6 @@
 package com.github.evan.common_utils_demo.designMode.factory;
 
-import com.github.evan.common_utils_demo.event.VehicleEvent;
+import com.github.evan.common_utils.event.VehicleEvent;
 
 import org.greenrobot.eventbus.EventBus;
 

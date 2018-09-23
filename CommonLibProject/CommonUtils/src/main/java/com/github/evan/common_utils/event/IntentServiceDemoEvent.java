@@ -1,13 +1,13 @@
-package com.github.evan.common_utils_demo.event;
+package com.github.evan.common_utils.event;
 
 /**
- * Created by Evan on 2018/9/10.
+ * Created by Evan on 2018/9/11.
  */
 
-public class ServiceLifeCycleEvent {
+public class IntentServiceDemoEvent {
     private String mMessage;
 
-    public ServiceLifeCycleEvent(String mMessage) {
+    public IntentServiceDemoEvent(String mMessage) {
         this.mMessage = mMessage;
     }
 

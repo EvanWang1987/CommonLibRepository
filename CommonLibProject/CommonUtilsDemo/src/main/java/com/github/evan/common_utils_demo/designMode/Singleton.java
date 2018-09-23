@@ -1,6 +1,7 @@
 package com.github.evan.common_utils_demo.designMode;
 
-import com.github.evan.common_utils_demo.event.SingletonEvent;
+
+import com.github.evan.common_utils.event.SingletonEvent;
 
 import org.greenrobot.eventbus.EventBus;
 

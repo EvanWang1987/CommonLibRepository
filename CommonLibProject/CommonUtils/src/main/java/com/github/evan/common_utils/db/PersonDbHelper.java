@@ -4,15 +4,13 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.github.evan.common_utils.db.upgradeInfomation.DbUpgradable;
-import com.github.evan.common_utils.db.upgradeInfomation.PersonTableVersionOne;
-import com.github.evan.common_utils.db.upgradeInfomation.PersonTableVersionTwo;
-import com.github.evan.common_utils.db.upgradeInfomation.StudentTableVersionOne;
-import com.github.evan.common_utils.db.upgradeInfomation.StudentTableVersionThree;
-import com.github.evan.common_utils.db.upgradeInfomation.StudentTableVersionTwo;
+import com.github.evan.common_utils.db.upgradeInfomation.PersonTableV1;
+import com.github.evan.common_utils.db.upgradeInfomation.PersonTableV2;
+import com.github.evan.common_utils.db.upgradeInfomation.StudentTableV1;
+import com.github.evan.common_utils.db.upgradeInfomation.StudentTableV3;
+import com.github.evan.common_utils.db.upgradeInfomation.StudentTableV2;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 /**
  * Created by Evan on 2018/9/18.
@@ -21,7 +19,7 @@ import java.util.List;
 public class PersonDbHelper extends BaseSQLiteHelper {
     public static final String DB_FILE_NAME = "person.db";
     public static final int DB_VERSION = 2;
-    private static final Class<? extends DbUpgradable>[] version_one_tables = new Class[]{PersonTableVersionOne.class, StudentTableVersionOne.class};
+    private static final Class<? extends DbUpgradable>[] version_one_tables = new Class[]{PersonTableV1.class, StudentTableV1.class};
 
 
 
@@ -46,10 +44,10 @@ public class PersonDbHelper extends BaseSQLiteHelper {
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         if(oldVersion == 1){
-            DatabaseUtils.updateTables(db, PersonTableVersionOne.class, PersonTableVersionTwo.class);
-            DatabaseUtils.updateTables(db, StudentTableVersionOne.class, StudentTableVersionTwo.class);
+            DatabaseUtils.updateTables(db, PersonTableV1.class, PersonTableV2.class);
+            DatabaseUtils.updateTables(db, StudentTableV1.class, StudentTableV2.class);
         }else if(oldVersion == 2){
-            DatabaseUtils.updateTables(db, StudentTableVersionTwo.class, StudentTableVersionThree.class);
+            DatabaseUtils.updateTables(db, StudentTableV2.class, StudentTableV3.class);
         }
     }
 

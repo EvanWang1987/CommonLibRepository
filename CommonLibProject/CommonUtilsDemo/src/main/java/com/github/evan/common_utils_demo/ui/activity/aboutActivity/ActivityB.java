@@ -4,10 +4,10 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
 
+import com.github.evan.common_utils.event.ActivityLifeCycleEvent;
 import com.github.evan.common_utils.ui.activity.BaseActivity;
 import com.github.evan.common_utils.ui.activity.BaseActivityConfig;
 import com.github.evan.common_utils_demo.R;
-import com.github.evan.common_utils_demo.event.ActivityLifeCycleEvent;
 
 import org.greenrobot.eventbus.EventBus;
 

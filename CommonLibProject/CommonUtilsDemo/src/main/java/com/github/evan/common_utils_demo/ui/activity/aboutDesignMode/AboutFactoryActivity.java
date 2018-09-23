@@ -7,9 +7,10 @@ import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 
+import com.github.evan.common_utils.event.CarEvent;
+import com.github.evan.common_utils.event.VehicleEvent;
 import com.github.evan.common_utils.ui.activity.BaseActivityConfig;
 import com.github.evan.common_utils.ui.dialog.DialogFactory;
-import com.github.evan.common_utils.utils.Logger;
 import com.github.evan.common_utils.utils.ResourceUtil;
 import com.github.evan.common_utils_demo.R;
 import com.github.evan.common_utils_demo.designMode.factory.Car;
@@ -17,8 +18,6 @@ import com.github.evan.common_utils_demo.designMode.factory.SimpleCarFactory;
 import com.github.evan.common_utils_demo.designMode.factory.Vehicle;
 import com.github.evan.common_utils_demo.designMode.factory.VehicleFactory;
 import com.github.evan.common_utils_demo.designMode.factory.VehicleType;
-import com.github.evan.common_utils_demo.event.CarEvent;
-import com.github.evan.common_utils_demo.event.VehicleEvent;
 import com.github.evan.common_utils_demo.ui.activity.collectionActivity.BaseLogCatActivity;
 
 import org.greenrobot.eventbus.EventBus;

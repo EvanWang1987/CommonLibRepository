@@ -1,13 +1,13 @@
-package com.github.evan.common_utils_demo.event;
+package com.github.evan.common_utils.event;
 
 /**
- * Created by Evan on 2018/9/15.
+ * Created by Evan on 2018/9/10.
  */
 
-public class SingletonEvent {
+public class ActivityLifeCycleEvent {
     private String mMessage;
 
-    public SingletonEvent(String mMessage) {
+    public ActivityLifeCycleEvent(String mMessage) {
         this.mMessage = mMessage;
     }
 

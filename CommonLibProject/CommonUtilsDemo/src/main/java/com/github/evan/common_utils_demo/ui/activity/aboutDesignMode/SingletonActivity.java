@@ -4,11 +4,12 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
+
+import com.github.evan.common_utils.event.SingletonEvent;
 import com.github.evan.common_utils.ui.activity.BaseActivityConfig;
 import com.github.evan.common_utils.ui.activity.SinglePhotoActivity;
 import com.github.evan.common_utils_demo.R;
 import com.github.evan.common_utils_demo.designMode.Singleton;
-import com.github.evan.common_utils_demo.event.SingletonEvent;
 import com.github.evan.common_utils_demo.ui.activity.collectionActivity.BaseLogCatActivity;
 
 import org.greenrobot.eventbus.EventBus;
