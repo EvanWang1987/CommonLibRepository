@@ -2,11 +2,9 @@ package com.github.evan.common_utils_demo.ui.activity.aboutDataSave;
 
 import android.view.LayoutInflater;
 import android.view.View;
-
 import com.github.evan.common_utils.ui.activity.BaseActivityConfig;
 import com.github.evan.common_utils_demo.R;
 import com.github.evan.common_utils_demo.ui.activity.collectionActivity.BaseLogCatActivity;
-
 import butterknife.ButterKnife;
 
 /**

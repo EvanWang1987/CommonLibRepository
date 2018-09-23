@@ -1,11 +1,13 @@
 package com.github.evan.common_utils_demo.ui.fragment;
 
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.github.evan.common_utils.db.PersonDbHelper;
 import com.github.evan.common_utils.ui.fragment.BaseFragment;
 import com.github.evan.common_utils_demo.R;
 import com.github.evan.common_utils_demo.ui.activity.aboutDataSave.ContentProviderActivity;
@@ -26,6 +28,8 @@ public class AboutDataSaveFragment extends BaseFragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_about_data_save, null);
         ButterKnife.bind(this, root);
+        SQLiteDatabase writableDatabase = PersonDbHelper.getInstance(getContext()).getWritableDatabase();
+        writableDatabase.isOpen();
         return root;
     }
 
