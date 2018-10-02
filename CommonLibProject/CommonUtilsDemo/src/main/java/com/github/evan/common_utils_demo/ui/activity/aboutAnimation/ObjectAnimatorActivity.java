@@ -18,7 +18,7 @@ import butterknife.OnClick;
  */
 
 public class ObjectAnimatorActivity extends BaseLogCatActivity {
-    private static final long DURATION = 500L;
+    private static final long DURATION = 1000L;
 
     @BindView(R.id.ic_portrait_animation)
     ImageView mIcPortrait;
@@ -41,24 +41,28 @@ public class ObjectAnimatorActivity extends BaseLogCatActivity {
             case R.id.card_object_animation_alpha:
                 ObjectAnimator alpha = ObjectAnimator.ofFloat(mIcPortrait, "alpha", 0.1f, 1f);
                 alpha.setDuration(DURATION);
+                addLog("Create a ObjectAnimator with 'alpha' & 1 second duration.");
                 alpha.start();
                 break;
 
             case R.id.card_object_animation_rotate:
                 ObjectAnimator rotate = ObjectAnimator.ofFloat(mIcPortrait, "rotation", 0f, 360f);
                 rotate.setDuration(DURATION);
+                addLog("Create a ObjectAnimator with 'rotation' & 1 second duration.");
                 rotate.start();
                 break;
 
             case R.id.card_object_animation_transate:
                 ObjectAnimator translationX = ObjectAnimator.ofFloat(mIcPortrait, "translationX", 0f, 100f);
                 translationX.setDuration(DURATION);
+                addLog("Create a ObjectAnimator with 'translationX' & 1 second duration.");
                 translationX.start();
                 break;
 
             case R.id.card_object_animation_scale:
                 ObjectAnimator scaleY = ObjectAnimator.ofFloat(mIcPortrait, "scaleY", 0f, 1f);
                 scaleY.setDuration(DURATION);
+                addLog("Create a ObjectAnimator with 'scaleY' & 1 second duration.");
                 scaleY.start();
                 break;
 
