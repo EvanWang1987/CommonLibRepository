@@ -59,6 +59,12 @@
         <activity android:name=".ui.activity.aboutAnimation.TweenAnimationActivity"/>
         <activity android:name=".ui.activity.aboutAnimation.ObjectAnimatorActivity"/>
         <activity android:name=".ui.activity.aboutAnimation.FrameAnimationActivity"/>
+        <activity android:name=".ui.activity.aboutViewGroup.LinearLayoutActivity"/>
+        <activity android:name=".ui.activity.aboutViewGroup.RelativeLayoutActivity"/>
+        <activity android:name=".ui.activity.aboutViewGroup.FrameLayoutActivity"/>
+        <activity android:name=".ui.activity.aboutViewGroup.TableLayoutActivity"/>
+        <activity android:name=".ui.activity.aboutViewGroup.GridLayoutActivity"/>
+        <activity android:name=".ui.activity.aboutViewGroup.AbsoluteLayoutActivity"/>
         <activity android:name=".ui.activity.RedirectUiActivity">
             <intent-filter>
                 <action android:name="@string/redirect_ui_action"/>

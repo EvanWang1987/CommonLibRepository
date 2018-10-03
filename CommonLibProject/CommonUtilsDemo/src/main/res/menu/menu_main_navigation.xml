@@ -16,6 +16,7 @@
         <item android:id="@+id/functionDataSave" android:title="@string/data_save" android:icon="@drawable/selector_db_black" />
         <item android:id="@+id/functionDesignMode" android:title="@string/design_mode" android:icon="@drawable/selector_design_mode_black" />
         <item android:id="@+id/functionAboutAnimation" android:title="@string/about_animation" android:icon="@drawable/selector_animation_black" />
+        <item android:id="@+id/functionAboutViewGroup" android:title="@string/view_group" android:icon="@drawable/selector_screen_adaptation_black" />
         <item android:id="@+id/functionListView" android:title="@string/list_view_and_grid_view" android:icon="@drawable/selector_list_view_black" />
         <item android:id="@+id/functionRecyclerView" android:title="@string/recycler_view" android:icon="@drawable/selector_recycler_view_black" />
         <item android:id="@+id/functionVerNestHorScrollView" android:title="@string/ver_nest_hor_scroll_view" android:icon="@drawable/selector_nesting_touch_black" />
