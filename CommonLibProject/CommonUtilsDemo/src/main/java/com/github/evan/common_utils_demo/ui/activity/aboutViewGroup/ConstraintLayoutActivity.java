@@ -2,6 +2,7 @@ package com.github.evan.common_utils_demo.ui.activity.aboutViewGroup;
 
 import com.github.evan.common_utils.ui.activity.BaseActivity;
 import com.github.evan.common_utils.ui.activity.BaseActivityConfig;
+import com.github.evan.common_utils_demo.R;
 
 /**
  * Created by Evan on 2018/10/3.
@@ -10,7 +11,7 @@ import com.github.evan.common_utils.ui.activity.BaseActivityConfig;
 public class ConstraintLayoutActivity extends BaseActivity {
     @Override
     public int getLayoutResId() {
-        return 0;
+        return R.layout.activity_constraint_layout;
     }
 
     @Override
