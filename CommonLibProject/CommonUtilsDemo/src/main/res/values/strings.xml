@@ -368,6 +368,9 @@
     <string name="align_parent_bottom">align_parent_bottom</string>
     <string name="align_parent_left">align_parent_left</string>
     <string name="align_parent_right">align_parent_right</string>
+    <string name="tab1">Tab1</string>
+    <string name="tab2">Tab2</string>
+    <string name="tab3">Tab3</string>
     <!-- 布局相关 -->
 
     <!-- ListView & GridView相关 -->
