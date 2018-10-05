@@ -67,6 +67,7 @@
         <activity android:name=".ui.activity.aboutViewGroup.AbsoluteLayoutActivity"/>
         <activity android:name=".ui.activity.aboutViewGroup.ConstraintLayoutActivity"/>
         <activity android:name=".ui.activity.aboutCache.LRUCacheActivity"/>
+        <activity android:name=".ui.activity.aboutCache.BitmapCacheActivity"/>
         <activity android:name=".ui.activity.RedirectUiActivity">
             <intent-filter>
                 <action android:name="@string/redirect_ui_action"/>

@@ -313,6 +313,8 @@
     <!-- 缓存相关 -->
     <string name="about_cache">缓存相关</string>
     <string name="lru_cache">LRU Cache</string>
+    <string name="lru_cache_principle">LRUCache原理</string>
+    <string name="lru_cache_principle_details">LRUCache基于LinkedHashMap</string>
     <string name="image_cache">图片缓存</string>
     <string name="init_lru_cache">初始化LRU缓存</string>
     <string name="used_memory">已用内存</string>

@@ -33,7 +33,7 @@ public class BitmapCacher implements IBitmapCacher {
     }
 
 
-    private static final String CACHE_DIR = FileUtil.getApplicationDataDir();
+    private static final String CACHE_DIR = FileUtil.getApplicationDataDir() + "/";
     ThreadPoolExecutor mThreadPool = new ThreadPoolExecutor(5, 15, 1, TimeUnit.MINUTES, new LinkedBlockingQueue<Runnable>(), new ThreadFactory("BitmapCacher Thread Pool"), new ThreadPoolExecutor.AbortPolicy());
     private static Bitmap mDefaultBitmap;
     private static BitmapCacher mInstance;

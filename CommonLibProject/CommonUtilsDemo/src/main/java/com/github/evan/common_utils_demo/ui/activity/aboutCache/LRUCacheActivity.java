@@ -43,7 +43,7 @@ public class LRUCacheActivity extends BaseLogCatActivity {
         return new BaseActivityConfig();
     }
 
-    @OnClick({R.id.card_init_lru_cache, R.id.card_lru_cache_add, R.id.card_lru_cache_remove, R.id.card_lru_cache_used_memory, R.id.card_lru_cache_total_memory})
+    @OnClick({R.id.card_init_lru_cache, R.id.card_lru_cache_add, R.id.card_lru_cache_used_memory, R.id.card_lru_cache_total_memory})
     protected void onClick(View view){
         switch (view.getId()){
             case R.id.card_init_lru_cache:

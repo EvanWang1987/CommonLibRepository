@@ -7,7 +7,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.github.evan.common_utils.ui.fragment.BaseFragment;
+import com.github.evan.common_utils.utils.ToastUtil;
 import com.github.evan.common_utils_demo.R;
+import com.github.evan.common_utils_demo.ui.activity.aboutCache.BitmapCacheActivity;
 import com.github.evan.common_utils_demo.ui.activity.aboutCache.LRUCacheActivity;
 
 import butterknife.ButterKnife;
@@ -40,7 +42,8 @@ public class CacheFragment extends BaseFragment {
                 break;
 
             case R.id.card_image_cache:
-
+                ToastUtil.showToastWithShortDuration("敬请期待");
+//                loadActivity(BitmapCacheActivity.class);
                 break;
         }
     }

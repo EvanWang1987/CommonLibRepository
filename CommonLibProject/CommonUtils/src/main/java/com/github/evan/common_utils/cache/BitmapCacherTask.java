@@ -30,8 +30,9 @@ public class BitmapCacherTask implements Runnable {
     @Override
     public void run() {
         //下载图片
-        Request getRequest = OkHttpManager.getInstance().getGetRequest(mBitmapInfo.getUrl(), null);
         try {
+            String url = mBitmapInfo.getUrl();
+            Request getRequest = OkHttpManager.getInstance().getGetRequest(url, null);
             Response response = OkHttpManager.getInstance().getHttpClient().newCall(getRequest).execute();
             if(response.isSuccessful()){
                 mIsRequestSuccess = true;
