@@ -310,6 +310,15 @@
     <string name="sqlite_update">数据库升级,数据迁移</string>
     <!-- 数据持久化 -->
 
+    <!-- 缓存相关 -->
+    <string name="about_cache">缓存相关</string>
+    <string name="lru_cache">LRU Cache</string>
+    <string name="image_cache">图片缓存</string>
+    <string name="init_lru_cache">初始化LRU缓存</string>
+    <string name="used_memory">已用内存</string>
+    <string name="total_memory">总共分配内存</string>
+    <!-- 缓存相关 -->
+
     <!-- 设计模式相关 -->
     <string name="design_mode">设计模式</string>
     <string name="singleton">单例模式</string>
