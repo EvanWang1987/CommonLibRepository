@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/main_layout_base_pull_layout_activity"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|right"
+        android:orientation="horizontal">
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/btn_invoke"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:src="@drawable/selector_ptr_white"
+            app:elevation="5dp"
+            app:useCompatPadding="true" />
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/btn_invoke_second"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:src="@drawable/selector_ptr_white"
+            app:elevation="5dp"
+            app:useCompatPadding="true" />
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/btn_invoking_complete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:src="@drawable/selector_done_white"
+            app:elevation="5dp"
+            app:useCompatPadding="true" />
+
+    </LinearLayout>
+
+
+</FrameLayout>

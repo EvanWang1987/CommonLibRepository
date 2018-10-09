@@ -1,5 +1,6 @@
 package com.github.evan.common_utils.utils;
 
+import android.app.ActivityManager;
 import android.content.Context;
 import android.os.Build;
 import android.telephony.TelephonyManager;
@@ -9,6 +10,7 @@ import com.github.evan.common_utils.BaseApplication;
 import java.io.File;
 import java.io.FileFilter;
 import java.io.IOException;
+import java.util.List;
 
 /**
  * Created by Evan on 2017/10/4.
@@ -49,6 +51,7 @@ public class DeviceUtil {
             return false;
         }
     };
+
 
     /**
      * 获取设备硬件信息

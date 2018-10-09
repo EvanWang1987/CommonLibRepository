@@ -3,4 +3,36 @@
     <array name="function_title_array">
         <item>Custom EditText</item>
     </array>
+    <array name="is_pull_layout_floating">
+        <item>悬浮</item>
+        <item>不悬浮</item>
+    </array>
+    <array name="pull_layout_direction">
+        <item>从上向下</item>
+        <item>从下向上</item>
+        <item>上下双方向</item>
+        <item>从左向右</item>
+        <item>从右向左</item>
+        <item>左右双方向</item>
+    </array>
+    <array name="pull_layout_indicator_style">
+        <item>经典样式</item>
+        <item>经典加强样式</item>
+        <item>IOS样式</item>
+    </array>
+    <array name="can_scroll_overstep_indicator">
+        <item>可以</item>
+        <item>禁止</item>
+    </array>
+    <array name="task_stack_menu">
+        <item>@string/standard_mode</item>
+        <item>@string/single_top_mode</item>
+        <item>@string/single_instance_mode</item>
+        <item>@string/single_task_mode</item>
+    </array>
+    <array name="vehicle_factory_item">
+        <item>@string/benz</item>
+        <item>@string/bmw</item>
+        <item>@string/audi</item>
+    </array>
 </resources>

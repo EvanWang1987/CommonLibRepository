@@ -1,7 +1,12 @@
 <resources>
     <string name="app_name">CommonUtilsDemo</string>
+    <string name="redirect_ui_action">com.github.evan.redirect_ui</string>
+
+
     <string name="warning">警告</string>
     <string name="exit">退出</string>
+    <string name="just_test">测试</string>
+    <string name="just_stop_test">停止测试</string>
     <string name="you_do_not_give_the_permission">您没有基于以下权限,App无法正常运行,请重新打开App或者在系统设置中给予响应的权限. \n %1$s</string>
 
     <!-- ToolBar's Action Button -->
@@ -24,28 +29,6 @@
     <!-- HomeFragment相关 -->
     <string name="home">首页</string>
     <!-- HomeFragment相关 -->
-
-    <!-- 计算器相关 -->
-    <string name="calculator">计算器</string>
-    <string name="addition">+</string>
-    <string name="subtraction">-</string>
-    <string name="multiplication">*</string>
-    <string name="division">/</string>
-    <string name="equal">=</string>
-    <string name="membrane">%</string>
-    <string name="zero">0</string>
-    <string name="one">1</string>
-    <string name="two">2</string>
-    <string name="three">3</string>
-    <string name="four">4</string>
-    <string name="five">5</string>
-    <string name="six">6</string>
-    <string name="seven">7</string>
-    <string name="eight">8</string>
-    <string name="nine">9</string>
-    <string name="dot">.</string>
-    <string name="clear_calculator">C</string>
-    <!-- 计算器相关 -->
 
     <!-- 设备信息相关 -->
     <string name="device_information">设备信息</string>
@@ -83,6 +66,36 @@
     <string name="un_available_sdcard">未检测到内部存储设备</string>
     <string name="un_available_ram">未检测到运行内存</string>
     <!-- 设备信息相关 -->
+
+    <!-- 计算器相关 -->
+    <string name="calculator">计算器</string>
+    <string name="addition">+</string>
+    <string name="subtraction">-</string>
+    <string name="multiplication">*</string>
+    <string name="division">/</string>
+    <string name="equal">=</string>
+    <string name="membrane">%</string>
+    <string name="zero">0</string>
+    <string name="one">1</string>
+    <string name="two">2</string>
+    <string name="three">3</string>
+    <string name="four">4</string>
+    <string name="five">5</string>
+    <string name="six">6</string>
+    <string name="seven">7</string>
+    <string name="eight">8</string>
+    <string name="nine">9</string>
+    <string name="dot">.</string>
+    <string name="clear_calculator">C</string>
+    <!-- 计算器相关 -->
+
+    <!-- 算法相关 -->
+    <string name="arithmetic">算法</string>
+    <string name="binary_search">折半查找</string>
+    <string name="select_sort">选择排序</string>
+    <string name="bubble_sort">冒泡排序</string>
+    <string name="merge_sort">归并排序</string>
+    <!-- 算法相关 -->
 
     <!-- CollectionFragment相关 -->
     <string name="about_collection">集合相关</string>
@@ -185,7 +198,57 @@
     <string name="multi_producer_consumer">多生产者多消费者演示</string>
     <string name="dead_lock">死锁演示</string>
     <string name="stop_demo">停止演示</string>
+    <string name="about_thread_pool">线程池相关</string>
+    <string name="about_async_task">Async相关</string>
+    <string name="thread_pool_feature">线程池特性</string>
+    <string name="test_cache_thread_pool">测试CacheThreadPool</string>
+    <string name="test_fixed_thread_pool">测试FixedThreadPool</string>
+    <string name="test_single_thread_pool">测试SingleThreadPool</string>
+    <string name="test_scheduled_thread_pool">测试ScheduledThreadPool</string>
+    <string name="stop_test">停止测试</string>
+    <string name="hint_input_async_start_result">请输入AsyncTask运行前字符串</string>
+    <string name="hint_input_async_end_result">请输入AsyncTask运行结果字符串</string>
+    <string name="initializing">初始化中</string>
+    <string name="updating_progress">更新进度 onUpdateProgress</string>
     <!-- 线程相关 -->
+
+    <!-- Activity相关 -->
+    <string name="activity">Activity</string>
+    <string name="life_cycle">生命周期</string>
+    <string name="task_stack">任务栈</string>
+    <string name="scheme_jump">Scheme跳转</string>
+    <string name="activity_a">Activity A</string>
+    <string name="activity_b">Activity B</string>
+    <string name="standard_mode">Standard Mode</string>
+    <string name="single_top_mode">SingleTop Mode</string>
+    <string name="single_task_mode">SingleTask Mode</string>
+    <string name="single_instance_mode">SingleInstance Mode</string>
+    <string name="start_activity">开启Activity</string>
+    <string name="choice_task_stack_mode">选择启动模式</string>
+    <string name="finish">关闭</string>
+    <string name="input_jump_url">请输入跳转的URL</string>
+    <string name="jump_array_list_ui">跳转到ArrayList界面</string>
+    <string name="jump_linked_list_ui">跳转到LinkedList界面</string>
+    <string name="jump_hash_set_ui">跳转到HashSet界面</string>
+    <string name="jump_tree_set_ui">跳转到TreeSet界面</string>
+    <string name="jump_hash_map_ui">跳转到HashMap界面</string>
+    <string name="jump_tree_map_ui">跳转到TreeMap界面</string>
+    <string name="empty_jump_code">空的跳转码</string>
+    <!-- Activity相关 -->
+
+    <!-- Service -->
+    <string name="service">Service</string>
+    <string name="service_start_mode">start开启模式</string>
+    <string name="service_bind_mode">bind开启模式</string>
+    <string name="start_service">start service A</string>
+    <string name="stop_service">stop service A</string>
+    <string name="bind_service">bind service A</string>
+    <string name="unbind_service">unbind service A</string>
+    <string name="invoke_binder">调用Binder函数</string>
+    <string name="intent_service">IntentService</string>
+    <string name="start_intent_service">开启IntentService</string>
+    <string name="simulate_progress">模拟进度</string>
+    <!-- Service -->
 
     <!-- Fragment相关 -->
     <string name="fragment">Fragment</string>
@@ -194,6 +257,9 @@
     <string name="with_extras">携带数据</string>
     <string name="print_stack">打印栈</string>
     <string name="fragment_back_stack">Fragment回退栈</string>
+    <string name="fragment_switch">Fragment切换</string>
+    <string name="fragment_switch_next">切换下一个</string>
+    <string name="fragment_switch_previews">切换上一个</string>
     <string name="fragment_a">Fragment A</string>
     <string name="jump_fragment_b_with_extra">携带数据跳转到Fragment B</string>
     <string name="fragment_b">Fragment B</string>
@@ -215,6 +281,108 @@
     <string name="start_observe_wifi_signal">开启wifi信号强度监听</string>
     <string name="stop_observe_wifi_signal">停止wifi信号强度监听</string>
     <!-- 网络相关 -->
+
+    <!-- WebView相关 -->
+    <string name="web_view">WebView</string>
+    <string name="load_url">加载网页</string>
+    <string name="input_url">输入网页地址</string>
+    <string name="js_call_android">JS调用Android演示</string>
+    <string name="android_call_js">Android调用JS演示</string>
+    <string name="demo_link">https://www.baidu.com</string>
+    <!-- WebView相关 -->
+
+    <!-- 数据持久化 -->
+    <string name="data_save">数据持久化</string>
+    <string name="shared_preference">Shared_Preference</string>
+    <string name="input_shared_preference_file_name">输入SharedPreference文件名</string>
+    <string name="create_sp">创建Shared_Preference文件</string>
+    <string name="commit_sp">同步提交Shared_Preference数据</string>
+    <string name="input_file_name">输入Shared_Preference文件名</string>
+    <string name="input_string_key">输入key</string>
+    <string name="input_string_value">输入value</string>
+    <string name="apply_sp">异步提交Shared_Preference数据</string>
+    <string name="get_sp">获取Shared_Preference数据</string>
+    <string name="view_sp_doc">查看Shared_Preference文档</string>
+    <string name="sqlite">SQLite</string>
+    <string name="content_provider">Content_Provider</string>
+    <string name="file">文件</string>
+    <string name="view_database">查看表内容</string>
+    <string name="sqlite_update">数据库升级,数据迁移</string>
+    <!-- 数据持久化 -->
+
+    <!-- 缓存相关 -->
+    <string name="about_cache">缓存相关</string>
+    <string name="lru_cache">LRU Cache</string>
+    <string name="lru_cache_principle">LRUCache原理</string>
+    <string name="lru_cache_principle_details">LRUCache基于LinkedHashMap</string>
+    <string name="image_cache">图片缓存</string>
+    <string name="init_lru_cache">初始化LRU缓存</string>
+    <string name="used_memory">已用内存</string>
+    <string name="total_memory">总共分配内存</string>
+    <!-- 缓存相关 -->
+
+    <!-- 设计模式相关 -->
+    <string name="design_mode">设计模式</string>
+    <string name="singleton">单例模式</string>
+    <string name="singleton_mode_features_title">单例模式特性</string>
+    <string name="observer_mode_features_title">观察者模式特性</string>
+    <string name="clear_instance">清空mInstance</string>
+    <string name="lazy_mode">懒汉式</string>
+    <string name="hungry_mode">饿汉式</string>
+    <string name="observer">观察者模式</string>
+    <string name="clear_observers">清空观察者</string>
+    <string name="builder">构建模式</string>
+    <string name="factory_mode">工厂模式</string>
+    <string name="simple_factory_mode">简单工厂模式</string>
+    <string name="abstract_factory_mode">抽象工厂模式</string>
+    <string name="benz">奔驰</string>
+    <string name="bmw">宝马</string>
+    <string name="audi">奥迪</string>
+    <!-- 设计模式相关 -->
+    
+    <!-- 动画相关 -->
+    <string name="about_animation">动画相关</string>
+    <string name="tween_animation">补间动画</string>
+    <string name="object_animation">属性动画</string>
+    <string name="frame_animation">帧动画</string>
+    <string name="alpha">透明</string>
+    <string name="rotate">旋转</string>
+    <string name="transate">位移</string>
+    <string name="scale">缩放</string>
+    <!-- 动画相关 -->
+
+    <!-- 布局相关 -->
+    <string name="view_group">布局</string>
+    <string name="linear_layout">线性布局</string>
+    <string name="relative_layout">相对布局</string>
+    <string name="frame_layout">帧布局</string>
+    <string name="absolute_layout">绝对布局</string>
+    <string name="table_layout">表格布局</string>
+    <string name="grid_layout">Grid布局</string>
+    <string name="constraint_layout">约束布局</string>
+    <string name="one_weight_with_0dp_width">1 weight 0dp width</string>
+    <string name="wrap_content_width">  wrap_content_width  </string>
+    <string name="weight_formula">weight 计算公式</string>
+    <string name="weight_formula_details">父窗体剩余宽度/高度 * weightSum / weight</string>
+    <string name="align_top">align_top</string>
+    <string name="align_bottom">align_bottom</string>
+    <string name="above">above</string>
+    <string name="below">below</string>
+    <string name="to_top_of">to_top_of</string>
+    <string name="to_bottom_of">to_bottom_of</string>
+    <string name="to_left_of">to_left_of</string>
+    <string name="to_right_of">to_right_of</string>
+    <string name="align_left">align_left</string>
+    <string name="align_right">align_right</string>
+    <string name="center_in_parent">center_in_parent</string>
+    <string name="align_parent_top">align_parent_top</string>
+    <string name="align_parent_bottom">align_parent_bottom</string>
+    <string name="align_parent_left">align_parent_left</string>
+    <string name="align_parent_right">align_parent_right</string>
+    <string name="tab1">Tab1</string>
+    <string name="tab2">Tab2</string>
+    <string name="tab3">Tab3</string>
+    <!-- 布局相关 -->
 
     <!-- ListView & GridView相关 -->
     <string name="list_view_and_grid_view">List View &amp; Grid View</string>
@@ -254,8 +422,13 @@
     <!-- ViewPager嵌套多重横向布局相关 -->
 
     <!-- 下拉刷新相关 -->
-    <string name="pull_to_refresh">下拉刷新</string>
-    <string name="with_view">Ptr with View</string>
+    <string name="pull_layout">拉动刷新</string>
+    <string name="choice_is_pull_layout_floating">选择拉动布局是否悬浮</string>
+    <string name="choice_pull_direction">选择拉动方向</string>
+    <string name="choice_pull_indicator">选择指示器样式</string>
+    <string name="choice_can_scroll_overstep_indicator">指示器完全显示后能否继续拉动</string>
+    <string name="choice_damping">选择阻尼系数</string>
+    <string name="with_text_view">Ptr with TextView</string>
     <string name="with_view_group">Ptr with ViewGroup</string>
     <string name="with_list_view">Ptr with ListView</string>
     <string name="with_grid_view">Ptr with GridView</string>
@@ -349,13 +522,31 @@
     <!-- 视频控制器相关 -->
 
 
-    <string name="test">很早以前，大运河边住着一个叫阿牛的农民。阿牛家里很穷， 他七岁就没了父亲，靠母亲纺织度日。阿牛母亲因子幼丧夫，生活艰辛，经常哭泣，把眼睛都哭烂了。
+    <string name="thread_pool">线程池构造函数中的参数意义： coreThreadCount: 线程核心数,线程池内维护的线程数。
+        maxThreadCount: 当线程池内的线程超过coreThreadCount,缓存队列也满了之后,再次提交Runnable,线程池会开启maxThreadCount - coreThreadPool个线程去执行Runnable。
+        keepAliveTime: 当额外开启的线程执行完毕后，这些线程的缓存时间。
+        TimeUtils: keepAliveTime的时间单位
+        workQueue: Runnable缓存队列
+        threadFactory: 线程工厂
+        RejectedExecutionHandler: workQueue队列满后的拒绝策略
 
-　　	阿牛长到13岁，他对母亲说：“妈妈，你眼睛不好，今后不要再日夜纺纱织布，我已经长大，我能养活你！”于是他就去张财主家做小长工，母子俩苦度光阴。 两年后，母亲的眼病越来越严重，不久竟双目失明了。 阿牛想，母亲的眼睛是为我而盲，无论如何也要医好她的眼睛。 他一边给财主做工，一边起早摸黑开荒种菜，靠卖菜换些钱给母亲求医买药。也不知吃了多少药， 母亲的眼病仍不见好转。一天夜里，阿牛做了一个梦，梦见一个漂亮的姑娘来帮他种菜，并告诉他说：“沿运河往西数十里，有个天花荡，荡中有一株白色的菊花，能治眼病。这花要九月初九重阳节才开放，到时候你用这花煎汤给你母亲吃，定能治好她的眼病”。重阳节那天，阿牛带了干粮，去天花荡寻找白菊花。原来这是一个长满野草的荒荡，人称天荒荡。他在那里找了很久，只有黄菊花，就是不见白菊花，一直找到下午，才在草荡中一个小土墩旁的草丛中找到一株白色的野菊花。这株白菊花长得很特别，一梗九分枝，眼前只开一朵花，其余八朵含苞待放。阿牛将这株白菊花连根带土挖了回来，移种在自家屋旁。经他浇水护理，不久八枚花朵也陆续绽开，又香又好看。于是他每天采下一朵白菊煎汤给母亲服用。当吃完了第七朵菊花之后，阿牛母亲的眼睛便开始复明了。
+        workQueue:
+            ArrayBlockQueue: 内部基于数组,先进先出的阻塞式队列.
+            LinkedBlockQueue: 内部基于链表,先进先出的的阻塞式队列,内部大小为Integer.MAX_VALUE
+            SynchronizedQueue: 容量为1的队列
 
-　　	白菊花能治眼病的消息很快传了出去，村上人纷纷前来观看这株不寻常的野菊花。这一消息也传到了张财主那里。张财主将阿牛叫去，命他立即将那株白菊移栽到张家花园里。阿牛当然不肯。张财主便派了几个手下人赶到阿牛家强抢那株白菊花，因双方争夺，结果菊花被折断，他们才扬长而去。阿牛见这株为母亲治好眼疾的白菊横遭强暴，十分伤心，坐在被折断的白菊旁哭到天黑，直至深夜仍不肯离开。半夜之后，他朦胧的泪眼前猛然一亮，上次梦见的那位漂亮姑娘突然来到他的身边。姑娘劝他说：“阿牛，你的孝心已经有了好报，不要伤心，回去睡吧！”阿牛说：“这株菊花救过我的亲人，它被折死，叫我怎么活？”姑娘说：“这菊花梗子虽然断了，但根还在，她没有死，你只要将根挖出来，移植到另一个地方，就会长出白菊花。”阿牛问道：“姑娘，你是何人，请告知，我要好好谢你。”姑娘说：“我是天上的菊花仙子，特来助你，无需报答，你只要按照一首《种菊谣》去做，白菊花定会种活。”接着菊花仙子念道：“三分四平头，五月水淋头，六月甩料头，七八捂墩头，九月滚绣球。”念完就不见了。
+        RejectedExecutionHandler:
+            AbortPolicy: 当线程池数量满了，缓存队列也满了之后，会拒绝接受Runnable，并抛出异常。
+            DiscardPolicy: 当线程池数量满了，缓存队列也满了之后，会拒绝接受Runnable。
+            DiscardOldestPolicy: 当线程池数量满了，缓存队列也满了之后，会抛弃最前面的Runnable。
+            CallerRunsPolicy: 当线程池满了，队列也满了，会尝试在当前线程执行Runnable。
 
-菊花仙子
+        CachedThreadPool: 缓存线程池，核心数为0， 最大数为Integer.MAX_VALUE, 缓存时间为1分钟，队列为LinkedBlockQueue, 拒绝策略为AbortPolicy。也就是说每提交一个Runnable,就会开启一个线程执行，执行完毕后缓存1分钟。
+        FixedThreadPool: 固定线程池, 核心为nThread，最大数为nThread，缓存时间为0，队列为LinkedBlockingQueue，拒绝策略为AbortPolicy。也就是说话固定n个线程，提交的Runnable满了之后，放入队列中一个一个执行。
+        SingleThreadPool: 单线程池，核心为1，最大为1，缓存时间为0，队列为LinkedBlockingQueue，拒绝策略为AbortPolicy。也就是说池内固定为1个线程，按顺序执行队列中的Runnable。
+        ScheduledThreadPool: 周期性线程池，核心为nThread，最大为nThread，缓存时间为0，队列为DelayedWorkQueue，拒绝策略为AbortPolicy。可以周期性的执行Runnable。
+    </string>
 
-　　	阿牛回到屋里仔细推敲菊花仙子的《种菊谣》，终于悟出了其中意思：种白菊要在三月移植，四月掐头，五月多浇水，六月勤施肥，七月八月护好根，这样九月就能开出绣球状的菊花。阿牛根据菊花仙子的指点去做了，后来菊花老根上果然爆出了不少枝条。他又剪下这些枝条去扦插，再按《种菊谣》说的去栽培，第二年九月初九重阳节便开出了一朵朵芬芳四溢的白菊花。后来阿牛将种菊的技能教给了村上的穷百姓，这一带种白菊花的人就越来越多了。因为阿牛是九月初九找到这株白菊花的，所以后来人们就将九月九称作菊花节，并形成了赏菊花、吃菊花茶、饮菊花酒等风俗。</string>
+    <string name="singleton_mode_features">单例设计模式特性: 单例设计模式保证从进程启动到进程结束之间，一个类在堆内存中只有一个实例。</string>
+    <string name="observer_mode_features">观察者模式特性: 被观察者维护数据，观察者向被观察者注册观察器，被观察者维护观察器，当数据改变时，通知所有观察者数据改变。</string>
 </resources>

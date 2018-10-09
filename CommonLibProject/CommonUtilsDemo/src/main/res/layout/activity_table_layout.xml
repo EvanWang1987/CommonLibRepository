@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TableRow>
+
+        <Button
+            android:id="@+id/button01"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="按钮1"></Button>
+
+        <Button
+            android:id="@+id/button02"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="按钮2"></Button>
+
+        <Button
+            android:id="@+id/button03"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="按钮3"></Button>
+    </TableRow>
+
+    <TableRow>
+
+        <Button
+            android:id="@+id/button04"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="按钮4"></Button>
+
+        <Button
+            android:id="@+id/button05"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="按钮5"></Button>
+
+        <Button
+            android:id="@+id/button06"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="按钮6"></Button>
+    </TableRow>
+
+    <TableRow>
+
+        <Button
+            android:id="@+id/button07"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="按钮7"></Button>
+
+        <Button
+            android:id="@+id/button08"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="按钮8"></Button>
+
+        <Button
+            android:id="@+id/button09"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="按钮9"></Button>
+    </TableRow>
+
+
+</TableLayout>

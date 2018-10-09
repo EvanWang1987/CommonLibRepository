@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">CommonUtils</string>
+    <string name="test">test...</string>
     <string name="loading_pager_loading">加载中...</string>
     <string name="loading_pager_net_unavailable">没有网络...</string>
     <string name="loading_pager_net_timeout">网络链接超时...</string>
@@ -7,10 +8,11 @@
     <string name="loading_pager_unknown_error">未知错误...</string>
     <string name="loading_pager_no_search_content">没有搜索到任何东西...</string>
     <string name="limit_text_notify_text_when_over_rang_limit_count">您输入的字符已经超出%1$d的限制</string>
-    <string name="pulling">下拉进行刷新</string>
+    <string name="pulling">拉动进行刷新</string>
     <string name="release_to_refresh">释放立即刷新</string>
     <string name="last_refresh_time">上次刷新于: %1$s</string>
     <string name="refreshing">正在刷新</string>
+    <string name="refresh_at_first_time">第一次拉动刷新</string>
     <string name="jd_make_your_shopping_faster">京西,让购物更快捷</string>
     <string name="open_camera_fail">相机打开失败,后台有其它进程正在使用相机</string>
     <string name="logcat">Logcat</string>
@@ -18,5 +20,11 @@
     <string name="notice">提示</string>
     <string name="confirm">确定</string>
     <string name="cancel">取消</string>
+    <string name="input_message">请输入内容</string>
     <string name="press_twice_notify_text">两秒内再次按下退出</string>
+    <string name="invalid_scheme_jump_code">无效的跳转码</string>
+    <string name="invalid_scheme_jump_args">无效的跳转参数</string>
+    <string name="invalid_scheme_jump_prefix">无效的跳转前缀</string>
+    <string name="invalid_scheme_jump_host">无效的跳转主机</string>
+    <string name="invalid_scheme_jump_path">无效的跳转地址</string>
 </resources>

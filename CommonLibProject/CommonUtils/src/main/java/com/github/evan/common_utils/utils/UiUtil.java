@@ -2,7 +2,9 @@ package com.github.evan.common_utils.utils;
 
 import android.view.Menu;
 import android.view.View;
+import android.view.ViewGroup;
 
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
 /**
@@ -10,6 +12,64 @@ import java.lang.reflect.Method;
  */
 
 public class UiUtil {
+
+    public static boolean addViewInner(ViewGroup parent, View child, int index, boolean preventRequestLayout){
+        if(null == parent || null == child){
+            return false;
+        }
+
+        try {
+            Class<? extends ViewGroup> aClass = parent.getClass();
+            if(aClass.isAssignableFrom(ViewGroup.class)){
+                Class<?> superclass = parent.getClass().getSuperclass();
+                Method addViewInnerMethod = superclass.getDeclaredMethod("addViewInner", View.class, int.class, ViewGroup.LayoutParams.class, boolean.class);
+                addViewInnerMethod.setAccessible(true);
+                addViewInnerMethod.invoke(parent, child, index, child.getLayoutParams(), preventRequestLayout);
+                return true;
+            }else{
+                Class<?> superclass = aClass.getSuperclass();
+                while (!superclass.isAssignableFrom(ViewGroup.class)){
+                    superclass = superclass.getSuperclass();
+                }
+                Method addViewInnerMethod = superclass.getDeclaredMethod("addViewInner", View.class, int.class, ViewGroup.LayoutParams.class, boolean.class);
+                addViewInnerMethod.setAccessible(true);
+                addViewInnerMethod.invoke(parent, child, index, child.getLayoutParams(), preventRequestLayout);
+                return true;
+            }
+        } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    public static boolean removeViewInternal(ViewGroup parent, View view){
+        if(null == view){
+            return false;
+        }
+
+        if(parent != view.getParent()){
+            return false;
+        }
+
+        try {
+            Class<ViewGroup> superclass = (Class<ViewGroup>) parent.getClass().getSuperclass();
+            Method removeViewInternalMethod = superclass.getDeclaredMethod("removeViewInternal", View.class);
+            removeViewInternalMethod.setAccessible(true);
+            removeViewInternalMethod.invoke(parent, view);
+            return true;
+        } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
 
     /**
      * 设置ToolBar上弹出按钮菜单时默认显示icon

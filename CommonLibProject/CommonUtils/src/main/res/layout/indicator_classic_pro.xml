@@ -2,9 +2,10 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="@color/Grey_Material_Design_300_saturation"
     android:gravity="center"
-    android:paddingBottom="20dp"
-    android:paddingTop="20dp">
+    android:paddingBottom="25dp"
+    android:paddingTop="25dp">
 
 
     <LinearLayout
@@ -20,27 +21,19 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/pulling"
-            android:textColor="@color/text_color_gray"
-            android:textSize="14sp" />
-
-        <TextView
-            android:id="@+id/txt_desc_indicator_classic_pro"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:text="@string/last_refresh_time"
-            android:textColor="@color/text_color_gray"
-            android:textSize="12sp" />
+            android:textColor="@color/text_color_black"
+            android:textSize="14sp"
+            android:textStyle="bold" />
 
     </LinearLayout>
 
 
     <ImageView
-        android:layout_marginLeft="50dp"
         android:id="@+id/ic_progress_indicator_classic_pro"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="left|center_vertical"
+        android:layout_marginLeft="50dp"
         android:src="@mipmap/icon_loading_small" />
 
 

@@ -2,6 +2,7 @@ package com.github.evan.common_utils.ui.deskIcon;
 
 import android.content.Context;
 import android.graphics.PixelFormat;
+import android.os.Build;
 import android.view.View;
 import android.view.WindowManager;
 
@@ -10,6 +11,7 @@ import com.github.evan.common_utils.utils.DensityUtil;
 /**
  * Created by Evan on 2017/12/23.
  */
+@SuppressWarnings("WrongConstant")
 public abstract class BaseDeskIcon implements IDeskIcon {
     public abstract DeskIconConfig onCreateDeskIconConfig();
 
@@ -30,7 +32,12 @@ public abstract class BaseDeskIcon implements IDeskIcon {
 
         mDeskIconView = deskIconConfig.getDeskIconView();
         mLayoutParams = new WindowManager.LayoutParams();
-        mLayoutParams.type = WindowManager.LayoutParams.TYPE_TOAST;
+        if (Build.VERSION.SDK_INT>=26) {//8.0新特性
+            mLayoutParams.type= WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY;
+        }else{
+            mLayoutParams.type= WindowManager.LayoutParams.TYPE_SYSTEM_ALERT;
+//            mLayoutParams.type= WindowManager.LayoutParams.TYPE_TOAST;
+        }
         mLayoutParams.format = PixelFormat.TRANSLUCENT;
         mLayoutParams.format = PixelFormat.RGBA_8888;
         mLayoutParams.flags |= WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE;

@@ -61,11 +61,13 @@ public class OkHttpManager {
     public Request getGetRequest(String url, Map<String, String> heads) {
         Request.Builder builder = new Request.Builder();
         builder = builder.url(url).get();
-        Set<Map.Entry<String, String>> entries = heads.entrySet();
-        Iterator<Map.Entry<String, String>> iterator = entries.iterator();
-        while (iterator.hasNext()) {
-            Map.Entry<String, String> next = iterator.next();
-            builder.header(next.getKey(), next.getValue());
+        if(null != heads){
+            Set<Map.Entry<String, String>> entries = heads.entrySet();
+            Iterator<Map.Entry<String, String>> iterator = entries.iterator();
+            while (iterator.hasNext()) {
+                Map.Entry<String, String> next = iterator.next();
+                builder.header(next.getKey(), next.getValue());
+            }
         }
         return builder.build();
     }

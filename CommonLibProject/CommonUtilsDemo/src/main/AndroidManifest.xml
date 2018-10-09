@@ -15,6 +15,9 @@
 
         <activity android:name=".ui.activity.TestActivity"/>
         <activity android:name=".ui.activity.AboutActivity"/>
+        <activity android:name=".ui.activity.pullLayoutActivity.PullWithTextViewActivity"/>
+        <activity android:name=".ui.activity.pullLayoutActivity.PullWithViewGroupActivity"/>
+        <activity android:name=".ui.activity.pullLayoutActivity.PullWithListViewActivity"/>
         <activity android:name=".ui.activity.collectionActivity.ArrayListActivity" android:theme="@style/AppCompatLightNoActionBarTransparentActivity"/>
         <activity android:name=".ui.activity.collectionActivity.LinkedListActivity" android:theme="@style/AppCompatLightNoActionBarTransparentActivity"/>
         <activity android:name=".ui.activity.collectionActivity.HashSetActivity" android:theme="@style/AppCompatLightNoActionBarTransparentActivity"/>
@@ -27,20 +30,53 @@
         <activity android:name=".ui.activity.collectionActivity.SparseArrayActivity" android:theme="@style/AppCompatLightNoActionBarTransparentActivity"/>
         <activity android:name=".ui.activity.collectionActivity.ArrayMapActivity" android:theme="@style/AppCompatLightNoActionBarTransparentActivity"/>
         <activity android:name=".ui.activity.aboutFragment.FragmentBackStackActivity" android:theme="@style/AppCompatLightNoActionBarTransparentActivity"/>
-        <activity android:name=".ui.activity.ptrActivity.PtrWithViewActivity"/>
-        <activity android:name=".ui.activity.ptrActivity.PtrWithViewGroupActivity"/>
-        <activity android:name=".ui.activity.ptrActivity.PtrWithListViewActivity"/>
-        <activity android:name=".ui.activity.ptrActivity.PtrWithGridViewActivity"/>
-        <activity android:name=".ui.activity.ptrActivity.PtrWithRecyclerViewActivity"/>
-        <activity android:name=".ui.activity.ptrActivity.PtrWithViewPagerActivity"/>
-        <activity android:name=".ui.activity.ptrActivity.PtrWithScrollViewActivity"/>
-        <activity android:name=".ui.activity.ptrActivity.PtrWithClassicIndicatorActivity"/>
-        <activity android:name=".ui.activity.ptrActivity.PtrWithClassicProIndicatorActivity"/>
-        <activity android:name=".ui.activity.ptrActivity.PtrWithGifIndicatorActivity"/>
-        <activity android:name=".ui.activity.ptrActivity.PtrWithLargeImageIndicatorActivity"/>
         <activity android:name=".ui.activity.mediaControllerActivity.CommonMediaControllerActivity"/>
         <activity android:name=".ui.activity.slideExitActivity.SlideExitDemoActivity" android:theme="@style/AppCompatLightNoActionBarTransparentActivity"/>
         <activity android:name=".ui.activity.slideExitActivity.MultiNestingDemoActivity" android:theme="@style/AppCompatLightNoActionBarTransparentActivity"/>
+        <activity android:name=".ui.activity.SwitchFragmentActivity"/>
+        <activity android:name=".ui.activity.aboutActivity.LifeCycleActivity"/>
+        <activity android:name=".ui.activity.aboutActivity.ActivityA"/>
+        <activity android:name=".ui.activity.aboutActivity.ActivityB"/>
+        <activity android:name=".ui.activity.aboutActivity.TaskStackActivity"/>
+        <activity android:name=".ui.activity.aboutActivity.ExtrasInformationActivity"/>
+        <activity android:name=".ui.activity.aboutActivity.ExtrasInformationSingleTopActivity" android:launchMode="singleTop"/>
+        <activity android:name=".ui.activity.aboutActivity.ExtrasInformationSingleInstanceActivity" android:launchMode="singleInstance"/>
+        <activity android:name=".ui.activity.aboutActivity.ExtrasInformationSingleTaskActivity" android:launchMode="singleTask"/>
+        <activity android:name=".ui.activity.aboutService.ServiceLifeCycleActivity"/>
+        <activity android:name=".ui.activity.aboutActivity.SchemeJumpActivity"/>
+        <activity android:name=".ui.activity.aboutService.StartServiceActivity"/>
+        <activity android:name=".ui.activity.aboutService.BindServiceActivity"/>
+        <activity android:name=".ui.activity.aboutService.IntentServiceActivity"/>
+        <activity android:name=".ui.activity.aboutThread.AboutThreadPoolActivity"/>
+        <activity android:name=".ui.activity.BrowserActivity"/>
+        <activity android:name=".ui.activity.aboutDesignMode.SingletonActivity"/>
+        <activity android:name=".ui.activity.aboutDesignMode.ObserverActivity"/>
+        <activity android:name=".ui.activity.aboutDesignMode.AboutFactoryActivity"/>
+        <activity android:name=".ui.activity.aboutDataSave.SharedPreferenceActivity"/>
+        <activity android:name=".ui.activity.aboutDataSave.SQLiteActivity"/>
+        <activity android:name=".ui.activity.aboutDataSave.ContentProviderActivity"/>
+        <activity android:name=".ui.activity.aboutDataSave.FileActivity"/>
+        <activity android:name=".ui.activity.aboutAnimation.TweenAnimationActivity"/>
+        <activity android:name=".ui.activity.aboutAnimation.ObjectAnimatorActivity"/>
+        <activity android:name=".ui.activity.aboutAnimation.FrameAnimationActivity"/>
+        <activity android:name=".ui.activity.aboutViewGroup.LinearLayoutActivity"/>
+        <activity android:name=".ui.activity.aboutViewGroup.RelativeLayoutActivity"/>
+        <activity android:name=".ui.activity.aboutViewGroup.FrameLayoutActivity"/>
+        <activity android:name=".ui.activity.aboutViewGroup.TableLayoutActivity"/>
+        <activity android:name=".ui.activity.aboutViewGroup.GridLayoutActivity"/>
+        <activity android:name=".ui.activity.aboutViewGroup.AbsoluteLayoutActivity"/>
+        <activity android:name=".ui.activity.aboutViewGroup.ConstraintLayoutActivity"/>
+        <activity android:name=".ui.activity.aboutCache.LRUCacheActivity"/>
+        <activity android:name=".ui.activity.aboutCache.BitmapCacheActivity"/>
+        <activity android:name=".ui.activity.RedirectUiActivity">
+            <intent-filter>
+                <action android:name="@string/redirect_ui_action"/>
+            </intent-filter>
+        </activity>
+
+        <service android:name=".service.ServiceA"/>
+        <service android:name=".service.DemoIntentService"/>
+
     </application>
 
 </manifest>

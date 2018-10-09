@@ -1,13 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.github.evan.common_utils.ui.view.pullable_view.PullLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/pullable_parent"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    app:can_scroll_overstep_indicator="true"
+    app:damping="0.7"
+    app:indicator_display_mode="scroll_with_content"
+    app:pull_direction="top_to_bottom">
 
-    <TextView
-        android:layout_width="wrap_content"
+    <com.github.evan.common_utils.ui.view.pullable_view.indicator.GifCourierIndicator
+        android:id="@id/id_top_indicator"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="Debug"
-        android:textSize="18sp" />
+        app:floating_classic_indicator_arrow_drawable="@mipmap/ic_ios_refresh_arrow"
+        app:floating_classic_indicator_progress_drawable="@drawable/animation_loading_frame"
+        app:floating_classic_indicator_time_flag="classic_floating_refresh_hor_indicator_in_debug_fragment" />
 
-</FrameLayout>
+    <FrameLayout
+        android:id="@id/id_content_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/Red">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:orientation="horizontal">
+
+            <android.support.design.widget.FloatingActionButton
+                android:id="@+id/btn_invoke"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:src="@drawable/selector_ptr_white"
+                app:elevation="5dp"
+                app:useCompatPadding="true" />
+
+            <android.support.design.widget.FloatingActionButton
+                android:id="@+id/btn_invoking_complete"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:src="@drawable/selector_done_white"
+                app:elevation="5dp"
+                app:useCompatPadding="true" />
+
+        </LinearLayout>
+
+
+    </FrameLayout>
+
+
+</com.github.evan.common_utils.ui.view.pullable_view.PullLayout>

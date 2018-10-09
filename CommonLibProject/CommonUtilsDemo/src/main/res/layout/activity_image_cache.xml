@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.github.evan.common_utils.ui.view.LoadingPager
+        android:id="@+id/loading_pager_image_cache"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        app:isLoadingWithRotateAnimation="true"
+        app:loadEmptyDrawable="@mipmap/status_empty_data"
+        app:loadEmptyText="@string/loading_pager_empty_data"
+        app:loadingDrawable="@mipmap/status_loading"
+        app:loadingText="@string/loading_pager_loading"
+        app:netTimeoutDrawable="@mipmap/status_net_timeout"
+        app:netTimeoutText="@string/loading_pager_net_timeout"
+        app:netUnAvailableDrawable="@mipmap/status_net_unavailable"
+        app:netUnAvailableText="@string/loading_pager_net_unavailable"
+        app:noSearchContentDrawable="@mipmap/status_no_search_content"
+        app:unknownDrawable="@mipmap/status_unknown_error"
+        app:unknownText="@string/loading_pager_unknown_error" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+</FrameLayout>

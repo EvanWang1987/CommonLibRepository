@@ -4,18 +4,27 @@
         <item android:id="@+id/functionHome" android:title="@string/home" android:icon="@drawable/selector_action_button_home_dark" />
         <item android:id="@+id/functionScreenAdaptation" android:title="@string/device_information" android:icon="@drawable/selector_screen_adaptation_black" />
         <item android:id="@+id/functionCalculator" android:title="@string/calculator" android:icon="@drawable/selector_calculator_black" />
+        <item android:id="@+id/functionArithmetic" android:title="@string/arithmetic" android:icon="@drawable/selector_calculator_black" />
         <item android:id="@+id/functionAboutCollection" android:title="@string/about_collection" android:icon="@drawable/selector_collection_black" />
         <item android:id="@+id/functionAboutThread" android:title="@string/about_thread" android:icon="@drawable/selector_thread_black" />
         <item android:id="@+id/functionAboutHandler" android:title="@string/about_handler" android:icon="@drawable/selector_handler_black" />
+        <item android:id="@+id/functionAboutActivity" android:title="@string/activity" android:icon="@drawable/selector_activity_black" />
+        <item android:id="@+id/functionAboutService" android:title="@string/service" android:icon="@drawable/selector_service_black" />
         <item android:id="@+id/functionAboutFragment" android:title="@string/fragment" android:icon="@drawable/selector_fragment_black" />
         <item android:id="@+id/functionNetwork" android:title="@string/network_information" android:icon="@drawable/selector_wifi_black" />
+        <item android:id="@+id/functionWebView" android:title="@string/web_view" android:icon="@drawable/selector_web_black" />
+        <item android:id="@+id/functionDataSave" android:title="@string/data_save" android:icon="@drawable/selector_db_black" />
+        <item android:id="@+id/functionCache" android:title="@string/about_cache" android:icon="@drawable/selector_cache_black" />
+        <item android:id="@+id/functionDesignMode" android:title="@string/design_mode" android:icon="@drawable/selector_design_mode_black" />
+        <item android:id="@+id/functionAboutAnimation" android:title="@string/about_animation" android:icon="@drawable/selector_animation_black" />
+        <item android:id="@+id/functionAboutViewGroup" android:title="@string/view_group" android:icon="@drawable/selector_screen_adaptation_black" />
         <item android:id="@+id/functionListView" android:title="@string/list_view_and_grid_view" android:icon="@drawable/selector_list_view_black" />
         <item android:id="@+id/functionRecyclerView" android:title="@string/recycler_view" android:icon="@drawable/selector_recycler_view_black" />
         <item android:id="@+id/functionVerNestHorScrollView" android:title="@string/ver_nest_hor_scroll_view" android:icon="@drawable/selector_nesting_touch_black" />
         <item android:id="@+id/functionHorNestVerScrollView" android:title="@string/hor_nest_ver_scroll_view" android:icon="@drawable/selector_nesting_touch_black" />
         <item android:id="@+id/functionViewPager" android:title="@string/view_pager" android:icon="@drawable/selector_button_view_pager_black_72dp" />
         <item android:id="@+id/functionViewPagerNestMultiHorizontalScroll" android:title="@string/view_pager_nest_multi_horizontal_scroll" android:icon="@drawable/selector_button_view_pager_black_72dp" />
-        <item android:id="@+id/functionPullToRefresh" android:title="@string/pull_to_refresh" android:icon="@drawable/selector_ptr_black" />
+        <item android:id="@+id/functionPullLayout" android:title="@string/pull_layout" android:icon="@drawable/selector_ptr_black" />
         <item android:id="@+id/functionSlideExitActivity" android:title="@string/slide_exit_activity" android:icon="@drawable/selector_slide_exit_black" />
         <item android:id="@+id/functionQRCode" android:title="@string/about_qr_code" android:icon="@drawable/selector_scan_black" />
         <item android:id="@+id/functionCustomEditText" android:title="@string/edit_text" android:icon="@drawable/selector_action_button_edit_dark" />

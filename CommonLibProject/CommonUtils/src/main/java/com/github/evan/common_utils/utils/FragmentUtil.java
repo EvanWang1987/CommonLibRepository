@@ -5,6 +5,10 @@ import android.support.annotation.IdRes;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.app.NavUtils;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Evan on 2017/11/11.
@@ -46,5 +50,26 @@ public class FragmentUtil {
             }
         }
         beginTransaction.commit();
+    }
+
+    public static void switchFragment(FragmentManager fragmentManager, List<String> tags, String whichWillBeShowing){
+        if(null == fragmentManager || null == tags || tags.size() <= 0 || StringUtil.isEmpty(whichWillBeShowing)){
+            return;
+        }
+
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        for (int i = 0, length = tags.size(); i < length; i++) {
+            String tag = tags.get(i);
+            Fragment fragment = fragmentManager.findFragmentByTag(tag);
+            if(null != fragment){
+                if(tag.equals(whichWillBeShowing)){
+                    fragmentTransaction.show(fragment);
+                }else{
+                    fragmentTransaction.hide(fragment);
+                }
+            }
+        }
+
+        fragmentTransaction.commit();
     }
 }
