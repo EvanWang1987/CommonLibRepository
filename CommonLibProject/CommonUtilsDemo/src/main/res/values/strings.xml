@@ -382,6 +382,10 @@
     <string name="tab1">Tab1</string>
     <string name="tab2">Tab2</string>
     <string name="tab3">Tab3</string>
+
+    <string name="base_line_test">base_line_test</string>
+    <string name="guide_line_test">guide_line_test</string>
+    <string name="absolute_test">absoluteX: 30dp</string>
     <!-- 布局相关 -->
 
     <!-- ListView & GridView相关 -->
@@ -515,11 +519,14 @@
     <string name="debug">Debug</string>
     <!-- DebugFragment相关 -->
 
-    <!-- 视频控制器相关 -->
-    <string name="media_controller">视频控制器</string>
-    <string name="common_media_controller_title">钢铁侠3预告</string>
-    <string name="releasing_video_file">正在释放视频文件</string>
-    <!-- 视频控制器相关 -->
+    <!-- 多媒体相关 -->
+    <string name="about_media">多媒体</string>
+    <string name="MediaPlayer">MediaPlayer</string>
+    <string name="SoundPlayer">SoundPlayer</string>
+    <string name="SurfaceView">SurfaceView</string>
+    <string name="TextureView">TextureView</string>
+    <string name="scanning_media_file">正在扫描音乐文件</string>
+    <!-- 多媒体相关 -->
 
 
     <string name="thread_pool">线程池构造函数中的参数意义： coreThreadCount: 线程核心数,线程池内维护的线程数。

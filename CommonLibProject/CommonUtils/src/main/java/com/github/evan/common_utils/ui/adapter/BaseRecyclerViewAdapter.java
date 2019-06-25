@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.github.evan.common_utils.ui.holder.BaseRecyclerViewHolder;
+import com.github.evan.common_utils.utils.Logger;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -71,6 +72,7 @@ public abstract class BaseRecyclerViewAdapter<Data> extends RecyclerView.Adapter
     @Override
     public void onBindViewHolder(BaseRecyclerViewHolder<Data> holder, int position) {
         Data data = mData.get(position);
+        Logger.i("position: " + position);
         if(!holder.isContextExists()){
             holder.setContext(mContext);
         }

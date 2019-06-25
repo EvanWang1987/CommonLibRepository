@@ -13,6 +13,7 @@
         <item android:id="@+id/functionAboutFragment" android:title="@string/fragment" android:icon="@drawable/selector_fragment_black" />
         <item android:id="@+id/functionNetwork" android:title="@string/network_information" android:icon="@drawable/selector_wifi_black" />
         <item android:id="@+id/functionWebView" android:title="@string/web_view" android:icon="@drawable/selector_web_black" />
+        <item android:id="@+id/functionMedia" android:title="@string/about_media" android:icon="@drawable/selector_media_controller_black" />
         <item android:id="@+id/functionDataSave" android:title="@string/data_save" android:icon="@drawable/selector_db_black" />
         <item android:id="@+id/functionCache" android:title="@string/about_cache" android:icon="@drawable/selector_cache_black" />
         <item android:id="@+id/functionDesignMode" android:title="@string/design_mode" android:icon="@drawable/selector_design_mode_black" />

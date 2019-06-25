@@ -310,7 +310,13 @@ public class FileUtil {
                 if (!mkdirs) {
                     return FileStatus.CREATE_PARENT_DIR_FAIL;
                 }
+            }else{
+                //如果存在，是文件，就直接删除
+                if(parentFile.isFile()){
+                    parentFile.delete();
+                }
             }
+
 
             return file.createNewFile() ? FileStatus.CREATE_SUCCESS : FileStatus.CREATE_FAIL;
         } catch (IOException e) {
