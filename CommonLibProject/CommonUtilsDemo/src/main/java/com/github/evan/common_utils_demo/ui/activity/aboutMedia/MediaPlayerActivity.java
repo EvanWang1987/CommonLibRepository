@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.design.widget.BottomSheetDialog;
+import android.view.View;
 
 import com.github.evan.common_utils.bean.Mp3Information;
 import com.github.evan.common_utils.bean.MusicInfo;
@@ -23,6 +24,9 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+
 public class MediaPlayerActivity extends BaseActivity {
     private ProgressDialog mScanningDialog;
     private ListBottomSheetDialogFragment mMusicListDialog;
@@ -31,6 +35,7 @@ public class MediaPlayerActivity extends BaseActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        ButterKnife.bind(this);
         mScanningDialog = DialogFactory.createProgressDialog(this, "", getString(R.string.scanning_media_file), ProgressDialog.STYLE_SPINNER, 0, 0);
         mMusicListDialog = new ListBottomSheetDialogFragment();
         mScanningDialog.show();
@@ -90,6 +95,16 @@ public class MediaPlayerActivity extends BaseActivity {
 
     public List<MusicInfo> getMusicInfo(){
         return mMusicInfo;
+    }
+
+    @OnClick({R.id.btn_media_list})
+    public void onClick(View view){
+        switch (view.getId()){
+            case R.id.btn_media_list:
+                mMusicListDialog.show(getSupportFragmentManager(), ListBottomSheetDialogFragment.class.getSimpleName());
+                mMusicListDialog.setData(mMusicInfo);
+                break;
+        }
     }
 
     @Override
